@@ -1,0 +1,3 @@
+class nhanvien {
+    int n;
+};
