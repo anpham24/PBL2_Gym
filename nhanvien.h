@@ -1,3 +1,0 @@
-class nhanvien {
-    int n;
-};
