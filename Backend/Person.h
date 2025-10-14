@@ -1,5 +1,7 @@
+#pragma once
 #include <iostream>
 #include <string>
+#include <map>
 using namespace std;
 
 class Person {
@@ -8,9 +10,12 @@ class Person {
         string hoTen;
         string sdt;
         string gioiTinh;
+        static map<int, int> nextIDMap;
+        static int lastYear;
+        static string generateID(int prefix);
     public:
         Person();
-        Person(const string&, const string&, const string&, const string&);
+        Person(const string&, const string&, const string&);
         virtual ~Person() = 0;
 
         string getID() const;
@@ -23,9 +28,5 @@ class Person {
         void setSDT(const string&);
         void setGioiTinh(const string&);
 
-        virtual void create() = 0;
-        virtual void read() const = 0;
-        virtual void update() = 0;
-        virtual void remove() = 0;
-
+        virtual string read() const = 0;
 };

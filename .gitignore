@@ -1,0 +1,5 @@
+# Bỏ qua folder VSCode
+.vscode/
+
+# Bỏ qua file exe khi build
+*.exe
