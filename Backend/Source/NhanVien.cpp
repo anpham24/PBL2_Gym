@@ -1,4 +1,4 @@
-#include "NhanVien.h"
+#include "../Include/NhanVien.h"
 #include <sstream>
 
 NhanVien::NhanVien() {
