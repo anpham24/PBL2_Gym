@@ -12,7 +12,7 @@ class HoiVien : public Person {
         double getPoint() const;
         void setPoint(int);
 
-        void create(const string&, const string&, const string&, int);
+        static HoiVien create(const string&, const string&, const string&, int);
         string read() const override;
         void update(const string&, const string&, const string&, int);
 };

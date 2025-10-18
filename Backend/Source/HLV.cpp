@@ -1,34 +1,31 @@
 #include "../Include/HLV.h"
+#include "../Include/IDGenerator.h"
 #include <sstream>
 
 HLV::HLV() {
-    this->ID = generateID(30);
+    this->id = IDGenerator::generateID(30);
 }
 
 HLV::HLV(const string& hoTen, const string& sdt, const string& gioiTinh, double luong)
     : Person(hoTen, sdt, gioiTinh), luong(luong) {
-    this->ID = generateID(30);
+    this->id = IDGenerator::generateID(30);
 }
 
 HLV::~HLV() {
 
 }
 
-double HLV::getLuong() const {
-    return this->luong;
-}
+double HLV::getLuong() const { return this->luong; }
 
-void HLV::setLuong(double luong) {
-    this->luong = luong;
-}
+void HLV::setLuong(double luong) { this->luong = luong; }
 
-void HLV::create(const string& hoTen, const string& sdt, const string& gioiTinh, double luong) {
-    *this = HLV(hoTen, sdt, gioiTinh, luong);
+HLV HLV::create(const string& hoTen, const string& sdt, const string& gioiTinh, double luong) {
+    return HLV(hoTen, sdt, gioiTinh, luong);
 }
 
 string HLV::read() const{
     ostringstream oss;
-    oss << ID << "," << hoTen << "," << sdt << "," << gioiTinh << "," << luong;
+    oss << id << "," << hoTen << "," << sdt << "," << gioiTinh << "," << luong;
     return oss.str();
 }
 

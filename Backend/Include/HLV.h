@@ -12,7 +12,7 @@ class HLV : public Person {
         double getLuong() const;
         void setLuong(double);
 
-        void create(const string&, const string&, const string&, double);
+        static HLV create(const string&, const string&, const string&, double);
         string read() const override;
         void update(const string&, const string&, const string&, double);
 };

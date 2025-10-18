@@ -1,18 +1,13 @@
 #pragma once
-#include <iostream>
 #include <string>
-#include <map>
 using namespace std;
 
 class Person {
     protected:
-        string ID;
+        string id;
         string hoTen;
         string sdt;
         string gioiTinh;
-        static map<int, int> nextIDMap;
-        static int lastYear;
-        static string generateID(int prefix);
     public:
         Person();
         Person(const string&, const string&, const string&);
