@@ -18,7 +18,6 @@ class Person {
         string getSDT() const;
         string getGioiTinh() const;
 
-        void setID(const string&);
         void setHoTen(const string&);
         void setSDT(const string&);
         void setGioiTinh(const string&);

@@ -18,7 +18,6 @@ string Person::getHoTen() const { return this->hoTen; }
 string Person::getSDT() const { return this->sdt; }
 string Person::getGioiTinh() const { return this->gioiTinh; }
 
-void Person::setID(const string& id) { this->id = id; }
 void Person::setHoTen(const string& ten) { this->hoTen = ten; }
 void Person::setSDT(const string& so) { this->sdt = so; }
 void Person::setGioiTinh(const string& gt) { this->gioiTinh = gt; }

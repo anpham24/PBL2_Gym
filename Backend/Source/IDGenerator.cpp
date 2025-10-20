@@ -21,3 +21,5 @@ string IDGenerator::generateID(int prefix) {
         << setw(4) << setfill('0') << ++nextID;
     return oss.str();
 }
+
+// ID có dạng: 10250001 (10: NV, 25: năm đk 2025, 0001: số tt 0001)

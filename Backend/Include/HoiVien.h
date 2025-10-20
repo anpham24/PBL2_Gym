@@ -4,15 +4,16 @@
 class HoiVien : public Person {
     private:
         int point;
+        string maHLV;
     public:
         HoiVien();
-        HoiVien(const string&, const string&, const string&, int = 0);
+        HoiVien(const string&, const string&, const string&, int = 0, const string& = "");
         ~HoiVien();
 
         double getPoint() const;
         void setPoint(int);
 
-        static HoiVien create(const string&, const string&, const string&, int);
+        static HoiVien create(const string&, const string&, const string&, int = 0, const string& = "");
         string read() const override;
-        void update(const string&, const string&, const string&, int);
+        void update(const string&, const string&, const string&, int, const string&);
 };
