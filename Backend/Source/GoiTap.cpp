@@ -18,13 +18,13 @@ GoiTap::~GoiTap() {
     
 }
 
-string GoiTap::getID() const { return this->id; }
-string GoiTap::getTenGoi() const { return this->tenGoi; }
+const string& GoiTap::getID() const { return this->id; }
+const string& GoiTap::getTenGoi() const { return this->tenGoi; }
 int GoiTap::getThoiGian() const { return this->thoiGian; }
 double GoiTap::getGia() const { return this->gia; }
-string GoiTap::getLichTap() const { return this->lichTap; }
-string GoiTap::getMaMon() const { return this->maMon; }
-string GoiTap::getMaHLV() const { return this->maHLV; }
+const string& GoiTap::getLichTap() const { return this->lichTap; }
+const string& GoiTap::getMaMon() const { return this->maMon; }
+const string& GoiTap::getMaHLV() const { return this->maHLV; }
 
 void GoiTap::setTenGoi(const string& t) { this->tenGoi = t; }
 void GoiTap::setThoiGian(int tg) { this->thoiGian = tg; }

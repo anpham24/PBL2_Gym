@@ -12,8 +12,8 @@ class HangHoa {
         HangHoa(const string&, double);
         ~HangHoa();
 
-        string getID() const;
-        string getTenHH() const;
+        const string& getID() const;
+        const string& getTenHH() const;
         double getGia() const;
 
         void setTenHH(const string&);

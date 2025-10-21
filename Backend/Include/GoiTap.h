@@ -16,13 +16,13 @@ class GoiTap {
         GoiTap(const string&, int, double, const string&, const string&, const string&);
         ~GoiTap();
 
-        string getID() const;
-        string getTenGoi() const;
+        const string& getID() const;
+        const string& getTenGoi() const;
         int getThoiGian() const;
         double getGia() const;
-        string getLichTap() const;
-        string getMaMon() const;
-        string getMaHLV() const;
+        const string& getLichTap() const;
+        const string& getMaMon() const;
+        const string& getMaHLV() const;
 
         void setTenGoi(const string&);
         void setThoiGian(int);

@@ -9,8 +9,8 @@ ChiTietHD::ChiTietHD(const string& maSP, const string& tenSP,
                      int soLuong, double donGia)
     : maSP(maSP), tenSP(tenSP), soLuong(soLuong), donGia(donGia) {}
 
-string ChiTietHD::getMaSP() const { return maSP; }
-string ChiTietHD::getTenSP() const { return tenSP; }
+const string& ChiTietHD::getMaSP() const { return maSP; }
+const string& ChiTietHD::getTenSP() const { return tenSP; }
 int ChiTietHD::getSoLuong() const { return soLuong; }
 double ChiTietHD::getDonGia() const { return donGia; }
 

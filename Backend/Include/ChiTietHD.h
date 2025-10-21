@@ -13,8 +13,8 @@ class ChiTietHD {
         ChiTietHD(const string& maSP, const string& tenSP, int soLuong, double donGia);
 
         // Getters
-        string getMaSP() const;
-        string getTenSP() const;
+        const string& getMaSP() const;
+        const string& getTenSP() const;
         int getSoLuong() const;
         double getDonGia() const;
 

@@ -13,10 +13,10 @@ class Person {
         Person(const string&, const string&, const string&);
         virtual ~Person() = 0;
 
-        string getID() const;
-        string getHoTen() const;
-        string getSDT() const;
-        string getGioiTinh() const;
+        const string& getID() const;
+        const string& getHoTen() const;
+        const string& getSDT() const;
+        const string& getGioiTinh() const;
 
         void setHoTen(const string&);
         void setSDT(const string&);

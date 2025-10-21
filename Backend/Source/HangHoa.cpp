@@ -14,8 +14,8 @@ HangHoa::~HangHoa() {
 
 }
 
-string HangHoa::getID() const { return this->id; }
-string HangHoa::getTenHH() const { return this->tenHH; }
+const string& HangHoa::getID() const { return this->id; }
+const string& HangHoa::getTenHH() const { return this->tenHH; }
 double HangHoa::getGia() const { return this->gia; }
  
 void HangHoa::setTenHH(const string& tenHH) { this->tenHH = tenHH; }
