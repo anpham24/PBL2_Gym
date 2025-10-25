@@ -1,19 +1,22 @@
 #include "../Include/HoiVien.h"
 #include "../Include/IDGenerator.h"
-#include <sstream>
+#define HV_ID 2
 
 HoiVien::HoiVien() {
-    this->id = IDGenerator::generateID(20);
+    this->id = IDGenerator::generateID(HV_ID);
 }
 
 HoiVien::HoiVien(const string& hoTen, const string& sdt, const string& gioiTinh, int point, const string& maHLV)
     : Person(hoTen, sdt, gioiTinh), point(point), maHLV(maHLV) {
-    this->id = IDGenerator::generateID(20);
+    this->id = IDGenerator::generateID(HV_ID);
 }
 
-HoiVien::~HoiVien() {
-
+HoiVien::HoiVien(const HoiVien& other) 
+    : Person(other.hoTen, other.sdt, other.gioiTinh), point(other.point), maHLV(other.maHLV) {
+    this->id = other.id;
 }
+
+HoiVien::~HoiVien() {}
 
 double HoiVien::getPoint() const { return this->point; }
 
@@ -24,9 +27,8 @@ HoiVien HoiVien::create(const string& hoTen, const string& sdt, const string& gi
 }
 
 string HoiVien::read() const{
-    ostringstream oss;
-    oss << id << "," << hoTen << "," << sdt << "," << gioiTinh << "," << point <<"," << maHLV;
-    return oss.str();
+    string result = id + "," + hoTen + "," + sdt + "," + gioiTinh + "," + to_string(point) + "," + maHLV;
+    return result;
 }
 
 void HoiVien::update(const string& hoTen, const string& sdt, const string& gioiTinh, int point, const string& maHLV) {

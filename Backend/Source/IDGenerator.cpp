@@ -1,6 +1,6 @@
 #include "../Include/IDGenerator.h"
 
-map <int, int> IDGenerator::nextIDMap;
+int IDGenerator::nextID[7] = {0};
 int IDGenerator::lastYear = 0;
 
 string IDGenerator::generateID(int prefix) {
@@ -9,16 +9,15 @@ string IDGenerator::generateID(int prefix) {
     int currentYear = (now->tm_year + 1900) % 100;
 
     if (currentYear != lastYear) {
-        nextIDMap.clear();
+        for (int i = 0; i < 10; ++i)
+            nextID[i] = 0;
         lastYear = currentYear;
     }
-
-    int& nextID = nextIDMap[prefix];
 
     ostringstream oss;
     oss << setw(2) << setfill('0') << prefix
         << setw(2) << setfill('0') << currentYear
-        << setw(4) << setfill('0') << ++nextID;
+        << setw(4) << setfill('0') << ++nextID[prefix];
     return oss.str();
 }
 

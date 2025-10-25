@@ -6,10 +6,11 @@ class HangHoa {
     private:
         string id;
         string tenHH;
-        double gia; // giá niêm yết
+        double gia;
     public:
         HangHoa();
         HangHoa(const string&, double);
+        HangHoa(const HangHoa& other);
         ~HangHoa();
 
         const string& getID() const;

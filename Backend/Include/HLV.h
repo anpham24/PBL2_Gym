@@ -7,6 +7,7 @@ class HLV : public Person {
     public:
         HLV();
         HLV(const string&, const string&, const string&, double = 0.0);
+        HLV(const HLV& other);
         ~HLV();
 
         double getLuong() const;

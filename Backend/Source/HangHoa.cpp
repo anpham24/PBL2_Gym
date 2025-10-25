@@ -1,18 +1,16 @@
 #include "../Include/HangHoa.h"
 #include "../Include/IDGenerator.h"
-#include <sstream>
+#define HH_ID 6
 
 HangHoa::HangHoa() {
-    this->id = IDGenerator::generateID(60);
+    this->id = IDGenerator::generateID(HH_ID);
 }
 
 HangHoa::HangHoa(const string& tenHH, double gia) : tenHH(tenHH), gia(gia) {
-    this->id = IDGenerator::generateID(60);
+    this->id = IDGenerator::generateID(HH_ID);
 }
 
-HangHoa::~HangHoa() {
-
-}
+HangHoa::~HangHoa() {}
 
 const string& HangHoa::getID() const { return this->id; }
 const string& HangHoa::getTenHH() const { return this->tenHH; }
@@ -31,7 +29,5 @@ void HangHoa::update(const string& tenHH, double gia) {
 }
 
 string HangHoa::read() const {
-    ostringstream oss;
-    oss << id << " | " << tenHH << " | " << gia;
-    return oss.str();
+    return id + "," + tenHH + "," + to_string(gia);
 }

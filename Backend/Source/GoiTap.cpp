@@ -1,61 +1,57 @@
 #include "../Include/GoiTap.h"
 #include "../Include/IDGenerator.h"
-#include <sstream>
+#define GT_ID 4
 
 GoiTap::GoiTap() {
-    this->id = IDGenerator::generateID(50);
+    this->id = IDGenerator::generateID(GT_ID);
 }
 
 GoiTap::GoiTap(const string& tenGoi, int thoiGian, double gia, 
-               const string& lichTap, const string& maMon, 
-               const string& MaHLV)
+               const string& lichTap)
     : tenGoi(tenGoi), thoiGian(thoiGian), gia(gia), 
-      lichTap(lichTap), maMon(maMon), maHLV(maHLV) {
-    this->id = IDGenerator::generateID(50);
+      lichTap(lichTap) {
+    this->id = IDGenerator::generateID(GT_ID);
 }
 
-GoiTap::~GoiTap() {
-    
-}
+GoiTap::GoiTap(const GoiTap& other) 
+    : id(other.id), tenGoi(other.tenGoi), thoiGian(other.thoiGian), gia(other.gia), 
+      lichTap(other.lichTap), maMon(other.maMon) {}
+
+GoiTap::~GoiTap() {}
 
 const string& GoiTap::getID() const { return this->id; }
 const string& GoiTap::getTenGoi() const { return this->tenGoi; }
 int GoiTap::getThoiGian() const { return this->thoiGian; }
 double GoiTap::getGia() const { return this->gia; }
 const string& GoiTap::getLichTap() const { return this->lichTap; }
-const string& GoiTap::getMaMon() const { return this->maMon; }
-const string& GoiTap::getMaHLV() const { return this->maHLV; }
+const MyVector<string>& GoiTap::getMaMon() const { return this->maMon; }
 
 void GoiTap::setTenGoi(const string& t) { this->tenGoi = t; }
 void GoiTap::setThoiGian(int tg) { this->thoiGian = tg; }
 void GoiTap::setGia(double g) { this->gia = g; }
 void GoiTap::setLichTap(const string& l) { this->lichTap = l; }
-void GoiTap::setMaMon(const string& m) { this->maMon = m; }
-void GoiTap::setMaHLV(const string& h) { this->maHLV = h; }
+void GoiTap::addMaMon(const string& m) { this->maMon.push_back(m); }
 
 GoiTap GoiTap::create(const string& tenGoi, int thoiGian, double gia, 
-                      const string& lichTap, const string& maMon,
-                      const string& maHLV)
+                      const string& lichTap)
 {
-    return GoiTap(tenGoi, thoiGian, gia, lichTap, maMon, maHLV);
+    return GoiTap(tenGoi, thoiGian, gia, lichTap);
 }
 
 void GoiTap::update(const string& newTenGoi, int newThoiGian, double newGia, 
-                    const string& newLichTap, const string& newMaMon,
-                    const string& newMaHLV)
+                    const string& newLichTap)
 {
     this->tenGoi = newTenGoi;
     this->thoiGian = newThoiGian;
     this->gia = newGia;
     this->lichTap = newLichTap;
-    this->maMon = newMaMon;
-    this->maHLV = newMaHLV;
 }
 
 string GoiTap::read() const {
-    ostringstream oss;
-    oss << id << " | " << tenGoi << " | "
-        << thoiGian << " | " << gia << " | " 
-        << lichTap << " | " << maMon << " | " << maHLV;
-    return oss.str();
+    string result = id + "," + tenGoi + "," + to_string(thoiGian) + "," + to_string(gia) + "," + lichTap;
+    // Thêm danh sách mã môn
+    for (size_t i = 0; i < maMon.size(); ++i) {
+        result += "," + maMon[i];
+    }
+    return result;
 }

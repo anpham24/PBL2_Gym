@@ -1,13 +1,14 @@
 #include "../Include/HoaDon.h"
 #include "../Include/IDGenerator.h"
+#define HD_ID 7
 
 HoaDon::HoaDon() {
-    this->id = IDGenerator::generateID(40);
+    this->id = IDGenerator::generateID(HD_ID);
 }
 
 HoaDon::HoaDon(const string& maHV, const string& maNV, const string& ngayLap, const string& phuongThucTT) 
     : maHV(maHV), maNV(maNV), ngayLap(ngayLap), phuongThucTT(phuongThucTT) {
-    this->id = IDGenerator::generateID(40);
+    this->id = IDGenerator::generateID(HD_ID);
 }
 
 const string& HoaDon::getID() const { return id; }
