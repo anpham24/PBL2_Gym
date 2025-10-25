@@ -6,13 +6,13 @@ NhanVien::NhanVien() {
     this->id = IDGenerator::generateID(NV_ID);
 }
 
-NhanVien::NhanVien(const string& hoTen, const string& sdt, const string& gioiTinh, double luong)
-    : Person(hoTen, sdt, gioiTinh), luong(luong) {
+NhanVien::NhanVien(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, double luong)
+    : Person(hoTen, sdt, gioiTinh, tuoi), luong(luong) {
     this->id = IDGenerator::generateID(NV_ID);
 }
 
 NhanVien::NhanVien(const NhanVien& other)
-    : Person(other.hoTen, other.sdt, other.gioiTinh), luong(other.luong) {
+    : Person(other.hoTen, other.sdt, other.gioiTinh, other.tuoi), luong(other.luong) {
     this->id = other.id;
 }
 
@@ -22,19 +22,20 @@ double NhanVien::getLuong() const { return this->luong; }
 
 void NhanVien::setLuong(double luong) { this->luong = luong; }
 
-NhanVien NhanVien::create(const string& hoTen, const string& sdt, const string& gioiTinh, double luong) {
-    return NhanVien(hoTen, sdt, gioiTinh, luong);
+NhanVien NhanVien::create(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, double luong) {
+    return NhanVien(hoTen, sdt, gioiTinh, tuoi, luong);
 }
 
 
 string NhanVien::read() const {
-    string result = id + "," + hoTen + "," + sdt + "," + gioiTinh + "," + to_string(luong);
+    string result = id + "," + hoTen + "," + sdt + "," + gioiTinh + "," + to_string(tuoi) + "," + to_string(luong);
     return result;
 }
 
-void NhanVien::update(const string& hoTen, const string& sdt, const string& gioiTinh, double luong) {
+void NhanVien::update(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, double luong) {
     this->hoTen = hoTen;
     this->sdt = sdt;
     this->gioiTinh = gioiTinh;
+    this->tuoi = tuoi;
     this->luong = luong;
 }

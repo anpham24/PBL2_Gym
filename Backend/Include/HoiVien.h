@@ -7,7 +7,7 @@ private:
     string maHLV;
 public:
     HoiVien();
-    HoiVien(const string&, const string&, const string&, int = 0, const string& = "");
+    HoiVien(const string&, const string&, const string&, int, int = 0, const string& = "");
     HoiVien(const HoiVien& other);
     ~HoiVien();
 
@@ -16,7 +16,7 @@ public:
     void setPoint(int);
     void setMaHLV(const string&);
 
-    static HoiVien create(const string&, const string&, const string&, int = 0, const string& = "");
+    static HoiVien create(const string&, const string&, const string&, int, int = 0, const string& = "");
     string read() const override;
-    void update(const string&, const string&, const string&, int, const string& = "");
+    void update(const string&, const string&, const string&, int, int, const string& = "");
 };

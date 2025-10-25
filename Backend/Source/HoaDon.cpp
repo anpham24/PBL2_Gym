@@ -11,12 +11,19 @@ HoaDon::HoaDon(const string& maHV, const string& maNV, const string& ngayLap, co
     this->id = IDGenerator::generateID(HD_ID);
 }
 
+HoaDon::HoaDon(const HoaDon& other)
+    : id(other.id), maHV(other.maHV), maNV(other.maNV), 
+      ngayLap(other.ngayLap), phuongThucTT(other.phuongThucTT), 
+      items(other.items) {}
+
+HoaDon::~HoaDon() {}
+
 const string& HoaDon::getID() const { return id; }
 const string& HoaDon::getMaNV() const { return maNV; }
 const string& HoaDon::getNgayLap() const { return ngayLap; }
 const string& HoaDon::getPhuongThuc() const { return phuongThucTT; }
 const string& HoaDon::getMaHV() const { return maHV; }
-const vector<ChiTietHD>& HoaDon::getItems() const { return items; }
+const MyVector<ChiTietHD>& HoaDon::getItems() const { return items; }
 
 void HoaDon::setMaHV(const string &m) { maHV = m; }
 void HoaDon::setMaNV(const string &m) { maNV = m; }
@@ -30,16 +37,18 @@ void HoaDon::addItem(const ChiTietHD& ct) {
 bool HoaDon::removeItemByMaSP(const string &maSP) {
     for (size_t i = 0; i < items.size(); i++) {
         if (items[i].getMaSP() == maSP) {
-            items.erase(items.begin() + i);
+            items.erase(items.begin() + i); 
             return true;
         }
     }
-    return false;
+    return false; 
 }
 
 double HoaDon::getTotal() const {
     double sum = 0.0;
-    for (const auto &c : items) sum += c.tinhTien();
+    for (size_t i = 0; i < items.size(); ++i) {
+        sum += items[i].tinhTien();
+    }
     return sum;
 }
 

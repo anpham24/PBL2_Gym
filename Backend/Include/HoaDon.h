@@ -1,7 +1,7 @@
 #pragma once
 #include "ChiTietHD.h"
-#include <string>
 #include "MyVector.h"
+#include <string>
 
 using namespace std;
 
@@ -16,6 +16,7 @@ private:
 public:
     HoaDon();
     HoaDon(const string&, const string&, const string&, const string&);
+    HoaDon(const HoaDon& other);
     ~HoaDon();
 
     const string& getID() const;

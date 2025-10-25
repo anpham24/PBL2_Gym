@@ -1,6 +1,6 @@
 #pragma once
 #include <stdexcept>
-#include <cstddef> // size_t
+#include <cstddef> 
 #include <iostream>
 
 template <typename T>
@@ -25,6 +25,13 @@ public:
     size_t size() const;
     bool empty() const;
     void clear();
+    void erase(size_t index);
+    T* begin();
+    T* end();
+    const T* begin() const;
+    const T* end() const;
+
+    void erase(T* it);
 
     T& operator[](size_t index);
     const T& operator[](size_t index) const;

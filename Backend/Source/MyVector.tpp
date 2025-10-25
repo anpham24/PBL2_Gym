@@ -7,7 +7,7 @@ template <typename T>
 MyVector<T>::MyVector(const MyVector& other) {
     capacity = other.capacity;
     length = other.length;
-    data = new T[capacity];
+    data = capacity > 0 ? new T[capacity] : nullptr;
     for (size_t i = 0; i < length; ++i)
         data[i] = other.data[i];
 }
@@ -18,7 +18,7 @@ MyVector<T>& MyVector<T>::operator=(const MyVector& other) {
         delete[] data;
         capacity = other.capacity;
         length = other.length;
-        data = new T[capacity];
+        data = capacity > 0 ? new T[capacity] : nullptr;
         for (size_t i = 0; i < length; ++i)
             data[i] = other.data[i];
     }
@@ -76,6 +76,46 @@ bool MyVector<T>::empty() const { return length == 0; }
 
 template <typename T>
 void MyVector<T>::clear() { length = 0; }
+
+template <typename T>
+void MyVector<T>::erase(size_t index) {
+    if (index >= length)
+        throw std::out_of_range("Index out of range");
+
+    for (size_t i = index; i < length - 1; ++i) {
+        data[i] = data[i + 1];
+    }
+    --length;
+}
+
+template <typename T>
+void MyVector<T>::erase(T* it) {
+    // Allow erasing by iterator (pointer) obtained from begin()/end()
+    if (it == nullptr) throw std::out_of_range("Iterator is null");
+    if (it < data || it >= data + length) throw std::out_of_range("Iterator out of range");
+    size_t idx = static_cast<size_t>(it - data);
+    erase(idx);
+}
+
+template <typename T>
+T* MyVector<T>::begin() {
+    return data; 
+}
+
+template <typename T>
+T* MyVector<T>::end() {
+    return data + length;  
+}
+
+template <typename T>
+const T* MyVector<T>::begin() const {
+    return data;
+}
+
+template <typename T>
+const T* MyVector<T>::end() const {
+    return data + length;
+}
 
 template <typename T>
 T& MyVector<T>::operator[](size_t index) { return data[index]; }

@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <sstream>
 using namespace std;
 
 class ThamGia {
@@ -12,18 +11,21 @@ private:
 
 public:
     ThamGia();
-    ThamGia(const string& maHV, const string& maGoi,
-            const string& ngayDK, const string& ngayHetHan);
+    ThamGia(const string&, const string&, const string&, const string&);
+    ThamGia(const ThamGia& other);
+    ~ThamGia();
 
-    string getMaHV() const;
-    string getMaGoi() const;
-    string getNgayDK() const;
-    string getNgayHetHan() const;
+    const string& getMaHV() const;
+    const string& getMaGoi() const;
+    const string& getNgayDK() const;
+    const string& getNgayHetHan() const;
 
     void setMaHV(const string& hv);
     void setMaGoi(const string& goi);
     void setNgayDK(const string& ngay);
     void setNgayHetHan(const string& ngay);
 
+    ThamGia create(const string&, const string&, const string&, const string&);
     string read() const; 
+    void update(const string&, const string&, const string&, const string&);
 };

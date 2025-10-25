@@ -14,11 +14,14 @@ string IDGenerator::generateID(int prefix) {
         lastYear = currentYear;
     }
 
-    ostringstream oss;
-    oss << setw(2) << setfill('0') << prefix
-        << setw(2) << setfill('0') << currentYear
-        << setw(4) << setfill('0') << ++nextID[prefix];
-    return oss.str();
+    string result;
+    result += to_string(prefix) + '0';
+    result += to_string(currentYear);
+    string temp = to_string(++nextID[prefix]);
+    while (temp.length() < 4)
+        temp = '0' + temp;
+    result += temp;
+    return result;
 }
 
 // ID có dạng: 10250001 (10: NV, 25: năm đk 2025, 0001: số tt 0001)
