@@ -1,40 +1,44 @@
 #pragma once
+#include <cstddef>
 #include <stdexcept>
-#include <cstddef> 
-#include <iostream>
 
 template <typename T>
 class MyVector {
 private:
     T* data;
+    size_t size;
     size_t capacity;
-    size_t length;
-
-    void resize(size_t newCap);
-
+    void resize(size_t newCapacity);
 public:
+    // Ham dung, ham huy, toan tu gan
     MyVector();
     MyVector(const MyVector& other);
-    MyVector& operator=(const MyVector& other);
     ~MyVector();
+    MyVector& operator=(const MyVector& other);
 
-    void push_back(const T& value);
+    // Thao tac dung luong:
+    void clear();
+
+    // Them, xoa phan tu
+    void push_back(const T&);
     void pop_back();
-    T& at(size_t index);
-    const T& at(size_t index) const;
+    void erase(size_t);
+    void erase(T*);
+
+    // Truy cap phan tu
+    T& operator[](size_t);
+    T& at(size_t);
+    const T& at(size_t) const;
+
+    // Ham thong tin
     size_t size() const;
     bool empty() const;
-    void clear();
-    void erase(size_t index);
+
+    // Ham iterator 
     T* begin();
     T* end();
     const T* begin() const;
     const T* end() const;
-
-    void erase(T* it);
-
-    T& operator[](size_t index);
-    const T& operator[](size_t index) const;
 };
 
 #include "../Source/MyVector.tpp"

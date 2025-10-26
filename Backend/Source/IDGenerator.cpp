@@ -1,6 +1,6 @@
 #include "../Include/IDGenerator.h"
 
-int IDGenerator::nextID[7] = {0};
+int IDGenerator::nextID[8] = {0};
 int IDGenerator::lastYear = 0;
 
 string IDGenerator::generateID(int prefix) {
