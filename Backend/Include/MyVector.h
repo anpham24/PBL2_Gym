@@ -6,15 +6,20 @@ template <typename T>
 class MyVector {
 private:
     T* data;
-    size_t size;
-    size_t capacity;
-    void resize(size_t newCapacity);
+    size_t m_size;
+    size_t m_capacity;
+
+    // Ham thay doi capacity
+    void reserve(size_t);
+    // Ham thay doi size
+    void resize(size_t);
+
 public:
     // Ham dung, ham huy, toan tu gan
     MyVector();
-    MyVector(const MyVector& other);
+    MyVector(const MyVector&);
     ~MyVector();
-    MyVector& operator=(const MyVector& other);
+    MyVector& operator=(const MyVector&);
 
     // Thao tac dung luong:
     void clear();

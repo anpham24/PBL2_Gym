@@ -51,7 +51,7 @@ string GoiTap::read() const {
     string result = id + "," + tenGoi + "," + to_string(thoiGian) + "," + to_string(gia) + "," + lichTap;
     // Thêm danh sách mã môn
     for (size_t i = 0; i < maMon.size(); ++i) {
-        result += "," + maMon[i];
+        result += "," + maMon.at(i);
     }
     return result;
 }

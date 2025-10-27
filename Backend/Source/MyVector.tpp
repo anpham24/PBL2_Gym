@@ -1,17 +1,17 @@
 #include "../Include/MyVector.h"
 
 template <typename T>
-MyVector<T>::MyVector() : data(nullptr), size(0), capacity(0) {}
+MyVector<T>::MyVector() : data(nullptr), m_size(0), m_capacity(0) {}
 
 template <typename T>
 MyVector<T>::MyVector(const MyVector& other) {
-    size = other.size;
-    capacity = other.capacity;
-    if (capacity > 0)
-        data = new T[capacity];
+    m_size = other.m_size;
+    m_capacity = other.m_capacity;
+    if (m_capacity > 0)
+        data = new T[m_capacity];
     else 
         data = nullptr;
-    for (size_t i = 0; i < size; i++) {
+    for (size_t i = 0; i < m_size; i++) {
         data[i] = other.data[i];
     }
 }
@@ -24,13 +24,13 @@ MyVector<T>::~MyVector() {
 template <typename T>
 MyVector<T>& MyVector<T>::operator=(const MyVector& other) {
     if (this != &other) {
-        size = other.size;
-        capacity = other.capacity;
-        if (capacity > 0)
-            data = new T[capacity];
+        m_size = other.m_size;
+        m_capacity = other.m_capacity;
+        if (m_capacity > 0)
+            data = new T[m_capacity];
         else 
             data = nullptr;
-        for (size_t i = 0; i < size; i++) {
+        for (size_t i = 0; i < m_size; i++) {
             data[i] = other.data[i];
         }
     }
@@ -39,53 +39,76 @@ MyVector<T>& MyVector<T>::operator=(const MyVector& other) {
 
 template <typename T>
 void MyVector<T>::clear() {
-    size = 0;
+    for (size_t i = 0; i < m_size; i++) {
+        data[i].~T();
+    }
+    m_size = 0;
 }
 
 template <typename T>
-void MyVector<T>::resize(size_t newCapacity) {
+void MyVector<T>::reserve(size_t newCapacity) {
     T* newData = new T[newCapacity];
-    for (size_t i = 0; i < size; i++) {
+    for (size_t i = 0; i < m_size; i++) {
         newData[i] = data[i];
     }
     delete[] data;
     data = newData;
-    capacity = newCapacity;    
+    m_capacity = newCapacity;    
 }
 
 template <typename T>
-void MyVector<T>::push_back(const T& value) {
-    if (size == capacity) {
-        if (capacity = 0)
-            resize(1);
-        else 
-            resize(capacity * 2);
+void MyVector<T>::resize(size_t newSize) {
+    if (newSize > m_size) {
+        if (newSize > m_capacity) {
+            reserve(newSize);
+        }
+        for (size_t i = m_size; i < newSize; i++) {
+            data[i] = T();
+        }
+    } else if (newSize < m_size) {
+        for (size_t i = newSize; i < m_size; i++) {
+            data[i].~T();
+        }
     }
-    data[size++] = value;
+    m_size = newSize;
+}
+
+
+template <typename T>
+void MyVector<T>::push_back(const T& value) {
+    if (m_size == m_capacity) {
+        if (m_capacity == 0)
+            reserve(1);
+        else
+            reserve(m_capacity * 2);
+    }
+    data[m_size++] = value;
 }
 
 template <typename T>
 void MyVector<T>::pop_back() {
-    if (size == 0)
+    if (m_size == 0)
         throw std::out_of_range("Vector is empty");
-    --size;
+    data[m_size - 1].~T();
+    --m_size;
 }
 
 template <typename T>
 void MyVector<T>::erase(size_t index) {
-    if (index >= size) 
+    if (index >= m_size) 
         throw std::out_of_range("Index out of range");
-    for (size_t i = index; i < size - 1; i++) {
+    data[index].~T();
+    for (size_t i = index; i < m_size - 1; i++) {
         data[i] = data[i + 1];
     }
-    --size;
+    --m_size;
 }
 
 template <typename T> 
 void MyVector<T>::erase(T* it) {
     if (it == nullptr) 
         throw std::out_of_range("Iterator is null");
-    if (it < data || it > data + size) 
+    if (it < data || it > data + m_size) 
         throw std::out_of_range("Iterator is out of range");
     size_t index = static_cast<size_t>(it - data);
     erase(index);
@@ -98,26 +121,26 @@ T& MyVector<T>::operator[](size_t index) {
 
 template <typename T>
 T& MyVector<T>::at(size_t index) {
-    if (index >= size)
+    if (index >= m_size)
         throw std::out_of_range("Index out of range");
     return data[index];
 } 
 
 template <typename T>
 const T& MyVector<T>::at(size_t index) const {
-    if (index >= size)
+    if (index >= m_size)
         throw std::out_of_range("Index out of range");
     return data[index];
 }
 
 template <typename T>
 size_t MyVector<T>::size() const {
-    return size;
+    return m_size;
 }
 
 template <typename T>
 bool MyVector<T>::empty() const {
-    return (size == 0);
+    return (m_size == 0);
 }
 
 template <typename T>
@@ -127,7 +150,7 @@ T* MyVector<T>::begin() {
 
 template <typename T>
 T* MyVector<T>::end() {
-    return data + size;
+    return data + m_size;
 }
 
 template <typename T>
@@ -137,5 +160,5 @@ const T* MyVector<T>::begin() const {
 
 template <typename T>
 const T* MyVector<T>::end() const {
-    return data + size;
+    return data + m_size;
 }
