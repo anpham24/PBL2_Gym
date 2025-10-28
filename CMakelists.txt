@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.16)
+project(PBL2_Gym)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Chỉ đường đến SFML 3.0 mà bạn đã build
+set(SFML_DIR "C:/SFML_Build/lib/cmake/SFML")
+
+# Nếu bạn dùng bản static (libsfml-xxx-s.a)
+set(SFML_STATIC_LIBRARIES ON)
+
+# Tìm package SFML 3.0
+find_package(SFML 3 REQUIRED COMPONENTS Graphics Window System)
+
+# Tạo file thực thi
+add_executable(PBL2_Gym main.cpp)
+
+# Dành cho thư viện static (rất quan trọng)
+target_compile_definitions(PBL2_Gym PRIVATE SFML_STATIC)
+
+# Liên kết với SFML 3.0
+target_link_libraries(PBL2_Gym PRIVATE SFML::Graphics SFML::Window SFML::System)
