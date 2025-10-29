@@ -20,7 +20,6 @@ class HangHoa {
         void setTenHH(const string&);
         void setGia(double);
 
-        static HangHoa create(const string&, double);
-        void update(const string&, double);
+        static HangHoa* create(const string&, double);
         string read() const;
 };

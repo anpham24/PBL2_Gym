@@ -24,6 +24,7 @@ private:
 
 public: 
     // Ham dung ham huy
+    MyHashTable();
     MyHashTable(size_t);
     ~MyHashTable();
 
@@ -36,6 +37,7 @@ public:
     size_t size() const;
     bool empty() const;
 
-    // Ham show toan bo
-    void show() const;
+    MyVector<T> getAllValues() const;
 };
+
+#include "../Source/MyHashTable.tpp"

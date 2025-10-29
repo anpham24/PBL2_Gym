@@ -1,41 +1,68 @@
 #include "../Include/HoiVien.h"
+#include "../Include/HLV.h"
+#include "../Include/HopDong.h"
 #include "../Include/IDGenerator.h"
-#define HV_ID 2
 
 HoiVien::HoiVien() {
-    this->id = IDGenerator::generateID(HV_ID);
+    this->id = IDGenerator::generateID(IDGenerator::Prefix_HoiVien);
 }
 
-HoiVien::HoiVien(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, const string& maHLV)
-    : Person(hoTen, sdt, gioiTinh, tuoi), point(point), maHLV(maHLV) {
-    this->id = IDGenerator::generateID(HV_ID);
+HoiVien::HoiVien(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, HLV* hlv)
+    : Person(hoTen, sdt, gioiTinh, tuoi), point(point), hlv(hlv) {
+    this->id = IDGenerator::generateID(IDGenerator::Prefix_HoiVien);
 }
 
 HoiVien::HoiVien(const HoiVien& other) 
-    : Person(other.hoTen, other.sdt, other.gioiTinh, other.tuoi), point(other.point), maHLV(other.maHLV) {
-    this->id = other.id;
+    : Person(other.hoTen, other.sdt, other.gioiTinh, other.tuoi), point(other.point), hlv(other.hlv) {
+    this->id = IDGenerator::generateID(IDGenerator::Prefix_HoiVien);
 }
 
 HoiVien::~HoiVien() {}
 
 double HoiVien::getPoint() const { return this->point; }
+void HoiVien::setPoint(int point) { this->point = point; }
+void HoiVien::setHLV(const HLV* hlv) { this->hlv = const_cast<HLV*>(hlv); }
+const HLV* HoiVien::getHLV() const { return this->hlv; }
 
-void HoiVien::setPoint(int Point) { this->point = point; }
+void HoiVien::addHoaDon(HoaDon* hoaDon) {
+    dsHoaDon.push_back(hoaDon);
+}
 
-HoiVien HoiVien::create(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, const string& maHLV) {
-    return HoiVien(hoTen, sdt, gioiTinh, tuoi, point, maHLV);
+void HoiVien::removeHoaDon(HoaDon* hoaDon) {
+    for (int i = 0; i < dsHoaDon.size(); i++) {
+        if (dsHoaDon[i] == hoaDon) {
+            dsHoaDon.erase(i);
+            break;
+        }
+    }
+}
+
+const MyVector<HoaDon*>& HoiVien::getDsHoaDon() const {
+    return dsHoaDon;
+}
+
+void HoiVien::addHopDong(HopDong* hopDong) {
+    dsHopDong.push_back(hopDong);
+}
+
+void HoiVien::removeHopDong(HopDong* hopDong) {
+    for (int i = 0; i < dsHopDong.size(); i++) {
+        if (dsHopDong[i] == hopDong) {
+            dsHopDong.erase(i);
+            break;
+        }
+    }
+}
+
+const MyVector<HopDong*>& HoiVien::getDsHopDong() const {
+    return dsHopDong;
+}
+
+HoiVien* HoiVien::create(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, HLV* hlv) {
+    return new HoiVien(hoTen, sdt, gioiTinh, tuoi, point, hlv);
 }
 
 string HoiVien::read() const{
-    string result = id + "," + hoTen + "," + sdt + "," + gioiTinh + "," + to_string(tuoi) + "," + to_string(point) + "," + maHLV;
+    string result = id + "," + hoTen + "," + sdt + "," + gioiTinh + "," + to_string(tuoi) + "," + to_string(point) + "," + (hlv ? hlv->getID() : "null");
     return result;
-}
-
-void HoiVien::update(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, const string& maHLV) {
-    this->hoTen = hoTen;
-    this->sdt = sdt;
-    this->gioiTinh = gioiTinh;
-    this->tuoi = tuoi;
-    this->point = point;
-    this->maHLV = maHLV;
 }

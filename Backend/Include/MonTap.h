@@ -22,7 +22,6 @@ public:
     void setLichTap(const string&);
     void setMaHLV(const string&);
 
-    static MonTap create(const string&, const string&, const string& = "");
-    void update(const string&, const string&, const string& = "");
+    static MonTap* create(const string&, const string&, const string& = "");
     string read() const;
 };
