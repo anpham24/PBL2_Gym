@@ -120,6 +120,11 @@ T& MyVector<T>::operator[](size_t index) {
 } 
 
 template <typename T>
+const T& MyVector<T>::operator[](size_t index) const {
+    return data[index];
+}
+
+template <typename T>
 T& MyVector<T>::at(size_t index) {
     if (index >= m_size)
         throw std::out_of_range("Index out of range");

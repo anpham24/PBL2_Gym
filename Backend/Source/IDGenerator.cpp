@@ -1,6 +1,6 @@
 #include "../Include/IDGenerator.h"
 
-int IDGenerator::nextID[8] = {0};
+int IDGenerator::nextID[9] = {0};
 int IDGenerator::lastYear = 0;
 
 string IDGenerator::generateID(int prefix) {
@@ -9,7 +9,7 @@ string IDGenerator::generateID(int prefix) {
     int currentYear = (now->tm_year + 1900) % 100;
 
     if (currentYear != lastYear) {
-        for (int i = 0; i < 10; ++i)
+        for (int i = 1; i <= 8; ++i)
             nextID[i] = 0;
         lastYear = currentYear;
     }

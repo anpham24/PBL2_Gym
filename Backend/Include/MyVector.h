@@ -32,6 +32,7 @@ public:
 
     // Truy cap phan tu
     T& operator[](size_t);
+    const T& operator[](size_t) const;
     T& at(size_t);
     const T& at(size_t) const;
 

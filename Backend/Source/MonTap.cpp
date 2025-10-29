@@ -1,18 +1,19 @@
 #include "../Include/MonTap.h"
 #include "../Include/IDGenerator.h"
-#define MT_ID 5
 
 MonTap::MonTap() {
-    this->id = IDGenerator::generateID(MT_ID);
+    this->id = IDGenerator::generateID(IDGenerator::Prefix_MonTap);
 }
 
 MonTap::MonTap(const string& tenMon, const string& lichTap, const string& maHLV)
     : tenMon(tenMon), lichTap(lichTap), maHLV(maHLV) {
-    this->id = IDGenerator::generateID(MT_ID);
+    this->id = IDGenerator::generateID(IDGenerator::Prefix_MonTap);
 }
 
 MonTap::MonTap(const MonTap& other) 
-    : id(other.id), tenMon(other.tenMon), lichTap(other.lichTap), maHLV(other.maHLV) {}
+    : tenMon(other.tenMon), lichTap(other.lichTap), maHLV(other.maHLV) {
+    this->id = IDGenerator::generateID(IDGenerator::Prefix_MonTap);
+}
 
 MonTap::~MonTap() {}
 
@@ -25,14 +26,8 @@ void MonTap::setTenMon(const string& t) { this->tenMon = t; }
 void MonTap::setLichTap(const string& l) { this->lichTap = l; }
 void MonTap::setMaHLV(const string& m) { this->maHLV = m; }
 
-MonTap MonTap::create(const string& tenMon, const string& lichTap, const string& maHLV) {
-    return MonTap(tenMon, lichTap, maHLV);
-}
-
-void MonTap::update(const string& newTenMon, const string& newLichTap, const string& newMaHLV) {
-    this->tenMon = newTenMon;
-    this->lichTap = newLichTap;
-    this->maHLV = newMaHLV;
+MonTap* MonTap::create(const string& tenMon, const string& lichTap, const string& maHLV) {
+    return new MonTap(tenMon, lichTap, maHLV);
 }
 
 string MonTap::read() const {
