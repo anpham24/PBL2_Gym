@@ -39,49 +39,49 @@ public:
     ~QuanLy();
 
     // Ham quan ly HoiVien
-    bool themHoiVien(HoiVien*);
-    bool xoaHoiVien(const string&);
-    HoiVien* timHoiVien(const string&) const;
+    bool addHoiVien(HoiVien*);
+    bool removeHoiVien(const string&);
+    HoiVien* getHoiVien(const string&) const;
 
     // Ham quan ly HLV
-    bool themHLV(HLV*);
+    bool addHLV(HLV*);
     bool xoaHLV(const string&);
     HLV* timHLV(const string&) const;
 
     // Ham quan ly NhanVien
-    bool themNhanVien(NhanVien*);
+    bool addNhanVien(NhanVien*);
     bool xoaNhanVien(const string&);
     NhanVien* timNhanVien(const string&) const;
 
     // Ham quan ly GoiTap
-    bool themGoiTap(GoiTap*);
+    bool addGoiTap(GoiTap*);
     bool xoaGoiTap(const string&);
     GoiTap* timGoiTap(const string&) const;
     
     // Ham quan ly LopHoc
-    bool themLopHoc(LopHoc*);
-    bool xoaLopHoc(const string&);
-    LopHoc* timLopHoc(const string&) const;
+    bool addLopHoc(LopHoc*);
+    bool removeLopHoc(const string&);
+    LopHoc* getLopHoc(const string&) const;
 
     // Ham quan ly MonTap
-    bool themMonTap(MonTap*);
-    bool xoaMonTap(const string&);
-    MonTap* timMonTap(const string&) const;
+    bool addMonTap(MonTap*);
+    bool removeMonTap(const string&);
+    MonTap* getMonTap(const string&) const;
 
     // Ham quan ly HopDong
-    bool themHopDong(HopDong*);
-    bool xoaHopDong(const string&);
-    HopDong* timHopDong(const string&) const;
+    bool addHopDong(HopDong*);
+    bool removeHopDong(const string&);
+    HopDong* getHopDong(const string&) const;
 
     // Ham quan ly HangHoa
-    bool themHangHoa(HangHoa*);
-    bool xoaHangHoa(const string&);
-    HangHoa* timHangHoa(const string&) const;
+    bool addHangHoa(HangHoa*);
+    bool removeHangHoa(const string&);
+    HangHoa* getHangHoa(const string&) const;
 
     // Ham quan ly HoaDon
-    bool themHoaDon(HoaDon*);
-    bool xoaHoaDon(const string&);
-    HoaDon* timHoaDon(const string&) const;
+    bool addHoaDon(HoaDon*);
+    bool removeHoaDon(const string&);
+    HoaDon* getHoaDon(const string&) const;
 
     void saveAllData(const string& filePath) const;
     void loadAllData(const string& filePath);
