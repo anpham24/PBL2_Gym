@@ -43,51 +43,72 @@ QuanLy::~QuanLy() {
     // MyHashTable tự động xóa các HoiVien* trong destructor của nó
 }
 
+void QuanLy::setDirty(bool status) {
+    this->isDirty = status;
+}
+
+bool QuanLy::getIsDirty() const {
+    return this->isDirty;
+}
+
 // ============================================================================
 // QUẢN LÝ HỘI VIÊN
 // ============================================================================
 
 bool QuanLy::addHoiVien(HoiVien* hv) {
-    if (!hv) return false;
-    if (dsHoiVien.search(hv->getID())) {
-        return false; // Đã tồn tại
-    }
+    if (hv == nullptr)
+        return false;
+    if (dsHoiVien.search(hv->getID()) != nullptr) 
+        return false;
     dsHoiVien.insert(hv->getID(), hv);
     return true;
 }
 
 bool QuanLy::removeHoiVien(const string& maHV) {
     HoiVien** hvPtr = dsHoiVien.search(maHV);
-    if (!hvPtr || !(*hvPtr)) return false;
-    HoiVien* hv = *hvPtr;
     
-    // Xóa các hợp đồng liên quan
-    for (size_t i = 0; i < dsHopDong.size(); ) {
-        if (&(dsHopDong[i]->getHoiVien()) == hv) {
-            delete dsHopDong[i];
-            dsHopDong.erase(i);
-        } else {
-            ++i;
+    // Nếu không tìm thấy Hội viên, hoặc con trỏ không hợp lệ
+    if (hvPtr == nullptr || *hvPtr == nullptr) {
+        return false; 
+    }
+    
+    HoiVien* hvCanXoa = *hvPtr;
+
+    if (hvCanXoa->getHLV() != nullptr) {
+        hvCanXoa->getHLV()->removeHoiVien(hvCanXoa);
+    }
+
+    MyVector<HopDong*>& dsHopDongLienQuan = hvCanXoa->getDsHopDong();
+    for (int i = dsHopDongLienQuan.size() - 1; i >= 0; --i) {
+        HopDong* hdCanXoa = dsHopDongLienQuan[i];
+
+        if (hdCanXoa != nullptr) {
+            dsHopDong.del(hdCanXoa->getID()); 
+            delete hdCanXoa; 
+            dsHopDongLienQuan.erase(i); 
         }
     }
     
-    // Xóa các hóa đơn liên quan
-    for (size_t i = 0; i < dsHoaDon.size(); ) {
-        if (dsHoaDon[i]->getHoiVien() == hv) {
-            delete dsHoaDon[i];
-            dsHoaDon.erase(i);
-        } else {
-            ++i;
+    MyVector<HoaDon*>& dsHoaDonLienQuan = hvCanXoa->getDsHoaDon();
+    for (int i = dsHoaDonLienQuan.size() - 1; i >= 0; --i) {
+        HoaDon* hdCanXoa = dsHoaDonLienQuan[i];
+
+        if (hdCanXoa != nullptr) {
+            dsHoaDon.del(hdCanXoa->getID()); 
+            delete hdCanXoa; 
+            dsHoaDonLienQuan.erase(i);
         }
     }
-    
-    // Xóa khỏi hash table và giải phóng bộ nhớ
-    bool removed = dsHoiVien.remove(maHV);
+
+    bool removed = dsHoiVien.del(maHV);
     if (removed) {
-        delete hv;
+        delete hvCanXoa; 
     }
+    
+    // Tầng Controller sẽ gọi setDirty(true)
     return removed;
 }
+
 
 HoiVien* QuanLy::getHoiVien(const string& maHV) const {
     return dsHoiVien.search(maHV);

@@ -1,13 +1,6 @@
 #include "../Include/MyHashTable.h"
 
 template <typename T>
-MyHashTable<T>::MyHashTable() : m_size(0), m_capacity(16) {
-    table.reserve(m_capacity);
-    for (size_t i = 0; i < m_capacity; i++) 
-        table.push_back(nullptr);
-}
-
-template <typename T>
 MyHashTable<T>::MyHashTable(size_t capacity) : m_size(0), m_capacity(capacity) {
     table.reserve(capacity);
     for (size_t i = 0; i < capacity; i++) 
@@ -60,7 +53,7 @@ void MyHashTable<T>::insert(const std::string& key, const T& value) {
 }
 
 template <typename T>
-bool MyHashTable<T>::remove(const std::string& key) {
+bool MyHashTable<T>::del(const std::string& key) {
     size_t index = hash_function(key);
     Node* current = table[index];
     Node* prev = nullptr;

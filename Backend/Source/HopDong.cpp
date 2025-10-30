@@ -20,6 +20,7 @@ HopDong::HopDong(const HopDong& other)
 
 HopDong::~HopDong() {}
 
+const string& HopDong::getID() const { return this->id; }
 const HoiVien& HopDong::getHoiVien() const { return *hv; }
 const GoiTap& HopDong::getGoiTap() const { return *gt; }
 const NhanVien& HopDong::getNhanVien() const { return *nv; }

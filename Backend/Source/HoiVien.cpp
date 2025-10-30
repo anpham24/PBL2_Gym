@@ -19,10 +19,22 @@ HoiVien::HoiVien(const HoiVien& other)
 
 HoiVien::~HoiVien() {}
 
-double HoiVien::getPoint() const { return this->point; }
+
 void HoiVien::setPoint(int point) { this->point = point; }
-void HoiVien::setHLV(const HLV* hlv) { this->hlv = const_cast<HLV*>(hlv); }
-const HLV* HoiVien::getHLV() const { return this->hlv; }
+
+void HoiVien::setHLV(HLV* newHLV) {
+    if (this->hlv != nullptr) {
+        this->hlv->removeHoiVien(this);
+    }
+    this->hlv = newHLV;
+    if (newHLV != nullptr) {
+        newHLV->addHoiVien(this);
+    }
+}
+
+double HoiVien::getPoint() const { return this->point; }
+HLV* HoiVien::getHLV() { return this->hlv; }
+const HLV* HoiVien::getHLV() const { return this->hlv; }   
 
 void HoiVien::addHoaDon(HoaDon* hoaDon) {
     dsHoaDon.push_back(hoaDon);
@@ -41,6 +53,10 @@ const MyVector<HoaDon*>& HoiVien::getDsHoaDon() const {
     return dsHoaDon;
 }
 
+MyVector<HoaDon*>& HoiVien::getDsHoaDon() {
+    return dsHoaDon;
+}
+
 void HoiVien::addHopDong(HopDong* hopDong) {
     dsHopDong.push_back(hopDong);
 }
@@ -55,6 +71,10 @@ void HoiVien::removeHopDong(HopDong* hopDong) {
 }
 
 const MyVector<HopDong*>& HoiVien::getDsHopDong() const {
+    return dsHopDong;
+}
+
+MyVector<HopDong*>& HoiVien::getDsHopDong() {
     return dsHopDong;
 }
 

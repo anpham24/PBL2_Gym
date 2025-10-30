@@ -16,17 +16,20 @@ class HoaDon;
 
 class QuanLy {
 private:
+    static QuanLy* instance;
     MyHashTable<HoiVien*> dsHoiVien;
     MyVector<HLV*> dsHLV;
     MyVector<NhanVien*> dsNhanVien;
     MyVector<GoiTap*> dsGoiTap;
     MyVector<LopHoc*> dsLopHoc;
     MyVector<MonTap*> dsMonTap;
-    MyVector<HopDong*> dsHopDong;
+    MyHashTable<HopDong*> dsHopDong;
     MyVector<HangHoa*> dsHangHoa;
-    MyVector<HoaDon*> dsHoaDon;
+    MyHashTable<HoaDon*> dsHoaDon;
 
-    QuanLy() {}
+    bool isDirty = false;
+
+    QuanLy() : dsHoiVien(7013), dsHoaDon(40009), dsHopDong(40009) {}
     QuanLy(const QuanLy&) = delete;
     QuanLy& operator=(const QuanLy&) = delete;
 
@@ -37,6 +40,12 @@ public:
     }
 
     ~QuanLy();
+
+    void saveAllData(const string& filePath) const;
+    void loadAllData(const string& filePath);
+
+    void setDirty(bool status = true);
+    bool getIsDirty() const;    
 
     // Ham quan ly HoiVien
     bool addHoiVien(HoiVien*);
@@ -82,9 +91,6 @@ public:
     bool addHoaDon(HoaDon*);
     bool removeHoaDon(const string&);
     HoaDon* getHoaDon(const string&) const;
-
-    void saveAllData(const string& filePath) const;
-    void loadAllData(const string& filePath);
 
     string getDisplayList(const string& entityName) const;
 };
