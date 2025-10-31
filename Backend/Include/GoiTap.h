@@ -4,6 +4,7 @@
 using namespace std;
 
 class MonTap;
+class ChiTietHoaDon_GT;
 
 class GoiTap {
 private:
@@ -12,6 +13,7 @@ private:
     int thoiGian; // số tháng
     double gia; // giá niêm yết
     MyVector<MonTap*> dsMonTap;
+    MyVector<ChiTietHoaDon_GT*> dsChiTietHoaDon_GT;
 public:
     GoiTap();
     GoiTap(const string&, int, double);
@@ -30,6 +32,12 @@ public:
     void addMonTap(MonTap*);
     void removeMonTap(MonTap*);
     const MyVector<MonTap*>& getDsMonTap() const;
+    MyVector<MonTap*>& getDsMonTap();
+
+    void addChiTietHoaDon_GT(ChiTietHoaDon_GT*);
+    void removeChiTietHoaDon_GT(ChiTietHoaDon_GT*);
+    const MyVector<ChiTietHoaDon_GT*>& getDsChiTietHoaDon_GT() const;
+    MyVector<ChiTietHoaDon_GT*>& getDsChiTietHoaDon_GT();
 
     static GoiTap* create(const string&, int, double);
     string read() const;

@@ -17,7 +17,7 @@ HoaDon::HoaDon(NhanVien* nv, HoiVien* hv, const string& ngayLap, const string& p
 HoaDon::HoaDon(const HoaDon& other)
     : nhanVien(other.nhanVien), hoiVien(other.hoiVien), 
       ngayLap(other.ngayLap), phuongThucTT(other.phuongThucTT), 
-      itemsHH(other.itemsHH), itemsGT(other.itemsGT) {
+      dsChiTietHoaDon_HH(other.dsChiTietHoaDon_HH), dsChiTietHoaDon_GT(other.dsChiTietHoaDon_GT) {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_HoaDon);
 }
 
@@ -28,35 +28,37 @@ const NhanVien* HoaDon::getNhanVien() const { return nhanVien; }
 const HoiVien* HoaDon::getHoiVien() const { return hoiVien; }
 const string& HoaDon::getNgayLap() const { return ngayLap; }
 const string& HoaDon::getPhuongThuc() const { return phuongThucTT; }
-const MyVector<ChiTietHoaDon_HH*>& HoaDon::getItemsHH() const { return itemsHH; }
-const MyVector<ChiTietHoaDon_GT*>& HoaDon::getItemsGT() const { return itemsGT; }
+const MyVector<ChiTietHoaDon_HH*>& HoaDon::getDsChiTietHoaDon_HH() const { return dsChiTietHoaDon_HH; }
+const MyVector<ChiTietHoaDon_GT*>& HoaDon::getDsChiTietHoaDon_GT() const { return dsChiTietHoaDon_GT; }
+MyVector<ChiTietHoaDon_HH*>& HoaDon::getDsChiTietHoaDon_HH() { return dsChiTietHoaDon_HH; }
+MyVector<ChiTietHoaDon_GT*>& HoaDon::getDsChiTietHoaDon_GT() { return dsChiTietHoaDon_GT; }
 
 void HoaDon::setNhanVien(NhanVien* nv) { nhanVien = nv; }
 void HoaDon::setHoiVien(HoiVien* hv) { hoiVien = hv; }
 void HoaDon::setNgayLap(const string &d) { ngayLap = d; }
 void HoaDon::setPhuongThucTT(const string &p) { phuongThucTT = p; }
 
-void HoaDon::addItemHH(ChiTietHoaDon_HH* item) {
-    itemsHH.push_back(item);
+void HoaDon::addHangHoa(ChiTietHoaDon_HH* item) {
+    dsChiTietHoaDon_HH.push_back(item);
 }
 
-void HoaDon::removeItemHH(ChiTietHoaDon_HH* item) {
-    for (size_t i = 0; i < itemsHH.size(); ++i) {
-        if (itemsHH.at(i) == item) {
-            itemsHH.erase(i);
+void HoaDon::removeHangHoa(ChiTietHoaDon_HH* item) {
+    for (size_t i = 0; i < dsChiTietHoaDon_HH.size(); ++i) {
+        if (dsChiTietHoaDon_HH.at(i) == item) {
+            dsChiTietHoaDon_HH.erase(i);
             return;
         }
     }
 }
 
-void HoaDon::addItemGT(ChiTietHoaDon_GT* item) {
-    itemsGT.push_back(item);
+void HoaDon::addGoiTap(ChiTietHoaDon_GT* item) {
+    dsChiTietHoaDon_GT.push_back(item);
 }
 
-void HoaDon::removeItemGT(ChiTietHoaDon_GT* item) {
-    for (size_t i = 0; i < itemsGT.size(); ++i) {
-        if (itemsGT.at(i) == item) {
-            itemsGT.erase(i);
+void HoaDon::removeGoiTap(ChiTietHoaDon_GT* item) {
+    for (size_t i = 0; i < dsChiTietHoaDon_GT.size(); ++i) {
+        if (dsChiTietHoaDon_GT.at(i) == item) {
+            dsChiTietHoaDon_GT.erase(i);
             return;
         }
     }
@@ -64,17 +66,17 @@ void HoaDon::removeItemGT(ChiTietHoaDon_GT* item) {
 
 double HoaDon::getTotal() const {
     double sum = 0.0;
-    for (size_t i = 0; i < itemsHH.size(); ++i) {
-        sum += itemsHH[i]->tinhTien();
+    for (size_t i = 0; i < dsChiTietHoaDon_HH.size(); ++i) {
+        sum += dsChiTietHoaDon_HH[i]->tinhTien();
     }
-    for (size_t i = 0; i < itemsGT.size(); ++i) {
-        sum += itemsGT[i]->tinhTien();
+    for (size_t i = 0; i < dsChiTietHoaDon_GT.size(); ++i) {
+        sum += dsChiTietHoaDon_GT[i]->tinhTien();
     }
     return sum;
 }
 
 size_t HoaDon::itemCount() const {
-    return itemsHH.size() + itemsGT.size();
+    return dsChiTietHoaDon_HH.size() + dsChiTietHoaDon_GT.size();
 }
 
 HoaDon* HoaDon::create(NhanVien* nv, HoiVien* hv, const string& ngayLap, const string& phuongThucTT) {
@@ -83,19 +85,22 @@ HoaDon* HoaDon::create(NhanVien* nv, HoiVien* hv, const string& ngayLap, const s
 
 string HoaDon::read() const {
     string result = id + "," + nhanVien->getID() + "," + hoiVien->getID() + "," + ngayLap + "," + phuongThucTT + ",";
+    
     // Thêm danh sách chi tiết hàng hóa
-    for (size_t i = 0; i < itemsHH.size(); ++i) {
-        result += itemsHH[i]->read();
-        if (i != itemsHH.size() - 1 || itemsGT.size() > 0) {
+    for (size_t i = 0; i < dsChiTietHoaDon_HH.size(); ++i) {
+        result += dsChiTietHoaDon_HH.at(i)->read();
+        if (i != dsChiTietHoaDon_HH.size() - 1 || dsChiTietHoaDon_GT.size() > 0) {
             result += ";"; // Ngăn cách các chi tiết bằng dấu chấm phẩy
         }
     }
+    
     // Thêm danh sách chi tiết gói tập
-    for (size_t i = 0; i < itemsGT.size(); ++i) {
-        result += itemsGT[i]->read();
-        if (i != itemsGT.size() - 1) {
+    for (size_t i = 0; i < dsChiTietHoaDon_GT.size(); ++i) {
+        result += dsChiTietHoaDon_GT.at(i)->read();
+        if (i != dsChiTietHoaDon_GT.size() - 1) {
             result += ";"; // Ngăn cách các chi tiết bằng dấu chấm phẩy
         }
     }
+    
     return result;
 }

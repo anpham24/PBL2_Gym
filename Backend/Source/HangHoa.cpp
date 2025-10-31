@@ -1,4 +1,5 @@
 #include "../Include/HangHoa.h"
+#include "../Include/ChiTietHoaDon_HH.h"
 #include "../Include/IDGenerator.h"
 
 HangHoa::HangHoa() {
@@ -24,6 +25,27 @@ int HangHoa::getSoLuongCon() const { return this->soLuongCon; }
 void HangHoa::setTenHH(const string& tenHH) { this->tenHH = tenHH; }
 void HangHoa::setGia(double gia) { this->gia = gia; }
 void HangHoa::setSoLuongCon(int soLuongCon) { this->soLuongCon = soLuongCon; }
+
+void HangHoa::addChiTietHoaDon_HH(ChiTietHoaDon_HH* ct) {
+    this->dsChiTietHoaDon_HH.push_back(ct);
+}
+
+void HangHoa::removeChiTietHoaDon_HH(ChiTietHoaDon_HH* ct) {
+    for (size_t i = 0; i < dsChiTietHoaDon_HH.size(); ++i) {
+        if (dsChiTietHoaDon_HH.at(i) == ct) {
+            dsChiTietHoaDon_HH.erase(i);
+            return;
+        }
+    }
+}
+
+const MyVector<ChiTietHoaDon_HH*>& HangHoa::getDsChiTietHoaDon_HH() const {
+    return this->dsChiTietHoaDon_HH;
+}
+
+MyVector<ChiTietHoaDon_HH*>& HangHoa::getDsChiTietHoaDon_HH() {
+    return this->dsChiTietHoaDon_HH;
+}
 
 HangHoa* HangHoa::create(const string& tenHH, double gia, int soLuongCon) {
     return new HangHoa(tenHH, gia, soLuongCon);

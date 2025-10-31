@@ -1,6 +1,9 @@
 #pragma once
+#include "MyVector.h"
 #include <string>
 using namespace std;
+
+class ChiTietHoaDon_HH;
 
 class HangHoa {
 private:
@@ -8,6 +11,7 @@ private:
     string tenHH;
     double gia;
     int soLuongCon;
+    MyVector<ChiTietHoaDon_HH*> dsChiTietHoaDon_HH;
 public:
     HangHoa();
     HangHoa(const string&, double, int);
@@ -22,6 +26,11 @@ public:
     void setTenHH(const string&);
     void setGia(double);
     void setSoLuongCon(int);
+
+    void addChiTietHoaDon_HH(ChiTietHoaDon_HH*);
+    void removeChiTietHoaDon_HH(ChiTietHoaDon_HH*);
+    const MyVector<ChiTietHoaDon_HH*>& getDsChiTietHoaDon_HH() const;
+    MyVector<ChiTietHoaDon_HH*>& getDsChiTietHoaDon_HH();
 
     static HangHoa* create(const string&, double, int);
     string read() const;

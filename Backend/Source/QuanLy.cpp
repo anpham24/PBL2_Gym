@@ -8,6 +8,8 @@
 #include "../Include/HopDong.h"
 #include "../Include/HangHoa.h"
 #include "../Include/HoaDon.h"
+#include "../Include/ChiTietHoaDon_GT.h"
+#include "../Include/ChiTietHoaDon_HH.h"
 #include <fstream>
 
 // ============================================================================
@@ -31,14 +33,8 @@ QuanLy::~QuanLy() {
     for (size_t i = 0; i < dsMonTap.size(); ++i) {
         delete dsMonTap[i];
     }
-    for (size_t i = 0; i < dsHopDong.size(); ++i) {
-        delete dsHopDong[i];
-    }
     for (size_t i = 0; i < dsHangHoa.size(); ++i) {
         delete dsHangHoa[i];
-    }
-    for (size_t i = 0; i < dsHoaDon.size(); ++i) {
-        delete dsHoaDon[i];
     }
     // MyHashTable tự động xóa các HoiVien* trong destructor của nó
 }
@@ -297,6 +293,15 @@ bool QuanLy::removeGoiTap(const string& maGoi) {
         }
     }
 
+    MyVector<ChiTietHoaDon_GT*>& dsChiTietHoaDon_GTLienQuan = gtCanXoa->getDsChiTietHoaDon_GT();
+    for (size_t i = 0; i < dsChiTietHoaDon_GTLienQuan.size(); ++i) {
+        ChiTietHoaDon_GT* ct = dsChiTietHoaDon_GTLienQuan[i];
+
+        if (ct != nullptr) {
+            ct->setGoiTap(nullptr);
+        }
+    }
+
     if (gtCanXoa == nullptr) {
         return false; 
     }
@@ -513,17 +518,48 @@ bool QuanLy::addHangHoa(HangHoa* hh) {
 }
 
 bool QuanLy::removeHangHoa(const string& maHH) {
-    for (size_t i = 0; i < dsHangHoa.size(); ++i) {
-        if (dsHangHoa[i]->getID() == maHH) {
-            delete dsHangHoa[i];
-            dsHangHoa.erase(i);
-            return true;
+    int hhIndex = -1;
+    HangHoa* hhCanXoa = nullptr;
+
+    for (size_t i = 0; i < dsHangHoa.size(); ++i) { 
+        HangHoa* currentHH = dsHangHoa[i];
+
+        if (currentHH != nullptr && currentHH->getID() == maHH) {
+            hhCanXoa = currentHH;
+            hhIndex = i;
+            break;
         }
     }
-    return false;
+
+    MyVector<ChiTietHoaDon_HH*>& dsChiTietHoaDon_HHLienQuan = hhCanXoa->getDsChiTietHoaDon_HH();
+    for (size_t i = 0; i < dsChiTietHoaDon_HHLienQuan.size(); ++i) {
+        ChiTietHoaDon_HH* ct = dsChiTietHoaDon_HHLienQuan[i];
+
+        if (ct != nullptr) {
+            ct->setHangHoa(nullptr);
+        }
+    }
+
+    if (hhCanXoa == nullptr) {
+        return false; 
+    }
+
+    delete hhCanXoa;
+
+    bool removed = dsHangHoa.erase(hhIndex);
+    return removed;
 }
 
-HangHoa* QuanLy::getHangHoa(const string& maHH) const {
+const HangHoa* QuanLy::getHangHoa(const string& maHH) const {
+    for (size_t i = 0; i < dsHangHoa.size(); ++i) {
+        if (dsHangHoa[i]->getID() == maHH) {
+            return dsHangHoa[i];
+        }
+    }
+    return nullptr;
+}
+
+HangHoa* QuanLy::getHangHoa(const string& maHH) {
     for (size_t i = 0; i < dsHangHoa.size(); ++i) {
         if (dsHangHoa[i]->getID() == maHH) {
             return dsHangHoa[i];
@@ -537,8 +573,11 @@ HangHoa* QuanLy::getHangHoa(const string& maHH) const {
 // ============================================================================
 
 bool QuanLy::addHoaDon(HoaDon* hd) {
-    if (!hd) return false;
-    dsHoaDon.push_back(hd);
+    if (hd == nullptr)
+        return false;
+    if (dsHoaDon.search(hd->getID()) != nullptr)
+        return false;
+    dsHoaDon.insert(hd->getID(), hd);
     return true;
 }
 
