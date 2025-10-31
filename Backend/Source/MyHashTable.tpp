@@ -85,6 +85,18 @@ T* MyHashTable<T>::search(const std::string& key) {
 }
 
 template <typename T>
+const T* MyHashTable<T>::search(const std::string& key) const {
+    size_t index = hash_function(key);
+    Node* current = table[index];
+
+    while (current != nullptr) {
+        if (current->key == key) return &(current->value);
+        current = current->next;
+    }
+    return nullptr; // không tìm thấy
+}
+
+template <typename T>
 size_t MyHashTable<T>::size() const {
     return m_size;
 }

@@ -3,23 +3,26 @@
 using namespace std;
 
 class HangHoa {
-    private:
-        string id;
-        string tenHH;
-        double gia;
-    public:
-        HangHoa();
-        HangHoa(const string&, double);
-        HangHoa(const HangHoa& other);
-        ~HangHoa();
+private:
+    string id;
+    string tenHH;
+    double gia;
+    int soLuongCon;
+public:
+    HangHoa();
+    HangHoa(const string&, double, int);
+    HangHoa(const HangHoa& other);
+    ~HangHoa();
 
-        const string& getID() const;
-        const string& getTenHH() const;
-        double getGia() const;
+    const string& getID() const;
+    const string& getTenHH() const;
+    double getGia() const;
+    int getSoLuongCon() const;
 
-        void setTenHH(const string&);
-        void setGia(double);
+    void setTenHH(const string&);
+    void setGia(double);
+    void setSoLuongCon(int);
 
-        static HangHoa* create(const string&, double);
-        string read() const;
+    static HangHoa* create(const string&, double, int);
+    string read() const;
 };

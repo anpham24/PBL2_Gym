@@ -39,6 +39,10 @@ const MyVector<HopDong*>& NhanVien::getDsHopDong() const {
     return this->dsHopDong;
 }
 
+MyVector<HopDong*>& NhanVien::getDsHopDong() {
+    return this->dsHopDong;
+}
+
 void NhanVien::addHoaDon(HoaDon* hoaDon) {
     this->dsHoaDon.push_back(hoaDon);
 }
@@ -53,6 +57,10 @@ void NhanVien::removeHoaDon(HoaDon* hoaDon) {
 }
 
 const MyVector<HoaDon*>& NhanVien::getDsHoaDon() const {
+    return this->dsHoaDon;
+}
+
+MyVector<HoaDon*>& NhanVien::getDsHoaDon() {
     return this->dsHoaDon;
 }
 

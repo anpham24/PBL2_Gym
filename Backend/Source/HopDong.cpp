@@ -27,9 +27,27 @@ const NhanVien& HopDong::getNhanVien() const { return *nv; }
 const string& HopDong::getNgayDK() const { return ngayDK; }
 const string& HopDong::getNgayHetHan() const { return ngayHetHan; }
 
-void HopDong::setHoiVien(HoiVien* hv) { this->hv = hv; }
+void HopDong::setHoiVien(HoiVien* hv) { 
+    if (this->hv != nullptr) {
+        this->hv->removeHopDong(this);
+    }
+    this->hv = hv;
+    if (hv != nullptr) {
+        hv->addHopDong(this);
+    }
+}
+
 void HopDong::setGoiTap(GoiTap* gt) { this->gt = gt; }
-void HopDong::setNhanVien(NhanVien* nv) { this->nv = nv; }
+void HopDong::setNhanVien(NhanVien* nv) { 
+    if (this->nv != nullptr) {
+        this->nv->removeHopDong(this);
+    }
+    this->nv = nv;
+    if (nv != nullptr) {
+        nv->addHopDong(this);
+    }
+}
+
 void HopDong::setNgayDK(const string& ngay) { ngayDK = ngay; }
 void HopDong::setNgayHetHan(const string& ngay) { ngayHetHan = ngay; }
 

@@ -19,7 +19,6 @@ public:
     ~HoiVien();
 
     const HLV* getHLV() const;
-    HLV* getHLV();
     double getPoint() const;
     void setPoint(int);
     void setHLV(HLV*);

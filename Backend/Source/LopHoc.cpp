@@ -31,7 +31,16 @@ HLV* LopHoc::getHLV() const { return this->hlv; }
 void LopHoc::setTenLop(const string& t) { this->tenLop = t; }
 void LopHoc::setLichTap(const string& l) { this->lichTap = l; }
 void LopHoc::setThoiLuong(int tl) { this->thoiLuong = tl; }
-void LopHoc::setMonTap(MonTap* mt) { this->monTap = mt; }
+
+void LopHoc::setMonTap(MonTap* mt) { 
+    if (this->monTap != nullptr) {
+        this->monTap->removeLopHoc(this);
+    }
+    this->monTap = mt;
+    if (mt != nullptr) {
+        mt->addLopHoc(this);
+    }
+}
 
 void LopHoc::setHLV(HLV* h) { 
     if (this->hlv != nullptr) {

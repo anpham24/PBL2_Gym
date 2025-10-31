@@ -94,24 +94,26 @@ void MyVector<T>::pop_back() {
 }
 
 template <typename T>
-void MyVector<T>::erase(size_t index) {
+bool MyVector<T>::erase(size_t index) {
     if (index >= m_size) 
-        throw std::out_of_range("Index out of range");
+        return false;
+
     data[index].~T();
     for (size_t i = index; i < m_size - 1; i++) {
         data[i] = data[i + 1];
     }
     --m_size;
+    return true;
 }
 
 template <typename T> 
-void MyVector<T>::erase(T* it) {
+bool MyVector<T>::erase(T* it) {
     if (it == nullptr) 
-        throw std::out_of_range("Iterator is null");
+        return false;
     if (it < data || it > data + m_size) 
-        throw std::out_of_range("Iterator is out of range");
+        return false;
     size_t index = static_cast<size_t>(it - data);
-    erase(index);
+    return erase(index);
 }
 
 template <typename T>

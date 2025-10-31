@@ -31,6 +31,7 @@ public:
     void insert(const string&, const T&);
     bool del(const string&);
     T* search(const string&);
+    const T* search(const string&) const;
 
     // Ham thong tin
     size_t size() const;

@@ -33,7 +33,6 @@ void HoiVien::setHLV(HLV* newHLV) {
 }
 
 double HoiVien::getPoint() const { return this->point; }
-HLV* HoiVien::getHLV() { return this->hlv; }
 const HLV* HoiVien::getHLV() const { return this->hlv; }   
 
 void HoiVien::addHoaDon(HoaDon* hoaDon) {
