@@ -1,0 +1,140 @@
+[
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\ChiTietHoaDon_GT.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\ChiTietHoaDon_GT.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/ChiTietHoaDon_GT.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/ChiTietHoaDon_GT.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\ChiTietHoaDon_HH.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\ChiTietHoaDon_HH.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/ChiTietHoaDon_HH.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/ChiTietHoaDon_HH.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\GoiTap.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\GoiTap.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/GoiTap.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/GoiTap.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\HLV.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\HLV.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/HLV.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/HLV.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\HangHoa.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\HangHoa.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/HangHoa.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/HangHoa.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\HoaDon.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\HoaDon.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/HoaDon.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/HoaDon.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\HoiVien.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\HoiVien.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/HoiVien.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/HoiVien.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\HopDong.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\HopDong.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/HopDong.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/HopDong.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\IDGenerator.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\IDGenerator.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/IDGenerator.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/IDGenerator.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\LopHoc.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\LopHoc.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/LopHoc.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/LopHoc.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\MonTap.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\MonTap.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/MonTap.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/MonTap.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\NhanVien.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\NhanVien.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/NhanVien.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/NhanVien.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\Person.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\Person.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/Person.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/Person.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -g -std=gnu++17 -o CMakeFiles\\gym_backend.dir\\Backend\\Source\\QuanLy.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Backend\\Source\\QuanLy.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/QuanLy.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/gym_backend.dir/Backend/Source/QuanLy.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI\" -isystem C:/SFML_Build/include -g -std=gnu++17 -o CMakeFiles\\PBL2_Gym.dir\\main.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\main.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/main.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/PBL2_Gym.dir/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI\" -isystem C:/SFML_Build/include -g -std=gnu++17 -o CMakeFiles\\PBL2_Gym.dir\\Frontend\\Source\\Manager\\DataManager.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Frontend\\Source\\Manager\\DataManager.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Source/Manager/DataManager.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/PBL2_Gym.dir/Frontend/Source/Manager/DataManager.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI\" -isystem C:/SFML_Build/include -g -std=gnu++17 -o CMakeFiles\\PBL2_Gym.dir\\Frontend\\Source\\Manager\\LoginSystem.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Frontend\\Source\\Manager\\LoginSystem.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Source/Manager/LoginSystem.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/PBL2_Gym.dir/Frontend/Source/Manager/LoginSystem.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI\" -isystem C:/SFML_Build/include -g -std=gnu++17 -o CMakeFiles\\PBL2_Gym.dir\\Frontend\\Source\\Screens\\LoginScreen.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Frontend\\Source\\Screens\\LoginScreen.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Source/Screens/LoginScreen.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/PBL2_Gym.dir/Frontend/Source/Screens/LoginScreen.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI\" -isystem C:/SFML_Build/include -g -std=gnu++17 -o CMakeFiles\\PBL2_Gym.dir\\Frontend\\Source\\Screens\\MemberScreen.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Frontend\\Source\\Screens\\MemberScreen.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Source/Screens/MemberScreen.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/PBL2_Gym.dir/Frontend/Source/Screens/MemberScreen.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI\" -isystem C:/SFML_Build/include -g -std=gnu++17 -o CMakeFiles\\PBL2_Gym.dir\\Frontend\\Source\\UI\\DropdownMenu.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Frontend\\Source\\UI\\DropdownMenu.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Source/UI/DropdownMenu.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/DropdownMenu.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI\" -isystem C:/SFML_Build/include -g -std=gnu++17 -o CMakeFiles\\PBL2_Gym.dir\\Frontend\\Source\\UI\\ModernButton.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Frontend\\Source\\UI\\ModernButton.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Source/UI/ModernButton.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/ModernButton.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI\" -isystem C:/SFML_Build/include -g -std=gnu++17 -o CMakeFiles\\PBL2_Gym.dir\\Frontend\\Source\\UI\\ModernInputBox.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Frontend\\Source\\UI\\ModernInputBox.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Source/UI/ModernInputBox.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/ModernInputBox.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens\" -I\"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI\" -isystem C:/SFML_Build/include -g -std=gnu++17 -o CMakeFiles\\PBL2_Gym.dir\\Frontend\\Source\\UI\\UIComponents.cpp.obj -c \"C:\\Users\\Admin\\OneDrive - The University of Technology\\Desktop\\PBL2\\PBL2_Gym\\Frontend\\Source\\UI\\UIComponents.cpp\"",
+  "file": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Source/UI/UIComponents.cpp",
+  "output": "C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build/CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/UIComponents.cpp.obj"
+}
+]

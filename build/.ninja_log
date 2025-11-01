@@ -1,0 +1,20 @@
+# ninja log v7
+137	6229	7836291034427174	CMakeFiles/PBL2_Gym.dir/main.cpp.obj	3ba1df18612e3cc0
+3543	4271	7835809314321761	PBL2_Gym.exe	5787d376e7d9cda1
+114	2117	7836291034198491	CMakeFiles/gym_backend.dir/Backend/Source/Person.cpp.obj	c5d693aa8a3cae7f
+26	565	7836628402075957	CMakeFiles/gym_backend.dir/Backend/Source/HopDong.cpp.obj	bd77bd2fda85304f
+140	997	7836621917099687	CMakeFiles/gym_backend.dir/Backend/Source/MonTap.cpp.obj	e51a79a2d815fc5f
+93	996	7836621916645149	CMakeFiles/gym_backend.dir/Backend/Source/HangHoa.cpp.obj	66342ca2e45b6a32
+86	2166	7836291033916680	CMakeFiles/gym_backend.dir/Backend/Source/IDGenerator.cpp.obj	79da131441b74fef
+70	996	7836621916406384	CMakeFiles/gym_backend.dir/Backend/Source/ChiTietHoaDon_HH.cpp.obj	5304e5c15b04b273
+64	911	7836621916348354	CMakeFiles/gym_backend.dir/Backend/Source/ChiTietHoaDon_GT.cpp.obj	ae1de8afdb653fc
+132	1008	7836621917026754	CMakeFiles/gym_backend.dir/Backend/Source/LopHoc.cpp.obj	320167af7643e1ac
+22	628	7836628402036404	CMakeFiles/gym_backend.dir/Backend/Source/HoaDon.cpp.obj	693857f7eafdd887
+77	1026	7836621916475353	CMakeFiles/gym_backend.dir/Backend/Source/GoiTap.cpp.obj	7defb09a95237701
+113	1107	7836621916845900	CMakeFiles/gym_backend.dir/Backend/Source/HoiVien.cpp.obj	f1b728031a89b91f
+85	1090	7836621916557575	CMakeFiles/gym_backend.dir/Backend/Source/HLV.cpp.obj	747d310481a2682e
+122	1991	7836291131008758	CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/ModernButton.cpp.obj	eb359fe31f44e8ef
+129	2190	7836291131083892	CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/ModernInputBox.cpp.obj	f88a98ad25dcf3ed
+115	2501	7836291130938835	CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/DropdownMenu.cpp.obj	277b8406e78e0b92
+134	5733	7836291131134010	CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/UIComponents.cpp.obj	78785c5fe68958fd
+148	1084	7836621917188005	CMakeFiles/gym_backend.dir/Backend/Source/NhanVien.cpp.obj	6156cb9e08069f77
