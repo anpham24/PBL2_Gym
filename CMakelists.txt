@@ -4,20 +4,79 @@ project(PBL2_Gym)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Chỉ đường đến SFML 3.0 mà bạn đã build
+# ============================================================================
+# SFML Configuration - DÙNG STATIC
+# ============================================================================
 set(SFML_DIR "C:/SFML_Build/lib/cmake/SFML")
+set(SFML_STATIC_LIBRARIES ON)  # GIỮ STATIC
 
-# Nếu bạn dùng bản static (libsfml-xxx-s.a)
-set(SFML_STATIC_LIBRARIES ON)
-
-# Tìm package SFML 3.0
 find_package(SFML 3 REQUIRED COMPONENTS Graphics Window System)
 
-# Tạo file thực thi
-add_executable(PBL2_Gym main.cpp)
+# ============================================================================
+# BACKEND (Static Library)
+# ============================================================================
+file(GLOB_RECURSE BACKEND_SOURCES 
+    "Backend/Source/*.cpp"
+    "Backend/Source/*.tpp"
+)
 
-# Dành cho thư viện static (rất quan trọng)
+add_library(gym_backend STATIC ${BACKEND_SOURCES})
+target_include_directories(gym_backend PUBLIC 
+    "${CMAKE_CURRENT_SOURCE_DIR}/Backend/Include"
+)
+
+# ============================================================================
+# FRONTEND (Executable)
+# ============================================================================
+file(GLOB_RECURSE FRONTEND_SOURCES
+    "Frontend/Source/Manager/*.cpp"
+    "Frontend/Source/Screens/*.cpp"
+    "Frontend/Source/UI/*.cpp"
+)
+
+add_executable(PBL2_Gym 
+    "main.cpp"
+    ${FRONTEND_SOURCES}
+)
+
+target_include_directories(PBL2_Gym PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/Backend/Include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Frontend/Include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Frontend/Include/Manager"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Frontend/Include/Screens"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Frontend/Include/UI"
+)
+
+# ============================================================================
+# LINKING - SỬA LỖI FREETYPE
+# ============================================================================
 target_compile_definitions(PBL2_Gym PRIVATE SFML_STATIC)
 
-# Liên kết với SFML 3.0
-target_link_libraries(PBL2_Gym PRIVATE SFML::Graphics SFML::Window SFML::System)
+target_link_libraries(PBL2_Gym PRIVATE 
+    gym_backend
+    SFML::Graphics 
+    SFML::Window 
+    SFML::System
+)
+
+# CHỈ LINK CÁC THƯ VIỆN CẦN THIẾT, KHÔNG LINK FREETYPE TRỰC TIẾP
+if(WIN32 AND SFML_STATIC_LIBRARIES)
+    target_link_libraries(PBL2_Gym PRIVATE 
+        winmm
+        opengl32
+        gdi32
+        # KHÔNG link freetype ở đây - SFML sẽ tự xử lý
+    )
+endif()
+
+# ============================================================================
+# FIX FREETYPE ISSUE - THÊM ĐOẠN NÀY
+# ============================================================================
+# Kiểm tra và sửa lỗi freetype include path
+if(TARGET freetype)
+    get_target_property(freetype_include_dirs freetype INTERFACE_INCLUDE_DIRECTORIES)
+    if(freetype_include_dirs)
+        list(FILTER freetype_include_dirs EXCLUDE REGEX ".*freetype2.*")
+        set_target_properties(freetype PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${freetype_include_dirs}")
+    endif()
+endif()

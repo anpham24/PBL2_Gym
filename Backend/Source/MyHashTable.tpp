@@ -73,7 +73,7 @@ bool MyHashTable<T>::del(const std::string& key) {
 }
 
 template <typename T>
-T* MyHashTable<T>::search(const std::string& key) {
+const T* MyHashTable<T>::search(const std::string& key)  const{
     size_t index = hash_function(key);
     Node* current = table[index];
 

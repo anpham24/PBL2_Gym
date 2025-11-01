@@ -11,6 +11,7 @@
 #include "../Include/ChiTietHoaDon_GT.h"
 #include "../Include/ChiTietHoaDon_HH.h"
 #include <fstream>
+#include <sstream>
 
 // ============================================================================
 // DESTRUCTOR
