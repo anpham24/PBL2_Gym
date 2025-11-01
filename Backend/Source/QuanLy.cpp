@@ -9,6 +9,7 @@
 #include "../Include/HangHoa.h"
 #include "../Include/HoaDon.h"
 #include <fstream>
+#include <sstream>
 
 // ============================================================================
 // DESTRUCTOR
@@ -41,6 +42,30 @@ QuanLy::~QuanLy() {
         delete dsHoaDon[i];
     }
     // MyHashTable tự động xóa các HoiVien* trong destructor của nó
+}
+
+const MyHashTable<HoiVien*>& QuanLy::getDsHoiVien() const {
+    return this->dsHoiVien;
+}
+
+const MyVector<HLV*>& QuanLy::getDsHLV() const {
+    return this->dsHLV;
+}
+
+const MyVector<NhanVien*>& QuanLy::getDsNhanVien() const {
+    return this->dsNhanVien;
+}
+
+const MyVector<GoiTap*>& QuanLy::getDsGoiTap() const {
+    return this->dsGoiTap;
+}
+
+const MyVector<HangHoa*>& QuanLy::getDsHangHoa() const {
+    return this->dsHangHoa;
+}
+
+const MyVector<HoaDon*>& QuanLy::getDsHoaDon() const {
+    return this->dsHoaDon;
 }
 
 // ============================================================================
@@ -89,8 +114,18 @@ bool QuanLy::removeHoiVien(const string& maHV) {
     return removed;
 }
 
-HoiVien* QuanLy::getHoiVien(const string& maHV) const {
-    return dsHoiVien.search(maHV);
+// Sửa lại hàm của bạn (dòng 117-119)
+const HoiVien* QuanLy::getHoiVien(const string& maHV) const {
+    // search() const trả về một con trỏ-đến-con-trỏ (HoiVien* const *)
+    HoiVien* const * hvPtr = dsHoiVien.search(maHV);
+
+    // Kiểm tra xem con trỏ (hvPtr) VÀ giá trị nó trỏ tới (*hvPtr)
+    // có hợp lệ không
+    if (hvPtr && *hvPtr) {
+        return *hvPtr; // Trả về giá trị (kiểu const HoiVien*)
+    }
+
+    return nullptr; // Trả về nullptr nếu không tìm thấy
 }
 
 // ============================================================================

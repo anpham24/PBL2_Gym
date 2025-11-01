@@ -31,7 +31,8 @@ public:
     // Ham them, xoa, tim kiem
     void insert(const string&, const T&);
     bool remove(const string&);
-    T* search(const string&);
+    T* search(const string& key);
+    const T* search(const string&) const;
 
     // Ham thong tin
     size_t size() const;

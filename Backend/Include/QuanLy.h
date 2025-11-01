@@ -38,10 +38,28 @@ public:
 
     ~QuanLy();
 
+    // Getter cho Hội Viên (MyHashTable)
+    const MyHashTable<HoiVien*>& getDsHoiVien() const;
+    
+    // Getter cho HLV (MyVector)
+    const MyVector<HLV*>& getDsHLV() const;
+
+    // Getter cho Nhân Viên (MyVector)
+    const MyVector<NhanVien*>& getDsNhanVien() const;
+
+    // Getter cho Gói Tập (MyVector)
+    const MyVector<GoiTap*>& getDsGoiTap() const;
+
+    // Getter cho Hàng Hóa (MyVector)
+    const MyVector<HangHoa*>& getDsHangHoa() const;
+
+    // Getter cho Hóa Đơn (MyVector)
+    const MyVector<HoaDon*>& getDsHoaDon() const;
+
     // Ham quan ly HoiVien
     bool addHoiVien(HoiVien*);
     bool removeHoiVien(const string&);
-    HoiVien* getHoiVien(const string&) const;
+    const HoiVien* getHoiVien(const string&) const;
 
     // Ham quan ly HLV
     bool addHLV(HLV*);
