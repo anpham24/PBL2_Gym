@@ -21,6 +21,7 @@ public:
     HopDong(const HopDong&);
     ~HopDong();
 
+    const string& getID() const;
     const string& getNgayDK() const;
     const string& getNgayHetHan() const;
     const HoiVien& getHoiVien() const;

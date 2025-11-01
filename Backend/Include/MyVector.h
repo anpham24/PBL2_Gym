@@ -27,8 +27,8 @@ public:
     // Them, xoa phan tu
     void push_back(const T&);
     void pop_back();
-    void erase(size_t);
-    void erase(T*);
+    bool erase(size_t);
+    bool erase(T*);
 
     // Truy cap phan tu
     T& operator[](size_t);

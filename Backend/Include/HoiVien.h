@@ -21,16 +21,17 @@ public:
     const HLV* getHLV() const;
     double getPoint() const;
     void setPoint(int);
-    void setHLV(const HLV*);
-    void removeHLV();
+    void setHLV(HLV*);
 
     void addHoaDon(HoaDon*);
     void removeHoaDon(HoaDon*);
     const MyVector<HoaDon*>& getDsHoaDon() const;
+    MyVector<HoaDon*>& getDsHoaDon();
 
     void addHopDong(HopDong*);
     void removeHopDong(HopDong*);
     const MyVector<HopDong*>& getDsHopDong() const;
+    MyVector<HopDong*>& getDsHopDong();
 
     static HoiVien* create(const string&, const string&, const string&, int, int, HLV*);
     string read() const override;

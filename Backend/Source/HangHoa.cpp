@@ -1,16 +1,17 @@
 #include "../Include/HangHoa.h"
+#include "../Include/ChiTietHoaDon_HH.h"
 #include "../Include/IDGenerator.h"
 
 HangHoa::HangHoa() {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_HangHoa);
 }
 
-HangHoa::HangHoa(const string& tenHH, double gia) : tenHH(tenHH), gia(gia) {
+HangHoa::HangHoa(const string& tenHH, double gia, int soLuongCon) : tenHH(tenHH), gia(gia), soLuongCon(soLuongCon) {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_HangHoa);
 }
 
 HangHoa::HangHoa(const HangHoa& other) 
-    : tenHH(other.tenHH), gia(other.gia) {
+    : tenHH(other.tenHH), gia(other.gia), soLuongCon(other.soLuongCon) {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_HangHoa);
 }
 
@@ -19,14 +20,37 @@ HangHoa::~HangHoa() {}
 const string& HangHoa::getID() const { return this->id; }
 const string& HangHoa::getTenHH() const { return this->tenHH; }
 double HangHoa::getGia() const { return this->gia; }
- 
-void HangHoa::setTenHH(const string& tenHH) { this->tenHH = tenHH; }
-void HangHoa::setGia(double gia) { this->gia = gia; } 
+int HangHoa::getSoLuongCon() const { return this->soLuongCon; }
 
-HangHoa* HangHoa::create(const string& tenHH, double gia) {
-    return new HangHoa(tenHH, gia);
+void HangHoa::setTenHH(const string& tenHH) { this->tenHH = tenHH; }
+void HangHoa::setGia(double gia) { this->gia = gia; }
+void HangHoa::setSoLuongCon(int soLuongCon) { this->soLuongCon = soLuongCon; }
+
+void HangHoa::addChiTietHoaDon_HH(ChiTietHoaDon_HH* ct) {
+    this->dsChiTietHoaDon_HH.push_back(ct);
+}
+
+void HangHoa::removeChiTietHoaDon_HH(ChiTietHoaDon_HH* ct) {
+    for (size_t i = 0; i < dsChiTietHoaDon_HH.size(); ++i) {
+        if (dsChiTietHoaDon_HH.at(i) == ct) {
+            dsChiTietHoaDon_HH.erase(i);
+            return;
+        }
+    }
+}
+
+const MyVector<ChiTietHoaDon_HH*>& HangHoa::getDsChiTietHoaDon_HH() const {
+    return this->dsChiTietHoaDon_HH;
+}
+
+MyVector<ChiTietHoaDon_HH*>& HangHoa::getDsChiTietHoaDon_HH() {
+    return this->dsChiTietHoaDon_HH;
+}
+
+HangHoa* HangHoa::create(const string& tenHH, double gia, int soLuongCon) {
+    return new HangHoa(tenHH, gia, soLuongCon);
 }
 
 string HangHoa::read() const {
-    return id + "," + tenHH + "," + to_string(gia);
+    return id + "," + tenHH + "," + to_string(gia) + "," + to_string(soLuongCon);
 }

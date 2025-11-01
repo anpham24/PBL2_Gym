@@ -15,6 +15,20 @@ GoiTap* ChiTietHoaDon_GT::getGoiTap() const { return goiTap; }
 int ChiTietHoaDon_GT::getSoLuong() const { return soLuong; }
 double ChiTietHoaDon_GT::getDonGia() const { return donGia; }
 
+void ChiTietHoaDon_GT::setGoiTap(GoiTap* gt) { 
+    if (this->goiTap != nullptr) {
+        this->goiTap->removeChiTietHoaDon_GT(this);
+    }
+    this->goiTap = gt;
+    if (gt != nullptr) {
+        gt->addChiTietHoaDon_GT(this);
+    }
+}
+
+ChiTietHoaDon_GT* ChiTietHoaDon_GT::create(GoiTap* goiTap, int soLuong, double donGia) {
+    return new ChiTietHoaDon_GT(goiTap, soLuong, donGia);
+}
+
 double ChiTietHoaDon_GT::tinhTien() const {
     return soLuong * donGia;
 }

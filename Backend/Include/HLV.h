@@ -22,10 +22,12 @@ class HLV : public Person {
         void addHoiVien(HoiVien*);
         void removeHoiVien(HoiVien*);
         const MyVector<HoiVien*>& getDsHoiVien() const;
+        MyVector<HoiVien*>& getDsHoiVien();
 
         void addLopHoc(LopHoc*);
         void removeLopHoc(LopHoc*);
         const MyVector<LopHoc*>& getDsLopHoc() const;
+        MyVector<LopHoc*>& getDsLopHoc();
 
         static HLV* create(const string&, const string&, const string&, int, double);
         string read() const override;

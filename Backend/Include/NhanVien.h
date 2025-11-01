@@ -21,10 +21,12 @@ public:
     void addHopDong(HopDong*);
     void removeHopDong(HopDong*);
     const MyVector<HopDong*>& getDsHopDong() const;
+    MyVector<HopDong*>& getDsHopDong();
 
     void addHoaDon(HoaDon*);
     void removeHoaDon(HoaDon*);
     const MyVector<HoaDon*>& getDsHoaDon() const;
+    MyVector<HoaDon*>& getDsHoaDon();
 
     static NhanVien* create(const string&, const string&, const string&, int, double);
     string read() const override;

@@ -24,14 +24,13 @@ private:
 
 public: 
     // Ham dung ham huy
-    MyHashTable();
     MyHashTable(size_t);
     ~MyHashTable();
 
     // Ham them, xoa, tim kiem
     void insert(const string&, const T&);
-    bool remove(const string&);
-    T* search(const string& key);
+    bool del(const string&);
+    T* search(const string&);
     const T* search(const string&) const;
 
     // Ham thong tin

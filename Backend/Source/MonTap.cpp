@@ -1,5 +1,6 @@
 #include "../Include/MonTap.h"
 #include "../Include/IDGenerator.h"
+#include "../Include/LopHoc.h"
 
 MonTap::MonTap() {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_MonTap);
@@ -25,6 +26,19 @@ const string& MonTap::getMaHLV() const { return this->maHLV; }
 void MonTap::setTenMon(const string& t) { this->tenMon = t; }
 void MonTap::setLichTap(const string& l) { this->lichTap = l; }
 void MonTap::setMaHLV(const string& m) { this->maHLV = m; }
+
+void MonTap::addLopHoc(LopHoc* lh) {
+    dsLopHoc.push_back(lh);
+}
+
+void MonTap::removeLopHoc(LopHoc* lh) {
+    for (int i = 0; i < dsLopHoc.size(); i++) {
+        if (dsLopHoc[i] == lh) {
+            dsLopHoc.erase(i);
+            break;
+        }
+    }
+}
 
 MonTap* MonTap::create(const string& tenMon, const string& lichTap, const string& maHLV) {
     return new MonTap(tenMon, lichTap, maHLV);

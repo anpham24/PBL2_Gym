@@ -15,8 +15,8 @@ private:
     HoiVien* hoiVien;
     string ngayLap;
     string phuongThucTT;
-    MyVector<ChiTietHoaDon_HH*> itemsHH;
-    MyVector<ChiTietHoaDon_GT*> itemsGT;
+    MyVector<ChiTietHoaDon_HH*> dsChiTietHoaDon_HH;
+    MyVector<ChiTietHoaDon_GT*> dsChiTietHoaDon_GT;
 public:
     HoaDon();
     HoaDon(NhanVien*, HoiVien*, const string&, const string&);
@@ -28,19 +28,21 @@ public:
     const HoiVien* getHoiVien() const;
     const string& getNgayLap() const;
     const string& getPhuongThuc() const;
-    const MyVector<ChiTietHoaDon_HH*>& getItemsHH() const;
-    const MyVector<ChiTietHoaDon_GT*>& getItemsGT() const;
+    const MyVector<ChiTietHoaDon_HH*>& getDsChiTietHoaDon_HH() const;
+    MyVector<ChiTietHoaDon_HH*>& getDsChiTietHoaDon_HH();
+    const MyVector<ChiTietHoaDon_GT*>& getDsChiTietHoaDon_GT() const;
+    MyVector<ChiTietHoaDon_GT*>& getDsChiTietHoaDon_GT();
 
     void setNhanVien(NhanVien*);
     void setHoiVien(HoiVien*);
     void setNgayLap(const string&);
     void setPhuongThucTT(const string&);
 
-    void addItemHH(ChiTietHoaDon_HH*);
-    void removeItemHH(ChiTietHoaDon_HH*);
+    void addHangHoa(ChiTietHoaDon_HH*);
+    void removeHangHoa(ChiTietHoaDon_HH*);
 
-    void addItemGT(ChiTietHoaDon_GT*);
-    void removeItemGT(ChiTietHoaDon_GT*);
+    void addGoiTap(ChiTietHoaDon_GT*);
+    void removeGoiTap(ChiTietHoaDon_GT*);
 
     double getTotal() const;
     size_t itemCount() const;

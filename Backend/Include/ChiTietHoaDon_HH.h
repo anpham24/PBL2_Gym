@@ -11,19 +11,19 @@ private:
     double donGia;
 public:
     ChiTietHoaDon_HH();
-    ChiTietHoaDon_HH(HangHoa* hangHoa, int soLuong, double donGia);
-    ChiTietHoaDon_HH(const ChiTietHoaDon_HH& other);
+    ChiTietHoaDon_HH(HangHoa*, int, double);
+    ChiTietHoaDon_HH(const ChiTietHoaDon_HH&);
     ~ChiTietHoaDon_HH();
     
     HangHoa* getHangHoa() const;
     int getSoLuong() const;
     double getDonGia() const;
 
-    void setHangHoa(HangHoa* hangHoa);
-    void setSoLuong(int soLuong);
-    void setDonGia(double donGia);
+    void setHangHoa(HangHoa*);
+    void setSoLuong(int);
+    void setDonGia(double);
 
-    static ChiTietHoaDon_HH* create(HangHoa* hangHoa, int soLuong, double donGia);
+    static ChiTietHoaDon_HH* create(HangHoa*, int, double);
     double tinhTien() const;
     string read() const;
 };

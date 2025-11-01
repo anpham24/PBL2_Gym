@@ -38,6 +38,10 @@ const MyVector<HoiVien*>& HLV::getDsHoiVien() const {
     return dsHoiVien;
 }
 
+MyVector<HoiVien*>& HLV::getDsHoiVien() {
+    return dsHoiVien;
+}
+
 void HLV::addLopHoc(LopHoc* lh) {
     dsLopHoc.push_back(lh);
 }
@@ -52,6 +56,10 @@ void HLV::removeLopHoc(LopHoc* lh) {
 }
 
 const MyVector<LopHoc*>& HLV::getDsLopHoc() const {
+    return dsLopHoc;
+}
+
+MyVector<LopHoc*>& HLV::getDsLopHoc() {
     return dsLopHoc;
 }
 

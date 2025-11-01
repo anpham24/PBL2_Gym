@@ -1,6 +1,7 @@
 #include "../Include/GoiTap.h"
 #include "../Include/MonTap.h"
 #include "../Include/IDGenerator.h"
+#include "../Include/ChiTietHoaDon_GT.h"
 
 GoiTap::GoiTap() {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_GoiTap);
@@ -42,6 +43,31 @@ void GoiTap::removeMonTap(MonTap* mt) {
 
 const MyVector<MonTap*>& GoiTap::getDsMonTap() const {
     return this->dsMonTap;
+}
+
+MyVector<MonTap*>& GoiTap::getDsMonTap() {
+    return this->dsMonTap;
+}
+
+void GoiTap::addChiTietHoaDon_GT(ChiTietHoaDon_GT* ct) {
+    this->dsChiTietHoaDon_GT.push_back(ct);
+}
+
+void GoiTap::removeChiTietHoaDon_GT(ChiTietHoaDon_GT* ct) {
+    for (size_t i = 0; i < dsChiTietHoaDon_GT.size(); ++i) {
+        if (dsChiTietHoaDon_GT.at(i) == ct) {
+            dsChiTietHoaDon_GT.erase(i);
+            return;
+        }
+    }
+}
+
+const MyVector<ChiTietHoaDon_GT*>& GoiTap::getDsChiTietHoaDon_GT() const {
+    return this->dsChiTietHoaDon_GT;
+}
+
+MyVector<ChiTietHoaDon_GT*>& GoiTap::getDsChiTietHoaDon_GT() {
+    return this->dsChiTietHoaDon_GT;
 }
 
 GoiTap* GoiTap::create(const string& tenGoi, int thoiGian, double gia) {

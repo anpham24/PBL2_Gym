@@ -1,25 +1,37 @@
 #pragma once
+#include "MyVector.h"
 #include <string>
 using namespace std;
 
+class ChiTietHoaDon_HH;
+
 class HangHoa {
-    private:
-        string id;
-        string tenHH;
-        double gia;
-    public:
-        HangHoa();
-        HangHoa(const string&, double);
-        HangHoa(const HangHoa& other);
-        ~HangHoa();
+private:
+    string id;
+    string tenHH;
+    double gia;
+    int soLuongCon;
+    MyVector<ChiTietHoaDon_HH*> dsChiTietHoaDon_HH;
+public:
+    HangHoa();
+    HangHoa(const string&, double, int);
+    HangHoa(const HangHoa& other);
+    ~HangHoa();
 
-        const string& getID() const;
-        const string& getTenHH() const;
-        double getGia() const;
+    const string& getID() const;
+    const string& getTenHH() const;
+    double getGia() const;
+    int getSoLuongCon() const;
 
-        void setTenHH(const string&);
-        void setGia(double);
+    void setTenHH(const string&);
+    void setGia(double);
+    void setSoLuongCon(int);
 
-        static HangHoa* create(const string&, double);
-        string read() const;
+    void addChiTietHoaDon_HH(ChiTietHoaDon_HH*);
+    void removeChiTietHoaDon_HH(ChiTietHoaDon_HH*);
+    const MyVector<ChiTietHoaDon_HH*>& getDsChiTietHoaDon_HH() const;
+    MyVector<ChiTietHoaDon_HH*>& getDsChiTietHoaDon_HH();
+
+    static HangHoa* create(const string&, double, int);
+    string read() const;
 };

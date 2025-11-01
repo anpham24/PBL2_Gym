@@ -19,9 +19,9 @@ public:
     int getSoLuong() const;
     double getDonGia() const;
 
-    void setGoiTap(GoiTap* goiTap);
-    void setSoLuong(int soLuong);
-    void setDonGia(double donGia);
+    void setGoiTap(GoiTap*);
+    void setSoLuong(int);
+    void setDonGia(double);
 
     static ChiTietHoaDon_GT* create(GoiTap* goiTap, int soLuong, double donGia);
     double tinhTien() const;
