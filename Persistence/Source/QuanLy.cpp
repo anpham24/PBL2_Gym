@@ -1,15 +1,15 @@
 #include "../Include/QuanLy.h"
-#include "../Include/HoiVien.h"
-#include "../Include/HLV.h"
-#include "../Include/NhanVien.h"
-#include "../Include/GoiTap.h"
-#include "../Include/LopHoc.h"
-#include "../Include/MonTap.h"
-#include "../Include/HopDong.h"
-#include "../Include/HangHoa.h"
-#include "../Include/HoaDon.h"
-#include "../Include/ChiTietHoaDon_GT.h"
-#include "../Include/ChiTietHoaDon_HH.h"
+#include "../../Models/Include/HoiVien.h"
+#include "../../Models/Include/HLV.h"
+#include "../../Models/Include/NhanVien.h"
+#include "../../Models/Include/GoiTap.h"
+#include "../../Models/Include/LopHoc.h"
+#include "../../Models/Include/MonTap.h"
+#include "../../Models/Include/HopDong.h"
+#include "../../Models/Include/HangHoa.h"
+#include "../../Models/Include/HoaDon.h"
+#include "../../Models/Include/ChiTietHoaDon_GT.h"
+#include "../../Models/Include/ChiTietHoaDon_HH.h"
 #include <fstream>
 #include <sstream>
 
@@ -18,27 +18,17 @@
 // ============================================================================
 
 QuanLy::~QuanLy() {
-    // Xóa tất cả các con trỏ trong MyVector
-    for (size_t i = 0; i < dsHLV.size(); ++i) {
-        delete dsHLV[i];
-    }
-    for (size_t i = 0; i < dsNhanVien.size(); ++i) {
-        delete dsNhanVien[i];
-    }
-    for (size_t i = 0; i < dsGoiTap.size(); ++i) {
-        delete dsGoiTap[i];
-    }
-    for (size_t i = 0; i < dsLopHoc.size(); ++i) {
-        delete dsLopHoc[i];
-    }
-    for (size_t i = 0; i < dsMonTap.size(); ++i) {
-        delete dsMonTap[i];
-    }
-    for (size_t i = 0; i < dsHangHoa.size(); ++i) {
-        delete dsHangHoa[i];
-    }
-    // MyHashTable tự động xóa các HoiVien* trong destructor của nó
+    dsHLV.clear(); 
+    dsNhanVien.clear();
+    dsGoiTap.clear();
+    dsLopHoc.clear();
+    dsMonTap.clear();
+    dsHangHoa.clear();
 }
+
+// ============================================================================
+// ĐỌC/GHI FILE
+// ============================================================================
 
 void QuanLy::setDirty(bool status) {
     this->isDirty = status;
@@ -46,6 +36,60 @@ void QuanLy::setDirty(bool status) {
 
 bool QuanLy::getIsDirty() const {
     return this->isDirty;
+}
+
+void QuanLy::saveAllData(const string& folderPath) const {
+    // Lưu dữ liệu vào các file .txt
+    // Mỗi entity sẽ có một file riêng
+    
+    // Ví dụ: lưu GoiTap
+    std::ofstream fileGT(folderPath + "/goitap.txt");
+    if (fileGT.is_open()) {
+        for (size_t i = 0; i < dsGoiTap.size(); ++i) {
+            fileGT << dsGoiTap[i]->read() << "\n";
+        }
+        fileGT.close();
+    }
+    
+    // Lưu HangHoa
+    std::ofstream fileHH(folderPath + "/hanghoa.txt");
+    if (fileHH.is_open()) {
+        for (size_t i = 0; i < dsHangHoa.size(); ++i) {
+            fileHH << dsHangHoa[i]->read() << "\n";
+        }
+        fileHH.close();
+    }
+    
+    // Lưu MonTap
+    std::ofstream fileMT(folderPath + "/montap.txt");
+    if (fileMT.is_open()) {
+        for (size_t i = 0; i < dsMonTap.size(); ++i) {
+            fileMT << dsMonTap[i]->read() << "\n";
+        }
+        fileMT.close();
+    }
+    
+    // Tương tự cho các entity khác...
+}
+
+void QuanLy::loadAllData(const string& folderPath) {
+    // Đọc dữ liệu từ các file .txt
+    // Cần parse từng dòng và tạo lại đối tượng
+    
+    // Ví dụ: đọc GoiTap
+    std::ifstream fileGT(folderPath + "/goitap.txt");
+    if (fileGT.is_open()) {
+        string line;
+        while (std::getline(fileGT, line)) {
+            // Parse line và tạo GoiTap object
+            // Giả sử format: id,tenGoi,thoiGian,gia
+            // GoiTap* gt = new GoiTap(...);
+            // addGoiTap(gt);
+        }
+        fileGT.close();
+    }
+    
+    // Tương tự cho các entity khác...
 }
 
 // ============================================================================
@@ -156,8 +200,6 @@ bool QuanLy::removeHLV(const string& maHLV) {
         }
     }
     
-    delete hlvCanXoa; 
-
     bool removed = dsHLV.erase(hlvIndex); 
     return removed;
 }
@@ -224,8 +266,6 @@ bool QuanLy::removeNhanVien(const string& maNV) {
         nvCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
         return true; // Không được xóa NhanVien nếu còn HoaDon liên quan
     }
-
-    delete nvCanXoa;
 
     bool removed = dsNhanVien.erase(nvIndex);
     return removed;
@@ -294,8 +334,6 @@ bool QuanLy::removeGoiTap(const string& maGoi) {
         return true; // Không được xóa GoiTap nếu còn ChiTietHoaDon_GT liên quan
     }
 
-    delete gtCanXoa;
-
     bool removed = dsGoiTap.erase(gtIndex);
     return removed;
 }
@@ -353,8 +391,6 @@ bool QuanLy::removeLopHoc(const string& maLop) {
 
     lhCanXoa->setMonTap(nullptr);
     lhCanXoa->setHLV(nullptr);
-
-    delete lhCanXoa;
 
     bool removed = dsLopHoc.erase(lhIndex);
     return removed;
@@ -416,11 +452,20 @@ bool QuanLy::removeMonTap(const string& maMon) {
         LopHoc* lh = dsLopHocLienQuan[i];
 
         if (lh != nullptr) {
+            lh->setHLV(nullptr);
             lh->setMonTap(nullptr);
+            dsLopHoc.erase(i);
         }
     }
 
-    delete mtCanXoa;
+    MyVector<GoiTap*>& dsGoiTapLienQuan = mtCanXoa->getDsGoiTap();
+    for (size_t i = 0; i < dsGoiTapLienQuan.size(); ++i) {
+        GoiTap* gt = dsGoiTapLienQuan[i];
+
+        if (gt != nullptr) {
+            gt->removeMonTap(mtCanXoa);
+        }
+    }
 
     bool removed = dsMonTap.erase(mtIndex);
     return removed;
@@ -519,8 +564,6 @@ bool QuanLy::removeHangHoa(const string& maHH) {
         return true; // Không được xóa HangHoa nếu còn ChiTietHoaDon_HH liên quan
     }
 
-    delete hhCanXoa;
-
     bool removed = dsHangHoa.erase(hhIndex);
     return removed;
 }
@@ -567,91 +610,3 @@ const HoaDon* QuanLy::getHoaDon(const string& maHD) const {
     HoaDon* const* result = dsHoaDon.search(maHD);
     return result ? *result : nullptr;
 }
-
-// ============================================================================
-// ĐỌC/GHI FILE
-// ============================================================================
-
-void QuanLy::saveAllData(const string& folderPath) const {
-    // Lưu dữ liệu vào các file .txt
-    // Mỗi entity sẽ có một file riêng
-    
-    // Ví dụ: lưu GoiTap
-    std::ofstream fileGT(folderPath + "/goitap.txt");
-    if (fileGT.is_open()) {
-        for (size_t i = 0; i < dsGoiTap.size(); ++i) {
-            fileGT << dsGoiTap[i]->read() << "\n";
-        }
-        fileGT.close();
-    }
-    
-    // Lưu HangHoa
-    std::ofstream fileHH(folderPath + "/hanghoa.txt");
-    if (fileHH.is_open()) {
-        for (size_t i = 0; i < dsHangHoa.size(); ++i) {
-            fileHH << dsHangHoa[i]->read() << "\n";
-        }
-        fileHH.close();
-    }
-    
-    // Lưu MonTap
-    std::ofstream fileMT(folderPath + "/montap.txt");
-    if (fileMT.is_open()) {
-        for (size_t i = 0; i < dsMonTap.size(); ++i) {
-            fileMT << dsMonTap[i]->read() << "\n";
-        }
-        fileMT.close();
-    }
-    
-    // Tương tự cho các entity khác...
-}
-
-void QuanLy::loadAllData(const string& folderPath) {
-    // Đọc dữ liệu từ các file .txt
-    // Cần parse từng dòng và tạo lại đối tượng
-    
-    // Ví dụ: đọc GoiTap
-    std::ifstream fileGT(folderPath + "/goitap.txt");
-    if (fileGT.is_open()) {
-        string line;
-        while (std::getline(fileGT, line)) {
-            // Parse line và tạo GoiTap object
-            // Giả sử format: id,tenGoi,thoiGian,gia
-            // GoiTap* gt = new GoiTap(...);
-            // addGoiTap(gt);
-        }
-        fileGT.close();
-    }
-    
-    // Tương tự cho các entity khác...
-}
-
-// ============================================================================
-// HIỂN THỊ DANH SÁCH
-// ============================================================================
-
-string QuanLy::getDisplayList(const string& entityName) const {
-    std::stringstream ss;
-    
-    if (entityName == "HoiVien") {
-        // Cần implement getAllValues() trong MyHashTable
-        ss << "Danh sach Hoi Vien:\n";
-        // for (auto hv : dsHoiVien.getAllValues()) {
-        //     ss << hv->read() << "\n";
-        // }
-    } else if (entityName == "GoiTap") {
-        ss << "Danh sach Goi Tap:\n";
-        for (size_t i = 0; i < dsGoiTap.size(); ++i) {
-            ss << dsGoiTap[i]->read() << "\n";
-        }
-    } else if (entityName == "HangHoa") {
-        ss << "Danh sach Hang Hoa:\n";
-        for (size_t i = 0; i < dsHangHoa.size(); ++i) {
-            ss << dsHangHoa[i]->read() << "\n";
-        }
-    }
-    // Thêm các entity khác...
-    
-    return ss.str();
-}
-

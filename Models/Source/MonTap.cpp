@@ -1,6 +1,7 @@
 #include "../Include/MonTap.h"
-#include "../Include/IDGenerator.h"
 #include "../Include/LopHoc.h"
+#include "../Include/GoiTap.h"
+#include "../../Utils/Include/IDGenerator.h"
 
 MonTap::MonTap() {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_MonTap);
@@ -38,6 +39,35 @@ void MonTap::removeLopHoc(LopHoc* lh) {
             break;
         }
     }
+}
+
+const MyVector<LopHoc*>& MonTap::getDsLopHoc() const {
+    return dsLopHoc;
+}
+
+MyVector<LopHoc*>& MonTap::getDsLopHoc() {
+    return dsLopHoc;
+}
+
+void MonTap::addGoiTap(GoiTap* gt) {
+    dsGoiTap.push_back(gt);
+}
+
+void MonTap::removeGoiTap(GoiTap* gt) {
+    for (int i = 0; i < dsGoiTap.size(); i++) {
+        if (dsGoiTap[i] == gt) {
+            dsGoiTap.erase(i);
+            break;
+        }
+    }
+}
+
+const MyVector<GoiTap*>& MonTap::getDsGoiTap() const {
+    return dsGoiTap;
+}
+
+MyVector<GoiTap*>& MonTap::getDsGoiTap() {
+    return dsGoiTap;
 }
 
 MonTap* MonTap::create(const string& tenMon, const string& lichTap, const string& maHLV) {

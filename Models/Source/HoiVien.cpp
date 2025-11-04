@@ -1,7 +1,7 @@
 #include "../Include/HoiVien.h"
 #include "../Include/HLV.h"
 #include "../Include/HopDong.h"
-#include "../Include/IDGenerator.h"
+#include "../../Utils/Include/IDGenerator.h"
 
 HoiVien::HoiVien() {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_HoiVien);

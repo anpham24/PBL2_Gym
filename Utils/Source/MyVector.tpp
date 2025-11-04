@@ -18,7 +18,11 @@ MyVector<T>::MyVector(const MyVector& other) {
 
 template <typename T>
 MyVector<T>::~MyVector() {
-    delete[] data;
+    clear();
+    if (data != nullptr) {
+        delete[] data;
+        data = nullptr;
+    }
 }
 
 template <typename T>
@@ -40,7 +44,7 @@ MyVector<T>& MyVector<T>::operator=(const MyVector& other) {
 template <typename T>
 void MyVector<T>::clear() {
     for (size_t i = 0; i < m_size; i++) {
-        data[i].~T();
+        delete data[i];
     }
     m_size = 0;
 }
@@ -67,7 +71,7 @@ void MyVector<T>::resize(size_t newSize) {
         }
     } else if (newSize < m_size) {
         for (size_t i = newSize; i < m_size; i++) {
-            data[i].~T();
+            delete data[i];
         }
     }
     m_size = newSize;
@@ -89,7 +93,7 @@ template <typename T>
 void MyVector<T>::pop_back() {
     if (m_size == 0)
         throw std::out_of_range("Vector is empty");
-    data[m_size - 1].~T();
+    delete data[m_size - 1];
     --m_size;
 }
 
@@ -98,7 +102,7 @@ bool MyVector<T>::erase(size_t index) {
     if (index >= m_size) 
         return false;
 
-    data[index].~T();
+    delete data[index];
     for (size_t i = index; i < m_size - 1; i++) {
         data[i] = data[i + 1];
     }

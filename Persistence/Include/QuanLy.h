@@ -1,6 +1,6 @@
 #pragma once
-#include "MyVector.h"
-#include "MyHashTable.h"
+#include "../../Utils/Include/MyVector.h"
+#include "../../Utils/Include/MyHashTable.h"
 #include <string>
 using namespace std;
 

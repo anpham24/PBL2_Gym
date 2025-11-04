@@ -1,22 +1,21 @@
 #include "../Include/LopHoc.h"
 #include "../Include/HLV.h"
 #include "../Include/MonTap.h"
-#include "../Include/IDGenerator.h"
-#define LopHoc_ID 3 // Dùng chung prefix với MonTap
+#include "../../Utils/Include/IDGenerator.h"
 
 LopHoc::LopHoc() {
-    this->id = IDGenerator::generateID(LopHoc_ID);
+    this->id = IDGenerator::generateID(IDGenerator::Prefix_MonTap);
 }
 
 LopHoc::LopHoc(const string& tenLop, const string& lichTap, int thoiLuong, MonTap* monTap, HLV* hlv)
     : tenLop(tenLop), lichTap(lichTap), thoiLuong(thoiLuong), monTap(monTap), hlv(hlv) {
-    this->id = IDGenerator::generateID(LopHoc_ID);
+    this->id = IDGenerator::generateID(IDGenerator::Prefix_MonTap);
 }
 
 LopHoc::LopHoc(const LopHoc& other)
     : tenLop(other.tenLop), lichTap(other.lichTap), thoiLuong(other.thoiLuong),
       monTap(other.monTap), hlv(other.hlv) {
-    this->id = IDGenerator::generateID(LopHoc_ID);
+    this->id = IDGenerator::generateID(IDGenerator::Prefix_MonTap);
 }
 
 LopHoc::~LopHoc() {}

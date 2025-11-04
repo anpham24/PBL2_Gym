@@ -3,6 +3,7 @@
 using namespace std;
 
 class LopHoc;
+class GoiTap;
 
 class MonTap {
 private:
@@ -11,6 +12,7 @@ private:
     string lichTap;
     string maHLV;
     MyVector<LopHoc*> dsLopHoc;
+    MyVector<GoiTap*> dsGoiTap;
 public:
     MonTap();
     MonTap(const string&, const string&, const string& = "");
@@ -30,6 +32,11 @@ public:
     void removeLopHoc(LopHoc*);
     const MyVector<LopHoc*>& getDsLopHoc() const;
     MyVector<LopHoc*>& getDsLopHoc();
+
+    void addGoiTap(GoiTap*);
+    void removeGoiTap(GoiTap*);
+    const MyVector<GoiTap*>& getDsGoiTap() const;
+    MyVector<GoiTap*>& getDsGoiTap();
 
     static MonTap* create(const string&, const string&, const string& = "");
     string read() const;

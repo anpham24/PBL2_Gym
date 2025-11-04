@@ -1,7 +1,7 @@
 #include "../Include/GoiTap.h"
 #include "../Include/MonTap.h"
-#include "../Include/IDGenerator.h"
 #include "../Include/ChiTietHoaDon_GT.h"
+#include "../../Utils/Include/IDGenerator.h"
 
 GoiTap::GoiTap() {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_GoiTap);

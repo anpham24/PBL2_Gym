@@ -2,7 +2,7 @@
 #include "../Include/HoiVien.h"
 #include "../Include/GoiTap.h"
 #include "../Include/NhanVien.h"
-#include "../Include/IDGenerator.h"
+#include "../../Utils/Include/IDGenerator.h"
 #include <ctime>
 
 HopDong::HopDong() {

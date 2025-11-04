@@ -1,6 +1,6 @@
 #include "../Include/HangHoa.h"
 #include "../Include/ChiTietHoaDon_HH.h"
-#include "../Include/IDGenerator.h"
+#include "../../Utils/Include/IDGenerator.h"
 
 HangHoa::HangHoa() {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_HangHoa);

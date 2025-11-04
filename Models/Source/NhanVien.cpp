@@ -1,7 +1,7 @@
 #include "../Include/NhanVien.h"
 #include "../Include/HopDong.h"
 #include "../Include/HoaDon.h"
-#include "../Include/IDGenerator.h"
+#include "../../Utils/Include/IDGenerator.h"
 
 NhanVien::NhanVien() {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_NhanVien);

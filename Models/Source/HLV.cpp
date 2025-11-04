@@ -1,6 +1,6 @@
 #include "../Include/HLV.h"
 #include "../Include/HoiVien.h"
-#include "../Include/IDGenerator.h"
+#include "../../Utils/Include/IDGenerator.h"
 
 HLV::HLV() {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_HLV);

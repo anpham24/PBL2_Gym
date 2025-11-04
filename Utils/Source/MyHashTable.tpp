@@ -13,11 +13,12 @@ MyHashTable<T>::~MyHashTable() {
         Node* current = table[i];
         while (current != nullptr) {
             Node* temp = current;
+            delete temp->value;
             delete temp;
             current = current->next;
         }
-        table[i] = nullptr;
     }
+    table.clear();
 }
 
 template <typename T>

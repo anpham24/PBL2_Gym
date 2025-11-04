@@ -3,7 +3,7 @@
 #include "../Include/HoiVien.h"
 #include "../Include/ChiTietHoaDon_HH.h"
 #include "../Include/ChiTietHoaDon_GT.h"
-#include "../Include/IDGenerator.h"
+#include "../../Utils/Include/IDGenerator.h"
 
 HoaDon::HoaDon() {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_HoaDon);
