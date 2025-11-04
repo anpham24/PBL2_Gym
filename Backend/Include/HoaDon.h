@@ -38,11 +38,11 @@ public:
     void setNgayLap(const string&);
     void setPhuongThucTT(const string&);
 
-    void addHangHoa(ChiTietHoaDon_HH*);
-    void removeHangHoa(ChiTietHoaDon_HH*);
+    void addChiTietHoaDon_HH(ChiTietHoaDon_HH*);
+    void removeChiTietHoaDon_HH(ChiTietHoaDon_HH*);
 
-    void addGoiTap(ChiTietHoaDon_GT*);
-    void removeGoiTap(ChiTietHoaDon_GT*);
+    void addChiTietHoaDon_GT(ChiTietHoaDon_GT*);
+    void removeChiTietHoaDon_GT(ChiTietHoaDon_GT*);
 
     double getTotal() const;
     size_t itemCount() const;

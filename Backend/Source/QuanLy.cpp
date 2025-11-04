@@ -74,25 +74,15 @@ bool QuanLy::removeHoiVien(const string& maHV) {
     hvCanXoa->setHLV(nullptr);
 
     MyVector<HopDong*>& dsHopDongLienQuan = hvCanXoa->getDsHopDong();
-    for (int i = dsHopDongLienQuan.size() - 1; i >= 0; --i) {
-        HopDong* hdCanXoa = dsHopDongLienQuan[i];
-
-        if (hdCanXoa != nullptr) {
-            dsHopDong.del(hdCanXoa->getID()); 
-            delete hdCanXoa; 
-            dsHopDongLienQuan.erase(i); 
-        }
+    if (!dsHopDongLienQuan.empty()) {
+        hvCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
+        return true; // Không được xóa Hội viên nếu còn Hợp đồng liên quan
     }
     
     MyVector<HoaDon*>& dsHoaDonLienQuan = hvCanXoa->getDsHoaDon();
-    for (int i = dsHoaDonLienQuan.size() - 1; i >= 0; --i) {
-        HoaDon* hdCanXoa = dsHoaDonLienQuan[i];
-
-        if (hdCanXoa != nullptr) {
-            dsHoaDon.del(hdCanXoa->getID()); 
-            delete hdCanXoa; 
-            dsHoaDonLienQuan.erase(i);
-        }
+    if (!dsHoaDonLienQuan.empty()) {
+        hvCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
+        return true; // Không được xóa Hội viên nếu còn Hóa đơn liên quan
     }
 
     bool removed = dsHoiVien.del(maHV);
@@ -224,21 +214,15 @@ bool QuanLy::removeNhanVien(const string& maNV) {
     }
 
     MyVector<HopDong*>& dsHopDongLienQuan = nvCanXoa->getDsHopDong();
-    for (size_t i = 0; i < dsHopDongLienQuan.size(); ++i) {
-        HopDong* hd = dsHopDongLienQuan[i];
-
-        if (hd != nullptr) {
-            hd->setNhanVien(nullptr);
-        }
+    if (!dsHopDongLienQuan.empty()) {
+        nvCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
+        return true; // Không được xóa NhanVien nếu còn HopDong liên quan
     }
 
     MyVector<HoaDon*>& dsHoaDonLienQuan = nvCanXoa->getDsHoaDon();
-    for (size_t i = 0; i < dsHoaDonLienQuan.size(); ++i) {
-        HoaDon* hd = dsHoaDonLienQuan[i];
-
-        if (hd != nullptr) {
-            hd->setNhanVien(nullptr);
-        }
+    if (!dsHoaDonLienQuan.empty()) {
+        nvCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
+        return true; // Không được xóa NhanVien nếu còn HoaDon liên quan
     }
 
     delete nvCanXoa;
@@ -294,17 +278,20 @@ bool QuanLy::removeGoiTap(const string& maGoi) {
         }
     }
 
-    MyVector<ChiTietHoaDon_GT*>& dsChiTietHoaDon_GTLienQuan = gtCanXoa->getDsChiTietHoaDon_GT();
-    for (size_t i = 0; i < dsChiTietHoaDon_GTLienQuan.size(); ++i) {
-        ChiTietHoaDon_GT* ct = dsChiTietHoaDon_GTLienQuan[i];
-
-        if (ct != nullptr) {
-            ct->setGoiTap(nullptr);
-        }
-    }
-
     if (gtCanXoa == nullptr) {
         return false; 
+    }
+
+    MyVector<HopDong*>& dsHopDongLienQuan = gtCanXoa->getDsHopDong();
+    if (!dsHopDongLienQuan.empty()) {
+        gtCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
+        return true; // Không được xóa GoiTap nếu còn HopDong liên quan
+    }
+
+    MyVector<ChiTietHoaDon_GT*>& dsChiTietHoaDon_GTLienQuan = gtCanXoa->getDsChiTietHoaDon_GT();
+    if (!dsChiTietHoaDon_GTLienQuan.empty()) {
+        gtCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
+        return true; // Không được xóa GoiTap nếu còn ChiTietHoaDon_GT liên quan
     }
 
     delete gtCanXoa;
@@ -470,27 +457,17 @@ bool QuanLy::addHopDong(HopDong* hd) {
     return true;
 }
 
-bool QuanLy::removeHopDong(const string& maHD) {
+// Không có hàm xóa HopDong vì HopDong là bất biến
+
+bool QuanLy::cancelHopDong(const string& maHD) {
     HopDong** hdPtr = dsHopDong.search(maHD);
-
-    // Nếu không tìm thấy Hợp đồng, hoặc con trỏ không hợp lệ
     if (hdPtr == nullptr || *hdPtr == nullptr) {
-        return false;
+        return false; 
     }
 
-    HopDong* hdCanXoa = *hdPtr;
-
-    hdCanXoa->setHoiVien(nullptr);
-    hdCanXoa->setGoiTap(nullptr);
-    hdCanXoa->setNhanVien(nullptr);
-
-    bool removed = dsHopDong.del(maHD);
-    if (removed) {
-        delete hdCanXoa;
-    }
-    
-    // Tầng Controller sẽ gọi setDirty(true)
-    return removed;
+    HopDong* hdCanHuy = *hdPtr;
+    hdCanHuy->setIsActive(false); 
+    return true;
 }
 
 HopDong* QuanLy::getHopDong(const string& maHD) {
@@ -532,17 +509,14 @@ bool QuanLy::removeHangHoa(const string& maHH) {
         }
     }
 
-    MyVector<ChiTietHoaDon_HH*>& dsChiTietHoaDon_HHLienQuan = hhCanXoa->getDsChiTietHoaDon_HH();
-    for (size_t i = 0; i < dsChiTietHoaDon_HHLienQuan.size(); ++i) {
-        ChiTietHoaDon_HH* ct = dsChiTietHoaDon_HHLienQuan[i];
-
-        if (ct != nullptr) {
-            ct->setHangHoa(nullptr);
-        }
-    }
-
     if (hhCanXoa == nullptr) {
         return false; 
+    }
+
+    MyVector<ChiTietHoaDon_HH*>& dsChiTietHoaDon_HHLienQuan = hhCanXoa->getDsChiTietHoaDon_HH();
+    if (!dsChiTietHoaDon_HHLienQuan.empty()) {
+        hhCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
+        return true; // Không được xóa HangHoa nếu còn ChiTietHoaDon_HH liên quan
     }
 
     delete hhCanXoa;
@@ -582,24 +556,16 @@ bool QuanLy::addHoaDon(HoaDon* hd) {
     return true;
 }
 
-bool QuanLy::removeHoaDon(const string& maHD) {
-    for (size_t i = 0; i < dsHoaDon.size(); ++i) {
-        if (dsHoaDon[i]->getID() == maHD) {
-            delete dsHoaDon[i];
-            dsHoaDon.erase(i);
-            return true;
-        }
-    }
-    return false;
+// Vì HoaDon là bất biến, không có hàm xóa HoaDon
+
+HoaDon* QuanLy::getHoaDon(const string& maHD) {
+    HoaDon** result = dsHoaDon.search(maHD);
+    return result ? *result : nullptr;
 }
 
-HoaDon* QuanLy::getHoaDon(const string& maHD) const {
-    for (size_t i = 0; i < dsHoaDon.size(); ++i) {
-        if (dsHoaDon[i]->getID() == maHD) {
-            return dsHoaDon[i];
-        }
-    }
-    return nullptr;
+const HoaDon* QuanLy::getHoaDon(const string& maHD) const {
+    HoaDon* const* result = dsHoaDon.search(maHD);
+    return result ? *result : nullptr;
 }
 
 // ============================================================================

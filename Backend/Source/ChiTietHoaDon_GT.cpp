@@ -1,17 +1,19 @@
 #include "../Include/ChiTietHoaDon_GT.h"
 #include "../Include/GoiTap.h"
+#include "../Include/HoaDon.h"
 
 ChiTietHoaDon_GT::ChiTietHoaDon_GT() {}
 
-ChiTietHoaDon_GT::ChiTietHoaDon_GT(GoiTap* goiTap, int soLuong, double donGia)
-    : goiTap(goiTap), soLuong(soLuong), donGia(donGia) {}
+ChiTietHoaDon_GT::ChiTietHoaDon_GT(GoiTap* goiTap, HoaDon* hoaDon, int soLuong, double donGia)
+    : goiTap(goiTap), hoaDon(hoaDon), soLuong(soLuong), donGia(donGia) {}
 
 ChiTietHoaDon_GT::ChiTietHoaDon_GT(const ChiTietHoaDon_GT& other)
-    : goiTap(other.goiTap), soLuong(other.soLuong), donGia(other.donGia) {}
+    : goiTap(other.goiTap), hoaDon(other.hoaDon), soLuong(other.soLuong), donGia(other.donGia) {}
 
 ChiTietHoaDon_GT::~ChiTietHoaDon_GT() {}
 
 GoiTap* ChiTietHoaDon_GT::getGoiTap() const { return goiTap; }
+HoaDon* ChiTietHoaDon_GT::getHoaDon() const { return hoaDon; }
 int ChiTietHoaDon_GT::getSoLuong() const { return soLuong; }
 double ChiTietHoaDon_GT::getDonGia() const { return donGia; }
 
@@ -25,8 +27,18 @@ void ChiTietHoaDon_GT::setGoiTap(GoiTap* gt) {
     }
 }
 
-ChiTietHoaDon_GT* ChiTietHoaDon_GT::create(GoiTap* goiTap, int soLuong, double donGia) {
-    return new ChiTietHoaDon_GT(goiTap, soLuong, donGia);
+void ChiTietHoaDon_GT::setHoaDon(HoaDon* hd) {
+    if (this->hoaDon != nullptr) {
+        this->hoaDon->removeChiTietHoaDon_GT(this);
+    }
+    this->hoaDon = hd;
+    if (hd != nullptr) {
+        hd->addChiTietHoaDon_GT(this);
+    }
+}
+
+ChiTietHoaDon_GT* ChiTietHoaDon_GT::create(GoiTap* goiTap, HoaDon* hoaDon, int soLuong, double donGia) {
+    return new ChiTietHoaDon_GT(goiTap, hoaDon, soLuong, donGia);
 }
 
 double ChiTietHoaDon_GT::tinhTien() const {

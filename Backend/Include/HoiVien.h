@@ -12,9 +12,10 @@ private:
     HLV* hlv;
     MyVector<HoaDon*> dsHoaDon;
     MyVector<HopDong*> dsHopDong;
+    bool isActive;
 public:
     HoiVien();
-    HoiVien(const string&, const string&, const string&, int, int = 0, HLV* = nullptr);
+    HoiVien(const string&, const string&, const string&, int, int = 0, HLV* = nullptr, bool = true);
     HoiVien(const HoiVien& other);
     ~HoiVien();
 
@@ -22,6 +23,8 @@ public:
     double getPoint() const;
     void setPoint(int);
     void setHLV(HLV*);
+    bool getIsActive() const;
+    void setIsActive(bool);
 
     void addHoaDon(HoaDon*);
     void removeHoaDon(HoaDon*);
@@ -33,6 +36,6 @@ public:
     const MyVector<HopDong*>& getDsHopDong() const;
     MyVector<HopDong*>& getDsHopDong();
 
-    static HoiVien* create(const string&, const string&, const string&, int, int, HLV*);
+    static HoiVien* create(const string&, const string&, const string&, int, int, HLV*, bool = true);
     string read() const override;
 };

@@ -7,18 +7,17 @@ HoiVien::HoiVien() {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_HoiVien);
 }
 
-HoiVien::HoiVien(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, HLV* hlv)
-    : Person(hoTen, sdt, gioiTinh, tuoi), point(point), hlv(hlv) {
+HoiVien::HoiVien(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, HLV* hlv, bool isActive)
+    : Person(hoTen, sdt, gioiTinh, tuoi), point(point), hlv(hlv), isActive(isActive) {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_HoiVien);
 }
 
 HoiVien::HoiVien(const HoiVien& other) 
-    : Person(other.hoTen, other.sdt, other.gioiTinh, other.tuoi), point(other.point), hlv(other.hlv) {
+    : Person(other.hoTen, other.sdt, other.gioiTinh, other.tuoi), point(other.point), hlv(other.hlv), isActive(other.isActive) {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_HoiVien);
 }
 
 HoiVien::~HoiVien() {}
-
 
 void HoiVien::setPoint(int point) { this->point = point; }
 
@@ -34,6 +33,9 @@ void HoiVien::setHLV(HLV* newHLV) {
 
 double HoiVien::getPoint() const { return this->point; }
 const HLV* HoiVien::getHLV() const { return this->hlv; }   
+
+bool HoiVien::getIsActive() const { return this->isActive; }
+void HoiVien::setIsActive(bool isActive) { this->isActive = isActive; } 
 
 void HoiVien::addHoaDon(HoaDon* hoaDon) {
     dsHoaDon.push_back(hoaDon);
@@ -77,11 +79,11 @@ MyVector<HopDong*>& HoiVien::getDsHopDong() {
     return dsHopDong;
 }
 
-HoiVien* HoiVien::create(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, HLV* hlv) {
-    return new HoiVien(hoTen, sdt, gioiTinh, tuoi, point, hlv);
+HoiVien* HoiVien::create(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, HLV* hlv, bool isActive) {
+    return new HoiVien(hoTen, sdt, gioiTinh, tuoi, point, hlv, isActive);
 }
 
 string HoiVien::read() const{
-    string result = id + "," + hoTen + "," + sdt + "," + gioiTinh + "," + to_string(tuoi) + "," + to_string(point) + "," + (hlv ? hlv->getID() : "null");
+    string result = id + "," + hoTen + "," + sdt + "," + gioiTinh + "," + to_string(tuoi) + "," + to_string(point) + "," + (hlv ? hlv->getID() : "null") + "," + (isActive ? "true" : "false");
     return result;
 }

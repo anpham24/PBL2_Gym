@@ -85,7 +85,7 @@ public:
 
     // Ham quan ly HopDong
     bool addHopDong(HopDong*);
-    bool removeHopDong(const string&);
+    bool cancelHopDong(const string&);
     HopDong* getHopDong(const string&);
     const HopDong* getHopDong(const string&) const;
 
@@ -97,7 +97,6 @@ public:
 
     // Ham quan ly HoaDon
     bool addHoaDon(HoaDon*);
-    bool removeHoaDon(const string&);
     HoaDon* getHoaDon(const string&);
     const HoaDon* getHoaDon(const string&) const;
 

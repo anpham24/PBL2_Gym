@@ -33,16 +33,32 @@ const MyVector<ChiTietHoaDon_GT*>& HoaDon::getDsChiTietHoaDon_GT() const { retur
 MyVector<ChiTietHoaDon_HH*>& HoaDon::getDsChiTietHoaDon_HH() { return dsChiTietHoaDon_HH; }
 MyVector<ChiTietHoaDon_GT*>& HoaDon::getDsChiTietHoaDon_GT() { return dsChiTietHoaDon_GT; }
 
-void HoaDon::setNhanVien(NhanVien* nv) { nhanVien = nv; }
-void HoaDon::setHoiVien(HoiVien* hv) { hoiVien = hv; }
+void HoaDon::setNhanVien(NhanVien* nv) { 
+    if (this->nhanVien != nullptr) {
+        this->nhanVien->removeHoaDon(this);
+    }
+    this->nhanVien = nv;
+    if (this->nhanVien != nullptr) {
+        this->nhanVien->addHoaDon(this);
+    }
+}
+void HoaDon::setHoiVien(HoiVien* hv) { 
+    if (this->hoiVien != nullptr) {
+        this->hoiVien->removeHoaDon(this);
+    }
+    this->hoiVien = hv;
+    if (this->hoiVien != nullptr) {
+        this->hoiVien->addHoaDon(this);
+    }
+}
 void HoaDon::setNgayLap(const string &d) { ngayLap = d; }
 void HoaDon::setPhuongThucTT(const string &p) { phuongThucTT = p; }
 
-void HoaDon::addHangHoa(ChiTietHoaDon_HH* item) {
+void HoaDon::addChiTietHoaDon_HH(ChiTietHoaDon_HH* item) {
     dsChiTietHoaDon_HH.push_back(item);
 }
 
-void HoaDon::removeHangHoa(ChiTietHoaDon_HH* item) {
+void HoaDon::removeChiTietHoaDon_HH(ChiTietHoaDon_HH* item) {
     for (size_t i = 0; i < dsChiTietHoaDon_HH.size(); ++i) {
         if (dsChiTietHoaDon_HH.at(i) == item) {
             dsChiTietHoaDon_HH.erase(i);
@@ -51,11 +67,11 @@ void HoaDon::removeHangHoa(ChiTietHoaDon_HH* item) {
     }
 }
 
-void HoaDon::addGoiTap(ChiTietHoaDon_GT* item) {
+void HoaDon::addChiTietHoaDon_GT(ChiTietHoaDon_GT* item) {
     dsChiTietHoaDon_GT.push_back(item);
 }
 
-void HoaDon::removeGoiTap(ChiTietHoaDon_GT* item) {
+void HoaDon::removeChiTietHoaDon_GT(ChiTietHoaDon_GT* item) {
     for (size_t i = 0; i < dsChiTietHoaDon_GT.size(); ++i) {
         if (dsChiTietHoaDon_GT.at(i) == item) {
             dsChiTietHoaDon_GT.erase(i);
