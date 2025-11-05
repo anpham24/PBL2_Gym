@@ -41,175 +41,172 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/build/
 # =============================================================================
-# Object build statements for STATIC_LIBRARY target gym_backend
-
-
-#############################################
-# Order-only phony target for gym_backend
-
-build cmake_object_order_depends_target_gym_backend: phony || .
-
-build CMakeFiles/gym_backend.dir/Backend/Source/ChiTietHoaDon_GT.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/ChiTietHoaDon_GT.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\ChiTietHoaDon_GT.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-build CMakeFiles/gym_backend.dir/Backend/Source/ChiTietHoaDon_HH.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/ChiTietHoaDon_HH.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\ChiTietHoaDon_HH.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-build CMakeFiles/gym_backend.dir/Backend/Source/GoiTap.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/GoiTap.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\GoiTap.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-build CMakeFiles/gym_backend.dir/Backend/Source/HLV.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/HLV.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\HLV.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-build CMakeFiles/gym_backend.dir/Backend/Source/HangHoa.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/HangHoa.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\HangHoa.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-build CMakeFiles/gym_backend.dir/Backend/Source/HoaDon.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/HoaDon.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\HoaDon.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-build CMakeFiles/gym_backend.dir/Backend/Source/HoiVien.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/HoiVien.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\HoiVien.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-build CMakeFiles/gym_backend.dir/Backend/Source/HopDong.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/HopDong.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\HopDong.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-build CMakeFiles/gym_backend.dir/Backend/Source/IDGenerator.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/IDGenerator.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\IDGenerator.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-build CMakeFiles/gym_backend.dir/Backend/Source/LopHoc.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/LopHoc.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\LopHoc.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-build CMakeFiles/gym_backend.dir/Backend/Source/MonTap.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/MonTap.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\MonTap.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-build CMakeFiles/gym_backend.dir/Backend/Source/NhanVien.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/NhanVien.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\NhanVien.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-build CMakeFiles/gym_backend.dir/Backend/Source/Person.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/Person.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\Person.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-build CMakeFiles/gym_backend.dir/Backend/Source/QuanLy.cpp.obj: CXX_COMPILER__gym_backend_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Backend/Source/QuanLy.cpp || cmake_object_order_depends_target_gym_backend
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\gym_backend.dir\Backend\Source\QuanLy.cpp.obj.d
-  FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include"
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  OBJECT_FILE_DIR = CMakeFiles\gym_backend.dir\Backend\Source
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target gym_backend
-
-
-#############################################
-# Link the static library libgym_backend.a
-
-build libgym_backend.a: CXX_STATIC_LIBRARY_LINKER__gym_backend_Debug CMakeFiles/gym_backend.dir/Backend/Source/ChiTietHoaDon_GT.cpp.obj CMakeFiles/gym_backend.dir/Backend/Source/ChiTietHoaDon_HH.cpp.obj CMakeFiles/gym_backend.dir/Backend/Source/GoiTap.cpp.obj CMakeFiles/gym_backend.dir/Backend/Source/HLV.cpp.obj CMakeFiles/gym_backend.dir/Backend/Source/HangHoa.cpp.obj CMakeFiles/gym_backend.dir/Backend/Source/HoaDon.cpp.obj CMakeFiles/gym_backend.dir/Backend/Source/HoiVien.cpp.obj CMakeFiles/gym_backend.dir/Backend/Source/HopDong.cpp.obj CMakeFiles/gym_backend.dir/Backend/Source/IDGenerator.cpp.obj CMakeFiles/gym_backend.dir/Backend/Source/LopHoc.cpp.obj CMakeFiles/gym_backend.dir/Backend/Source/MonTap.cpp.obj CMakeFiles/gym_backend.dir/Backend/Source/NhanVien.cpp.obj CMakeFiles/gym_backend.dir/Backend/Source/Person.cpp.obj CMakeFiles/gym_backend.dir/Backend/Source/QuanLy.cpp.obj
-  CONFIG = Debug
-  LANGUAGE_COMPILE_FLAGS = -g
-  OBJECT_DIR = CMakeFiles\gym_backend.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  TARGET_FILE = libgym_backend.a
-  TARGET_PDB = gym_backend.a.dbg
-  TARGET_SUPPORT_DIR = CMakeFiles\gym_backend.dir
-
-# =============================================================================
 # Object build statements for EXECUTABLE target PBL2_Gym
 
 
 #############################################
 # Order-only phony target for PBL2_Gym
 
-build cmake_object_order_depends_target_PBL2_Gym: phony || cmake_object_order_depends_target_gym_backend
+build cmake_object_order_depends_target_PBL2_Gym: phony || .
 
 build CMakeFiles/PBL2_Gym.dir/main.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/main.cpp || cmake_object_order_depends_target_PBL2_Gym
   CONFIG = Debug
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\PBL2_Gym.dir\main.cpp.obj.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
   OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
   OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Controllers/Controller.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Controllers/Controller.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Controllers\Controller.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Controllers
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Managers/QuanLy.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Managers/QuanLy.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Managers\QuanLy.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Managers
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Models/ChiTietHoaDon_GT.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Models/ChiTietHoaDon_GT.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Models\ChiTietHoaDon_GT.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Models
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Models/ChiTietHoaDon_HH.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Models/ChiTietHoaDon_HH.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Models\ChiTietHoaDon_HH.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Models
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Models/GoiTap.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Models/GoiTap.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Models\GoiTap.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Models
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Models/HLV.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Models/HLV.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Models\HLV.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Models
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Models/HangHoa.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Models/HangHoa.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Models\HangHoa.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Models
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Models/HoaDon.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Models/HoaDon.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Models\HoaDon.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Models
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Models/HoiVien.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Models/HoiVien.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Models\HoiVien.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Models
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Models/HopDong.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Models/HopDong.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Models\HopDong.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Models
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Models/LopHoc.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Models/LopHoc.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Models\LopHoc.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Models
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Models/MonTap.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Models/MonTap.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Models\MonTap.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Models
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Models/NhanVien.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Models/NhanVien.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Models\NhanVien.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Models
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Models/Person.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Models/Person.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Models\Person.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Models
+  TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
+
+build CMakeFiles/PBL2_Gym.dir/Src/Utils/IDGenerator.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Src/Utils/IDGenerator.cpp || cmake_object_order_depends_target_PBL2_Gym
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PBL2_Gym.dir\Src\Utils\IDGenerator.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
+  OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Src\Utils
   TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
 
 build CMakeFiles/PBL2_Gym.dir/Frontend/Source/Manager/DataManager.cpp.obj: CXX_COMPILER__PBL2_Gym_unscanned_Debug C$:/Users/Admin/OneDrive$ -$ The$ University$ of$ Technology/Desktop/PBL2/PBL2_Gym/Frontend/Source/Manager/DataManager.cpp || cmake_object_order_depends_target_PBL2_Gym
@@ -217,7 +214,7 @@ build CMakeFiles/PBL2_Gym.dir/Frontend/Source/Manager/DataManager.cpp.obj: CXX_C
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\PBL2_Gym.dir\Frontend\Source\Manager\DataManager.cpp.obj.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
   OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
   OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Frontend\Source\Manager
   TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
@@ -227,7 +224,7 @@ build CMakeFiles/PBL2_Gym.dir/Frontend/Source/Manager/LoginSystem.cpp.obj: CXX_C
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\PBL2_Gym.dir\Frontend\Source\Manager\LoginSystem.cpp.obj.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
   OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
   OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Frontend\Source\Manager
   TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
@@ -237,7 +234,7 @@ build CMakeFiles/PBL2_Gym.dir/Frontend/Source/Screens/LoginScreen.cpp.obj: CXX_C
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\PBL2_Gym.dir\Frontend\Source\Screens\LoginScreen.cpp.obj.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
   OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
   OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Frontend\Source\Screens
   TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
@@ -247,7 +244,7 @@ build CMakeFiles/PBL2_Gym.dir/Frontend/Source/Screens/MemberScreen.cpp.obj: CXX_
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\PBL2_Gym.dir\Frontend\Source\Screens\MemberScreen.cpp.obj.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
   OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
   OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Frontend\Source\Screens
   TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
@@ -257,7 +254,7 @@ build CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/DropdownMenu.cpp.obj: CXX_COMPI
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\PBL2_Gym.dir\Frontend\Source\UI\DropdownMenu.cpp.obj.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
   OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
   OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Frontend\Source\UI
   TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
@@ -267,7 +264,7 @@ build CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/ModernButton.cpp.obj: CXX_COMPI
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\PBL2_Gym.dir\Frontend\Source\UI\ModernButton.cpp.obj.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
   OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
   OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Frontend\Source\UI
   TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
@@ -277,7 +274,7 @@ build CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/ModernInputBox.cpp.obj: CXX_COM
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\PBL2_Gym.dir\Frontend\Source\UI\ModernInputBox.cpp.obj.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
   OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
   OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Frontend\Source\UI
   TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
@@ -287,7 +284,7 @@ build CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/UIComponents.cpp.obj: CXX_COMPI
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\PBL2_Gym.dir\Frontend\Source\UI\UIComponents.cpp.obj.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Backend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
+  INCLUDES = -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Models" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Managers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Controllers" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Include/Utils" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Manager" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/Screens" -I"C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/Frontend/Include/UI" -isystem C:/SFML_Build/include
   OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
   OBJECT_FILE_DIR = CMakeFiles\PBL2_Gym.dir\Frontend\Source\UI
   TARGET_SUPPORT_DIR = CMakeFiles\PBL2_Gym.dir
@@ -300,10 +297,10 @@ build CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/UIComponents.cpp.obj: CXX_COMPI
 #############################################
 # Link the executable PBL2_Gym.exe
 
-build PBL2_Gym.exe: CXX_EXECUTABLE_LINKER__PBL2_Gym_Debug CMakeFiles/PBL2_Gym.dir/main.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/Manager/DataManager.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/Manager/LoginSystem.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/Screens/LoginScreen.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/Screens/MemberScreen.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/DropdownMenu.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/ModernButton.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/ModernInputBox.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/UIComponents.cpp.obj | libgym_backend.a C$:/SFML_Build/lib/libsfml-graphics-s.a C$:/SFML_Build/lib/libsfml-window-s.a C$:/SFML_Build/lib/libsfml-system-s.a C$:/SFML_Build/lib/libfreetype.a C$:/SFML_Build/lib/libharfbuzz.a C$:/SFML_Build/lib/libfreetype.a C$:/SFML_Build/lib/libharfbuzz.a || libgym_backend.a
+build PBL2_Gym.exe: CXX_EXECUTABLE_LINKER__PBL2_Gym_Debug CMakeFiles/PBL2_Gym.dir/main.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Controllers/Controller.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Managers/QuanLy.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Models/ChiTietHoaDon_GT.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Models/ChiTietHoaDon_HH.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Models/GoiTap.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Models/HLV.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Models/HangHoa.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Models/HoaDon.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Models/HoiVien.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Models/HopDong.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Models/LopHoc.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Models/MonTap.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Models/NhanVien.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Models/Person.cpp.obj CMakeFiles/PBL2_Gym.dir/Src/Utils/IDGenerator.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/Manager/DataManager.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/Manager/LoginSystem.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/Screens/LoginScreen.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/Screens/MemberScreen.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/DropdownMenu.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/ModernButton.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/ModernInputBox.cpp.obj CMakeFiles/PBL2_Gym.dir/Frontend/Source/UI/UIComponents.cpp.obj | C$:/SFML_Build/lib/libsfml-graphics-s.a C$:/SFML_Build/lib/libsfml-window-s.a C$:/SFML_Build/lib/libsfml-system-s.a C$:/SFML_Build/lib/libfreetype.a C$:/SFML_Build/lib/libharfbuzz.a C$:/SFML_Build/lib/libfreetype.a C$:/SFML_Build/lib/libharfbuzz.a
   CONFIG = Debug
   FLAGS = -g
-  LINK_LIBRARIES = libgym_backend.a  C:/SFML_Build/lib/libsfml-graphics-s.a  C:/SFML_Build/lib/libsfml-window-s.a  C:/SFML_Build/lib/libsfml-system-s.a  -lwinmm  -lopengl32  -lgdi32  -lopengl32  C:/SFML_Build/lib/libfreetype.a  C:/SFML_Build/lib/libharfbuzz.a  C:/SFML_Build/lib/libfreetype.a  C:/SFML_Build/lib/libharfbuzz.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = C:/SFML_Build/lib/libsfml-graphics-s.a  C:/SFML_Build/lib/libsfml-window-s.a  C:/SFML_Build/lib/libsfml-system-s.a  -lwinmm  -lopengl32  -lgdi32  -lopengl32  C:/SFML_Build/lib/libfreetype.a  C:/SFML_Build/lib/libharfbuzz.a  C:/SFML_Build/lib/libfreetype.a  C:/SFML_Build/lib/libharfbuzz.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\PBL2_Gym.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -341,8 +338,6 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 build PBL2_Gym: phony PBL2_Gym.exe
 
-build gym_backend: phony libgym_backend.a
-
 # =============================================================================
 # Folder targets.
 
@@ -351,7 +346,7 @@ build gym_backend: phony libgym_backend.a
 #############################################
 # Folder: C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build
 
-build all: phony libgym_backend.a PBL2_Gym.exe
+build all: phony PBL2_Gym.exe
 
 # =============================================================================
 # Built-in targets
