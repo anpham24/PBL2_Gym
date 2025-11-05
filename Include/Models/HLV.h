@@ -12,7 +12,7 @@ class HLV : public Person {
         MyVector<LopHoc*> dsLopHoc;
     public:
         HLV();
-        HLV(const string&, const string&, const string&, int, double = 0.0);
+        HLV(const string&, const string&, const string&, const string&, int, double = 0.0);
         HLV(const HLV& other);
         ~HLV();
 
@@ -29,6 +29,7 @@ class HLV : public Person {
         const MyVector<LopHoc*>& getDsLopHoc() const;
         MyVector<LopHoc*>& getDsLopHoc();
 
-        static HLV* create(const string&, const string&, const string&, int, double);
+        static HLV* create(const string&, const string&, const string&, const string&, int, double = 0.0);
+        static HLV* create(const string&, const string&, const string&, int, double = 0.0);
         string read() const override;
 };

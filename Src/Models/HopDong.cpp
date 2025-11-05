@@ -5,19 +5,13 @@
 #include "IDGenerator.h"
 #include <ctime>
 
-HopDong::HopDong() {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HopDong);
-}
+HopDong::HopDong() {}
 
-HopDong::HopDong(HoiVien* hv, GoiTap* gt, NhanVien* nv, const string& ngayDK, const string& ngayHetHan, bool isActive)
-    : hv(hv), gt(gt), nv(nv), ngayDK(ngayDK), ngayHetHan(ngayHetHan), isActive(isActive) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HopDong);
-}
+HopDong::HopDong(const string& id, HoiVien* hv, GoiTap* gt, NhanVien* nv, const string& ngayDK, const string& ngayHetHan, bool isActive)
+    : id(id), hv(hv), gt(gt), nv(nv), ngayDK(ngayDK), ngayHetHan(ngayHetHan), isActive(isActive) {}
 
 HopDong::HopDong(const HopDong& other)
-    : hv(other.hv), gt(other.gt), nv(other.nv), ngayDK(other.ngayDK), ngayHetHan(other.ngayHetHan), isActive(other.isActive) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HopDong);
-}
+    : id(other.id), hv(other.hv), gt(other.gt), nv(other.nv), ngayDK(other.ngayDK), ngayHetHan(other.ngayHetHan), isActive(other.isActive) {}
 
 HopDong::~HopDong() {}
 
@@ -68,13 +62,20 @@ void HopDong::setNgayDK(const string& ngay) { ngayDK = ngay; }
 void HopDong::setNgayHetHan(const string& ngay) { ngayHetHan = ngay; }
 void HopDong::setIsActive(bool active) { isActive = active; }
 
+HopDong* HopDong::create(const string& id, HoiVien* hv, GoiTap* gt, NhanVien* nv,
+                   const string& ngayDK, const string& ngayHetHan, bool isActive)
+{
+    return new HopDong(id, hv, gt, nv, ngayDK, ngayHetHan, isActive);
+}
+
 HopDong* HopDong::create(HoiVien* hv, GoiTap* gt, NhanVien* nv,
                    const string& ngayDK, const string& ngayHetHan, bool isActive)
 {
-    return new HopDong(hv, gt, nv, ngayDK, ngayHetHan, isActive);
+    string id = IDGenerator::generateID(IDGenerator::Prefix_HopDong);
+    return new HopDong(id, hv, gt, nv, ngayDK, ngayHetHan, isActive);
 }
 
 string HopDong::read() {
-    string result = hv->getID() + "," + gt->getID() + "," + nv->getID() + "," + ngayDK + "," + ngayHetHan + "," + to_string(this->getIsActive());
+    string result = id + "," + hv->getID() + "," + gt->getID() + "," + nv->getID() + "," + ngayDK + "," + ngayHetHan + "," + to_string(this->getIsActive());
     return result;
 }

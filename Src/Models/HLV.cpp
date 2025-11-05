@@ -6,15 +6,11 @@ HLV::HLV() {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_HLV);
 }
 
-HLV::HLV(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, double luong)
-    : Person(hoTen, sdt, gioiTinh, tuoi), luong(luong) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HLV);
-}
+HLV::HLV(const string& id, const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, double luong)
+    : Person(id, hoTen, sdt, gioiTinh, tuoi), luong(luong) {}
 
 HLV::HLV(const HLV& other) 
-    : Person(other.hoTen, other.sdt, other.gioiTinh, other.tuoi), luong(other.luong) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HLV);
-}
+    : Person(other.id, other.hoTen, other.sdt, other.gioiTinh, other.tuoi), luong(other.luong) {}
 
 HLV::~HLV() {}
 
@@ -63,8 +59,13 @@ MyVector<LopHoc*>& HLV::getDsLopHoc() {
     return dsLopHoc;
 }
 
+HLV* HLV::create(const string& id, const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, double luong) {
+    return new HLV(id, hoTen, sdt, gioiTinh, tuoi, luong);
+}
+
 HLV* HLV::create(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, double luong) {
-    return new HLV(hoTen, sdt, gioiTinh, tuoi, luong);
+    string id = IDGenerator::generateID(IDGenerator::Prefix_HLV);
+    return new HLV(id, hoTen, sdt, gioiTinh, tuoi, luong);
 }
 
 string HLV::read() const {

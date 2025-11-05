@@ -19,7 +19,7 @@ private:
     MyVector<ChiTietHoaDon_GT*> dsChiTietHoaDon_GT;
 public:
     HoaDon();
-    HoaDon(NhanVien*, HoiVien*, const string&, const string&);
+    HoaDon(const string&, NhanVien*, HoiVien*, const string&, const string&);
     HoaDon(const HoaDon& other);
     ~HoaDon();
 
@@ -47,6 +47,7 @@ public:
     double getTotal() const;
     size_t itemCount() const;
 
+    static HoaDon* create(const string&, NhanVien*, HoiVien*, const string&, const string&);
     static HoaDon* create(NhanVien*, HoiVien*, const string&, const string&);
     string read() const;
 };

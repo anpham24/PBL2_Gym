@@ -15,7 +15,8 @@ private:
     bool isActive;
 public:
     HoiVien();
-    HoiVien(const string&, const string&, const string&, int, int = 0, HLV* = nullptr, bool = true);
+    HoiVien(const string&, const string&, const string&, const string&, 
+            int, int = 0, HLV* = nullptr, bool = true);
     HoiVien(const HoiVien& other);
     ~HoiVien();
 
@@ -36,6 +37,9 @@ public:
     const MyVector<HopDong*>& getDsHopDong() const;
     MyVector<HopDong*>& getDsHopDong();
 
-    static HoiVien* create(const string&, const string&, const string&, int, int, HLV*, bool = true);
+    static HoiVien* create(const string&, const string&, const string&, const string&, 
+                            int, int = 0, HLV* = nullptr, bool = true);
+    static HoiVien* create(const string&, const string&, const string&, 
+                            int, int = 0, HLV* = nullptr, bool = true);
     string read() const override;
 };

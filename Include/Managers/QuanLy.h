@@ -41,9 +41,6 @@ public:
 
     ~QuanLy();
 
-    void saveAllData(const string& filePath) const;
-    void loadAllData(const string& filePath);
-
     void setDirty(bool status = true);
     bool getIsDirty() const;    
 

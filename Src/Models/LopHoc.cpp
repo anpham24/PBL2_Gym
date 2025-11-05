@@ -3,20 +3,14 @@
 #include "MonTap.h"
 #include "IDGenerator.h"
 
-LopHoc::LopHoc() {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_MonTap);
-}
+LopHoc::LopHoc() {}
 
-LopHoc::LopHoc(const string& tenLop, const string& lichTap, int thoiLuong, MonTap* monTap, HLV* hlv)
-    : tenLop(tenLop), lichTap(lichTap), thoiLuong(thoiLuong), monTap(monTap), hlv(hlv) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_MonTap);
-}
+LopHoc::LopHoc(const string& id, const string& tenLop, const string& lichTap, int thoiLuong, MonTap* monTap, HLV* hlv)
+    : id(id), tenLop(tenLop), lichTap(lichTap), thoiLuong(thoiLuong), monTap(monTap), hlv(hlv) {}
 
 LopHoc::LopHoc(const LopHoc& other)
-    : tenLop(other.tenLop), lichTap(other.lichTap), thoiLuong(other.thoiLuong),
-      monTap(other.monTap), hlv(other.hlv) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_MonTap);
-}
+    : id(other.id), tenLop(other.tenLop), lichTap(other.lichTap), thoiLuong(other.thoiLuong),
+      monTap(other.monTap), hlv(other.hlv) {}
 
 LopHoc::~LopHoc() {}
 
@@ -51,8 +45,13 @@ void LopHoc::setHLV(HLV* h) {
     }
 }
 
-LopHoc* LopHoc::create(const string& tenLop, const string& lichTap, const string& thoiLuongStr, int thoiLuong, MonTap* monTap, HLV* hlv) {
-    return new LopHoc(tenLop, lichTap, thoiLuong, monTap, hlv);
+LopHoc* LopHoc::create(const string& id, const string& tenLop, const string& lichTap, int thoiLuong, MonTap* monTap, HLV* hlv) {
+    return new LopHoc(id, tenLop, lichTap, thoiLuong, monTap, hlv);
+}
+
+LopHoc* LopHoc::create(const string& tenLop, const string& lichTap, int thoiLuong, MonTap* monTap, HLV* hlv) {
+    string id = IDGenerator::generateID(IDGenerator::Prefix_MonTap);
+    return new LopHoc(id, tenLop, lichTap, thoiLuong, monTap, hlv);
 }
 
 string LopHoc::read() const {

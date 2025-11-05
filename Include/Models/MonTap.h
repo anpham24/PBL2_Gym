@@ -10,24 +10,18 @@ class MonTap {
 private:
     string id;
     string tenMon;
-    string lichTap;
-    string maHLV;
     MyVector<LopHoc*> dsLopHoc;
     MyVector<GoiTap*> dsGoiTap;
 public:
     MonTap();
-    MonTap(const string&, const string&, const string& = "");
+    MonTap(const string&, const string&);
     MonTap(const MonTap& other);
     ~MonTap();
 
     const string& getID() const;
     const string& getTenMon() const;
-    const string& getLichTap() const;
-    const string& getMaHLV() const;
 
     void setTenMon(const string&);
-    void setLichTap(const string&);
-    void setMaHLV(const string&);
 
     void addLopHoc(LopHoc*);
     void removeLopHoc(LopHoc*);
@@ -39,6 +33,7 @@ public:
     const MyVector<GoiTap*>& getDsGoiTap() const;
     MyVector<GoiTap*>& getDsGoiTap();
 
-    static MonTap* create(const string&, const string&, const string& = "");
+    static MonTap* create(const string&, const string&);
+    static MonTap* create(const string&);
     string read() const;
 };

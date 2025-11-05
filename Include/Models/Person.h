@@ -11,7 +11,7 @@ class Person {
         int tuoi;
     public:
         Person();
-        Person(const string&, const string&, const string&, int);
+        Person(const string&, const string&, const string&, const string&, int);
         virtual ~Person() = 0;
 
         const string& getID() const;

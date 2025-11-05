@@ -4,18 +4,13 @@
 #include "IDGenerator.h"
 
 NhanVien::NhanVien() {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_NhanVien);
 }
 
-NhanVien::NhanVien(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, double luong, bool isActive)
-    : Person(hoTen, sdt, gioiTinh, tuoi), luong(luong), isActive(isActive) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_NhanVien);
-}
+NhanVien::NhanVien(const string& id, const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, double luong, bool isActive)
+    : Person(id, hoTen, sdt, gioiTinh, tuoi), luong(luong), isActive(isActive) {}
 
 NhanVien::NhanVien(const NhanVien& other)
-    : Person(other.hoTen, other.sdt, other.gioiTinh, other.tuoi), luong(other.luong), isActive(other.isActive) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_NhanVien);
-}
+    : Person(other.id, other.hoTen, other.sdt, other.gioiTinh, other.tuoi), luong(other.luong), isActive(other.isActive) {}
 
 NhanVien::~NhanVien() {}
 
@@ -67,10 +62,14 @@ MyVector<HoaDon*>& NhanVien::getDsHoaDon() {
     return this->dsHoaDon;
 }
 
-NhanVien* NhanVien::create(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, double luong, bool isActive) {
-    return new NhanVien(hoTen, sdt, gioiTinh, tuoi, luong, isActive);
+NhanVien* NhanVien::create(const string& id, const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, double luong, bool isActive) {
+    return new NhanVien(id, hoTen, sdt, gioiTinh, tuoi, luong, isActive);
 }
 
+NhanVien* NhanVien::create(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, double luong, bool isActive) {
+    string id = IDGenerator::generateID(IDGenerator::Prefix_NhanVien);
+    return new NhanVien(id, hoTen, sdt, gioiTinh, tuoi, luong, isActive);
+}
 
 string NhanVien::read() const {
     string result = id + "|" + hoTen + "|" + sdt + "|" + gioiTinh + "|" + to_string(tuoi) + "|" + to_string(luong) + "|" + to_string(isActive);

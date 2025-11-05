@@ -15,7 +15,7 @@ private:
     bool isActive;
 public:
     HangHoa();
-    HangHoa(const string&, double, int, bool = true);
+    HangHoa(const string&, const string&, double, int, bool = true);
     HangHoa(const HangHoa& other);
     ~HangHoa();
 
@@ -35,6 +35,7 @@ public:
     const MyVector<ChiTietHoaDon_HH*>& getDsChiTietHoaDon_HH() const;
     MyVector<ChiTietHoaDon_HH*>& getDsChiTietHoaDon_HH();
 
+    static HangHoa* create(const string&, const string&, double, int, bool = true);
     static HangHoa* create(const string&, double, int, bool = true);
     string read() const;
 };

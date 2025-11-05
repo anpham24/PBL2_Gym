@@ -5,21 +5,14 @@
 #include "ChiTietHoaDon_GT.h"
 #include "IDGenerator.h"
 
-HoaDon::HoaDon() {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HoaDon);
-}
+HoaDon::HoaDon() {}
 
-HoaDon::HoaDon(NhanVien* nv, HoiVien* hv, const string& ngayLap, const string& phuongThucTT) 
-    : nhanVien(nv), hoiVien(hv), ngayLap(ngayLap), phuongThucTT(phuongThucTT) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HoaDon);
-}
+HoaDon::HoaDon(const string& id, NhanVien* nv, HoiVien* hv, const string& ngayLap, const string& phuongThucTT) 
+    : id(id), nhanVien(nv), hoiVien(hv), ngayLap(ngayLap), phuongThucTT(phuongThucTT) {}
 
 HoaDon::HoaDon(const HoaDon& other)
-    : nhanVien(other.nhanVien), hoiVien(other.hoiVien), 
-      ngayLap(other.ngayLap), phuongThucTT(other.phuongThucTT), 
-      dsChiTietHoaDon_HH(other.dsChiTietHoaDon_HH), dsChiTietHoaDon_GT(other.dsChiTietHoaDon_GT) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HoaDon);
-}
+    : id(other.id), nhanVien(other.nhanVien), hoiVien(other.hoiVien), 
+      ngayLap(other.ngayLap), phuongThucTT(other.phuongThucTT) {}
 
 HoaDon::~HoaDon() {}
 
@@ -95,8 +88,13 @@ size_t HoaDon::itemCount() const {
     return dsChiTietHoaDon_HH.size() + dsChiTietHoaDon_GT.size();
 }
 
+HoaDon* HoaDon::create(const string& id, NhanVien* nv, HoiVien* hv, const string& ngayLap, const string& phuongThucTT) {
+    return new HoaDon(id, nv, hv, ngayLap, phuongThucTT);
+}
+
 HoaDon* HoaDon::create(NhanVien* nv, HoiVien* hv, const string& ngayLap, const string& phuongThucTT) {
-    return new HoaDon(nv, hv, ngayLap, phuongThucTT);
+    string id = IDGenerator::generateID(IDGenerator::Prefix_HoaDon);
+    return new HoaDon(id, nv, hv, ngayLap, phuongThucTT);
 }
 
 string HoaDon::read() const {

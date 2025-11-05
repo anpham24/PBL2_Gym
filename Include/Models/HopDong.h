@@ -18,7 +18,7 @@ private:
 
 public:
     HopDong();
-    HopDong(HoiVien*, GoiTap*, NhanVien*, const string&, const string&, bool = true);
+    HopDong(const string&, HoiVien*, GoiTap*, NhanVien*, const string&, const string&, bool = true);
     HopDong(const HopDong&);
     ~HopDong();
 
@@ -37,6 +37,7 @@ public:
     void setNhanVien(NhanVien*);
     void setIsActive(bool);
 
+    static HopDong* create(const string&, HoiVien*, GoiTap*, NhanVien*, const string&, const string&, bool = true);
     static HopDong* create(HoiVien*, GoiTap*, NhanVien*, const string&, const string&, bool = true);
     string read();
 };

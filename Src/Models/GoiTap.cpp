@@ -3,19 +3,13 @@
 #include "ChiTietHoaDon_GT.h"
 #include "IDGenerator.h"
 
-GoiTap::GoiTap() {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_GoiTap);
-}
+GoiTap::GoiTap() {}
 
-GoiTap::GoiTap(const string& tenGoi, int thoiGian, double gia, bool isActive)
-    : tenGoi(tenGoi), thoiGian(thoiGian), gia(gia), isActive(isActive) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_GoiTap);
-}
+GoiTap::GoiTap(const string& id, const string& tenGoi, int thoiGian, double gia, bool isActive)
+    : id(id), tenGoi(tenGoi), thoiGian(thoiGian), gia(gia), isActive(isActive) {}
 
 GoiTap::GoiTap(const GoiTap& other) 
-    : tenGoi(other.tenGoi), thoiGian(other.thoiGian), gia(other.gia), isActive(other.isActive) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_GoiTap);
-}
+    : id(other.id), tenGoi(other.tenGoi), thoiGian(other.thoiGian), gia(other.gia), isActive(other.isActive) {}
 
 GoiTap::~GoiTap() {}
 
@@ -93,10 +87,14 @@ MyVector<ChiTietHoaDon_GT*>& GoiTap::getDsChiTietHoaDon_GT() {
     return this->dsChiTietHoaDon_GT;
 }
 
-GoiTap* GoiTap::create(const string& tenGoi, int thoiGian, double gia, bool isActive) {
-    return new GoiTap(tenGoi, thoiGian, gia, isActive);
+GoiTap* GoiTap::create(const string& id, const string& tenGoi, int thoiGian, double gia, bool isActive) {
+    return new GoiTap(id, tenGoi, thoiGian, gia, isActive);
 }
 
+GoiTap* GoiTap::create(const string& tenGoi, int thoiGian, double gia, bool isActive) {
+    string id = IDGenerator::generateID(IDGenerator::Prefix_GoiTap);
+    return new GoiTap(id, tenGoi, thoiGian, gia, isActive);
+}
 
 string GoiTap::read() const {
     string result = id + "," + tenGoi + "," + to_string(thoiGian) + "," + to_string(gia) + "," + to_string(isActive);

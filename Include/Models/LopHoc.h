@@ -15,7 +15,7 @@ private:
     HLV* hlv;     // Pointer to associated HLV
 public: 
     LopHoc();
-    LopHoc(const string&, const string&, int, MonTap*, HLV*);
+    LopHoc(const string&, const string&, const string&, int, MonTap*, HLV*);
     LopHoc(const LopHoc& other);
     ~LopHoc();
 
@@ -33,5 +33,6 @@ public:
     void setHLV(HLV*);
 
     static LopHoc* create(const string&, const string&, const string&, int, MonTap*, HLV*);
+    static LopHoc* create(const string&, const string&, int, MonTap*, HLV*);
     string read() const;
 };

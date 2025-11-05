@@ -2,18 +2,12 @@
 #include "Models/ChiTietHoaDon_HH.h"
 #include "Utils/IDGenerator.h"
 
-HangHoa::HangHoa() {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HangHoa);
-}
+HangHoa::HangHoa() {}
 
-HangHoa::HangHoa(const string& tenHH, double gia, int soLuongCon, bool isActive) : tenHH(tenHH), gia(gia), soLuongCon(soLuongCon), isActive(isActive) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HangHoa);
-}
+HangHoa::HangHoa(const string& id, const string& tenHH, double gia, int soLuongCon, bool isActive) : id(id), tenHH(tenHH), gia(gia), soLuongCon(soLuongCon), isActive(isActive) {}
 
 HangHoa::HangHoa(const HangHoa& other) 
-    : tenHH(other.tenHH), gia(other.gia), soLuongCon(other.soLuongCon), isActive(other.isActive) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HangHoa);
-}
+    : id(other.id), tenHH(other.tenHH), gia(other.gia), soLuongCon(other.soLuongCon), isActive(other.isActive) {}
 
 HangHoa::~HangHoa() {}
 
@@ -49,8 +43,13 @@ MyVector<ChiTietHoaDon_HH*>& HangHoa::getDsChiTietHoaDon_HH() {
     return this->dsChiTietHoaDon_HH;
 }
 
+HangHoa* HangHoa::create(const string& id, const string& tenHH, double gia, int soLuongCon, bool isActive) {
+    return new HangHoa(id, tenHH, gia, soLuongCon, isActive);
+}
+
 HangHoa* HangHoa::create(const string& tenHH, double gia, int soLuongCon, bool isActive) {
-    return new HangHoa(tenHH, gia, soLuongCon, isActive);
+    string id = IDGenerator::generateID(IDGenerator::Prefix_HangHoa);
+    return new HangHoa(id, tenHH, gia, soLuongCon, isActive);
 }
 
 string HangHoa::read() const {

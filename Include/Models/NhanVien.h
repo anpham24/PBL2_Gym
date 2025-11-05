@@ -14,7 +14,7 @@ private:
     bool isActive;
 public:
     NhanVien();
-    NhanVien(const string&, const string&, const string&, int, double = 0.0, bool = true);
+    NhanVien(const string&, const string&, const string&, const string&, int, double = 0.0, bool = true);
     NhanVien(const NhanVien& other);
     ~NhanVien();
 
@@ -33,6 +33,7 @@ public:
     const MyVector<HoaDon*>& getDsHoaDon() const;
     MyVector<HoaDon*>& getDsHoaDon();
 
+    static NhanVien* create(const string&, const string&, const string&, const string&, int, double = 0.0, bool = true);
     static NhanVien* create(const string&, const string&, const string&, int, double = 0.0, bool = true);
     string read() const override;
 };

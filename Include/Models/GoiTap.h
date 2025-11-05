@@ -19,7 +19,7 @@ private:
     bool isActive;
 public:
     GoiTap();
-    GoiTap(const string&, int, double, bool = true);
+    GoiTap(const string&, const string&, int, double, bool = true);
     GoiTap(const GoiTap& other);
     ~GoiTap();
 
@@ -49,6 +49,7 @@ public:
     const MyVector<ChiTietHoaDon_GT*>& getDsChiTietHoaDon_GT() const;
     MyVector<ChiTietHoaDon_GT*>& getDsChiTietHoaDon_GT();
 
+    static GoiTap* create(const string&, const string&, int, double, bool = true);
     static GoiTap* create(const string&, int, double, bool = true);
     string read() const;
 };

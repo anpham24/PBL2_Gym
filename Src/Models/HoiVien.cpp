@@ -3,19 +3,13 @@
 #include "HopDong.h"
 #include "IDGenerator.h"
 
-HoiVien::HoiVien() {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HoiVien);
-}
+HoiVien::HoiVien() {}
 
-HoiVien::HoiVien(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, HLV* hlv, bool isActive)
-    : Person(hoTen, sdt, gioiTinh, tuoi), point(point), hlv(hlv), isActive(isActive) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HoiVien);
-}
+HoiVien::HoiVien(const string& id, const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, HLV* hlv, bool isActive)
+    : Person(id, hoTen, sdt, gioiTinh, tuoi), point(point), hlv(hlv), isActive(isActive) {}
 
 HoiVien::HoiVien(const HoiVien& other) 
-    : Person(other.hoTen, other.sdt, other.gioiTinh, other.tuoi), point(other.point), hlv(other.hlv), isActive(other.isActive) {
-    this->id = IDGenerator::generateID(IDGenerator::Prefix_HoiVien);
-}
+    : Person(other.id, other.hoTen, other.sdt, other.gioiTinh, other.tuoi), point(other.point), hlv(other.hlv), isActive(other.isActive) {}
 
 HoiVien::~HoiVien() {}
 
@@ -79,8 +73,13 @@ MyVector<HopDong*>& HoiVien::getDsHopDong() {
     return dsHopDong;
 }
 
+HoiVien* HoiVien::create(const string& id, const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, HLV* hlv, bool isActive) {
+    return new HoiVien(id, hoTen, sdt, gioiTinh, tuoi, point, hlv, isActive);
+}
+
 HoiVien* HoiVien::create(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, HLV* hlv, bool isActive) {
-    return new HoiVien(hoTen, sdt, gioiTinh, tuoi, point, hlv, isActive);
+    string id = IDGenerator::generateID(IDGenerator::Prefix_HoiVien);
+    return new HoiVien(id, hoTen, sdt, gioiTinh, tuoi, point, hlv, isActive);
 }
 
 string HoiVien::read() const{

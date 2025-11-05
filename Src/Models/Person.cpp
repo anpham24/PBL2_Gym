@@ -2,8 +2,8 @@
 
 Person::Person() {}
 
-Person::Person(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi)
-        : hoTen(hoTen), sdt(sdt), gioiTinh(gioiTinh), tuoi(tuoi) {}
+Person::Person(const string& id, const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi)
+        : id(id), hoTen(hoTen), sdt(sdt), gioiTinh(gioiTinh), tuoi(tuoi) {}
 
 Person::~Person() {}
 
