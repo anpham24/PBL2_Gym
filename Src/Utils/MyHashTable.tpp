@@ -13,9 +13,8 @@ MyHashTable<T>::~MyHashTable() {
         Node* current = table[i];
         while (current != nullptr) {
             Node* temp = current;
-            delete temp->value;
-            delete temp;
             current = current->next;
+            delete temp;
         }
     }
     table.clear();
@@ -74,7 +73,7 @@ bool MyHashTable<T>::del(const std::string& key) {
 }
 
 template <typename T>
-const T* MyHashTable<T>::search(const std::string& key)  const{
+T* MyHashTable<T>::search(const std::string& key) {
     size_t index = hash_function(key);
     Node* current = table[index];
 

@@ -28,6 +28,9 @@ MyVector<T>::~MyVector() {
 template <typename T>
 MyVector<T>& MyVector<T>::operator=(const MyVector& other) {
     if (this != &other) {
+        // Giải phóng bộ nhớ cũ
+        delete[] data;
+        
         m_size = other.m_size;
         m_capacity = other.m_capacity;
         if (m_capacity > 0)
@@ -43,9 +46,6 @@ MyVector<T>& MyVector<T>::operator=(const MyVector& other) {
 
 template <typename T>
 void MyVector<T>::clear() {
-    for (size_t i = 0; i < m_size; i++) {
-        delete data[i];
-    }
     m_size = 0;
 }
 
@@ -69,10 +69,6 @@ void MyVector<T>::resize(size_t newSize) {
         for (size_t i = m_size; i < newSize; i++) {
             data[i] = T();
         }
-    } else if (newSize < m_size) {
-        for (size_t i = newSize; i < m_size; i++) {
-            delete data[i];
-        }
     }
     m_size = newSize;
 }
@@ -93,7 +89,6 @@ template <typename T>
 void MyVector<T>::pop_back() {
     if (m_size == 0)
         throw std::out_of_range("Vector is empty");
-    delete data[m_size - 1];
     --m_size;
 }
 
@@ -102,7 +97,6 @@ bool MyVector<T>::erase(size_t index) {
     if (index >= m_size) 
         return false;
 
-    delete data[index];
     for (size_t i = index; i < m_size - 1; i++) {
         data[i] = data[i + 1];
     }
