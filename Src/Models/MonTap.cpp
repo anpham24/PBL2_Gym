@@ -1,7 +1,13 @@
 #include "MonTap.h"
+<<<<<<< HEAD
 #include "../Include/LopHoc.h"
 #include "../Include/GoiTap.h"
 #include "../../Utils/Include/IDGenerator.h"
+=======
+#include "LopHoc.h"
+#include "GoiTap.h"
+#include "IDGenerator.h"
+>>>>>>> 9f94fa62b72403948afc940c83a2405ced5cf3d7
 
 MonTap::MonTap() {
     this->id = IDGenerator::generateID(IDGenerator::Prefix_MonTap);

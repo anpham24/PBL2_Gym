@@ -18,12 +18,52 @@
 // ============================================================================
 
 QuanLy::~QuanLy() {
-    dsHLV.clear(); 
+    // Xóa các object trong MyVector
+    for (size_t i = 0; i < dsHLV.size(); ++i) {
+        delete dsHLV.at(i);
+    }
+    dsHLV.clear();
+    
+    for (size_t i = 0; i < dsNhanVien.size(); ++i) {
+        delete dsNhanVien.at(i);
+    }
     dsNhanVien.clear();
+    
+    for (size_t i = 0; i < dsGoiTap.size(); ++i) {
+        delete dsGoiTap.at(i);
+    }
     dsGoiTap.clear();
+    
+    for (size_t i = 0; i < dsLopHoc.size(); ++i) {
+        delete dsLopHoc.at(i);
+    }
     dsLopHoc.clear();
+    
+    for (size_t i = 0; i < dsMonTap.size(); ++i) {
+        delete dsMonTap.at(i);
+    }
     dsMonTap.clear();
+    
+    for (size_t i = 0; i < dsHangHoa.size(); ++i) {
+        delete dsHangHoa.at(i);
+    }
     dsHangHoa.clear();
+    
+    // Xóa các object trong MyHashTable
+    MyVector<HoiVien*> allHV = dsHoiVien.getAllValues();
+    for (size_t i = 0; i < allHV.size(); ++i) {
+        delete allHV.at(i);
+    }
+    
+    MyVector<HopDong*> allHD = dsHopDong.getAllValues();
+    for (size_t i = 0; i < allHD.size(); ++i) {
+        delete allHD.at(i);
+    }
+    
+    MyVector<HoaDon*> allHoaDon = dsHoaDon.getAllValues();
+    for (size_t i = 0; i < allHoaDon.size(); ++i) {
+        delete allHoaDon.at(i);
+    }
 }
 
 // ============================================================================
@@ -39,57 +79,306 @@ bool QuanLy::getIsDirty() const {
 }
 
 void QuanLy::saveAllData(const string& folderPath) const {
-    // Lưu dữ liệu vào các file .txt
-    // Mỗi entity sẽ có một file riêng
-    
-    // Ví dụ: lưu GoiTap
-    std::ofstream fileGT(folderPath + "/goitap.txt");
-    if (fileGT.is_open()) {
-        for (size_t i = 0; i < dsGoiTap.size(); ++i) {
-            fileGT << dsGoiTap[i]->read() << "\n";
-        }
-        fileGT.close();
+    // 1. Lưu Hội viên (MyHashTable) - cần getAllValues()
+    std::ofstream fileHV(folderPath + "/HoiVien.txt");
+    if (fileHV.is_open()) {
+        // TODO: Implement getAllValues() trong MyHashTable để duyệt tất cả
+        // MyVector<HoiVien*> allHV = dsHoiVien.getAllValues();
+        // for (size_t i = 0; i < allHV.size(); ++i) {
+        //     fileHV << allHV.at(i)->read() << "\n";
+        // }
+        fileHV.close();
     }
     
-    // Lưu HangHoa
-    std::ofstream fileHH(folderPath + "/hanghoa.txt");
-    if (fileHH.is_open()) {
-        for (size_t i = 0; i < dsHangHoa.size(); ++i) {
-            fileHH << dsHangHoa[i]->read() << "\n";
+    // 2. Lưu Nhân viên
+    std::ofstream fileNV(folderPath + "/NhanVien.txt");
+    if (fileNV.is_open()) {
+        for (size_t i = 0; i < dsNhanVien.size(); ++i) {
+            fileNV << dsNhanVien.at(i)->read() << "\n";
         }
-        fileHH.close();
+        fileNV.close();
     }
     
-    // Lưu MonTap
-    std::ofstream fileMT(folderPath + "/montap.txt");
+    // 3. Lưu HLV
+    std::ofstream fileHLV(folderPath + "/HLV.txt");
+    if (fileHLV.is_open()) {
+        for (size_t i = 0; i < dsHLV.size(); ++i) {
+            fileHLV << dsHLV.at(i)->read() << "\n";
+        }
+        fileHLV.close();
+    }
+    
+    // 4. Lưu Môn tập
+    std::ofstream fileMT(folderPath + "/MonTap.txt");
     if (fileMT.is_open()) {
         for (size_t i = 0; i < dsMonTap.size(); ++i) {
-            fileMT << dsMonTap[i]->read() << "\n";
+            fileMT << dsMonTap.at(i)->read() << "\n";
         }
         fileMT.close();
     }
     
-    // Tương tự cho các entity khác...
-}
-
-void QuanLy::loadAllData(const string& folderPath) {
-    // Đọc dữ liệu từ các file .txt
-    // Cần parse từng dòng và tạo lại đối tượng
-    
-    // Ví dụ: đọc GoiTap
-    std::ifstream fileGT(folderPath + "/goitap.txt");
+    // 5. Lưu Gói tập
+    std::ofstream fileGT(folderPath + "/GoiTap.txt");
     if (fileGT.is_open()) {
-        string line;
-        while (std::getline(fileGT, line)) {
-            // Parse line và tạo GoiTap object
-            // Giả sử format: id,tenGoi,thoiGian,gia
-            // GoiTap* gt = new GoiTap(...);
-            // addGoiTap(gt);
+        for (size_t i = 0; i < dsGoiTap.size(); ++i) {
+            fileGT << dsGoiTap.at(i)->read() << "\n";
         }
         fileGT.close();
     }
     
-    // Tương tự cho các entity khác...
+    // 6. Lưu Lớp học
+    std::ofstream fileLH(folderPath + "/LopHoc.txt");
+    if (fileLH.is_open()) {
+        for (size_t i = 0; i < dsLopHoc.size(); ++i) {
+            fileLH << dsLopHoc.at(i)->read() << "\n";
+        }
+        fileLH.close();
+    }
+    
+    // 7. Lưu Hàng hóa
+    std::ofstream fileHH(folderPath + "/HangHoa.txt");
+    if (fileHH.is_open()) {
+        for (size_t i = 0; i < dsHangHoa.size(); ++i) {
+            fileHH << dsHangHoa.at(i)->read() << "\n";
+        }
+        fileHH.close();
+    }
+    
+    // 8. Lưu Hợp đồng (MyHashTable)
+    std::ofstream fileHD(folderPath + "/HopDong.txt");
+    if (fileHD.is_open()) {
+        // TODO: Implement getAllValues() trong MyHashTable
+        // MyVector<HopDong*> allHD = dsHopDong.getAllValues();
+        // for (size_t i = 0; i < allHD.size(); ++i) {
+        //     fileHD << allHD.at(i)->read() << "\n";
+        // }
+        fileHD.close();
+    }
+    
+    // 9. Lưu Hóa đơn (MyHashTable)
+    std::ofstream fileHoaDon(folderPath + "/HoaDon.txt");
+    if (fileHoaDon.is_open()) {
+        // TODO: Implement getAllValues() trong MyHashTable
+        // MyVector<HoaDon*> allHoaDon = dsHoaDon.getAllValues();
+        // for (size_t i = 0; i < allHoaDon.size(); ++i) {
+        //     fileHoaDon << allHoaDon.at(i)->read() << "\n";
+        // }
+        fileHoaDon.close();
+    }
+}
+
+void QuanLy::loadAllData(const string& folderPath) {
+    // Helper function để tách chuỗi
+    auto split = [](const string& s, char delimiter) -> MyVector<string> {
+        MyVector<string> tokens;
+        string token;
+        std::stringstream ss(s);
+        while (std::getline(ss, token, delimiter)) {
+            tokens.push_back(token);
+        }
+        return tokens;
+    };
+    
+    // Helper function để chuyển string sang int
+    auto toInt = [](const string& s) -> int {
+        return std::stoi(s);
+    };
+    
+    // Helper function để chuyển string sang double
+    auto toDouble = [](const string& s) -> double {
+        return std::stod(s);
+    };
+    
+    // Helper function để chuyển string sang bool
+    auto toBool = [](const string& s) -> bool {
+        return s == "1" || s == "true" || s == "True" || s == "TRUE";
+    };
+    
+    // Thứ tự đọc file quan trọng vì có quan hệ phụ thuộc:
+    // 1. Đọc các entity độc lập trước: HLV, NhanVien, MonTap
+    // 2. Đọc các entity phụ thuộc: GoiTap (cần MonTap), LopHoc (cần MonTap, HLV)
+    // 3. Đọc HangHoa
+    // 4. Đọc Hội viên (cần HLV)
+    // 5. Đọc Hợp đồng (cần HoiVien, GoiTap, NhanVien)
+    // 6. Đọc Hóa đơn (cần HoiVien, NhanVien, HangHoa, GoiTap)
+    
+    // 1. Đọc HLV
+    std::ifstream fileHLV(folderPath + "/HLV.txt");
+    if (fileHLV.is_open()) {
+        string line;
+        while (std::getline(fileHLV, line)) {
+            if (line.empty()) continue;
+            MyVector<string> parts = split(line, ',');
+            if (parts.size() >= 5) {
+                // Format: id,ten,sdt,gioiTinh,luong
+                HLV* hlv = new HLV(parts.at(0), parts.at(1), parts.at(2), 
+                                   toInt(parts.at(3)), toDouble(parts.at(4)));
+                addHLV(hlv);
+            }
+        }
+        fileHLV.close();
+    }
+    
+    // 2. Đọc Nhân viên
+    std::ifstream fileNV(folderPath + "/NhanVien.txt");
+    if (fileNV.is_open()) {
+        string line;
+        while (std::getline(fileNV, line)) {
+            if (line.empty()) continue;
+            MyVector<string> parts = split(line, ',');
+            if (parts.size() >= 6) {
+                // Format: id,ten,sdt,gioiTinh,luong,isActive
+                NhanVien* nv = new NhanVien(parts.at(0), parts.at(1), parts.at(2), 
+                                            toInt(parts.at(3)), toDouble(parts.at(4)), 
+                                            toBool(parts.at(5)));
+                addNhanVien(nv);
+            }
+        }
+        fileNV.close();
+    }
+    
+    // 3. Đọc Môn tập
+    std::ifstream fileMT(folderPath + "/MonTap.txt");
+    if (fileMT.is_open()) {
+        string line;
+        while (std::getline(fileMT, line)) {
+            if (line.empty()) continue;
+            MyVector<string> parts = split(line, ',');
+            if (parts.size() >= 3) {
+                // Format: id,tenMon,lichTap,maHLV
+                MonTap* mt = new MonTap(parts.at(0), parts.at(1), 
+                                        parts.size() > 2 ? parts.at(2) : "");
+                if (parts.size() > 3) {
+                    mt->setMaHLV(parts.at(3));
+                }
+                addMonTap(mt);
+            }
+        }
+        fileMT.close();
+    }
+    
+    // 4. Đọc Gói tập
+    std::ifstream fileGT(folderPath + "/GoiTap.txt");
+    if (fileGT.is_open()) {
+        string line;
+        while (std::getline(fileGT, line)) {
+            if (line.empty()) continue;
+            MyVector<string> parts = split(line, ',');
+            if (parts.size() >= 4) {
+                // Format: id,tenGoi,thoiGian,gia,isActive
+                GoiTap* gt = new GoiTap(parts.at(0), toInt(parts.at(1)), 
+                                        toDouble(parts.at(2)), 
+                                        parts.size() > 3 ? toBool(parts.at(3)) : true);
+                addGoiTap(gt);
+            }
+        }
+        fileGT.close();
+    }
+    
+    // 5. Đọc Lớp học
+    std::ifstream fileLH(folderPath + "/LopHoc.txt");
+    if (fileLH.is_open()) {
+        string line;
+        while (std::getline(fileLH, line)) {
+            if (line.empty()) continue;
+            MyVector<string> parts = split(line, ',');
+            if (parts.size() >= 5) {
+                // Format: id,tenLop,lichTap,thoiLuong,maMonTap,maHLV
+                MonTap* mt = parts.size() > 4 ? getMonTap(parts.at(4)) : nullptr;
+                HLV* hlv = parts.size() > 5 ? getHLV(parts.at(5)) : nullptr;
+                
+                LopHoc* lh = new LopHoc(parts.at(0), parts.at(1), toInt(parts.at(3)), mt, hlv);
+                lh->setLichTap(parts.at(2));
+                addLopHoc(lh);
+            }
+        }
+        fileLH.close();
+    }
+    
+    // 6. Đọc Hàng hóa
+    std::ifstream fileHH(folderPath + "/HangHoa.txt");
+    if (fileHH.is_open()) {
+        string line;
+        while (std::getline(fileHH, line)) {
+            if (line.empty()) continue;
+            MyVector<string> parts = split(line, ',');
+            if (parts.size() >= 4) {
+                // Format: id,tenHH,gia,soLuongCon,isActive
+                HangHoa* hh = new HangHoa(parts.at(0), toDouble(parts.at(1)), 
+                                          toInt(parts.at(2)), 
+                                          parts.size() > 3 ? toBool(parts.at(3)) : true);
+                addHangHoa(hh);
+            }
+        }
+        fileHH.close();
+    }
+    
+    // 7. Đọc Hội viên
+    std::ifstream fileHV(folderPath + "/HoiVien.txt");
+    if (fileHV.is_open()) {
+        string line;
+        while (std::getline(fileHV, line)) {
+            if (line.empty()) continue;
+            MyVector<string> parts = split(line, ',');
+            if (parts.size() >= 6) {
+                // Format: id,ten,sdt,gioiTinh,point,maHLV,isActive
+                HLV* hlv = parts.size() > 5 && !parts.at(5).empty() ? getHLV(parts.at(5)) : nullptr;
+                HoiVien* hv = new HoiVien(parts.at(0), parts.at(1), parts.at(2), 
+                                          toInt(parts.at(3)), toInt(parts.at(4)), hlv,
+                                          parts.size() > 6 ? toBool(parts.at(6)) : true);
+                addHoiVien(hv);
+            }
+        }
+        fileHV.close();
+    }
+    
+    // 8. Đọc Hợp đồng
+    std::ifstream fileHD(folderPath + "/HopDong.txt");
+    if (fileHD.is_open()) {
+        string line;
+        while (std::getline(fileHD, line)) {
+            if (line.empty()) continue;
+            MyVector<string> parts = split(line, ',');
+            if (parts.size() >= 6) {
+                // Format: id,maHV,maGT,maNV,ngayDK,ngayHetHan,isActive
+                HoiVien* hv = getHoiVien(parts.at(1));
+                GoiTap* gt = getGoiTap(parts.at(2));
+                NhanVien* nv = getNhanVien(parts.at(3));
+                
+                if (hv && gt && nv) {
+                    HopDong* hd = new HopDong(hv, gt, nv, parts.at(4), parts.at(5),
+                                              parts.size() > 6 ? toBool(parts.at(6)) : true);
+                    addHopDong(hd);
+                }
+            }
+        }
+        fileHD.close();
+    }
+    
+    // 9. Đọc Hóa đơn (phức tạp hơn vì có chi tiết hóa đơn)
+    std::ifstream fileHoaDon(folderPath + "/HoaDon.txt");
+    if (fileHoaDon.is_open()) {
+        string line;
+        while (std::getline(fileHoaDon, line)) {
+            if (line.empty()) continue;
+            MyVector<string> parts = split(line, ',');
+            if (parts.size() >= 5) {
+                // Format: id,maNV,maHV,ngayLap,phuongThucTT,[chiTietHH],[chiTietGT]
+                NhanVien* nv = getNhanVien(parts.at(1));
+                HoiVien* hv = getHoiVien(parts.at(2));
+                
+                if (nv && hv) {
+                    HoaDon* hoaDon = new HoaDon(nv, hv, parts.at(3), parts.at(4));
+                    
+                    // TODO: Parse chi tiết hóa đơn nếu có trong file
+                    // Cần định dạng cụ thể cho chi tiết hóa đơn
+                    
+                    addHoaDon(hoaDon);
+                }
+            }
+        }
+        fileHoaDon.close();
+    }
 }
 
 // ============================================================================

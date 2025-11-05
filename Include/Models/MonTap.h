@@ -1,3 +1,4 @@
+#pragma once
 #include "MyVector.h"
 #include <string>
 using namespace std;
