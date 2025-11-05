@@ -9,17 +9,18 @@ private:
     size_t m_size;
     size_t m_capacity;
 
-    // Ham thay doi capacity
-    void reserve(size_t);
-    // Ham thay doi size
-    void resize(size_t);
-
 public:
     // Ham dung, ham huy, toan tu gan
     MyVector();
     MyVector(const MyVector&);
     ~MyVector();
     MyVector& operator=(const MyVector&);
+
+    // Ham thay doi capacity
+    void reserve(size_t);
+
+    // Ham thay doi size
+    void resize(size_t);
 
     // Thao tac dung luong:
     void clear();
