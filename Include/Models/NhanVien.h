@@ -9,9 +9,9 @@ class HoaDon;
 class NhanVien : public Person {
 private:
     double luong;
+    bool isActive;
     MyVector<HopDong*> dsHopDong; // Danh sách hợp đồng do nhân viên này xử lý
     MyVector<HoaDon*> dsHoaDon;     // Danh sách hóa đơn do nhân viên này lập
-    bool isActive;
 public:
     NhanVien();
     NhanVien(const string&, const string&, const string&, const string&, int, double = 0.0, bool = true);

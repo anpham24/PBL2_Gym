@@ -15,15 +15,15 @@
 #include <fstream>
 
 void FileIO::loadNhanVien(QuanLy& ql, const string& filePath) {
-    std::ifstream file(filePath);
+    ifstream file(filePath);
     if (!file.is_open()) return;
 
     string line;
-    while (std::getline(file, line)) {
+    while (getline(file, line)) {
         if (line.empty()) continue;
 
         // Goi ham tien ich de tach chuoi
-        MyVector<std::string> parts = splitString(line, '|');
+        MyVector<string> parts = splitString(line, '|');
 
         // Kiem tra xem co du so luong phan tu khong (vi du: 7 phan)
         if (parts.size() < 7) continue; // Bo qua dong loi
@@ -44,14 +44,14 @@ void FileIO::loadNhanVien(QuanLy& ql, const string& filePath) {
 }
 
 void FileIO::loadHLV(QuanLy& ql, const string& filePath) {
-    std::ifstream file(filePath);
+    ifstream file(filePath);
     if (!file.is_open()) return;
 
     string line;
-    while (std::getline(file, line)) {
+    while (getline(file, line)) {
         if (line.empty()) continue;
 
-        MyVector<std::string> parts = splitString(line, '|');
+        MyVector<string> parts = splitString(line, '|');
 
         if (parts.size() < 6) continue;
 
@@ -69,14 +69,14 @@ void FileIO::loadHLV(QuanLy& ql, const string& filePath) {
 }
 
 void FileIO::loadMonTap(QuanLy& ql, const string& filePath) {
-    std::ifstream file(filePath);
+    ifstream file(filePath);
     if (!file.is_open()) return;
 
     string line;
-    while (std::getline(file, line)) {
+    while (getline(file, line)) {
         if (line.empty()) continue;
 
-        MyVector<std::string> parts = splitString(line, '|');
+        MyVector<string> parts = splitString(line, '|');
 
         if (parts.size() < 2) continue;
 
@@ -90,13 +90,13 @@ void FileIO::loadMonTap(QuanLy& ql, const string& filePath) {
 }
 
 void FileIO::loadHangHoa(QuanLy& ql, const string& filePath) {
-    std::ifstream file(filePath);
+    ifstream file(filePath);
     if (!file.is_open()) return;
     string line;
-    while (std::getline(file, line)) {
+    while (getline(file, line)) {
         if (line.empty()) continue;
 
-        MyVector<std::string> parts = splitString(line, '|');
+        MyVector<string> parts = splitString(line, '|');
 
         if (parts.size() < 5) continue;
 
@@ -112,15 +112,38 @@ void FileIO::loadHangHoa(QuanLy& ql, const string& filePath) {
     file.close();
 }
 
+void FileIO::loadGoiTap(QuanLy& ql, const string& filePath) {
+    ifstream file(filePath);
+    if (!file.is_open()) return;
+    string line;
+    while (getline(file, line)) {
+        if (line.empty()) continue;
+
+        MyVector<string> parts = splitString(line, '|');
+
+        if (parts.size() < 5) continue;
+
+        string maGoi = parts[0];
+        string tenGoi = parts[1];
+        int thoiGian = stoi(parts[2]);
+        double gia = stod(parts[3]);
+        bool isActive = toBool(parts[4]);
+
+        GoiTap* gt = GoiTap::create(maGoi, tenGoi, thoiGian, gia, isActive);
+        ql.addGoiTap(gt);
+    }
+    file.close();
+}
+
 void FileIO::loadHoiVien(QuanLy& ql, const string& filePath) {
-    std::ifstream file(filePath);
+    ifstream file(filePath);
     if (!file.is_open()) return;
 
     string line;
-    while (std::getline(file, line)) {
+    while (getline(file, line)) {
         if (line.empty()) continue;
         
-        MyVector<std::string> parts = splitString(line, '|');
+        MyVector<string> parts = splitString(line, '|');
         
         // Cấu trúc: <MaHV>|<TenHV>|<SDT>|<GioiTinh>|<Point>|<isActive>|<MaHLV_FK>
         if (parts.size() < 7) continue; 
@@ -134,12 +157,13 @@ void FileIO::loadHoiVien(QuanLy& ql, const string& filePath) {
         bool isActive = toBool(parts[6]);
         string maHLV_FK = parts[7];
 
-        HoiVien* hv = HoiVien::create(maHV, tenHV, sdt, gioiTinh, tuoi, point, nullptr, isActive);
-        
-        HLV* hlv = ql.getHLV(maHLV_FK);
-        hv->setHLV(hlv);
-
+        HoiVien* hv = HoiVien::create(maHV, tenHV, sdt, gioiTinh, tuoi, point, isActive, nullptr);
+        if (maHLV_FK != "NULL") {
+            HLV* hlv = ql.getHLV(maHLV_FK);
+            hv->setHLV(hlv);
+        }
         ql.addHoiVien(hv);
     }
     file.close();
 }
+

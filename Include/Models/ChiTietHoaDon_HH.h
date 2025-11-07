@@ -7,13 +7,13 @@ class HoaDon;
 
 class ChiTietHoaDon_HH {
 private:
-    HangHoa* hangHoa; // Pointer to the associated HangHoa
-    HoaDon* hoaDon;   // Pointer to the associated HoaDon
     int soLuong;
     double donGia;
+    HangHoa* hangHoa; // Pointer to the associated HangHoa
+    HoaDon* hoaDon;   // Pointer to the associated HoaDon
 public:
     ChiTietHoaDon_HH();
-    ChiTietHoaDon_HH(HangHoa*, HoaDon*, int, double);
+    ChiTietHoaDon_HH(int, double, HangHoa*, HoaDon*);
     ChiTietHoaDon_HH(const ChiTietHoaDon_HH&);
     ~ChiTietHoaDon_HH();
     
@@ -27,7 +27,7 @@ public:
     void setSoLuong(int);
     void setDonGia(double);
 
-    static ChiTietHoaDon_HH* create(HangHoa*, HoaDon*, int, double);
+    static ChiTietHoaDon_HH* create(int, double, HangHoa*, HoaDon*);
     double tinhTien() const;
     string read() const;
 };

@@ -4,7 +4,7 @@
 
 ChiTietHoaDon_GT::ChiTietHoaDon_GT() {}
 
-ChiTietHoaDon_GT::ChiTietHoaDon_GT(GoiTap* goiTap, HoaDon* hoaDon, int soLuong, double donGia)
+ChiTietHoaDon_GT::ChiTietHoaDon_GT(int soLuong, double donGia, GoiTap* goiTap, HoaDon* hoaDon)
     : goiTap(goiTap), hoaDon(hoaDon), soLuong(soLuong), donGia(donGia) {}
 
 ChiTietHoaDon_GT::ChiTietHoaDon_GT(const ChiTietHoaDon_GT& other)
@@ -37,8 +37,8 @@ void ChiTietHoaDon_GT::setHoaDon(HoaDon* hd) {
     }
 }
 
-ChiTietHoaDon_GT* ChiTietHoaDon_GT::create(GoiTap* goiTap, HoaDon* hoaDon, int soLuong, double donGia) {
-    return new ChiTietHoaDon_GT(goiTap, hoaDon, soLuong, donGia);
+ChiTietHoaDon_GT* ChiTietHoaDon_GT::create(int soLuong, double donGia, GoiTap* goiTap, HoaDon* hoaDon) {
+    return new ChiTietHoaDon_GT(soLuong, donGia, goiTap, hoaDon);
 }
 
 double ChiTietHoaDon_GT::tinhTien() const {

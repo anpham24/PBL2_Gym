@@ -1,32 +1,23 @@
 #include "HoiVien.h"
-#include "HLV.h"
 #include "HopDong.h"
+#include "HoaDon.h"
 #include "IDGenerator.h"
 
 HoiVien::HoiVien() {}
 
-HoiVien::HoiVien(const string& id, const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, HLV* hlv, bool isActive)
-    : Person(id, hoTen, sdt, gioiTinh, tuoi), point(point), hlv(hlv), isActive(isActive) {}
+HoiVien::HoiVien(const string& id, const string& hoTen, const string& sdt, const string& gioiTinh, const string& ngaySinh, int point, int soBuoiPT, bool isActive)
+    : Person(id, hoTen, sdt, gioiTinh, ngaySinh), point(point), soBuoiPT(soBuoiPT), isActive(isActive) {}
 
 HoiVien::HoiVien(const HoiVien& other) 
-    : Person(other.id, other.hoTen, other.sdt, other.gioiTinh, other.tuoi), point(other.point), hlv(other.hlv), isActive(other.isActive) {}
+    : Person(other.id, other.hoTen, other.sdt, other.gioiTinh, other.ngaySinh), point(other.point), soBuoiPT(other.soBuoiPT), isActive(other.isActive) {}
 
 HoiVien::~HoiVien() {}
 
+int HoiVien::getSoBuoiPT() const { return this->soBuoiPT; }
+void HoiVien::setSoBuoiPT(int soBuoiPT) { this->soBuoiPT = soBuoiPT; }
+
 void HoiVien::setPoint(int point) { this->point = point; }
-
-void HoiVien::setHLV(HLV* newHLV) {
-    if (this->hlv != nullptr) {
-        this->hlv->removeHoiVien(this);
-    }
-    this->hlv = newHLV;
-    if (newHLV != nullptr) {
-        newHLV->addHoiVien(this);
-    }
-}
-
-double HoiVien::getPoint() const { return this->point; }
-const HLV* HoiVien::getHLV() const { return this->hlv; }   
+int HoiVien::getPoint() const { return this->point; }
 
 bool HoiVien::getIsActive() const { return this->isActive; }
 void HoiVien::setIsActive(bool isActive) { this->isActive = isActive; } 
@@ -73,16 +64,37 @@ MyVector<HopDong*>& HoiVien::getDsHopDong() {
     return dsHopDong;
 }
 
-HoiVien* HoiVien::create(const string& id, const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, HLV* hlv, bool isActive) {
-    return new HoiVien(id, hoTen, sdt, gioiTinh, tuoi, point, hlv, isActive);
+void HoiVien::addLogTapPT(LogTapPT* logTapPT) {
+    dsLogTapPT.push_back(logTapPT);
 }
 
-HoiVien* HoiVien::create(const string& hoTen, const string& sdt, const string& gioiTinh, int tuoi, int point, HLV* hlv, bool isActive) {
+void HoiVien::removeLogTapPT(LogTapPT* logTapPT) {
+    for (int i = 0; i < dsLogTapPT.size(); i++) {
+        if (dsLogTapPT[i] == logTapPT) {
+            dsLogTapPT.erase(i);
+            break;
+        }
+    }
+}
+
+const MyVector<LogTapPT*>& HoiVien::getDsLogTapPT() const {
+    return dsLogTapPT;
+}
+
+MyVector<LogTapPT*>& HoiVien::getDsLogTapPT() {
+    return dsLogTapPT;
+}
+
+HoiVien* HoiVien::create(const string& id, const string& hoTen, const string& sdt, const string& gioiTinh, const string& ngaySinh, int point, int soBuoiPT, bool isActive) {
+    return new HoiVien(id, hoTen, sdt, gioiTinh, ngaySinh, point, soBuoiPT, isActive);
+}
+
+HoiVien* HoiVien::create(const string& hoTen, const string& sdt, const string& gioiTinh, const string& ngaySinh, int point, int soBuoiPT, bool isActive) {
     string id = IDGenerator::generateID(IDGenerator::Prefix_HoiVien);
-    return new HoiVien(id, hoTen, sdt, gioiTinh, tuoi, point, hlv, isActive);
+    return new HoiVien(id, hoTen, sdt, gioiTinh, ngaySinh, point, soBuoiPT, isActive);
 }
 
 string HoiVien::read() const{
-    string result = id + "," + hoTen + "," + sdt + "," + gioiTinh + "," + to_string(tuoi) + "," + to_string(point) + "," + (hlv ? hlv->getID() : "null") + "," + (isActive ? "true" : "false");
+    string result = id + "," + hoTen + "," + sdt + "," + gioiTinh + "," + ngaySinh + "," + to_string(point) + "," + to_string(soBuoiPT) + "," + (isActive ? "true" : "false");
     return result;
 }

@@ -2,28 +2,29 @@
 #include "Person.h"
 #include "MyVector.h"
 
-class HLV; // Forward declaration
 class HoaDon; // Forward declaration
 class HopDong; // Forward declaration
+class LogTapPT; // Forward declaration
 
 class HoiVien : public Person {
 private:
     int point;
-    HLV* hlv;
+    int soBuoiPT;
+    bool isActive;
     MyVector<HoaDon*> dsHoaDon;
     MyVector<HopDong*> dsHopDong;
-    bool isActive;
+    MyVector<LogTapPT*> dsLogTapPT;
 public:
     HoiVien();
     HoiVien(const string&, const string&, const string&, const string&, 
-            int, int = 0, HLV* = nullptr, bool = true);
+            const string&, int = 0, int = 0, bool = true);
     HoiVien(const HoiVien& other);
     ~HoiVien();
 
-    const HLV* getHLV() const;
-    double getPoint() const;
+    int getSoBuoiPT() const;
+    void setSoBuoiPT(int);
+    int getPoint() const;
     void setPoint(int);
-    void setHLV(HLV*);
     bool getIsActive() const;
     void setIsActive(bool);
 
@@ -37,9 +38,14 @@ public:
     const MyVector<HopDong*>& getDsHopDong() const;
     MyVector<HopDong*>& getDsHopDong();
 
+    void addLogTapPT(LogTapPT*);
+    void removeLogTapPT(LogTapPT*);
+    const MyVector<LogTapPT*>& getDsLogTapPT() const;
+    MyVector<LogTapPT*>& getDsLogTapPT();
+
     static HoiVien* create(const string&, const string&, const string&, const string&, 
-                            int, int = 0, HLV* = nullptr, bool = true);
+                            const string&, int = 0, int = 0, bool = true);
     static HoiVien* create(const string&, const string&, const string&, 
-                            int, int = 0, HLV* = nullptr, bool = true);
+                            const string&, int = 0, int = 0, bool = true);
     string read() const override;
 };

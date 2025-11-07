@@ -7,7 +7,7 @@
 
 HoaDon::HoaDon() {}
 
-HoaDon::HoaDon(const string& id, NhanVien* nv, HoiVien* hv, const string& ngayLap, const string& phuongThucTT) 
+HoaDon::HoaDon(const string& id, const string& ngayLap, const string& phuongThucTT, NhanVien* nv, HoiVien* hv) 
     : id(id), nhanVien(nv), hoiVien(hv), ngayLap(ngayLap), phuongThucTT(phuongThucTT) {}
 
 HoaDon::HoaDon(const HoaDon& other)
@@ -88,13 +88,13 @@ size_t HoaDon::itemCount() const {
     return dsChiTietHoaDon_HH.size() + dsChiTietHoaDon_GT.size();
 }
 
-HoaDon* HoaDon::create(const string& id, NhanVien* nv, HoiVien* hv, const string& ngayLap, const string& phuongThucTT) {
-    return new HoaDon(id, nv, hv, ngayLap, phuongThucTT);
+HoaDon* HoaDon::create(const string& id, const string& ngayLap, const string& phuongThucTT, NhanVien* nv, HoiVien* hv) {
+    return new HoaDon(id, ngayLap, phuongThucTT, nv, hv);
 }
 
-HoaDon* HoaDon::create(NhanVien* nv, HoiVien* hv, const string& ngayLap, const string& phuongThucTT) {
+HoaDon* HoaDon::create(const string& ngayLap, const string& phuongThucTT, NhanVien* nv, HoiVien* hv) {
     string id = IDGenerator::generateID(IDGenerator::Prefix_HoaDon);
-    return new HoaDon(id, nv, hv, ngayLap, phuongThucTT);
+    return new HoaDon(id, ngayLap, phuongThucTT, nv, hv);
 }
 
 string HoaDon::read() const {

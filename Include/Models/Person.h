@@ -8,22 +8,22 @@ class Person {
         string hoTen;
         string sdt;
         string gioiTinh;
-        int tuoi;
+        string ngaySinh;
     public:
         Person();
-        Person(const string&, const string&, const string&, const string&, int);
+        Person(const string&, const string&, const string&, const string&, const string&);
         virtual ~Person() = 0;
 
         const string& getID() const;
         const string& getHoTen() const;
         const string& getSDT() const;
         const string& getGioiTinh() const;
-        int getTuoi() const;
+        const string& getNgaySinh() const;
 
         void setHoTen(const string&);
         void setSDT(const string&);
         void setGioiTinh(const string&);
-        void setTuoi(int);
+        void setNgaySinh(const string&);
 
         virtual string read() const = 0;
 };

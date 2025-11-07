@@ -11,8 +11,8 @@ private:
     string tenHH;
     double gia;
     int soLuongCon;
-    MyVector<ChiTietHoaDon_HH*> dsChiTietHoaDon_HH;
     bool isActive;
+    MyVector<ChiTietHoaDon_HH*> dsChiTietHoaDon_HH;
 public:
     HangHoa();
     HangHoa(const string&, const string&, double, int, bool = true);

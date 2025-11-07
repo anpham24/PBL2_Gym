@@ -10,6 +10,7 @@
 #include "HoaDon.h"
 #include "ChiTietHoaDon_GT.h"
 #include "ChiTietHoaDon_HH.h"
+#include "LogTapPT.h"
 #include <fstream>
 #include <sstream>
 
@@ -97,8 +98,6 @@ bool QuanLy::removeHoiVien(const string& maHV) {
     
     HoiVien* hvCanXoa = *hvPtr;
 
-    hvCanXoa->setHLV(nullptr);
-
     MyVector<HopDong*>& dsHopDongLienQuan = hvCanXoa->getDsHopDong();
     if (!dsHopDongLienQuan.empty()) {
         hvCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
@@ -109,6 +108,12 @@ bool QuanLy::removeHoiVien(const string& maHV) {
     if (!dsHoaDonLienQuan.empty()) {
         hvCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
         return true; // Không được xóa Hội viên nếu còn Hóa đơn liên quan
+    }
+
+    MyVector<LogTapPT*>& dsLogTapPTLienQuan = hvCanXoa->getDsLogTapPT();
+    if (!dsLogTapPTLienQuan.empty()) {
+        hvCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
+        return true; // Không được xóa Hội viên nếu còn Log tập PT liên quan
     }
 
     bool removed = dsHoiVien.del(maHV);
@@ -164,13 +169,10 @@ bool QuanLy::removeHLV(const string& maHLV) {
         return false; 
     }
 
-    MyVector<HoiVien*>& dsHoiVienLienQuan = hlvCanXoa->getDsHoiVien();
-    for (size_t i = 0; i < dsHoiVienLienQuan.size(); ++i) {
-        HoiVien* hv = dsHoiVienLienQuan[i];
-        
-        if (hv != nullptr) {
-            hv->setHLV(nullptr); 
-        }
+    MyVector<LogTapPT*>& dsLogTapPTLienQuan = hlvCanXoa->getDsLogTapPT();
+    if (!dsLogTapPTLienQuan.empty()) {
+        hlvCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
+        return true; // Không được xóa HLV nếu còn Log tập PT liên quan
     }
 
     MyVector<LopHoc*>& dsLopHocLienQuan = hlvCanXoa->getDsLopHoc();
@@ -590,5 +592,28 @@ HoaDon* QuanLy::getHoaDon(const string& maHD) {
 
 const HoaDon* QuanLy::getHoaDon(const string& maHD) const {
     HoaDon* const* result = dsHoaDon.search(maHD);
+    return result ? *result : nullptr;
+}
+
+// ============================================================================
+// QUẢN LÝ LOG TẬP PT
+// ============================================================================
+
+bool QuanLy::addLogTapPT(LogTapPT* log) {
+    if (log == nullptr)
+        return false;
+    if (dsLogTapPT.search(log->getID()) != nullptr)
+        return false;
+    dsLogTapPT.insert(log->getID(), log);
+    return true;
+}
+
+LogTapPT* QuanLy::getLogTapPT(const string& maLog) {
+    LogTapPT** result = dsLogTapPT.search(maLog);
+    return result ? *result : nullptr;
+}
+
+const LogTapPT* QuanLy::getLogTapPT(const string& maLog) const {
+    LogTapPT* const* result = dsLogTapPT.search(maLog);
     return result ? *result : nullptr;
 }

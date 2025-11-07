@@ -4,7 +4,7 @@
 
 ChiTietHoaDon_HH::ChiTietHoaDon_HH() {}
 
-ChiTietHoaDon_HH::ChiTietHoaDon_HH(HangHoa* hangHoa, HoaDon* hoaDon, int soLuong, double donGia)
+ChiTietHoaDon_HH::ChiTietHoaDon_HH(int soLuong, double donGia, HangHoa* hangHoa, HoaDon* hoaDon)
     : hangHoa(hangHoa), hoaDon(hoaDon), soLuong(soLuong), donGia(donGia) {}
 
 ChiTietHoaDon_HH::ChiTietHoaDon_HH(const ChiTietHoaDon_HH& other)
@@ -38,8 +38,8 @@ void ChiTietHoaDon_HH::setHoaDon(HoaDon* hd) {
 void ChiTietHoaDon_HH::setSoLuong(int sl) { soLuong = sl; }
 void ChiTietHoaDon_HH::setDonGia(double dg) { donGia = dg; }
 
-ChiTietHoaDon_HH* ChiTietHoaDon_HH::create(HangHoa* hangHoa, HoaDon* hoaDon, int soLuong, double donGia) {
-    return new ChiTietHoaDon_HH(hangHoa, hoaDon, soLuong, donGia);
+ChiTietHoaDon_HH* ChiTietHoaDon_HH::create(int soLuong, double donGia, HangHoa* hangHoa, HoaDon* hoaDon) {
+    return new ChiTietHoaDon_HH(soLuong, donGia, hangHoa, hoaDon);
 }
 
 double ChiTietHoaDon_HH::tinhTien() const {

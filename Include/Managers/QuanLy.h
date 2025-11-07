@@ -13,6 +13,7 @@ class MonTap;
 class HopDong;
 class HangHoa;
 class HoaDon;
+class LogTapPT;
 
 class QuanLy {
 private:
@@ -26,10 +27,11 @@ private:
     MyHashTable<HopDong*> dsHopDong;
     MyVector<HangHoa*> dsHangHoa;
     MyHashTable<HoaDon*> dsHoaDon;
+    MyHashTable<LogTapPT*> dsLogTapPT;
 
     bool isDirty = false;
 
-    QuanLy() : dsHoiVien(7013), dsHoaDon(40009), dsHopDong(40009) {}
+    QuanLy() : dsHoiVien(7013), dsHoaDon(40009), dsHopDong(40009), dsLogTapPT(40009) {}
     QuanLy(const QuanLy&) = delete;
     QuanLy& operator=(const QuanLy&) = delete;
 
@@ -96,6 +98,11 @@ public:
     bool addHoaDon(HoaDon*);
     HoaDon* getHoaDon(const string&);
     const HoaDon* getHoaDon(const string&) const;
+
+    // Ham quan ly LogTapPT
+    bool addLogTapPT(LogTapPT*);
+    LogTapPT* getLogTapPT(const string&);
+    const LogTapPT* getLogTapPT(const string&) const;
 
     string getDisplayList(const string& entityName) const;
 };

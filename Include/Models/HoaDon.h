@@ -11,15 +11,15 @@ class ChiTietHoaDon_GT;
 class HoaDon {
 private:
     string id;
-    NhanVien* nhanVien;
-    HoiVien* hoiVien;
     string ngayLap;
     string phuongThucTT;
     MyVector<ChiTietHoaDon_HH*> dsChiTietHoaDon_HH;
     MyVector<ChiTietHoaDon_GT*> dsChiTietHoaDon_GT;
+    NhanVien* nhanVien;
+    HoiVien* hoiVien;
 public:
     HoaDon();
-    HoaDon(const string&, NhanVien*, HoiVien*, const string&, const string&);
+    HoaDon(const string&, const string&, const string&, NhanVien* = nullptr, HoiVien* = nullptr);
     HoaDon(const HoaDon& other);
     ~HoaDon();
 
@@ -47,7 +47,7 @@ public:
     double getTotal() const;
     size_t itemCount() const;
 
-    static HoaDon* create(const string&, NhanVien*, HoiVien*, const string&, const string&);
-    static HoaDon* create(NhanVien*, HoiVien*, const string&, const string&);
+    static HoaDon* create(const string&, const string&, const string&, NhanVien* = nullptr, HoiVien* = nullptr);
+    static HoaDon* create(const string&, const string&, NhanVien* = nullptr, HoiVien* = nullptr);
     string read() const;
 };

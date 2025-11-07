@@ -13,10 +13,10 @@ private:
     string tenGoi;  
     int thoiGian; // số tháng
     double gia; // giá niêm yết
+    bool isActive;
     MyVector<MonTap*> dsMonTap;
     MyVector<HopDong*> dsHopDong;
     MyVector<ChiTietHoaDon_GT*> dsChiTietHoaDon_GT;
-    bool isActive;
 public:
     GoiTap();
     GoiTap(const string&, const string&, int, double, bool = true);

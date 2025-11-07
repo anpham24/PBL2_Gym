@@ -5,7 +5,7 @@ using namespace std;
 
 class IDGenerator {
 private:
-    static int nextID[9];
+    static int nextID[10];
     static int lastYear;
 public:
     enum Prefix {
@@ -16,7 +16,8 @@ public:
         Prefix_MonTap = 5, // Dùng chung prefix với LopHoc
         Prefix_HopDong = 6,
         Prefix_HangHoa = 7,
-        Prefix_HoaDon = 8
+        Prefix_HoaDon = 8,
+        Prefix_LogTapPT = 9
     };
     static string generateID(int prefix);
 };

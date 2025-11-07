@@ -7,7 +7,7 @@
 
 HopDong::HopDong() {}
 
-HopDong::HopDong(const string& id, HoiVien* hv, GoiTap* gt, NhanVien* nv, const string& ngayDK, const string& ngayHetHan, bool isActive)
+HopDong::HopDong(const string& id, const string& ngayDK, const string& ngayHetHan, bool isActive, HoiVien* hv, GoiTap* gt, NhanVien* nv)
     : id(id), hv(hv), gt(gt), nv(nv), ngayDK(ngayDK), ngayHetHan(ngayHetHan), isActive(isActive) {}
 
 HopDong::HopDong(const HopDong& other)
@@ -62,17 +62,17 @@ void HopDong::setNgayDK(const string& ngay) { ngayDK = ngay; }
 void HopDong::setNgayHetHan(const string& ngay) { ngayHetHan = ngay; }
 void HopDong::setIsActive(bool active) { isActive = active; }
 
-HopDong* HopDong::create(const string& id, HoiVien* hv, GoiTap* gt, NhanVien* nv,
-                   const string& ngayDK, const string& ngayHetHan, bool isActive)
+HopDong* HopDong::create(const string& id, const string& ngayDK, const string& ngayHetHan, 
+                            bool isActive, HoiVien* hv, GoiTap* gt, NhanVien* nv)
 {
-    return new HopDong(id, hv, gt, nv, ngayDK, ngayHetHan, isActive);
+    return new HopDong(id, ngayDK, ngayHetHan, isActive, hv, gt, nv);
 }
 
-HopDong* HopDong::create(HoiVien* hv, GoiTap* gt, NhanVien* nv,
-                   const string& ngayDK, const string& ngayHetHan, bool isActive)
+HopDong* HopDong::create(const string& ngayDK, const string& ngayHetHan, 
+                            bool isActive, HoiVien* hv, GoiTap* gt, NhanVien* nv)
 {
     string id = IDGenerator::generateID(IDGenerator::Prefix_HopDong);
-    return new HopDong(id, hv, gt, nv, ngayDK, ngayHetHan, isActive);
+    return new HopDong(id, ngayDK, ngayHetHan, isActive, hv, gt, nv);
 }
 
 string HopDong::read() {
