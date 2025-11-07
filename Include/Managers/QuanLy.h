@@ -14,8 +14,10 @@ class HopDong;
 class HangHoa;
 class HoaDon;
 class LogTapPT;
+class FileIO;
 
 class QuanLy {
+    friend class FileIO;
 private:
     static QuanLy* instance;
     MyHashTable<HoiVien*> dsHoiVien;

@@ -9,11 +9,11 @@ class ChiTietHoaDon_GT {
 private:
     int soLuong;
     double donGia;
-    GoiTap* goiTap; // Pointer to the associated GoiTap
-    HoaDon* hoaDon; // Pointer to the associated HoaDon
+    HoaDon* hoaDon;
+    GoiTap* goiTap; 
 public:
     ChiTietHoaDon_GT();
-    ChiTietHoaDon_GT(int soLuong, double donGia, GoiTap* goiTap, HoaDon* hoaDon);
+    ChiTietHoaDon_GT(int soLuong, double donGia, HoaDon* hoaDon, GoiTap* goiTap);
     ChiTietHoaDon_GT(const ChiTietHoaDon_GT& other);
     ~ChiTietHoaDon_GT();
 
@@ -27,7 +27,7 @@ public:
     void setSoLuong(int);
     void setDonGia(double);
 
-    static ChiTietHoaDon_GT* create(int soLuong, double donGia, GoiTap* goiTap, HoaDon* hoaDon);
+    static ChiTietHoaDon_GT* create(int soLuong, double donGia, HoaDon* hoaDon, GoiTap* goiTap);
     double tinhTien() const;
     string read() const;
 };

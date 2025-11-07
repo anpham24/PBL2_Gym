@@ -439,6 +439,7 @@ bool QuanLy::removeMonTap(const string& maMon) {
             lh->setHLV(nullptr);
             lh->setMonTap(nullptr);
             dsLopHoc.erase(i);
+            delete lh;
         }
     }
 

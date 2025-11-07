@@ -1,7 +1,41 @@
 #include "IDGenerator.h"
+#include <fstream>
 
-int IDGenerator::nextID[9] = {0};
+int IDGenerator::nextID[10] = {0};
 int IDGenerator::lastYear = 0;
+
+void IDGenerator::loadState() {
+    ifstream fileIn("Data/IDGeneratorState.txt");
+    
+    if (fileIn.is_open()) {
+        fileIn >> lastYear;
+        for (int i = 1; i <= 9; ++i) {
+            fileIn >> nextID[i];
+        }
+        fileIn.close();
+    } else {
+        time_t now = time(0);
+        tm *ltm = localtime(&now);
+        lastYear = 1900 + ltm->tm_year;
+        
+        for (int i = 0; i < 10; ++i) {
+            nextID[i] = 0; 
+        }
+        saveState();
+    }
+}
+
+void IDGenerator::saveState() {
+    ofstream fileOut("Data/IDGeneratorState.txt");
+    
+    if (fileOut.is_open()) {
+        fileOut << lastYear << endl;
+        for (int i = 1; i <= 9; ++i) {
+            fileOut << nextID[i] << endl;
+        }
+        fileOut.close();
+    }
+}
 
 string IDGenerator::generateID(int prefix) {
     time_t t = time(nullptr);
@@ -9,7 +43,7 @@ string IDGenerator::generateID(int prefix) {
     int currentYear = (now->tm_year + 1900) % 100;
 
     if (currentYear != lastYear) {
-        for (int i = 1; i <= 8; ++i)
+        for (int i = 1; i <= 9; ++i)
             nextID[i] = 0;
         lastYear = currentYear;
     }

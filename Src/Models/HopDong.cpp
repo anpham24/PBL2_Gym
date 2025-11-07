@@ -38,6 +38,7 @@ bool HopDong::getIsActive() {
 }
 
 void HopDong::setHoiVien(HoiVien* hv) { 
+    if (hv == this->hv) return;
     if (this->hv != nullptr) {
         this->hv->removeHopDong(this);
     }
@@ -47,8 +48,19 @@ void HopDong::setHoiVien(HoiVien* hv) {
     }
 }
 
-void HopDong::setGoiTap(GoiTap* gt) { this->gt = gt; }
+void HopDong::setGoiTap(GoiTap* gt) { 
+    if (this->gt == gt) return;
+    if (this->gt != nullptr) {
+        this->gt->removeHopDong(this);
+    }
+    this->gt = gt;
+    if (gt != nullptr) {
+        gt->addHopDong(this);
+    }
+}
+
 void HopDong::setNhanVien(NhanVien* nv) { 
+    if (this->nv == nv) return;
     if (this->nv != nullptr) {
         this->nv->removeHopDong(this);
     }

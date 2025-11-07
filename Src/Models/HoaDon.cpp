@@ -27,6 +27,7 @@ MyVector<ChiTietHoaDon_HH*>& HoaDon::getDsChiTietHoaDon_HH() { return dsChiTietH
 MyVector<ChiTietHoaDon_GT*>& HoaDon::getDsChiTietHoaDon_GT() { return dsChiTietHoaDon_GT; }
 
 void HoaDon::setNhanVien(NhanVien* nv) { 
+    if (nv == this->nhanVien) return;
     if (this->nhanVien != nullptr) {
         this->nhanVien->removeHoaDon(this);
     }
@@ -36,6 +37,7 @@ void HoaDon::setNhanVien(NhanVien* nv) {
     }
 }
 void HoaDon::setHoiVien(HoiVien* hv) { 
+    if (hv == this->hoiVien) return;
     if (this->hoiVien != nullptr) {
         this->hoiVien->removeHoaDon(this);
     }

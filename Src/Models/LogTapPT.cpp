@@ -19,8 +19,26 @@ const HoiVien& LogTapPT::getHoiVien() const { return *(this->hv); }
 const HLV& LogTapPT::getHLV() const { return *(this->hlv); }
 
 void LogTapPT::setNgayGio(const string& ngayGio) { this->ngayGio = ngayGio; }
-void LogTapPT::setHoiVien(HoiVien* hv) { this->hv = hv; }
-void LogTapPT::setHLV(HLV* hlv) { this->hlv = hlv; }
+void LogTapPT::setHoiVien(HoiVien* hv) { 
+    if (hv == this->hv) return;
+    if (this->hv != nullptr) {
+        this->hv->removeLogTapPT(this);
+    }
+    this->hv = hv;
+    if (hv != nullptr) {
+        hv->addLogTapPT(this);
+    }
+}
+void LogTapPT::setHLV(HLV* hlv) { 
+    if (hlv == this->hlv) return;
+    if (this->hlv != nullptr) {
+        this->hlv->removeLogTapPT(this);
+    }
+    this->hlv = hlv;
+    if (hlv != nullptr) {
+        hlv->addLogTapPT(this);
+    }
+}
 
 LogTapPT* LogTapPT::create(const string& id, const string& ngayGio, HoiVien* hv, HLV* hlv) {
     return new LogTapPT(id, ngayGio, hv, hlv);
