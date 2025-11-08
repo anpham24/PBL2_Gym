@@ -46,6 +46,6 @@ double ChiTietHoaDon_GT::tinhTien() const {
 }
 
 string ChiTietHoaDon_GT::read() const {
-    string result = goiTap->getID() + "," + to_string(soLuong) + "," + to_string(donGia) + "," + to_string(tinhTien());
+    string result = hoaDon->getID() + ";" + goiTap->getID() + ";" + to_string(soLuong) + ";" + to_string(donGia);
     return result;
 }

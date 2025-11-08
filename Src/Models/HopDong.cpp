@@ -88,6 +88,9 @@ HopDong* HopDong::create(const string& ngayDK, const string& ngayHetHan,
 }
 
 string HopDong::read() {
-    string result = id + "," + hv->getID() + "," + gt->getID() + "," + nv->getID() + "," + ngayDK + "," + ngayHetHan + "," + to_string(this->getIsActive());
+    string result = id + ";" + ngayDK + ";" + ngayHetHan + ";" + (isActive ? "true" : "false") + ";" +
+                    (hv ? hv->getID() : "NULL") + ";" +
+                    (gt ? gt->getID() : "NULL") + ";" +
+                    (nv ? nv->getID() : "NULL");
     return result;
 }

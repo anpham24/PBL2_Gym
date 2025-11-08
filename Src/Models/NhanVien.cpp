@@ -72,6 +72,6 @@ NhanVien* NhanVien::create(const string& hoTen, const string& sdt, const string&
 }
 
 string NhanVien::read() const {
-    string result = id + "|" + hoTen + "|" + sdt + "|" + gioiTinh + "|" + ngaySinh + "|" + to_string(luong) + "|" + to_string(isActive);
+    string result = id + ";" + hoTen + ";" + sdt + ";" + gioiTinh + ";" + ngaySinh + ";" + to_string(luong) + ";" + (isActive ? "true" : "false");
     return result;
 }

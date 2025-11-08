@@ -76,6 +76,6 @@ HLV* HLV::create(const string& hoTen, const string& sdt, const string& gioiTinh,
 }
 
 string HLV::read() const {
-    string result = id + "," + hoTen + "," + sdt + "," + gioiTinh + "," + ngaySinh + "," + chuyenMon + "," + to_string(luong) + "," + to_string(isActive);
+    string result = id + ";" + hoTen + ";" + sdt + ";" + gioiTinh + ";" + ngaySinh + ";" + chuyenMon + ";" + to_string(luong) + ";" + (isActive ? "true" : "false");
     return result;
 }

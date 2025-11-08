@@ -55,17 +55,10 @@ LopHoc* LopHoc::create(const string& tenLop, const string& lichTap, int thoiLuon
 }
 
 string LopHoc::read() const {
-    string result = id + "," + tenLop + "," + lichTap + "," + to_string(thoiLuong);
-    if (monTap != nullptr) {
-        result += "," + monTap->getID();
-    } else {
-        result += ",NULL";
-    }
-    if (hlv != nullptr) {
-        result += "," + hlv->getID();
-    } else {
-        result += ",NULL";
-    }
+    string result = id + ";" + tenLop + ";" + lichTap + ";" + to_string(thoiLuong) + ";";
+    result += (monTap != nullptr) ? monTap->getID() : "NULL";
+    result += ";";
+    result += (hlv != nullptr) ? hlv->getID() : "NULL";
     return result;
 }
 

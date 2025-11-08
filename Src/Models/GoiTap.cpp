@@ -99,6 +99,6 @@ GoiTap* GoiTap::create(const string& tenGoi, int thoiGian, int soBuoiPT, double 
 }
 
 string GoiTap::read() const {
-    string result = id + "," + tenGoi + "," + to_string(thoiGian) + "," + to_string(soBuoiPT) + "," + to_string(gia) + "," + to_string(isActive);
+    string result = id + ";" + tenGoi + ";" + to_string(thoiGian) + ";" + to_string(soBuoiPT) + ";" + to_string(gia) + ";" + (isActive ? "true" : "false");
     return result;
 }

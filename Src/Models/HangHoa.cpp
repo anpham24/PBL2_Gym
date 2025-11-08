@@ -56,5 +56,5 @@ HangHoa* HangHoa::create(const string& tenHH, const string& loaiHH, double gia, 
 }
 
 string HangHoa::read() const {
-    return id + "," + tenHH + "," + loaiHH + "," + to_string(gia) + "," + to_string(soLuongCon) + "," + to_string(isActive);
+    return id + ";" + tenHH + ";" + loaiHH + ";" + to_string(gia) + ";" + to_string(soLuongCon) + ";" + (isActive ? "true" : "false");
 }

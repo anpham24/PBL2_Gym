@@ -11,7 +11,7 @@ class GoiTap {
 private:
     string id;
     string tenGoi;  
-    int thoiGian; // số tháng
+    int thoiGian; // số ngày
     int soBuoiPT; // số buổi tập PT
     double gia; // giá niêm yết
     bool isActive;

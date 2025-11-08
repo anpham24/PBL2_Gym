@@ -100,23 +100,8 @@ HoaDon* HoaDon::create(const string& ngayLap, const string& phuongThucTT, NhanVi
 }
 
 string HoaDon::read() const {
-    string result = id + "," + nhanVien->getID() + "," + hoiVien->getID() + "," + ngayLap + "," + phuongThucTT + ",";
-    
-    // Thêm danh sách chi tiết hàng hóa
-    for (size_t i = 0; i < dsChiTietHoaDon_HH.size(); ++i) {
-        result += dsChiTietHoaDon_HH.at(i)->read();
-        if (i != dsChiTietHoaDon_HH.size() - 1 || dsChiTietHoaDon_GT.size() > 0) {
-            result += ";"; // Ngăn cách các chi tiết bằng dấu chấm phẩy
-        }
-    }
-    
-    // Thêm danh sách chi tiết gói tập
-    for (size_t i = 0; i < dsChiTietHoaDon_GT.size(); ++i) {
-        result += dsChiTietHoaDon_GT.at(i)->read();
-        if (i != dsChiTietHoaDon_GT.size() - 1) {
-            result += ";"; // Ngăn cách các chi tiết bằng dấu chấm phẩy
-        }
-    }
-    
+    string result = id + ";" + ngayLap + ";" + phuongThucTT + ";" + 
+                    (nhanVien ? nhanVien->getID() : "NULL") + ";" + 
+                    (hoiVien ? hoiVien->getID() : "NULL");
     return result;
 }

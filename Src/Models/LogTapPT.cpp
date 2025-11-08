@@ -50,8 +50,7 @@ LogTapPT* LogTapPT::create(const string& ngayGio, HoiVien* hv, HLV* hlv) {
     return new LogTapPT(id, ngayGio, hv, hlv);
 }
 
-string LogTapPT::read() {
-    string hvID = (hv != nullptr) ? hv->getID() : "NULL";
-    string hlvID = (hlv != nullptr) ? hlv->getID() : "NULL";
-    return id + "|" + ngayGio + "|" + hvID + "|" + hlvID;
+string LogTapPT::read() const {
+    string result = id + ";" + ngayGio + ";" + (hv ? hv->getID() : "NULL") + ";" + (hlv ? hlv->getID() : "NULL");
+    return result;
 }

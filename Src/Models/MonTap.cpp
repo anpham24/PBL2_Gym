@@ -70,6 +70,6 @@ MonTap* MonTap::create(const string& tenMon) {
 }
 
 string MonTap::read() const {
-    string result = id + "," + tenMon;
+    string result = id + ";" + tenMon;
     return result;
 }

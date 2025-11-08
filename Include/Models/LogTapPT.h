@@ -28,5 +28,5 @@ public:
 
     static LogTapPT* create(const string&, const string&, HoiVien* = nullptr, HLV* = nullptr);
     static LogTapPT* create(const string&, HoiVien* = nullptr, HLV* = nullptr);
-    string read();
+    string read() const;
 };

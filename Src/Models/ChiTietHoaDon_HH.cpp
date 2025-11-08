@@ -47,6 +47,6 @@ double ChiTietHoaDon_HH::tinhTien() const {
 }
 
 string ChiTietHoaDon_HH::read() const {
-    string result = hangHoa->getID() + "," + to_string(soLuong) + "," + to_string(donGia) + "," + to_string(tinhTien());
+    string result = hoaDon->getID() + ";" + hangHoa->getID() + ";" + to_string(soLuong) + ";" + to_string(donGia);
     return result;
 }

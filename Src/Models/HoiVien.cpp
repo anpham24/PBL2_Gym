@@ -95,6 +95,6 @@ HoiVien* HoiVien::create(const string& hoTen, const string& sdt, const string& g
 }
 
 string HoiVien::read() const{
-    string result = id + "," + hoTen + "," + sdt + "," + gioiTinh + "," + ngaySinh + "," + to_string(point) + "," + to_string(soBuoiPT) + "," + (isActive ? "true" : "false");
+    string result = id + ";" + hoTen + ";" + sdt + ";" + gioiTinh + ";" + ngaySinh + ";" + to_string(point) + ";" + to_string(soBuoiPT) + ";" + (isActive ? "true" : "false");
     return result;
 }

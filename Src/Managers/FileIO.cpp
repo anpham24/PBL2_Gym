@@ -503,3 +503,141 @@ void FileIO::loadAllData(const string& folderPath) {
     linkLogTapPT(folderPath + "/LogTapPT.txt");
     linkGoiTap_MonTap(folderPath + "/GoiTap_MonTap.txt");
 }
+
+void FileIO::saveNhanVien(const string& filePath) {
+    QuanLy& ql = QuanLy::getInstance();
+    ofstream file(filePath);
+    if (!file.is_open()) return;
+
+    for (size_t i = 0; i < ql.dsNhanVien.size(); ++i) {
+        NhanVien* nv = ql.dsNhanVien.at(i);
+        file << nv->read() << endl;
+    }
+    file.close();
+}
+
+void FileIO::saveHLV(const string& filePath) {
+    QuanLy& ql = QuanLy::getInstance();
+    ofstream file(filePath);
+    if (!file.is_open()) return;
+
+    for (size_t i = 0; i < ql.dsHLV.size(); ++i) {
+        HLV* hlv = ql.dsHLV.at(i);
+        file << hlv->read() << endl;
+    }
+    file.close();
+}
+
+void FileIO::saveHoiVien(const string& filePath) {
+    QuanLy& ql = QuanLy::getInstance();
+    ofstream file(filePath);
+    if (!file.is_open()) return;
+
+    MyVector<HoiVien*> dsHV = ql.dsHoiVien.getAllValues();
+    for (size_t i = 0; i < dsHV.size(); ++i) {
+        HoiVien* hv = dsHV.at(i);
+        file << hv->read() << endl;
+    }
+    file.close();
+}
+
+void FileIO::saveMonTap(const string& filePath) {
+    QuanLy& ql = QuanLy::getInstance();
+    ofstream file(filePath);
+    if (!file.is_open()) return;
+
+    for (size_t i = 0; i < ql.dsMonTap.size(); ++i) {
+        MonTap* mt = ql.dsMonTap.at(i);
+        file << mt->read() << endl;
+    }
+    file.close();
+}
+
+void FileIO::saveGoiTap(const string& filePath) {
+    QuanLy& ql = QuanLy::getInstance();
+    ofstream file(filePath);
+    if (!file.is_open()) return;
+
+    for (size_t i = 0; i < ql.dsGoiTap.size(); ++i) {
+        GoiTap* gt = ql.dsGoiTap.at(i);
+        file << gt->read() << endl;
+    }
+    file.close();
+}
+
+void FileIO::saveHangHoa(const string& filePath) {
+    QuanLy& ql = QuanLy::getInstance();
+    ofstream file(filePath);
+    if (!file.is_open()) return;
+
+    for (size_t i = 0; i < ql.dsHangHoa.size(); ++i) {
+        HangHoa* hh = ql.dsHangHoa.at(i);
+        file << hh->read() << endl;
+    }
+    file.close();
+}
+
+void FileIO::saveLopHoc(const string& filePath) {
+    QuanLy& ql = QuanLy::getInstance();
+    ofstream file(filePath);
+    if (!file.is_open()) return;
+
+    for (size_t i = 0; i < ql.dsLopHoc.size(); ++i) {
+        LopHoc* lh = ql.dsLopHoc.at(i);
+        file << lh->read() << endl;
+    }
+    file.close();
+}
+
+void FileIO::saveHopDong(const string& filePath) {
+    QuanLy& ql = QuanLy::getInstance();
+    ofstream file(filePath);
+    if (!file.is_open()) return;
+
+    MyVector<HopDong*> dsHD = ql.dsHopDong.getAllValues();
+    for (size_t i = 0; i < dsHD.size(); ++i) {
+        HopDong* hd = dsHD.at(i);
+        file << hd->read() << endl;
+    }
+    file.close();
+}
+
+void FileIO::saveHoaDon(const string& filePath) {
+    QuanLy& ql = QuanLy::getInstance();
+    ofstream file(filePath);
+    if (!file.is_open()) return;
+
+    MyVector<HoaDon*> dsHD = ql.dsHoaDon.getAllValues();
+    for (size_t i = 0; i < dsHD.size(); ++i) {
+        HoaDon* hd = dsHD.at(i);
+        file << hd->read() << endl;
+    }
+    file.close();
+}
+
+void FileIO::saveLogTapPT(const string& filePath) {
+    QuanLy& ql = QuanLy::getInstance();
+    ofstream file(filePath);
+    if (!file.is_open()) return;
+
+    MyVector<LogTapPT*> dsLog = ql.dsLogTapPT.getAllValues();
+    for (size_t i = 0; i < dsLog.size(); ++i) {
+        LogTapPT* log = dsLog.at(i);
+        file << log->read() << endl;
+    }
+    file.close();
+}
+
+void FileIO::saveAllData(const string& folderPath) {
+    saveNhanVien(folderPath + "/NhanVien.txt");
+    saveHLV(folderPath + "/HLV.txt");
+    saveHoiVien(folderPath + "/HoiVien.txt");
+    saveMonTap(folderPath + "/MonTap.txt");
+    saveGoiTap(folderPath + "/GoiTap.txt");
+    saveHangHoa(folderPath + "/HangHoa.txt");
+
+    saveLopHoc(folderPath + "/LopHoc.txt");
+    saveHopDong(folderPath + "/HopDong.txt");
+    saveHoaDon(folderPath + "/HoaDon.txt");
+    saveLogTapPT(folderPath + "/LogTapPT.txt");
+}
