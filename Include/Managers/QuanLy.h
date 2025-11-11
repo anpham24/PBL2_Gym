@@ -52,18 +52,21 @@ public:
     bool addHoiVien(HoiVien*);
     bool removeHoiVien(const string&);
     HoiVien* getHoiVien(const string&);
+    HoiVien* getHoiVienBySDT(const string&);
     const HoiVien* getHoiVien(const string&) const;
 
     // Ham quan ly HLV
     bool addHLV(HLV*);
     bool removeHLV(const string&);
     HLV* getHLV(const string&);
+    HLV* getHLVBySDT(const string&);
     const HLV* getHLV(const string&) const;
 
     // Ham quan ly NhanVien
     bool addNhanVien(NhanVien*);
     bool removeNhanVien(const string&);
     NhanVien* getNhanVien(const string&);
+    NhanVien* getNhanVienBySDT(const string&);
     const NhanVien* getNhanVien(const string&) const;
 
     // Ham quan ly GoiTap

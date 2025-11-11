@@ -13,6 +13,7 @@
 #include "ChiTietHoaDon_GT.h"
 #include "ChiTietHoaDon_HH.h"
 #include "LogTapPT.h"
+#include "IDGenerator.h"
 #include <fstream>
 
 void FileIO::loadNhanVien(const string& filePath) {
@@ -482,6 +483,8 @@ void FileIO::linkGoiTap_MonTap(const string& filePath) {
 }
 
 void FileIO::loadAllData(const string& folderPath) {
+    IDGenerator::loadState();
+
     loadNhanVien(folderPath + "/NhanVien.txt");
     loadHLV(folderPath + "/HLV.txt");
     loadHoiVien(folderPath + "/HoiVien.txt");
@@ -640,4 +643,6 @@ void FileIO::saveAllData(const string& folderPath) {
     saveHopDong(folderPath + "/HopDong.txt");
     saveHoaDon(folderPath + "/HoaDon.txt");
     saveLogTapPT(folderPath + "/LogTapPT.txt");
+
+    IDGenerator::saveState();
 }

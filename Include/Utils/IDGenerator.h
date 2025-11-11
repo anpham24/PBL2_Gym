@@ -20,8 +20,8 @@ public:
         Prefix_LogTapPT = 9
     };
     static string generateID(int prefix);
-    void loadState();
-    void saveState();
+    static void loadState();
+    static void saveState();
 };
 
 // ID format: PPYYNNNN (PP: prefix, YY: last two digits of year, NNNN: sequential number)

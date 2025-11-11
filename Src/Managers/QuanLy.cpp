@@ -131,6 +131,16 @@ HoiVien* QuanLy::getHoiVien(const string& maHV) {
     return result ? *result : nullptr;
 }
 
+HoiVien* QuanLy::getHoiVienBySDT(const string& sdt) {
+    MyVector<HoiVien*> allHoiVien = dsHoiVien.getAllValues();
+    for (size_t i = 0; i < allHoiVien.size(); ++i) {
+        if (allHoiVien[i]->getSDT() == sdt) {
+            return allHoiVien[i];
+        }
+    }
+    return nullptr;
+}
+
 const HoiVien* QuanLy::getHoiVien(const string& maHV) const {
     HoiVien* const* result = dsHoiVien.search(maHV);
     return result ? *result : nullptr;
@@ -191,6 +201,15 @@ bool QuanLy::removeHLV(const string& maHLV) {
 HLV* QuanLy::getHLV(const string& maHLV) {
     for (size_t i = 0; i < dsHLV.size(); ++i) {
         if (dsHLV[i]->getID() == maHLV) {
+            return dsHLV[i];
+        }
+    }
+    return nullptr;
+}
+
+HLV* QuanLy::getHLVBySDT(const string& sdt) {
+    for (size_t i = 0; i < dsHLV.size(); ++i) {
+        if (dsHLV[i]->getSDT() == sdt) {
             return dsHLV[i];
         }
     }
@@ -258,6 +277,15 @@ bool QuanLy::removeNhanVien(const string& maNV) {
 NhanVien* QuanLy::getNhanVien(const string& maNV) {
     for (size_t i = 0; i < dsNhanVien.size(); ++i) {
         if (dsNhanVien[i]->getID() == maNV) {
+            return dsNhanVien[i];
+        }
+    }
+    return nullptr;
+}
+
+NhanVien* QuanLy::getNhanVienBySDT(const string& sdt) {
+    for (size_t i = 0; i < dsNhanVien.size(); ++i) {
+        if (dsNhanVien[i]->getSDT() == sdt) {
             return dsNhanVien[i];
         }
     }
