@@ -27,7 +27,7 @@ void HoiVienService::themHoiVien(const string& tenHV, const string& sdt,
         // UI::showError("Lỗi ngày sinh: " + errorMsg);
         return;
     }
-    errorMsg = Validator::validateSoDuong(to_string(point));
+    errorMsg = Validator::validateSoDuong(point);
     if (!errorMsg.empty()) {
         // UI::showError("Lỗi điểm: " + errorMsg);
         return;
@@ -71,7 +71,7 @@ void HoiVienService::suaHoiVien(const string& maHV, const string& tenHV, const s
         // UI::showError("Lỗi ngày sinh: " + errorMsg);
         return;
     }
-    errorMsg = Validator::validateSoDuong(to_string(point));
+    errorMsg = Validator::validateSoDuong(point);
     if (!errorMsg.empty()) {
         // UI::showError("Lỗi điểm: " + errorMsg);
         return;

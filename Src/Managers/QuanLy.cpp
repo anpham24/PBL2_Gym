@@ -21,49 +21,49 @@
 QuanLy::~QuanLy() {
     // Xóa các object trong MyVector
     for (size_t i = 0; i < dsHLV.size(); ++i) {
-        delete dsHLV.at(i);
+        delete dsHLV[i];
     }
     dsHLV.clear();
     
     for (size_t i = 0; i < dsNhanVien.size(); ++i) {
-        delete dsNhanVien.at(i);
+        delete dsNhanVien[i];
     }
     dsNhanVien.clear();
     
     for (size_t i = 0; i < dsGoiTap.size(); ++i) {
-        delete dsGoiTap.at(i);
+        delete dsGoiTap[i];
     }
     dsGoiTap.clear();
     
     for (size_t i = 0; i < dsLopHoc.size(); ++i) {
-        delete dsLopHoc.at(i);
+        delete dsLopHoc[i];
     }
     dsLopHoc.clear();
     
     for (size_t i = 0; i < dsMonTap.size(); ++i) {
-        delete dsMonTap.at(i);
+        delete dsMonTap[i];
     }
     dsMonTap.clear();
     
     for (size_t i = 0; i < dsHangHoa.size(); ++i) {
-        delete dsHangHoa.at(i);
+        delete dsHangHoa[i];
     }
     dsHangHoa.clear();
     
     // Xóa các object trong MyHashTable
     MyVector<HoiVien*> allHV = dsHoiVien.getAllValues();
     for (size_t i = 0; i < allHV.size(); ++i) {
-        delete allHV.at(i);
+        delete allHV[i];
     }
     
     MyVector<HopDong*> allHD = dsHopDong.getAllValues();
     for (size_t i = 0; i < allHD.size(); ++i) {
-        delete allHD.at(i);
+        delete allHD[i];
     }
     
     MyVector<HoaDon*> allHoaDon = dsHoaDon.getAllValues();
     for (size_t i = 0; i < allHoaDon.size(); ++i) {
-        delete allHoaDon.at(i);
+        delete allHoaDon[i];
     }
 }
 

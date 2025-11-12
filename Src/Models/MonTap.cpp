@@ -19,11 +19,12 @@ const string& MonTap::getTenMon() const { return this->tenMon; }
 void MonTap::setTenMon(const string& t) { this->tenMon = t; }
 
 void MonTap::addLopHoc(LopHoc* lh) {
+    if (lh == nullptr) return;
     dsLopHoc.push_back(lh);
 }
 
 void MonTap::removeLopHoc(LopHoc* lh) {
-    for (int i = 0; i < dsLopHoc.size(); i++) {
+    for (size_t i = 0; i < dsLopHoc.size(); i++) {
         if (dsLopHoc[i] == lh) {
             dsLopHoc.erase(i);
             break;
@@ -44,7 +45,7 @@ void MonTap::addGoiTap(GoiTap* gt) {
 }
 
 void MonTap::removeGoiTap(GoiTap* gt) {
-    for (int i = 0; i < dsGoiTap.size(); i++) {
+    for (size_t i = 0; i < dsGoiTap.size(); i++) {
         if (dsGoiTap[i] == gt) {
             dsGoiTap.erase(i);
             break;

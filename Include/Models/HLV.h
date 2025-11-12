@@ -18,11 +18,14 @@ class HLV : public Person {
         HLV(const HLV&);
         ~HLV();
 
+        // Getters
         string getChuyenMon() const;
-        void setChuyenMon(const string&);
         double getLuong() const;
-        void setLuong(double);
         bool getIsActive() const;
+
+        // Setters
+        void setChuyenMon(const string&);
+        void setLuong(double);
         void setIsActive(bool);
 
         void addLogTapPT(LogTapPT*);

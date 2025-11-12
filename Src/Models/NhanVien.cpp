@@ -14,10 +14,12 @@ NhanVien::NhanVien(const NhanVien& other)
 
 NhanVien::~NhanVien() {}
 
+// Getters
 double NhanVien::getLuong() const { return this->luong; }
-void NhanVien::setLuong(double luong) { this->luong = luong; }
-
 bool NhanVien::getIsActive() const { return this->isActive; }
+
+// Setters
+void NhanVien::setLuong(double luong) { this->luong = luong; }
 void NhanVien::setIsActive(bool isActive) { this->isActive = isActive; }
 
 void NhanVien::addHopDong(HopDong* hopDong) {
@@ -25,8 +27,8 @@ void NhanVien::addHopDong(HopDong* hopDong) {
 }
 
 void NhanVien::removeHopDong(HopDong* hopDong) {
-    for (size_t i = 0; i < dsHopDong.size(); ++i) {
-        if (dsHopDong.at(i) == hopDong) {
+    for (size_t i = 0; i < dsHopDong.size(); i++) {
+        if (dsHopDong[i] == hopDong) {
             dsHopDong.erase(i);
             return;
         }
@@ -46,8 +48,8 @@ void NhanVien::addHoaDon(HoaDon* hoaDon) {
 }
 
 void NhanVien::removeHoaDon(HoaDon* hoaDon) {
-    for (size_t i = 0; i < dsHoaDon.size(); ++i) {
-        if (dsHoaDon.at(i) == hoaDon) {
+    for (size_t i = 0; i < dsHoaDon.size(); i++) {
+        if (dsHoaDon[i] == hoaDon) {
             dsHoaDon.erase(i);
             return;
         }

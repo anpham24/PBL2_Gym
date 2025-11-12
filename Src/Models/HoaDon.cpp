@@ -54,8 +54,8 @@ void HoaDon::addChiTietHoaDon_HH(ChiTietHoaDon_HH* item) {
 }
 
 void HoaDon::removeChiTietHoaDon_HH(ChiTietHoaDon_HH* item) {
-    for (size_t i = 0; i < dsChiTietHoaDon_HH.size(); ++i) {
-        if (dsChiTietHoaDon_HH.at(i) == item) {
+    for (size_t i = 0; i < dsChiTietHoaDon_HH.size(); i++) {
+        if (dsChiTietHoaDon_HH[i] == item) {
             dsChiTietHoaDon_HH.erase(i);
             return;
         }
@@ -67,8 +67,8 @@ void HoaDon::addChiTietHoaDon_GT(ChiTietHoaDon_GT* item) {
 }
 
 void HoaDon::removeChiTietHoaDon_GT(ChiTietHoaDon_GT* item) {
-    for (size_t i = 0; i < dsChiTietHoaDon_GT.size(); ++i) {
-        if (dsChiTietHoaDon_GT.at(i) == item) {
+    for (size_t i = 0; i < dsChiTietHoaDon_GT.size(); i++) {
+        if (dsChiTietHoaDon_GT[i] == item) {
             dsChiTietHoaDon_GT.erase(i);
             return;
         }

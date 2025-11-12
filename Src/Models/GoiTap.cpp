@@ -27,12 +27,14 @@ void GoiTap::setGia(double g) { this->gia = g; }
 void GoiTap::setIsActive(bool active) { this->isActive = active; }
 
 void GoiTap::addMonTap(MonTap* mt) {
+    if (mt == nullptr) return;
     this->dsMonTap.push_back(mt);
+    mt->addGoiTap(this);
 }
 
 void GoiTap::removeMonTap(MonTap* mt) {
-    for (size_t i = 0; i < dsMonTap.size(); ++i) {
-        if (dsMonTap.at(i) == mt) {
+    for (size_t i = 0; i < dsMonTap.size(); i++) {
+        if (dsMonTap[i] == mt) {
             dsMonTap.erase(i);
             return;
         }
@@ -52,8 +54,8 @@ void GoiTap::addHopDong(HopDong* hd) {
 }
 
 void GoiTap::removeHopDong(HopDong* hd) {
-    for (size_t i = 0; i < dsHopDong.size(); ++i) {
-        if (dsHopDong.at(i) == hd) {
+    for (size_t i = 0; i < dsHopDong.size(); i++) {
+        if (dsHopDong[i] == hd) {
             dsHopDong.erase(i);
             return;
         }
@@ -73,8 +75,8 @@ void GoiTap::addChiTietHoaDon_GT(ChiTietHoaDon_GT* ct) {
 }
 
 void GoiTap::removeChiTietHoaDon_GT(ChiTietHoaDon_GT* ct) {
-    for (size_t i = 0; i < dsChiTietHoaDon_GT.size(); ++i) {
-        if (dsChiTietHoaDon_GT.at(i) == ct) {
+    for (size_t i = 0; i < dsChiTietHoaDon_GT.size(); i++) {
+        if (dsChiTietHoaDon_GT[i] == ct) {
             dsChiTietHoaDon_GT.erase(i);
             return;
         }

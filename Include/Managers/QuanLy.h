@@ -19,21 +19,32 @@ class FileIO;
 class QuanLy {
     friend class FileIO;
 private:
+    // Hang so kich thuoc hash table (so nguyen to de phan bo tot hon)
+    static const size_t HOIVIEN_CAPACITY = 7013;    // So nguyen to nho cho du lieu hoi vien
+    static const size_t TRANSACTION_CAPACITY = 40009; // So nguyen to lon cho cac giao dich
+    
     static QuanLy* instance;
-    MyHashTable<HoiVien*> dsHoiVien;
-    MyVector<HLV*> dsHLV;
-    MyVector<NhanVien*> dsNhanVien;
-    MyVector<GoiTap*> dsGoiTap;
-    MyVector<LopHoc*> dsLopHoc;
-    MyVector<MonTap*> dsMonTap;
-    MyHashTable<HopDong*> dsHopDong;
-    MyVector<HangHoa*> dsHangHoa;
-    MyHashTable<HoaDon*> dsHoaDon;
-    MyHashTable<LogTapPT*> dsLogTapPT;
+    
+    // Luu tru du lieu - MyHashTable cho cac entity can tra cuu nhanh theo ID
+    MyHashTable<HoiVien*> dsHoiVien;      // Hoi vien (tra cuu thuong xuyen)
+    MyHashTable<HopDong*> dsHopDong;      // Hop dong (tra cuu thuong xuyen)
+    MyHashTable<HoaDon*> dsHoaDon;        // Hoa don (tra cuu thuong xuyen)
+    MyHashTable<LogTapPT*> dsLogTapPT;    // Nhat ky tap PT (tra cuu thuong xuyen)
+    
+    // MyVector cho cac entity duyet tuan tu
+    MyVector<HLV*> dsHLV;                 // Huan luyen vien
+    MyVector<NhanVien*> dsNhanVien;       // Nhan vien
+    MyVector<GoiTap*> dsGoiTap;           // Goi tap
+    MyVector<LopHoc*> dsLopHoc;           // Lop hoc
+    MyVector<MonTap*> dsMonTap;           // Mon tap
+    MyVector<HangHoa*> dsHangHoa;         // Hang hoa
 
-    bool isDirty = false;
+    bool isDirty = false;                 // Danh dau du lieu can luu
 
-    QuanLy() : dsHoiVien(7013), dsHoaDon(40009), dsHopDong(40009), dsLogTapPT(40009) {}
+    QuanLy() : dsHoiVien(HOIVIEN_CAPACITY), 
+               dsHoaDon(TRANSACTION_CAPACITY), 
+               dsHopDong(TRANSACTION_CAPACITY), 
+               dsLogTapPT(TRANSACTION_CAPACITY) {}
     QuanLy(const QuanLy&) = delete;
     QuanLy& operator=(const QuanLy&) = delete;
 

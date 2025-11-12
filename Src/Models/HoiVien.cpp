@@ -13,13 +13,14 @@ HoiVien::HoiVien(const HoiVien& other)
 
 HoiVien::~HoiVien() {}
 
-int HoiVien::getSoBuoiPT() const { return this->soBuoiPT; }
-void HoiVien::setSoBuoiPT(int soBuoiPT) { this->soBuoiPT = soBuoiPT; }
-
-void HoiVien::setPoint(int point) { this->point = point; }
+// Getters
 int HoiVien::getPoint() const { return this->point; }
-
+int HoiVien::getSoBuoiPT() const { return this->soBuoiPT; }
 bool HoiVien::getIsActive() const { return this->isActive; }
+
+// Setters
+void HoiVien::setPoint(int point) { this->point = point; }
+void HoiVien::setSoBuoiPT(int soBuoiPT) { this->soBuoiPT = soBuoiPT; }
 void HoiVien::setIsActive(bool isActive) { this->isActive = isActive; } 
 
 void HoiVien::addHoaDon(HoaDon* hoaDon) {
@@ -27,7 +28,7 @@ void HoiVien::addHoaDon(HoaDon* hoaDon) {
 }
 
 void HoiVien::removeHoaDon(HoaDon* hoaDon) {
-    for (int i = 0; i < dsHoaDon.size(); i++) {
+    for (size_t i = 0; i < dsHoaDon.size(); i++) {
         if (dsHoaDon[i] == hoaDon) {
             dsHoaDon.erase(i);
             break;
@@ -48,7 +49,7 @@ void HoiVien::addHopDong(HopDong* hopDong) {
 }
 
 void HoiVien::removeHopDong(HopDong* hopDong) {
-    for (int i = 0; i < dsHopDong.size(); i++) {
+    for (size_t i = 0; i < dsHopDong.size(); i++) {
         if (dsHopDong[i] == hopDong) {
             dsHopDong.erase(i);
             break;
@@ -69,7 +70,7 @@ void HoiVien::addLogTapPT(LogTapPT* logTapPT) {
 }
 
 void HoiVien::removeLogTapPT(LogTapPT* logTapPT) {
-    for (int i = 0; i < dsLogTapPT.size(); i++) {
+    for (size_t i = 0; i < dsLogTapPT.size(); i++) {
         if (dsLogTapPT[i] == logTapPT) {
             dsLogTapPT.erase(i);
             break;

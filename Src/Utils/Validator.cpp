@@ -64,14 +64,41 @@ string Validator::validateNgay(const string& ngay) {
     return "";
 }
 
-string Validator::validateSoDuong(const string& so) {
-    for (char c : so) {
-        if (!isdigit(c)) {
-            return "Giá trị phải là số dương.";
-        }
+string Validator::validateNgayGio(const string& ngayGio) {
+    // Định dạng ngày giờ dự kiến: "DD/MM/YYYY HH:MM"
+    if (ngayGio.length() != 16 || ngayGio[2] != '/' || ngayGio[5] != '/' || ngayGio[10] != ' ' || ngayGio[13] != ':') {
+        return "Ngày giờ phải có định dạng DD/MM/YYYY HH:MM.";
     }
-    if (so.empty() || stoi(so) <= 0) {
-        return "Giá trị phải là số dương lớn hơn 0.";
+    // Tách phần ngày và giờ
+    string ngay = ngayGio.substr(0, 10);
+    string gio = ngayGio.substr(11, 5);
+
+    // Kiểm tra phần ngày
+    string ngayError = validateNgay(ngay);
+    if (!ngayError.empty()) {
+        return ngayError;
     }
+
+    // Kiểm tra phần giờ
+    int hour = stoi(gio.substr(0, 2));
+    int minute = stoi(gio.substr(3, 2));
+
+    if (hour < 0 || hour > 23) {
+        return "Giờ phải từ 00 đến 23.";
+    }
+    if (minute < 0 || minute > 59) {
+        return "Phút phải từ 00 đến 59.";
+    }
+
     return "";
+}
+
+string Validator::validateSoDuong(const int& so) {
+    if (so < 0)
+        return "Giá trị phải là số dương";
+}
+
+string Validator::validateSoDuong(const double& so) {
+    if (so < 0)
+        return "Giá trị phải là số dương";
 }

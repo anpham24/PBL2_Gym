@@ -21,11 +21,14 @@ public:
     HoiVien(const HoiVien& other);
     ~HoiVien();
 
-    int getSoBuoiPT() const;
-    void setSoBuoiPT(int);
+    // Getters
     int getPoint() const;
-    void setPoint(int);
+    int getSoBuoiPT() const;
     bool getIsActive() const;
+
+    // Setters
+    void setPoint(int);
+    void setSoBuoiPT(int);
     void setIsActive(bool);
 
     void addHoaDon(HoaDon*);

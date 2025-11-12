@@ -15,13 +15,14 @@ HLV::HLV(const HLV& other)
 
 HLV::~HLV() {}
 
+// Getters
 string HLV::getChuyenMon() const { return this->chuyenMon; }
-void HLV::setChuyenMon(const string& chuyenMon) { this->chuyenMon = chuyenMon; }
-
 double HLV::getLuong() const { return this->luong; }
-void HLV::setLuong(double luong) { this->luong = luong; }
-
 bool HLV::getIsActive() const { return this->isActive; }
+
+// Setters
+void HLV::setChuyenMon(const string& chuyenMon) { this->chuyenMon = chuyenMon; }
+void HLV::setLuong(double luong) { this->luong = luong; }
 void HLV::setIsActive(bool status) { this->isActive = status; }
 
 void HLV::addLogTapPT(LogTapPT* log) {
@@ -29,7 +30,7 @@ void HLV::addLogTapPT(LogTapPT* log) {
 }
 
 void HLV::removeLogTapPT(LogTapPT* log) {
-    for (int i = 0; i < dsLogTapPT.size(); i++) {
+    for (size_t i = 0; i < dsLogTapPT.size(); i++) {
         if (dsLogTapPT[i] == log) {
             dsLogTapPT.erase(i);
             break;
@@ -50,7 +51,7 @@ void HLV::addLopHoc(LopHoc* lh) {
 }
 
 void HLV::removeLopHoc(LopHoc* lh) {
-    for (int i = 0; i < dsLopHoc.size(); i++) {
+    for (size_t i = 0; i < dsLopHoc.size(); i++) {
         if (dsLopHoc[i] == lh) {
             dsLopHoc.erase(i);
             break;

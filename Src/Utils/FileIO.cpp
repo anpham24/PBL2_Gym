@@ -1,3 +1,17 @@
+/**
+ * FileIO.cpp - Cac thao tac nhap/xuat file cho he thong quan ly phong gym
+ * 
+ * File nay xu ly viec load va save tat ca du lieu entity tu/vao cac file CSV.
+ * Moi loai entity co file rieng voi dinh dang cu the (phan cach bang dau cham phay).
+ * 
+ * Thu tu load quan trong doi voi cac entity co su phu thuoc:
+ * 1. Cac entity doc lap (NhanVien, HLV, MonTap, GoiTap, HangHoa, HoiVien)
+ * 2. Cac entity co tham chieu don gian (LopHoc can MonTap+HLV, HopDong can HoiVien+GoiTap)
+ * 3. Cac entity giao dich (HoaDon can NhanVien+HoiVien)
+ * 4. Cac entity chi tiet (ChiTietHoaDon_* can HoaDon va HangHoa/GoiTap)
+ * 5. Cac entity log (LogTapPT can HoiVien+HLV)
+ */
+
 #include "FileIO.h"
 #include "QuanLy.h"
 #include "StringUtils.h"
@@ -15,6 +29,10 @@
 #include "LogTapPT.h"
 #include "IDGenerator.h"
 #include <fstream>
+
+// ============================================================================
+// CAC HAM LOAD - Doc file CSV va dien du lieu vao cau truc QuanLy
+// ============================================================================
 
 void FileIO::loadNhanVien(const string& filePath) {
     QuanLy& ql = QuanLy::getInstance();
@@ -513,7 +531,7 @@ void FileIO::saveNhanVien(const string& filePath) {
     if (!file.is_open()) return;
 
     for (size_t i = 0; i < ql.dsNhanVien.size(); ++i) {
-        NhanVien* nv = ql.dsNhanVien.at(i);
+        NhanVien* nv = ql.dsNhanVien[i];
         file << nv->read() << endl;
     }
     file.close();
@@ -525,7 +543,7 @@ void FileIO::saveHLV(const string& filePath) {
     if (!file.is_open()) return;
 
     for (size_t i = 0; i < ql.dsHLV.size(); ++i) {
-        HLV* hlv = ql.dsHLV.at(i);
+        HLV* hlv = ql.dsHLV[i];
         file << hlv->read() << endl;
     }
     file.close();
@@ -538,7 +556,7 @@ void FileIO::saveHoiVien(const string& filePath) {
 
     MyVector<HoiVien*> dsHV = ql.dsHoiVien.getAllValues();
     for (size_t i = 0; i < dsHV.size(); ++i) {
-        HoiVien* hv = dsHV.at(i);
+        HoiVien* hv = dsHV[i];
         file << hv->read() << endl;
     }
     file.close();
@@ -550,7 +568,7 @@ void FileIO::saveMonTap(const string& filePath) {
     if (!file.is_open()) return;
 
     for (size_t i = 0; i < ql.dsMonTap.size(); ++i) {
-        MonTap* mt = ql.dsMonTap.at(i);
+        MonTap* mt = ql.dsMonTap[i];
         file << mt->read() << endl;
     }
     file.close();
@@ -562,7 +580,7 @@ void FileIO::saveGoiTap(const string& filePath) {
     if (!file.is_open()) return;
 
     for (size_t i = 0; i < ql.dsGoiTap.size(); ++i) {
-        GoiTap* gt = ql.dsGoiTap.at(i);
+        GoiTap* gt = ql.dsGoiTap[i];
         file << gt->read() << endl;
     }
     file.close();
@@ -574,7 +592,7 @@ void FileIO::saveHangHoa(const string& filePath) {
     if (!file.is_open()) return;
 
     for (size_t i = 0; i < ql.dsHangHoa.size(); ++i) {
-        HangHoa* hh = ql.dsHangHoa.at(i);
+        HangHoa* hh = ql.dsHangHoa[i];
         file << hh->read() << endl;
     }
     file.close();
@@ -586,7 +604,7 @@ void FileIO::saveLopHoc(const string& filePath) {
     if (!file.is_open()) return;
 
     for (size_t i = 0; i < ql.dsLopHoc.size(); ++i) {
-        LopHoc* lh = ql.dsLopHoc.at(i);
+        LopHoc* lh = ql.dsLopHoc[i];
         file << lh->read() << endl;
     }
     file.close();
@@ -599,7 +617,7 @@ void FileIO::saveHopDong(const string& filePath) {
 
     MyVector<HopDong*> dsHD = ql.dsHopDong.getAllValues();
     for (size_t i = 0; i < dsHD.size(); ++i) {
-        HopDong* hd = dsHD.at(i);
+        HopDong* hd = dsHD[i];
         file << hd->read() << endl;
     }
     file.close();
@@ -612,7 +630,7 @@ void FileIO::saveHoaDon(const string& filePath) {
 
     MyVector<HoaDon*> dsHD = ql.dsHoaDon.getAllValues();
     for (size_t i = 0; i < dsHD.size(); ++i) {
-        HoaDon* hd = dsHD.at(i);
+        HoaDon* hd = dsHD[i];
         file << hd->read() << endl;
     }
     file.close();
@@ -625,7 +643,7 @@ void FileIO::saveLogTapPT(const string& filePath) {
 
     MyVector<LogTapPT*> dsLog = ql.dsLogTapPT.getAllValues();
     for (size_t i = 0; i < dsLog.size(); ++i) {
-        LogTapPT* log = dsLog.at(i);
+        LogTapPT* log = dsLog[i];
         file << log->read() << endl;
     }
     file.close();

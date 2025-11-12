@@ -32,7 +32,7 @@ void HLVService::themHLV(const string& tenHLV, const string& sdt,
         // UI::showError("Chuyên môn không được để trống.");
         return;
     }
-    errorMsg = Validator::validateSoDuong(to_string(luong));
+    errorMsg = Validator::validateSoDuong(luong);
     if (!errorMsg.empty()) {
         // UI::showError("Lỗi lương: " + errorMsg);
         return;
@@ -81,7 +81,7 @@ void HLVService::suaHLV(const string& maHLV, const string& tenHLV, const string&
         // UI::showError("Chuyên môn không được để trống.");
         return;
     }
-    errorMsg = Validator::validateSoDuong(to_string(luong));
+    errorMsg = Validator::validateSoDuong(luong);
     if (!errorMsg.empty()) {
         // UI::showError("Lỗi lương: " + errorMsg);
         return;

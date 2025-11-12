@@ -30,8 +30,8 @@ void HangHoa::addChiTietHoaDon_HH(ChiTietHoaDon_HH* ct) {
 }
 
 void HangHoa::removeChiTietHoaDon_HH(ChiTietHoaDon_HH* ct) {
-    for (size_t i = 0; i < dsChiTietHoaDon_HH.size(); ++i) {
-        if (dsChiTietHoaDon_HH.at(i) == ct) {
+    for (size_t i = 0; i < dsChiTietHoaDon_HH.size(); i++) {
+        if (dsChiTietHoaDon_HH[i] == ct) {
             dsChiTietHoaDon_HH.erase(i);
             return;
         }

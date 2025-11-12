@@ -27,7 +27,7 @@ void NhanVienService::themNhanVien(const string& tenNV, const string& sdt,
         // UI::showError("Lỗi ngày sinh: " + errorMsg);
         return;
     }
-    errorMsg = Validator::validateSoDuong(to_string(luong));
+    errorMsg = Validator::validateSoDuong(luong);
     if (!errorMsg.empty()) {
         // UI::showError("Lỗi lương: " + errorMsg);
         return;
@@ -71,7 +71,7 @@ void NhanVienService::suaNhanVien(const string& maNV, const string& tenNV, const
         // UI::showError("Lỗi ngày sinh: " + errorMsg);
         return;
     }
-    errorMsg = Validator::validateSoDuong(to_string(luong));
+    errorMsg = Validator::validateSoDuong(luong);
     if (!errorMsg.empty()) {
         // UI::showError("Lỗi lương: " + errorMsg);
         return;

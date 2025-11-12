@@ -18,8 +18,11 @@ public:
     NhanVien(const NhanVien& other);
     ~NhanVien();
 
+    // Getters
     double getLuong() const;
     bool getIsActive() const;
+
+    // Setters
     void setLuong(double);
     void setIsActive(bool);
 
