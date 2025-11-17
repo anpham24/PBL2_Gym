@@ -13,6 +13,7 @@ private:
     string id;
     string ngayLap;
     string phuongThucTT;
+    bool daThanhToan;
     MyVector<ChiTietHoaDon_HH*> dsChiTietHoaDon_HH;
     MyVector<ChiTietHoaDon_GT*> dsChiTietHoaDon_GT;
     NhanVien* nhanVien;
@@ -50,4 +51,7 @@ public:
     static HoaDon* create(const string&, const string&, const string&, NhanVien* = nullptr, HoiVien* = nullptr);
     static HoaDon* create(const string&, const string&, NhanVien* = nullptr, HoiVien* = nullptr);
     string read() const;
+
+    void setDaThanhToan(bool status);
+    bool getDaThanhToan() const;
 };

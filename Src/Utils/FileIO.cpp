@@ -15,6 +15,7 @@
 #include "FileIO.h"
 #include "QuanLy.h"
 #include "StringUtils.h"
+#include "AccountManager.h"
 #include "HoiVien.h"
 #include "HLV.h"
 #include "NhanVien.h"
@@ -29,6 +30,7 @@
 #include "LogTapPT.h"
 #include "IDGenerator.h"
 #include <fstream>
+#include <iostream>
 
 // ============================================================================
 // CAC HAM LOAD - Doc file CSV va dien du lieu vao cau truc QuanLy
@@ -500,7 +502,9 @@ void FileIO::linkGoiTap_MonTap(const string& filePath) {
     file.close();
 }
 
-void FileIO::loadAllData(const string& folderPath) {
+void FileIO::loadAllData(QuanLy& ql, AccountManager& am, const string& folderPath) {
+    loadAccounts(am, ql, folderPath + "/accounts.txt");
+
     IDGenerator::loadState();
 
     loadNhanVien(folderPath + "/NhanVien.txt");
@@ -649,7 +653,9 @@ void FileIO::saveLogTapPT(const string& filePath) {
     file.close();
 }
 
-void FileIO::saveAllData(const string& folderPath) {
+void FileIO::saveAllData(const QuanLy& ql, const AccountManager& am, const string& folderPath) {
+    saveAccounts(am, folderPath + "/accounts.txt");
+
     saveNhanVien(folderPath + "/NhanVien.txt");
     saveHLV(folderPath + "/HLV.txt");
     saveHoiVien(folderPath + "/HoiVien.txt");
@@ -663,4 +669,69 @@ void FileIO::saveAllData(const string& folderPath) {
     saveLogTapPT(folderPath + "/LogTapPT.txt");
 
     IDGenerator::saveState();
+}
+
+void FileIO::saveAccounts(const AccountManager& am, const string& filePath) {
+    ofstream file(filePath);
+    if (!file.is_open()) {
+        // std::cerr << "Loi: Khong the mo file de luu Accounts: " << filePath << std::endl;
+        return;
+    }
+
+    const MyVector<Account*>& ds = am.getDsAccount();
+    for (size_t i = 0; i < ds.size(); ++i) {
+        Account* acc = ds[i];
+        if (acc == nullptr) continue;
+        
+        file << acc->getUsername() << "|";
+        file << acc->getPassword() << "|"; // <-- Chinh sua Account.h de them getPassword()
+        file << static_cast<int>(acc->getAccountType()) << "|";
+        
+        if (acc->getLinkedStaff() != nullptr) {
+            file << acc->getLinkedStaff()->getID() << "\n";
+        } else {
+            file << "NULL\n";
+        }
+    }
+    file.close();
+    std::cout << "Da luu " << ds.size() << " tai khoan vao " << filePath << std::endl;
+}
+
+/**
+ * @brief (MOI) Tai file accounts.txt
+ */
+void FileIO::loadAccounts(AccountManager& am, QuanLy& ql, const string& filePath) {
+    ifstream file(filePath);
+    if (!file.is_open()) {
+        // std::cerr << "Loi: Khong tim thay file Accounts: " << filePath << std::endl;
+        return; // Khong phai la loi lon, co the la chay lan dau
+    }
+
+    string line;
+    int count = 0;
+    while (getline(file, line)) {
+        if (line.empty()) continue;
+
+        MyVector<string> parts = splitString(line, '|');
+        if (parts.size() < 4) continue; // Dong bi loi
+
+        string username = parts[0];
+        string password = parts[1];
+        AccountType type = static_cast<AccountType>(stoi(parts[2]));
+        string staffID = parts[3];
+
+        NhanVien* linkedStaff = nullptr;
+        if (staffID != "NULL") {
+            linkedStaff = ql.getNhanVien(staffID);
+            if (linkedStaff == nullptr) {
+                // std::cerr << "Loi: Khong tim thay NhanVien " << staffID << " de lien ket tai khoan " << username << std::endl;
+                continue; // Bo qua tai khoan nay
+            }
+        }
+        
+        am.addAccount(username, password, type, linkedStaff);
+        count++;
+    }
+    file.close();
+    std::cout << "Da tai " << count << " tai khoan tu " << filePath << std::endl;
 }

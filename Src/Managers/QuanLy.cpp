@@ -146,6 +146,10 @@ const HoiVien* QuanLy::getHoiVien(const string& maHV) const {
     return result ? *result : nullptr;
 }
 
+MyHashTable<HoiVien*>& QuanLy::getDsHoiVien() {
+        return dsHoiVien;
+    }
+
 // ============================================================================
 // QUẢN LÝ HUẤN LUYỆN VIÊN (HLV)
 // ============================================================================
@@ -316,6 +320,8 @@ bool QuanLy::addGoiTap(GoiTap* gt) {
     return true;
 }
 
+// (SỬA LẠI HÀM NÀY TRONG QuanLy.cpp)
+
 bool QuanLy::removeGoiTap(const string& maGoi) {
     int gtIndex = -1;
     GoiTap* gtCanXoa = nullptr;
@@ -337,16 +343,20 @@ bool QuanLy::removeGoiTap(const string& maGoi) {
     MyVector<HopDong*>& dsHopDongLienQuan = gtCanXoa->getDsHopDong();
     if (!dsHopDongLienQuan.empty()) {
         gtCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
-        return true; // Không được xóa GoiTap nếu còn HopDong liên quan
+        return false; // SỬA LẠI: Trả về false (không xóa)
     }
 
     MyVector<ChiTietHoaDon_GT*>& dsChiTietHoaDon_GTLienQuan = gtCanXoa->getDsChiTietHoaDon_GT();
     if (!dsChiTietHoaDon_GTLienQuan.empty()) {
         gtCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
-        return true; // Không được xóa GoiTap nếu còn ChiTietHoaDon_GT liên quan
+        return false; // SỬA LẠI: Trả về false (không xóa)
     }
 
+    // Nếu không còn ràng buộc, tiến hành xóa
     bool removed = dsGoiTap.erase(gtIndex);
+    if (removed) {
+        delete gtCanXoa; // <--- BUG FIX: Thêm dòng này để giải phóng bộ nhớ
+    }
     return removed;
 }
 
@@ -645,4 +655,36 @@ LogTapPT* QuanLy::getLogTapPT(const string& maLog) {
 const LogTapPT* QuanLy::getLogTapPT(const string& maLog) const {
     LogTapPT* const* result = dsLogTapPT.search(maLog);
     return result ? *result : nullptr;
+}
+
+// ============================================================================
+// QUẢN LÝ TRUY CẬP DANH SÁCH
+// ============================================================================
+
+MyVector<HLV*>& QuanLy::getDsHLV() {
+    return dsHLV;
+}
+MyVector<NhanVien*>& QuanLy::getDsNhanVien() {
+    return dsNhanVien;
+}
+MyVector<GoiTap*>& QuanLy::getDsGoiTap() {
+    return dsGoiTap;
+}
+MyVector<LopHoc*>& QuanLy::getDsLopHoc() {
+    return dsLopHoc;
+}
+MyVector<MonTap*>& QuanLy::getDsMonTap() {
+    return dsMonTap;
+}
+MyVector<HangHoa*>& QuanLy::getDsHangHoa() {
+    return dsHangHoa;
+}
+MyHashTable<HoaDon*>& QuanLy::getDsHoaDon() {
+    return dsHoaDon;
+}
+MyHashTable<HopDong*>& QuanLy::getDsHopDong() {
+    return dsHopDong;
+}
+MyHashTable<LogTapPT*>& QuanLy::getDsLogTapPT() {
+    return dsLogTapPT;
 }

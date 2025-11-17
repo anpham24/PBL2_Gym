@@ -105,3 +105,11 @@ string HoaDon::read() const {
                     (hoiVien ? hoiVien->getID() : "NULL");
     return result;
 }
+
+void HoaDon::setDaThanhToan(bool status) {
+    this->daThanhToan = status; 
+}
+
+bool HoaDon::getDaThanhToan() const {
+    return this->daThanhToan; 
+}

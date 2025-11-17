@@ -7,35 +7,37 @@
 #include "Validator.h"
 #include "QuanLy.h"
 
-void HoaDonService::taoHoaDon(const string& maNV, const string& maHV,
-                              const string& ngayLap, const string& phuongThucTT) {
-    string errorMsg = Validator::validateNgay(ngayLap);
-    if (!errorMsg.empty()) {
-        // UI::showError("Lỗi ngày lập: " + errorMsg);
-        return;
-    }
-    
-    if (phuongThucTT.empty()) {
-        // UI::showError("Phương thức thanh toán không được để trống.");
-        return;
-    }
+HoaDon* HoaDonService::taoHoaDon(const string& maNV, const string& maHV,
+    const string& ngayLap, const string& phuongThucTT) {
+string errorMsg = Validator::validateNgay(ngayLap);
+if (!errorMsg.empty()) {
+// UI::showError("Lỗi ngày lập: " + errorMsg);
+return nullptr; // <--- SỬA Ở ĐÂY
+}
 
-    QuanLy& ql = QuanLy::getInstance();
-    NhanVien* nv = ql.getNhanVien(maNV);
-    if (nv == nullptr) {
-        // UI::showError("Mã nhân viên không tồn tại.");
-        return;
-    }
-    HoiVien* hv = ql.getHoiVien(maHV);
-    if (hv == nullptr) {
-        // UI::showError("Mã hội viên không tồn tại.");
-        return;
-    }
+if (phuongThucTT.empty()) {
+// UI::showError("Phương thức thanh toán không được để trống.");
+return nullptr; // <--- SỬA Ở ĐÂY
+}
 
-    HoaDon* newHoaDon = HoaDon::create(ngayLap, phuongThucTT, nv, hv);
-    ql.addHoaDon(newHoaDon);
-    ql.setDirty(true);
-    // UI::showMessage("Tạo hóa đơn thành công.");
+QuanLy& ql = QuanLy::getInstance();
+NhanVien* nv = ql.getNhanVien(maNV);
+if (nv == nullptr) {
+// UI::showError("Mã nhân viên không tồn tại.");
+return nullptr; // <--- SỬA Ở ĐÂY
+}
+HoiVien* hv = ql.getHoiVien(maHV);
+if (hv == nullptr) {
+// UI::showError("Mã hội viên không tồn tại.");
+return nullptr; // <--- SỬA Ở ĐÂY
+}
+
+HoaDon* newHoaDon = HoaDon::create(ngayLap, phuongThucTT, nv, hv);
+ql.addHoaDon(newHoaDon);
+ql.setDirty(true);
+// UI::showMessage("Tạo hóa đơn thành công.");
+
+return newHoaDon; // <--- THÊM DÒNG NÀY
 }
 
 void HoaDonService::themHangHoaVaoHoaDon(const string& maHD, const string& maHH, int soLuong, double donGia) {

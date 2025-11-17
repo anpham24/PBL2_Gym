@@ -3,11 +3,12 @@
 using namespace std;
 
 class QuanLy;
+class AccountManager;
 
 class FileIO {
 public:
-    static void saveAllData(const string& folderPath);
-    static void loadAllData(const string& folderPath);
+    static void saveAllData(const QuanLy& ql, const AccountManager& am, const string& folderPath);
+    static void loadAllData(QuanLy& ql, AccountManager& am, const string& folderPath);
 private:
     // Các đối tượng không có khóa ngoại:
     static void loadNhanVien(const string& filePath);
@@ -45,4 +46,7 @@ private:
     static void saveHopDong(const string& filePath);
     static void saveHoaDon(const string& filePath);
     static void saveLogTapPT(const string& filePath);
+
+    static void saveAccounts(const AccountManager& am, const string& filePath);
+    static void loadAccounts(AccountManager& am, QuanLy& ql, const string& filePath);
 };

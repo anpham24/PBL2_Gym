@@ -21,6 +21,10 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/Include/Managers
     ${CMAKE_CURRENT_SOURCE_DIR}/Include/Services
     ${CMAKE_CURRENT_SOURCE_DIR}/Include/Utils
+    ${CMAKE_CURRENT_SOURCE_DIR}/Include/GUI
+    ${CMAKE_CURRENT_SOURCE_DIR}/Include/GUI/Components
+    ${CMAKE_CURRENT_SOURCE_DIR}/Include/GUI/Screens
+    ${CMAKE_CURRENT_SOURCE_DIR}/Include/GUI/Popup
     # ${CMAKE_CURRENT_SOURCE_DIR}/Include/UI
 )
 
@@ -32,23 +36,11 @@ file(GLOB_RECURSE SRC_FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/Src/*.tpp"
 )
 
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/Frontend/Include
-    ${CMAKE_CURRENT_SOURCE_DIR}/Frontend/Include/Manager
-    ${CMAKE_CURRENT_SOURCE_DIR}/Frontend/Include/Screens
-    ${CMAKE_CURRENT_SOURCE_DIR}/Frontend/Include/UI
-)
 
-file(GLOB_RECURSE FRONTEND_FILES
-    "${CMAKE_CURRENT_SOURCE_DIR}/Frontend/Source/Manager/*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/Frontend/Source/Screens/*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/Frontend/Source/UI/*.cpp"
-)
 
 add_executable(PBL2_Gym 
     main.cpp
     ${SRC_FILES}
-    ${FRONTEND_FILES}
 )
 
 # ============================================================================

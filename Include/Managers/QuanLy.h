@@ -12,7 +12,7 @@ class LopHoc;
 class MonTap;
 class HopDong;
 class HangHoa;
-class HoaDon;
+class HoaDon; 
 class LogTapPT;
 class FileIO;
 
@@ -65,6 +65,7 @@ public:
     HoiVien* getHoiVien(const string&);
     HoiVien* getHoiVienBySDT(const string&);
     const HoiVien* getHoiVien(const string&) const;
+    MyHashTable<HoiVien*>& getDsHoiVien();
 
     // Ham quan ly HLV
     bool addHLV(HLV*);
@@ -121,4 +122,14 @@ public:
     const LogTapPT* getLogTapPT(const string&) const;
 
     string getDisplayList(const string& entityName) const;
+
+    MyVector<HLV*>& getDsHLV();
+    MyVector<NhanVien*>& getDsNhanVien();
+    MyVector<GoiTap*>& getDsGoiTap();
+    MyVector<LopHoc*>& getDsLopHoc();
+    MyVector<MonTap*>& getDsMonTap();
+    MyVector<HangHoa*>& getDsHangHoa();
+    MyHashTable<HoaDon*>& getDsHoaDon();
+    MyHashTable<HopDong*>& getDsHopDong();
+    MyHashTable<LogTapPT*>& getDsLogTapPT();
 };

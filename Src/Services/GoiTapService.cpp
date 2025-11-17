@@ -3,6 +3,7 @@
 #include "MonTap.h"
 #include "QuanLy.h"
 #include "Validator.h"
+#include <iostream>
 
 void GoiTapService::themGoiTap(const string& tenGoi, int thoiGian, int soBuoiPT, double gia) {
     string errorMsg = Validator::validateTen(tenGoi);
@@ -91,4 +92,18 @@ void GoiTapService::suaGoiTap(const string& maGoi, const string& tenGoi, int tho
     gtCanSua->setGia(gia);
     ql.setDirty(true);
     // UI::Sửa thành công
+}
+
+void GoiTapService::xoaGoiTap(const std::string& id) {
+    QuanLy& ql = QuanLy::getInstance();
+    
+    bool success = ql.removeGoiTap(id);
+    
+    if (success) {
+        std::cout << "Service: Xoa Goi Tap " << id << " thanh cong." << std::endl;
+        ql.setDirty(true);
+    } else {
+        std::cerr << "Loi Service: Xoa Goi Tap " << id << " that bai." << std::endl;
+        // (Sau này bạn sẽ dùng UI::showError thay cho cerr)
+    }
 }
