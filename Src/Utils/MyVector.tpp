@@ -18,11 +18,12 @@ MyVector<T>::MyVector(const MyVector& other) {
 
 template <typename T>
 MyVector<T>::~MyVector() {
-    clear();
     if (data != nullptr) {
         delete[] data;
         data = nullptr;
     }
+    m_size = 0;
+    m_capacity = 0;
 }
 
 template <typename T>
@@ -112,6 +113,16 @@ bool MyVector<T>::erase(T* it) {
         return false;
     size_t index = static_cast<size_t>(it - data);
     return erase(index);
+}
+
+template <typename T>
+bool MyVector<T>::eraseByValue(const T& value) {
+    for (size_t i = 0; i < m_size; ++i) {
+        if (data[i] == value) {
+            return erase(i);
+        }
+    }
+    return false;
 }
 
 template <typename T>

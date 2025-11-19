@@ -1,6 +1,7 @@
 #pragma once
 #include "MyVector.h"
 #include "MyHashTable.h"
+#include "SearchEngine.h"
 #include <string>
 using namespace std;
 
@@ -39,6 +40,9 @@ private:
     MyVector<MonTap*> dsMonTap;           // Mon tap
     MyVector<HangHoa*> dsHangHoa;         // Hang hoa
 
+    // Trie cho tim kiem nhanh theo ten
+    SearchEngine searchEngine;
+
     bool isDirty = false;                 // Danh dau du lieu can luu
 
     QuanLy() : dsHoiVien(HOIVIEN_CAPACITY), 
@@ -63,23 +67,22 @@ public:
     bool addHoiVien(HoiVien*);
     bool removeHoiVien(const string&);
     HoiVien* getHoiVien(const string&);
-    HoiVien* getHoiVienBySDT(const string&);
     const HoiVien* getHoiVien(const string&) const;
-    MyHashTable<HoiVien*>& getDsHoiVien();
+    MyVector<HoiVien*> searchHoiVienByName(const string& namePrefix);
 
     // Ham quan ly HLV
     bool addHLV(HLV*);
     bool removeHLV(const string&);
     HLV* getHLV(const string&);
-    HLV* getHLVBySDT(const string&);
     const HLV* getHLV(const string&) const;
+    MyVector<HLV*> searchHLVByName(const string& namePrefix);
 
     // Ham quan ly NhanVien
     bool addNhanVien(NhanVien*);
     bool removeNhanVien(const string&);
     NhanVien* getNhanVien(const string&);
-    NhanVien* getNhanVienBySDT(const string&);
     const NhanVien* getNhanVien(const string&) const;
+    MyVector<NhanVien*> searchNhanVienByName(const string& namePrefix);
 
     // Ham quan ly GoiTap
     bool addGoiTap(GoiTap*);
@@ -123,13 +126,15 @@ public:
 
     string getDisplayList(const string& entityName) const;
 
-    MyVector<HLV*>& getDsHLV();
-    MyVector<NhanVien*>& getDsNhanVien();
-    MyVector<GoiTap*>& getDsGoiTap();
-    MyVector<LopHoc*>& getDsLopHoc();
-    MyVector<MonTap*>& getDsMonTap();
-    MyVector<HangHoa*>& getDsHangHoa();
-    MyHashTable<HoaDon*>& getDsHoaDon();
-    MyHashTable<HopDong*>& getDsHopDong();
-    MyHashTable<LogTapPT*>& getDsLogTapPT();
+
+    const MyHashTable<HoiVien*>& getDsHoiVien() const;
+    const MyVector<HLV*>& getDsHLV() const;
+    const MyVector<NhanVien*>& getDsNhanVien() const;
+    const MyVector<GoiTap*>& getDsGoiTap() const;
+    const MyVector<LopHoc*>& getDsLopHoc() const;
+    const MyVector<MonTap*>& getDsMonTap() const;
+    const MyVector<HangHoa*>& getDsHangHoa() const;
+    const MyHashTable<HoaDon*>& getDsHoaDon() const;
+    const MyHashTable<HopDong*>& getDsHopDong() const;
+    const MyHashTable<LogTapPT*>& getDsLogTapPT() const;
 };

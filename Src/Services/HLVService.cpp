@@ -38,10 +38,6 @@ void HLVService::themHLV(const string& tenHLV, const string& sdt,
         return;
     }
     QuanLy& ql = QuanLy::getInstance();
-    if (ql.getHLVBySDT(sdt) != nullptr) {
-        // UI::showError("Số điện thoại đã tồn tại.");
-        return;
-    }
     HLV* newHLV = HLV::create(tenHLV, sdt, gioiTinh, ngaySinh, chuyenMon, luong);
     ql.addHLV(newHLV);
     ql.setDirty(true);
@@ -84,12 +80,6 @@ void HLVService::suaHLV(const string& maHLV, const string& tenHLV, const string&
     errorMsg = Validator::validateSoDuong(luong);
     if (!errorMsg.empty()) {
         // UI::showError("Lỗi lương: " + errorMsg);
-        return;
-    }
-
-    HLV* hlvKiemTraSDT = ql.getHLVBySDT(sdt);
-    if (hlvKiemTraSDT != nullptr && hlvKiemTraSDT->getID() != maHLV) {
-        // UI::showError("Số điện thoại đã tồn tại.");
         return;
     }
 
