@@ -31,6 +31,9 @@ public:
     bool erase(size_t);
     bool erase(T*);
 
+    // Xoa theo value
+    bool eraseByValue(const T& value);
+
     // Truy cap phan tu
     T& operator[](size_t);
     const T& operator[](size_t) const;

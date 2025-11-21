@@ -33,10 +33,6 @@ void NhanVienService::themNhanVien(const string& tenNV, const string& sdt,
         return;
     }
     QuanLy& ql = QuanLy::getInstance();
-    if (ql.getNhanVienBySDT(sdt) != nullptr) {
-        // UI::showError("Số điện thoại đã tồn tại.");
-        return;
-    }
     NhanVien* newNhanVien = NhanVien::create(tenNV, sdt, gioiTinh, ngaySinh, luong);
     ql.addNhanVien(newNhanVien);
     ql.setDirty(true);
@@ -74,12 +70,6 @@ void NhanVienService::suaNhanVien(const string& maNV, const string& tenNV, const
     errorMsg = Validator::validateSoDuong(luong);
     if (!errorMsg.empty()) {
         // UI::showError("Lỗi lương: " + errorMsg);
-        return;
-    }
-
-    NhanVien* nvKiemTraSDT = ql.getNhanVienBySDT(sdt);
-    if (nvKiemTraSDT != nullptr && nvKiemTraSDT->getID() != maNV) {
-        // UI::showError("Số điện thoại đã tồn tại.");
         return;
     }
 

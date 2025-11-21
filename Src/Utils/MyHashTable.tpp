@@ -9,15 +9,15 @@ MyHashTable<T>::MyHashTable(size_t capacity) : m_size(0), m_capacity(capacity) {
 
 template <typename T>
 MyHashTable<T>::~MyHashTable() {
-    for (size_t i = 0; i < m_capacity; i++) {
+    for (size_t i = 0; i < table.size(); i++) {
         Node* current = table[i];
         while (current != nullptr) {
             Node* temp = current;
             current = current->next;
             delete temp;
         }
+        table[i] = nullptr;
     }
-    table.clear();
 }
 
 template <typename T>

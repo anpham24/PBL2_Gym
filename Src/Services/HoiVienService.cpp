@@ -33,10 +33,6 @@ void HoiVienService::themHoiVien(const string& tenHV, const string& sdt,
         return;
     }
     QuanLy& ql = QuanLy::getInstance();
-    if (ql.getHoiVienBySDT(sdt) != nullptr) {
-        // UI::showError("Số điện thoại đã tồn tại.");
-        return;
-    }
     HoiVien* newHoiVien = HoiVien::create(tenHV, sdt, gioiTinh, ngaySinh, point);
     ql.addHoiVien(newHoiVien);
     ql.setDirty(true);
@@ -74,12 +70,6 @@ void HoiVienService::suaHoiVien(const string& maHV, const string& tenHV, const s
     errorMsg = Validator::validateSoDuong(point);
     if (!errorMsg.empty()) {
         // UI::showError("Lỗi điểm: " + errorMsg);
-        return;
-    }
-
-    HoiVien* hvKiemTraSDT = ql.getHoiVienBySDT(sdt);
-    if (hvKiemTraSDT != nullptr && hvKiemTraSDT->getID() != maHV) {
-        // UI::showError("Số điện thoại đã tồn tại.");
         return;
     }
 
