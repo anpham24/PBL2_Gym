@@ -34,9 +34,14 @@ void HoiVienService::themHoiVien(const string& tenHV, const string& sdt,
     }
     QuanLy& ql = QuanLy::getInstance();
     HoiVien* newHoiVien = HoiVien::create(tenHV, sdt, gioiTinh, ngaySinh, point);
-    ql.addHoiVien(newHoiVien);
-    ql.setDirty(true);
-    // UI::showMessage("Thêm hội viên thành công.");
+
+    if (ql.addHoiVien(newHoiVien)) {
+        ql.setDirty(true);
+        // UI::showMessage("Thêm hội viên thành công.");
+    } else {
+        delete newHoiVien; // Xóa nếu thêm thất bại để tránh leak
+        // UI::showError("Lỗi: Không thể thêm hội viên (Trùng ID hoặc lỗi hệ thống).");
+    }
 }
 
 void HoiVienService::suaHoiVien(const string& maHV, const string& tenHV, const string& sdt,

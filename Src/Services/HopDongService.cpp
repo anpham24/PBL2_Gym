@@ -34,9 +34,13 @@ void HopDongService::themHopDong(const string& maHV, const string& maGT, const s
     }
 
     HopDong* newHopDong = HopDong::create(ngayDK, ngayHetHan, true, hv, gt, nv);
-    ql.addHopDong(newHopDong);
-    ql.setDirty(true);
-    // UI::showMessage("Thêm hợp đồng thành công.");
+    if (ql.addHopDong(newHopDong)) {
+        ql.setDirty(true);
+        // UI::showMessage("Thêm hợp đồng thành công.");
+    } else {
+        delete newHopDong; // Xóa nếu thêm thất bại để tránh leak
+        // UI::showError("Lỗi: Không thể thêm hợp đồng (Trùng ID hoặc lỗi hệ thống).");
+    }
 }
 
 void HopDongService::suaHopDong(const string& maHD, const string& maHV, const string& maGT,

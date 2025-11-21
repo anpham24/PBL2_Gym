@@ -25,9 +25,13 @@ void LopHocService::themLopHoc(const string& tenLop, const string& lichTap, int 
     HLV* hlv = ql.getHLV(maHLV);
 
     LopHoc* newLopHoc = LopHoc::create(tenLop, lichTap, thoiLuong, monTap, hlv);
-    ql.addLopHoc(newLopHoc);
-    ql.setDirty(true);
-    // UI::showMessage("Thêm lớp học thành công.");
+    if (ql.addLopHoc(newLopHoc)) {
+        ql.setDirty(true);
+        // UI::showMessage("Thêm lớp học thành công.");
+    } else {
+        delete newLopHoc; // Xóa nếu thêm thất bại để tránh leak
+        // UI::showError("Lỗi: Không thể thêm lớp học (Trùng ID hoặc lỗi hệ thống).");
+    }
 }
 
 void LopHocService::suaLopHoc(const string& maLop, const string& tenLop, const string& lichTap,

@@ -31,9 +31,14 @@ void HangHoaService::themHangHoa(const string& tenHH, const string& loaiHH, doub
     QuanLy& ql = QuanLy::getInstance();
     
     HangHoa* newHangHoa = HangHoa::create(tenHH, loaiHH, gia, soLuong);
-    ql.addHangHoa(newHangHoa);
-    ql.setDirty(true);
-    // UI::showMessage("Thêm hàng hóa thành công.");
+    if (ql.addHangHoa(newHangHoa)) {
+        ql.setDirty(true);
+        // UI::showMessage("Thêm hàng hóa thành công.");
+    } else {
+        delete newHangHoa; // Xóa nếu thêm thất bại để tránh leak
+        // UI::showError("Lỗi: Không thể thêm hàng hóa (Trùng ID hoặc lỗi hệ thống).");
+        return;
+    }
 }
 
 void HangHoaService::suaHangHoa(const string& maHH, const string& tenHH, const string& loaiHH,

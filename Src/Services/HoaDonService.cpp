@@ -9,35 +9,39 @@
 
 HoaDon* HoaDonService::taoHoaDon(const string& maNV, const string& maHV,
     const string& ngayLap, const string& phuongThucTT) {
-string errorMsg = Validator::validateNgay(ngayLap);
-if (!errorMsg.empty()) {
-// UI::showError("Lỗi ngày lập: " + errorMsg);
-return nullptr; // <--- SỬA Ở ĐÂY
-}
+    string errorMsg = Validator::validateNgay(ngayLap);
+    if (!errorMsg.empty()) {
+    // UI::showError("Lỗi ngày lập: " + errorMsg);
+    return nullptr; // <--- SỬA Ở ĐÂY
+    }
 
-if (phuongThucTT.empty()) {
-// UI::showError("Phương thức thanh toán không được để trống.");
-return nullptr; // <--- SỬA Ở ĐÂY
-}
+    if (phuongThucTT.empty()) {
+    // UI::showError("Phương thức thanh toán không được để trống.");
+    return nullptr; // <--- SỬA Ở ĐÂY
+    }
 
-QuanLy& ql = QuanLy::getInstance();
-NhanVien* nv = ql.getNhanVien(maNV);
-if (nv == nullptr) {
-// UI::showError("Mã nhân viên không tồn tại.");
-return nullptr; // <--- SỬA Ở ĐÂY
-}
-HoiVien* hv = ql.getHoiVien(maHV);
-if (hv == nullptr) {
-// UI::showError("Mã hội viên không tồn tại.");
-return nullptr; // <--- SỬA Ở ĐÂY
-}
+    QuanLy& ql = QuanLy::getInstance();
+    NhanVien* nv = ql.getNhanVien(maNV);
+    if (nv == nullptr) {
+    // UI::showError("Mã nhân viên không tồn tại.");
+    return nullptr; // <--- SỬA Ở ĐÂY
+    }
+    HoiVien* hv = ql.getHoiVien(maHV);
+    if (hv == nullptr) {
+    // UI::showError("Mã hội viên không tồn tại.");
+    return nullptr; // <--- SỬA Ở ĐÂY
+    }
 
-HoaDon* newHoaDon = HoaDon::create(ngayLap, phuongThucTT, nv, hv);
-ql.addHoaDon(newHoaDon);
-ql.setDirty(true);
-// UI::showMessage("Tạo hóa đơn thành công.");
-
-return newHoaDon; // <--- THÊM DÒNG NÀY
+    HoaDon* newHoaDon = HoaDon::create(ngayLap, phuongThucTT, nv, hv);
+    if (ql.addHoaDon(newHoaDon)) {
+        ql.setDirty(true);
+        // UI::showMessage("Tạo hóa đơn thành công.");
+    } else {
+        delete newHoaDon; // Xóa nếu thêm thất bại để tránh leak
+        // UI::showError("Lỗi: Không thể tạo hóa đơn (Trùng ID hoặc lỗi hệ thống).");
+        return nullptr; // <--- SỬA Ở ĐÂY
+    }
+    return newHoaDon; // <--- THÊM DÒNG NÀY
 }
 
 void HoaDonService::themHangHoaVaoHoaDon(const string& maHD, const string& maHH, int soLuong, double donGia) {
@@ -127,8 +131,9 @@ void HoaDonService::xoaHangHoaKhoiHoaDon(const string& maHD, const string& maHH)
             }
             
             // Xoa lien ket va giai phong bo nho
-            hd->removeChiTietHoaDon_HH(dsChiTiet[i]); // Dong thoi xoa o phia HangHoa
-            delete dsChiTiet[i];
+            ChiTietHoaDon_HH* itemToDelete = dsChiTiet[i]; // 1. Lưu con trỏ lại
+            hd->removeChiTietHoaDon_HH(itemToDelete);      // 2. Xóa khỏi danh sách
+            delete itemToDelete;
             ql.setDirty(true);
             // UI::showMessage("Xóa hàng hóa khỏi hóa đơn thành công.");
             return;
@@ -149,8 +154,9 @@ void HoaDonService::xoaGoiTapKhoiHoaDon(const string& maHD, const string& maGT) 
     for (size_t i = 0; i < dsChiTiet.size(); ++i) {
         if (dsChiTiet[i]->getGoiTap()->getID() == maGT) {
             // Xoa lien ket hai chieu va giai phong bo nho
-            hd->removeChiTietHoaDon_GT(dsChiTiet[i]); // Dong thoi xoa o phia GoiTap
-            delete dsChiTiet[i];
+            ChiTietHoaDon_GT* itemToDelete = dsChiTiet[i];
+            hd->removeChiTietHoaDon_GT(itemToDelete);
+            delete itemToDelete;
             ql.setDirty(true);
             // UI::showMessage("Xóa gói tập khỏi hóa đơn thành công.");
             return;
