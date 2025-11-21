@@ -212,7 +212,7 @@ void CartPopup::loadSanPhamList() {
     // (nen convert term sang chu thuong)
     
     if (sanPhamTabs.getActiveTab() == 0) { // Tab Hang Hoa
-        MyVector<HangHoa*>& ds = app.getQuanLy().getDsHangHoa();
+        const MyVector<HangHoa*>& ds = app.getQuanLy().getDsHangHoa();
         for (size_t i = 0; i < ds.size(); ++i) {
             HangHoa* hh = ds[i];
             if (hh->getIsActive() && hh->getSoLuongCon() > 0) {
@@ -224,7 +224,7 @@ void CartPopup::loadSanPhamList() {
             }
         }
     } else { // Tab Goi Tap
-        MyVector<GoiTap*>& ds = app.getQuanLy().getDsGoiTap();
+        const MyVector<GoiTap*>& ds = app.getQuanLy().getDsGoiTap();
         for (size_t i = 0; i < ds.size(); ++i) {
             GoiTap* gt = ds[i];
             if (gt->getIsActive()) {

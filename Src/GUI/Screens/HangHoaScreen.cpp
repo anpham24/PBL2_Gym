@@ -74,7 +74,7 @@ HangHoaScreen::HangHoaScreen(App& app)
 void HangHoaScreen::loadAndDisplayData() {
     allHangHoa.clear();
     
-    MyVector<HangHoa*>& dsHangHoaGoc = app.getQuanLy().getDsHangHoa();
+    const MyVector<HangHoa*>& dsHangHoaGoc = app.getQuanLy().getDsHangHoa();
     for (size_t i = 0; i < dsHangHoaGoc.size(); ++i) {
         allHangHoa.push_back(dsHangHoaGoc[i]);
     }

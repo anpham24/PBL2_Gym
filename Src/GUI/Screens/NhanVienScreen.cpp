@@ -81,7 +81,7 @@ NhanVienScreen::NhanVienScreen(App& app)
 void NhanVienScreen::loadAndDisplayData() {
     allNhanVien.clear();
     
-    MyVector<NhanVien*>& dsNhanVienGoc = app.getQuanLy().getDsNhanVien();
+    const MyVector<NhanVien*>& dsNhanVienGoc = app.getQuanLy().getDsNhanVien();
     for (size_t i = 0; i < dsNhanVienGoc.size(); ++i) {
         allNhanVien.push_back(dsNhanVienGoc[i]);
     }

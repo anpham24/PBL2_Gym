@@ -13,7 +13,7 @@ HoiVienScreen::HoiVienScreen(App& app)
 {
     // --- (MOI) KIEM TRA QUYEN ---
     // Neu la Staff, dat co ReadOnly
-    isStaffReadOnly = (app.getCurrentAccount()->getAccountType() == AccountType::STAFF);
+    // isStaffReadOnly = (app.getCurrentAccount()->getAccountType() == AccountType::STAFF);
 
     float contentX = 250; // Vi tri bat dau (sau Sidebar)
     
@@ -50,7 +50,7 @@ HoiVienScreen::HoiVienScreen(App& app)
     });
 
     // --- (MOI) CHI ADMIN MOI THAY COT SUA/XOA ---
-    if (!isStaffReadOnly) {
+    // if (!isStaffReadOnly) {
         // Cot "Sua"
         hoiVienTable.addEditAction([this](HoiVien* hv){
             // Goi popup sua, voi callback
@@ -75,7 +75,7 @@ HoiVienScreen::HoiVienScreen(App& app)
             
             this->deletePopup.show(hv->getHoTen(), onConfirm, warning);
         });
-    }
+    // }
 
     // --- Phan Trang ---
     pagination.setPosition(contentX, 600); // Dat duoi bang

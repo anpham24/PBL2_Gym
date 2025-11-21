@@ -94,7 +94,7 @@ void DatHLVPopup::hide() {
 void DatHLVPopup::loadAllHLV() {
     allActiveHLV.clear();
     
-    MyVector<HLV*>& allHLV = app.getQuanLy().getDsHLV(); 
+    const MyVector<HLV*>& allHLV = app.getQuanLy().getDsHLV(); 
     
     for (size_t i = 0; i < allHLV.size(); ++i) {
         HLV* hlv = allHLV[i];

@@ -82,6 +82,7 @@ public:
     bool removeNhanVien(const string&);
     NhanVien* getNhanVien(const string&);
     const NhanVien* getNhanVien(const string&) const;
+    NhanVien* getNhanVienBySDT(const string& sdt);
     MyVector<NhanVien*> searchNhanVienByName(const string& namePrefix);
 
     // Ham quan ly GoiTap

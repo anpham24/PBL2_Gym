@@ -95,7 +95,7 @@ HLVScreen::HLVScreen(App& app)
 void HLVScreen::loadAndDisplayData() {
     allHLV.clear();
     
-    MyVector<HLV*>& dsHLVGoc = app.getQuanLy().getDsHLV();
+    const MyVector<HLV*>& dsHLVGoc = app.getQuanLy().getDsHLV();
     for (size_t i = 0; i < dsHLVGoc.size(); ++i) {
         allHLV.push_back(dsHLVGoc[i]);
     }

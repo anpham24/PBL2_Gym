@@ -74,7 +74,7 @@ LopHocScreen::LopHocScreen(App& app)
 void LopHocScreen::loadAndDisplayData() {
     allLopHoc.clear();
     
-    MyVector<LopHoc*>& dsLopHocGoc = app.getQuanLy().getDsLopHoc();
+    const MyVector<LopHoc*>& dsLopHocGoc = app.getQuanLy().getDsLopHoc();
     for (size_t i = 0; i < dsLopHocGoc.size(); ++i) {
         allLopHoc.push_back(dsLopHocGoc[i]);
     }

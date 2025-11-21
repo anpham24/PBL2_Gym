@@ -288,6 +288,15 @@ const NhanVien* QuanLy::getNhanVien(const string& maNV) const {
     return nullptr;
 }
 
+NhanVien* QuanLy::getNhanVienBySDT(const string& sdt) {
+    for (size_t i = 0; i < dsNhanVien.size(); ++i) {
+        if (dsNhanVien[i]->getSDT() == sdt) {
+            return dsNhanVien[i];
+        }
+    }
+    return nullptr;
+}
+
 MyVector<NhanVien*> QuanLy::searchNhanVienByName(const string& namePrefix) {
     return searchEngine.searchNhanVien(namePrefix);
 }

@@ -80,7 +80,7 @@ GoiTapScreen::GoiTapScreen(App& app)
 void GoiTapScreen::loadAndDisplayData() {
     allGoiTap.clear();
     
-    MyVector<GoiTap*>& dsGoiTapGoc = app.getQuanLy().getDsGoiTap();
+    const MyVector<GoiTap*>& dsGoiTapGoc = app.getQuanLy().getDsGoiTap();
     for (size_t i = 0; i < dsGoiTapGoc.size(); ++i) {
         allGoiTap.push_back(dsGoiTapGoc[i]);
     }

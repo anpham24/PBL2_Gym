@@ -504,7 +504,7 @@ void FileIO::linkGoiTap_MonTap(const string& filePath) {
 }
 
 void FileIO::loadAllData(QuanLy& ql, AccountManager& am, const string& folderPath) {
-    loadAccounts(am, ql, folderPath + "/accounts.txt");
+   
 
     IDGenerator::loadState();
 
@@ -523,6 +523,8 @@ void FileIO::loadAllData(QuanLy& ql, AccountManager& am, const string& folderPat
     loadChiTietHoaDon_HH(folderPath + "/ChiTietHoaDon_HH.txt");
     loadChiTietHoaDon_GT(folderPath + "/ChiTietHoaDon_GT.txt");
 
+    loadAccounts(am, ql, folderPath + "/accounts.txt");
+    
     linkLopHoc(folderPath + "/LopHoc.txt");
     linkHopDong(folderPath + "/HopDong.txt");
     linkHoaDon(folderPath + "/HoaDon.txt");

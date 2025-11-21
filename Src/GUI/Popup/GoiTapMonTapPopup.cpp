@@ -68,7 +68,7 @@ void GoiTapMonTapPopup::loadData() {
     // Tab 2: Load mon co a them (Chi load neu la Admin)
     if (!isReadOnly) {
         availableMonTap.clear();
-        MyVector<MonTap*>& allMonTap = app.getQuanLy().getDsMonTap();
+        const MyVector<MonTap*>& allMonTap = app.getQuanLy().getDsMonTap();
         std::string searchTerm = searchInput.getString(); //.toAnsiString(); SFML 3.0
         // (nen convert searchTerm sang chu thuong)
 

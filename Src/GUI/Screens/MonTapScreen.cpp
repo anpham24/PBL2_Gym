@@ -77,7 +77,7 @@ void MonTapScreen::loadAndDisplayData() {
     allMonTap.clear();
     
     // Lay data tu QuanLy
-    MyVector<MonTap*>& dsMonTapGoc = app.getQuanLy().getDsMonTap();
+    const MyVector<MonTap*>& dsMonTapGoc = app.getQuanLy().getDsMonTap();
     for (size_t i = 0; i < dsMonTapGoc.size(); ++i) {
         allMonTap.push_back(dsMonTapGoc[i]);
     }
