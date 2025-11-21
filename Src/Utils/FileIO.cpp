@@ -86,10 +86,11 @@ void FileIO::loadHLV(const string& filePath) {
         string sdt = parts[2];
         string gioiTinh = parts[3];
         string ngaySinh = parts[4];
-        double luong = stod(parts[5]);
-        bool isActive = toBool(parts[6]);
+       string chuyenMon = parts[5]; // ✅ THÊM DÒNG NÀY!
+            double luong = stod(parts[6]);
+            bool isActive = toBool(parts[7]);
 
-        HLV* hlv = HLV::create(maHLV, tenHLV, sdt, gioiTinh, ngaySinh, luong, isActive);
+        HLV* hlv = HLV::create(maHLV, tenHLV, sdt, gioiTinh, ngaySinh, chuyenMon, luong, isActive);
         ql.addHLV(hlv);
     }
     file.close();

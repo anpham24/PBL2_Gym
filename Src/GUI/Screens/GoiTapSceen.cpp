@@ -32,8 +32,8 @@ GoiTapScreen::GoiTapScreen(App& app)
     
     // Cac cot luon hien thi
     goiTapTable.addColumn("ID", 100, [](const GoiTap* gt) { return gt->getID(); });
-    goiTapTable.addColumn("Ten Goi", 250, [](const GoiTap* gt) { return gt->getTenGoi(); });
-    goiTapTable.addColumn("Thoi Gian (Ngay)", 120, [](const GoiTap* gt) { return std::to_string(gt->getThoiGian()); });
+    goiTapTable.addColumn("Ten Goi", 230, [](const GoiTap* gt) { return gt->getTenGoi(); });
+    goiTapTable.addColumn("Thoi Gian (Ngay)", 150, [](const GoiTap* gt) { return std::to_string(gt->getThoiGian()); });
     goiTapTable.addColumn("Gia", 150, [](const GoiTap* gt) { return std::to_string((int)gt->getGia()); });
     goiTapTable.addColumn("Buoi PT", 80, [](const GoiTap* gt) { return std::to_string(gt->getSoBuoiPT()); });
     

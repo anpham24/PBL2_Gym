@@ -30,13 +30,27 @@ HLVScreen::HLVScreen(App& app)
     // --- Bang Du Lieu ---
     hlvTable.setPosition(contentX, 100);
     
-    // Cac cot luon hien thi
-    hlvTable.addColumn("ID", 100, [](const HLV* hlv) { return hlv->getID(); });
-    hlvTable.addColumn("Ten HLV", 250, [](const HLV* hlv) { return hlv->getHoTen(); });
-    hlvTable.addColumn("SDT", 150, [](const HLV* hlv) { return hlv->getSDT(); });
+    // === SỬA LẠI CÁC CỘT Ở ĐÂY ===
+    // Cot ID: Lay ID
+    hlvTable.addColumn("ID", 100, [](const HLV* hlv) { 
+        return hlv->getID(); 
+    });
+
+    // Cot Ten: Lay Ho Ten (Truoc day ban co the dang lay ID)
+    hlvTable.addColumn("Ten HLV", 250, [](const HLV* hlv) { 
+        return hlv->getHoTen(); 
+    });
+
+    // Cot SDT: Lay SDT (Truoc day ban co the dang lay Ten)
+    hlvTable.addColumn("SDT", 150, [](const HLV* hlv) { 
+        return hlv->getSDT(); 
+    });
+
+    // Cot Trang Thai
     hlvTable.addColumn("Trang Thai", 120, [](const HLV* hlv) { 
         return hlv->getIsActive() ? "Dang lam" : "Nghi viec"; 
     });
+    // ==============================
     
     // Cot "Chi Tiet" (Nut "Xem" - Luon hien thi)
     hlvTable.addAction("Xem", [this](HLV* hlv) {

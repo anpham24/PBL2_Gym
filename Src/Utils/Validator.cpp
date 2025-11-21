@@ -8,11 +8,11 @@ string Validator::validateTen(const string& ten) {
         return "Tên không được vượt quá 50 ký tự.";
     }
     // Kiem tra ký tự hợp lệ (chỉ cho phép chữ cái và dấu cách)
-    for (char c : ten) {
-        if (!isalpha(c) && !isspace(c)) {
-            return "Tên chỉ được chứa chữ cái và dấu cách.";
-        }
-    }
+    // for (char c : ten) {
+    //     if (!isalpha(c) && !isspace(c)) {
+    //         return "Tên chỉ được chứa chữ cái và dấu cách.";
+    //     }
+    // }
     return "";
 }
 

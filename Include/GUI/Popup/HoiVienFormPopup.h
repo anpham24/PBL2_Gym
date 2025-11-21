@@ -1,96 +1,69 @@
-// GUI/Popups/HoiVienFormPopup.h
 #pragma once
 
 #include "BasePopup.h"
+#include "HoiVien.h"
 #include "InputBox.h"
 #include "Button.h"
-#include "HoiVien.h"
-#include <functional> // De su dung std::function
+#include <functional>
 
-/*
- * (Component con)
- * Dinh nghia mot nhom 2 nut (Nam/Nu) de chon gioi tinh.
- */
-class GenderSelector {
-public:
-    sf::Text label;
+// Component con de chon gioi tinh
+struct GenderSelector {
+    sf::Font& font;
+    int selectedGender; // 0: None, 1: Nam, 2: Nu
+    
+    sf::Text* label; // <--- QUAN TRỌNG: Phải là CON TRỎ
+    
     Button btnNam;
     Button btnNu;
-    int selectedGender; // 0 = chua chon, 1 = Nam, 2 = Nu
-    sf::Font& font;
 
     GenderSelector(sf::Font& font);
+    ~GenderSelector();
+
+    // --- QUAN TRỌNG: Copy Constructor & Assignment ---
+    GenderSelector(const GenderSelector& other);
+    GenderSelector& operator=(const GenderSelector& other);
+
     void setup(float x, float y);
     void draw(sf::RenderTarget& target);
     void handleEvent(sf::Event event, sf::Vector2i mousePos);
     void update(sf::Vector2i mousePos);
+    
     std::string getString();
     void setFocused(bool focusNam, bool focusNu);
 };
 
-
-/*
- * Lop HoiVienFormPopup la popup chinh de Them hoac Sua thong tin Hoi Vien.
- * No ke thua BasePopup va chua toan bo logic form.
- */
 class HoiVienFormPopup : public BasePopup {
 private:
-    HoiVien* currentHoiVien; // Con tro den hoi vien dang sua (nullptr neu la them moi)
-
-    // Ham callback se duoc goi khi Them/Sua thanh cong (de load lai bang)
-    std::function<void()> onSuccessCallback; 
-
-    // Form components
+    HoiVien* currentHoiVien; // Neu null -> Them moi, nguoc lai -> Sua
+    
+    // Cac truong nhap lieu
     InputBox hoTenInput;
     InputBox sdtInput;
     InputBox ngaySinhInput;
+    
     GenderSelector genderSelector;
-    sf::Text errorMessage; // De hien "Vui long nhap du thong tin"
-
+    
+    sf::Text errorMessage; // Thong bao loi
+    
     Button confirmButton;
     Button cancelButton;
-
-    // Dinh vi focus de dieu huong bang phim
-    int focusIndex; // 0=HoTen, 1=SDT, 2=NgaySinh, 3=Nam, 4=Nu, 5=Confirm, 6=Cancel
-
-    // Ham xu ly
-    /**
-     * @brief Kiem tra tat ca input, su dung Validator.
-     * @return true neu tat ca deu hop le.
-     */
-    bool validateInfo(std::string& ten, std::string& sdt, std::string& gioiTinh, std::string& ngaySinh);
     
-    /**
-     * @brief Goi khi nhan "Xac Nhan", se goi validateInfo va Service.
-     */
+    int focusIndex; // De dieu huong bang tab/enter
+    std::function<void()> onSuccessCallback;
+
+    bool validateInfo(std::string& ten, std::string& sdt, std::string& gioiTinh, std::string& ngaySinh);
     void handleSubmit();
     
-    /**
-     * @brief Cap nhat giao dien focus (vien vang) cho component.
-     */
     void updateFocus();
-    
-    /**
-     * @brief Xu ly dieu huong bang phim (Tab, Enter, Mui ten).
-     */
     void handleKeyNavigation(sf::Keyboard::Key key);
-
-protected:
-    // Ve cac input, button vao popupPanel
-    void drawContent(sf::RenderTarget& target) override;
 
 public:
     HoiVienFormPopup(App& app);
     
-    // An/Hien
-    /**
-     * @brief Hien thi form.
-     * @param hv Con tro den HoiVien de SUA (nullptr neu THEM MOI).
-     * @param onSuccess Callback de goi khi thanh cong.
-     */
-    void show(HoiVien* hv, std::function<void()> onSuccess);
-
-    // Ghi de cac ham cua BasePopup
+    void show(HoiVien* hv = nullptr, std::function<void()> onSuccess = nullptr);
+    
+    // Override tu BasePopup
+    void drawContent(sf::RenderTarget& target) override;
     void handleEvent(sf::Event event, sf::Vector2i mousePos) override;
     void update(sf::Vector2i mousePos) override;
 };

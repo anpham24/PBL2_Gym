@@ -238,6 +238,8 @@ void InputBox::resetCursorBlink() {
 
 // --- THÊM VÀO CUỐI TỆP InputBox.cpp ---
 
+// --- DÁN 2 HÀM NÀY VÀO CUỐI TỆP InputBox.cpp ---
+
 InputBox::InputBox(const InputBox& other)
     : box(other.box),
       stringValue(other.stringValue),

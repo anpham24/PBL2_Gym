@@ -1,8 +1,9 @@
 // GUI/Sidebar.cpp
 #include "Sidebar.h"
-#include "App.h"
+#include "Screens/MainScreen.h" 
+#include "../App.h"
 #include <iostream>
-#include "MainScreen.h"
+#include <string> 
 
 // Dinh nghia cac muc dieu huong
 struct NavItem {
@@ -11,44 +12,42 @@ struct NavItem {
     bool adminOnly; // Chi Admin moi thay
 };
 
-// --- (CAP NHAT LOGIC QUYEN) ---
-// Danh sach tat ca cac muc dieu huong trong he thong
-// adminOnly: false = Staff co a thay
-// adminOnly: true  = Staff KHONG a thay
+// (CAP NHAT LOGIC QUYEN)
 const std::vector<NavItem> allNavItems = {
-    {"Hoi Vien",    ContentScreenType::HoiVien,   false}, // Staff co the thay
-    {"Ban Hang",    ContentScreenType::BanHang,   false}, // Staff co the thay
-    {"Goi Tap",     ContentScreenType::GoiTap,    false}, // (MOI) Staff co the thay
-    {"Lop Hoc",     ContentScreenType::LopHoc,    false}, // (MOI) Staff co the thay
-    {"HLV",         ContentScreenType::HLV,       false}, // (MOI) Staff co the thay
-    {"Nhan Vien",   ContentScreenType::NhanVien,  false}, // (MOI) Staff co the thay
-    {"Hang Hoa",    ContentScreenType::HangHoa,   false}, // (MOI) Staff co the thay
-    {"Bao Cao",     ContentScreenType::BaoCao,    true},  // (VAN AN) Chi Admin
-    {"Cai Dat",     ContentScreenType::CaiDat,    false}  // Staff co the thay
+    {"Hoi Vien",    ContentScreenType::HoiVien,   false},
+    {"Ban Hang",    ContentScreenType::BanHang,   false},
+    {"Goi Tap",     ContentScreenType::GoiTap,    false},
+    {"Lop Hoc",     ContentScreenType::LopHoc,    false},
+    {"HLV",         ContentScreenType::HLV,       false},
+    {"Nhan Vien",   ContentScreenType::NhanVien,  false},
+    {"Hang Hoa",    ContentScreenType::HangHoa,   false},
+    {"Mon Tap",     ContentScreenType::MonTap,    false}, 
+    {"Bao Cao",     ContentScreenType::BaoCao,    true},  
+    {"Cai Dat",     ContentScreenType::CaiDat,    false}
 };
 
 
 Sidebar::Sidebar(MainScreen& screen, App& app) 
-    : mainScreen(screen), app(app),title(nullptr), staffName(nullptr), activeButton(nullptr), sidebarWidth(220.0f) 
+    : mainScreen(screen), app(app), title(nullptr), staffName(nullptr), activeButton(nullptr), sidebarWidth(220.0f) 
 {
-    // Thiet lap nen cho Sidebar
     background.setSize(sf::Vector2f(sidebarWidth, (float)app.getWindow().getSize().y));
-    background.setFillColor(Config::CardDark); // Mau nen toi
+    background.setFillColor(Config::CardDark);
     
-    // Thiet lap Title (ten phan mem)
+    // SỬA: Dùng 'new' để khởi tạo con trỏ
     title = new sf::Text(app.getGlobalFont(), "GYM PRO", 24);
+    
+    // SỬA: Dùng '->' thay vì '.'
     title->setFillColor(Config::AccentCyan);
     title->setStyle(sf::Text::Bold);
-    // SỬA LỖI API: Dùng sf::Vector2f
     title->setPosition(sf::Vector2f(20, 20));
 
-    // --- SỬA STAFFNAME ---
+    // SỬA: Dùng 'new'
     staffName = new sf::Text(app.getGlobalFont(), "", 16);
+    
+    // SỬA: Dùng '->' thay vì '.'
     staffName->setFillColor(Config::TextMuted);
-    // SỬA LỖI API: Dùng sf::Vector2f
     staffName->setPosition(sf::Vector2f(20, 60));
 
-    // Thiet lap nut Dang Xuat (luon o duoi cung)
     logoutButton.setup("Dang Xuat", app.getGlobalFont());
     logoutButton.setSize(sidebarWidth - 40, 40);
     logoutButton.setPosition(20, app.getWindow().getSize().y - 60.0f);
@@ -63,34 +62,32 @@ Sidebar::~Sidebar() {
 }
 
 void Sidebar::setup(Account* currentUser) {
-    if (currentUser == nullptr) {
-        std::cerr << "Loi Sidebar: Khong co nguoi dung hien tai!" << std::endl;
-        return;
-    }
+    if (currentUser == nullptr) return;
 
     AccountType userType = currentUser->getAccountType();
     
     // Hien thi ten nguoi dung
     if (userType == AccountType::ADMIN) {
-        if (staffName) staffName->setString("Xin chao, Admin"); // SỬA
-    } else if (currentUser->getLinkedStaff() != nullptr) {
-        // ...
+        // SỬA: Dùng '->'
+        if (staffName) staffName->setString("Xin chao, Admin");
+    } 
+    else if (currentUser->getLinkedStaff() != nullptr) {
         std::string tenNV = currentUser->getLinkedStaff()->getHoTen();
-        if (staffName) staffName->setString(sf::String::fromUtf8(tenNV.begin(), tenNV.end())); // SỬA
-    } else {
-        if (staffName) staffName->setString("Xin chao, Staff"); // SỬA
+        // SỬA: Dùng '->'
+        if (staffName) staffName->setString("NV: " + sf::String::fromUtf8(tenNV.begin(), tenNV.end()));
+    } 
+    else {
+        // SỬA: Dùng '->'
+        if (staffName) staffName->setString("Xin chao, Staff (Loi)"); 
     }
 
     navButtons.clear();
     float currentY = 120.0f; 
 
-    // --- LOGIC LOC QUYEN (DA CAP NHAT) ---
+    // Logic loc quyen
     for (const auto& item : allNavItems) {
-        
-        // Neu muc nay chi danh cho Admin (adminOnly == true)
-        // va nguoi dung khong phai la Admin
         if (item.adminOnly && userType != AccountType::ADMIN) {
-            continue; // Bo qua, khong tao nut nay (chi xay ra voi "Bao Cao")
+            continue; 
         }
 
         Button btn;
@@ -100,9 +97,6 @@ void Sidebar::setup(Account* currentUser) {
 
         btn.setOnClick([this, item]() {
             this->mainScreen.changeContentScreen(item.screenType);
-            
-            // (Chung ta se them logic de to mau nut active o day)
-            // this->activeButton = &btn; 
         });
         
         navButtons.push_back(btn);
@@ -126,11 +120,12 @@ void Sidebar::update(sf::Vector2i mousePos) {
 
 void Sidebar::draw(sf::RenderTarget& target) {
     target.draw(background);
+    
+    // SỬA: Dùng '*' để vẽ đối tượng mà con trỏ trỏ tới
     if (title) target.draw(*title);
     if (staffName) target.draw(*staffName);
 
     for (auto& btn : navButtons) {
-        // (Them logic: Neu nut nay la activeButton -> doi mau)
         btn.draw(target);
     }
     

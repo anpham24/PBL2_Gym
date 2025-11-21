@@ -48,7 +48,7 @@ NhanVienFormPopup::NhanVienFormPopup(App& app)
     luongInput.setPosition(pX + 120, pY + 200);
 
     // (MOI) Checkbox cap tai khoan
-    capTaiKhoanCheck.setup("Cap tai khoan Staff (Ten dang nhap = ID, Mat khau = SDT)", font);
+    capTaiKhoanCheck.setup("Cap tai khoan Staff", font);
     capTaiKhoanCheck.setPosition(pX + 120, pY + 250);
     capTaiKhoanCheck.setChecked(true); // Mac dinh la co cap tai khoan
 

@@ -6,6 +6,7 @@
 // #include "MainScreen.h" // De lay enum ContentScreenType
 #include "App.h"               // De lay thong tin Account
 #include <vector>
+#include <string>
 
 class MainScreen;
 class Sidebar {

@@ -1,50 +1,86 @@
-// GUI/Popups/HoiVienFormPopup.cpp
 #include "HoiVienFormPopup.h"
-#include "HoiVienService.h" // Goi Service
-#include "Validator.h"         // Goi Validator
+#include "Services/HoiVienService.h"
+#include "Utils/Validator.h"
 #include <iostream>
 
 // ========================================================================
-// IMPLEMENTATION cho GenderSelector (Component con)
+// IMPLEMENTATION cho GenderSelector
 // ========================================================================
+
+// 1. Constructor
 GenderSelector::GenderSelector(sf::Font& font) 
-    : font(font), selectedGender(0), label(font,"Gioi tinh:", 16), btnNam(), btnNu()
+    : font(font), 
+      selectedGender(0), 
+      label(new sf::Text(font, "Gioi tinh:", 16)), 
+      btnNam(), 
+      btnNu()
 {
-    // label.setFont(font);
-    // label.setString("Gioi tinh:");
-    // label.setCharacterSize(16);
-    label.setFillColor(Config::TextNormal);
+    label->setFillColor(Config::TextNormal);
     
     btnNam.setup("Nam", font);
     btnNu.setup("Nu", font);
     btnNam.setSize(80, 35);
     btnNu.setSize(80, 35);
     
-    // Dat mau mac dinh cho nut chua chon
     btnNam.setColors(Config::CardLight, Config::CardDark);
     btnNu.setColors(Config::CardLight, Config::CardDark);
     
-    // Khi click, thay doi trang thai va mau sac
     btnNam.setOnClick([this](){ 
         selectedGender = 1; 
-        btnNam.setColors(Config::AccentCyan, Config::AccentCyan); // Mau chon
-        btnNu.setColors(Config::CardLight, Config::CardDark); // Mau mac dinh
+        btnNam.setColors(Config::AccentCyan, Config::AccentCyan);
+        btnNu.setColors(Config::CardLight, Config::CardDark);
     });
     btnNu.setOnClick([this](){ 
         selectedGender = 2; 
-        btnNu.setColors(Config::AccentCyan, Config::AccentCyan); // Mau chon
-        btnNam.setColors(Config::CardLight, Config::CardDark); // Mau mac dinh
+        btnNu.setColors(Config::AccentCyan, Config::AccentCyan);
+        btnNam.setColors(Config::CardLight, Config::CardDark);
     });
 }
 
+// 2. Destructor
+GenderSelector::~GenderSelector() {
+    delete label;
+}
+
+// 3. Copy Constructor
+GenderSelector::GenderSelector(const GenderSelector& other)
+    : font(other.font),
+      selectedGender(other.selectedGender),
+      btnNam(other.btnNam), 
+      btnNu(other.btnNu)
+{
+    if (other.label != nullptr) {
+        this->label = new sf::Text(*other.label);
+    } else {
+        this->label = nullptr;
+    }
+}
+
+// 4. Copy Assignment Operator
+GenderSelector& GenderSelector::operator=(const GenderSelector& other) {
+    if (this == &other) return *this;
+
+    selectedGender = other.selectedGender;
+    btnNam = other.btnNam;
+    btnNu = other.btnNu;
+
+    delete label;
+    if (other.label != nullptr) {
+        this->label = new sf::Text(*other.label);
+    } else {
+        this->label = nullptr;
+    }
+    return *this;
+}
+
 void GenderSelector::setup(float x, float y) {
-    label.setPosition(sf::Vector2f(x, y + 5));
+    if (label) label->setPosition(sf::Vector2f(x, y + 5));
     btnNam.setPosition(x + 120, y);
     btnNu.setPosition(x + 210, y);
 }
 
 void GenderSelector::draw(sf::RenderTarget& target) {
-    target.draw(label);
+    if (label) target.draw(*label);
     btnNam.draw(target);
     btnNu.draw(target);
 }
@@ -74,66 +110,72 @@ void GenderSelector::setFocused(bool focusNam, bool focusNu) {
 // ========================================================================
 // IMPLEMENTATION cho HoiVienFormPopup
 // ========================================================================
+
 HoiVienFormPopup::HoiVienFormPopup(App& app)
     : BasePopup(app, "Them Hoi Vien Moi"),
       currentHoiVien(nullptr),
       genderSelector(app.getGlobalFont()),
       focusIndex(0),
-      errorMessage(font, "", 14),
-      hoTenInput(),         // Gọi InputBox::InputBox() (đã sửa)
-      sdtInput(),           // Gọi InputBox::InputBox() (đã sửa)
-      ngaySinhInput(),      // Gọi InputBox::InputBox() (đã sửa)
-    //   errorMessage(font, "", 14), // <--- Quan trọng!
-      confirmButton(),      // Gọi Button::Button() (đã sửa)
-      cancelButton()        // Gọi Button::Button() (đã sửa)
+      errorMessage(app.getGlobalFont(), "", 14),
+      hoTenInput(),
+      sdtInput(),
+      ngaySinhInput(),
+      confirmButton(),
+      cancelButton()
 {
-    // Thiet ke layout
     sf::Vector2f panelSize(500, 450);
+    
+    // SỬA LẠI: Dùng '.' (dấu chấm) vì popupPanel là đối tượng, không phải con trỏ
     popupPanel.setSize(panelSize);
     popupPanel.setPosition(sf::Vector2f(
         (app.getWindow().getSize().x - panelSize.x) / 2.0f,
         (app.getWindow().getSize().y - panelSize.y) / 2.0f
     ));
-    // Dat lai vi tri title/nut [X]
-    title.setPosition(sf::Vector2f(popupPanel.getPosition().x + 20, popupPanel.getPosition().y + 15));
-    closeButton.setPosition(popupPanel.getPosition().x + panelSize.x - 40, popupPanel.getPosition().y + 15);
     
-    float pX = popupPanel.getPosition().x + 30; // X bat dau (co padding)
-    float pY = popupPanel.getPosition().y + 80; // Y bat dau (duoi title)
-    float inputWidth = panelSize.x - 180; // Chieu rong input
+    // SỬA LẠI: Dùng '.'
+    title.setPosition(sf::Vector2f(popupPanel.getPosition().x + 20, popupPanel.getPosition().y + 15));
+    
+    // SỬA LẠI: Dùng '.'
+    closeButton.setPosition(
+        popupPanel.getPosition().x + panelSize.x - 40, 
+        popupPanel.getPosition().y + 15
+    );
+    
+    // SỬA LẠI: Dùng '.'
+    float pX = popupPanel.getPosition().x + 30;
+    float pY = popupPanel.getPosition().y + 80;
+    float inputWidth = panelSize.x - 180;
 
-    // Setup cac InputBox
-    hoTenInput.setup("Nhap ho ten", font, false);
+    sf::Font& f = app.getGlobalFont();
+
+    hoTenInput.setup("Nhap ho ten", f, false);
     hoTenInput.setSize(inputWidth, 35);
     hoTenInput.setPosition(pX + 120, pY);
 
-    sdtInput.setup("Nhap SDT (VD: 09...)", font, false);
+    sdtInput.setup("Nhap SDT (VD: 09...)", f, false);
     sdtInput.setSize(inputWidth, 35);
     sdtInput.setPosition(pX + 120, pY + 50);
 
-    ngaySinhInput.setup("DD/MM/YYYY", font, false);
+    ngaySinhInput.setup("DD/MM/YYYY", f, false);
     ngaySinhInput.setSize(inputWidth, 35);
     ngaySinhInput.setPosition(pX + 120, pY + 100);
 
-    // Setup GenderSelector
     genderSelector.setup(pX, pY + 150);
 
-    // Setup Error Message
-    // errorMessage.setFont(font);
-    // errorMessage.setCharacterSize(14);
     errorMessage.setFillColor(Config::Danger);
     errorMessage.setPosition(sf::Vector2f(pX, pY + 200));
 
-    // Setup Buttons
+    // SỬA LẠI: Dùng '.'
     float btnY = popupPanel.getPosition().y + panelSize.y - 70;
-    confirmButton.setup("Xac Nhan", font);
+    
+    confirmButton.setup("Xac Nhan", f);
     confirmButton.setSize(120, 40);
     confirmButton.setPosition(pX + 100, btnY);
     confirmButton.setOnClick([this]() {
         handleSubmit();
     });
 
-    cancelButton.setup("Huy", font);
+    cancelButton.setup("Huy", f);
     cancelButton.setSize(120, 40);
     cancelButton.setPosition(pX + 260, btnY);
     cancelButton.setOnClick([this]() {
@@ -142,31 +184,28 @@ HoiVienFormPopup::HoiVienFormPopup(App& app)
 }
 
 void HoiVienFormPopup::show(HoiVien* hv, std::function<void()> onSuccess) {
-    onSuccessCallback = onSuccess; // Luu lai ham callback
+    onSuccessCallback = onSuccess;
     errorMessage.setString("");
     
     if (hv == nullptr) {
-        // --- THEM MOI ---
+        // SỬA LẠI: Dùng '.'
         title.setString("Them Hoi Vien Moi");
         currentHoiVien = nullptr;
         
-        // Xoa het du lieu cu
         hoTenInput.setString("");
         sdtInput.setString("");
         ngaySinhInput.setString("");
         genderSelector.selectedGender = 0;
         genderSelector.btnNam.setColors(Config::CardLight, Config::CardDark);
         genderSelector.btnNu.setColors(Config::CardLight, Config::CardDark);
-        
     } else {
-        // --- SUA ---
+        // SỬA LẠI: Dùng '.'
         title.setString("Cap Nhat Thong Tin");
         currentHoiVien = hv;
         
-        // Dien thong tin cua hoi vien
         hoTenInput.setString(hv->getHoTen());
         sdtInput.setString(hv->getSDT());
-        ngaySinhInput.setString(hv->getNgaySinh()); // Gia su format la DD/MM/YYYY
+        ngaySinhInput.setString(hv->getNgaySinh());
         
         if (hv->getGioiTinh() == "Nam") {
             genderSelector.btnNam.click();
@@ -181,9 +220,12 @@ void HoiVienFormPopup::show(HoiVien* hv, std::function<void()> onSuccess) {
 }
 
 void HoiVienFormPopup::drawContent(sf::RenderTarget& target) {
-    // Ve cac label
-    sf::Text label(font, sf::String(), 16);
+    sf::Font& f = genderSelector.font; 
+    
+    sf::Text label(f, "", 16);
     label.setFillColor(Config::TextNormal);
+    
+    // SỬA LẠI: Dùng '.'
     float pX = popupPanel.getPosition().x + 30;
     float pY = popupPanel.getPosition().y + 80;
     
@@ -199,7 +241,6 @@ void HoiVienFormPopup::drawContent(sf::RenderTarget& target) {
     label.setPosition(sf::Vector2f(pX, pY + 105));
     target.draw(label);
 
-    // Ve cac component
     hoTenInput.draw(target);
     sdtInput.draw(target);
     ngaySinhInput.draw(target);
@@ -213,28 +254,23 @@ void HoiVienFormPopup::drawContent(sf::RenderTarget& target) {
 
 void HoiVienFormPopup::handleEvent(sf::Event event, sf::Vector2i mousePos) {
     if (!isVisible) return;
-    BasePopup::handleEvent(event, mousePos); // Xu ly nut [X]
+    BasePopup::handleEvent(event, mousePos);
 
-    // Truyen event cho cac component con
     confirmButton.handleEvent(event, mousePos);
     cancelButton.handleEvent(event, mousePos);
     genderSelector.handleEvent(event, mousePos);
 
-    // Xu ly input (TextEntered)
     if (event.getIf<sf::Event::TextEntered>()) {
         if (focusIndex == 0) hoTenInput.handleEvent(event);
         else if (focusIndex == 1) sdtInput.handleEvent(event);
         else if (focusIndex == 2) ngaySinhInput.handleEvent(event);
     }
     
-    // Xu ly dieu huong
     if (auto* keyEvent = event.getIf<sf::Event::KeyPressed>()) {
-        // Truyen phim dieu huong (Left, Right, Delete...) cho input
         if (focusIndex == 0) hoTenInput.handleEvent(event);
         else if (focusIndex == 1) sdtInput.handleEvent(event);
         else if (focusIndex == 2) ngaySinhInput.handleEvent(event);
 
-        // Dieu huong (Tab, Down, Up, Enter)
         handleKeyNavigation(keyEvent->code);
     }
 }
@@ -260,22 +296,22 @@ void HoiVienFormPopup::handleKeyNavigation(sf::Keyboard::Key key) {
     }
     else if (key == sf::Keyboard::Key::Enter) {
         switch (focusIndex) {
-            case 0: // Tu Ho Ten -> SDT
-            case 1: // Tu SDT -> Ngay Sinh
-            case 2: // Tu Ngay Sinh -> Gioi Tinh (Nam)
+            case 0: 
+            case 1: 
+            case 2: 
                 focusIndex++;
                 updateFocus();
                 break;
-            case 3: // O nut Nam
+            case 3: 
                 genderSelector.btnNam.click();
                 break;
-            case 4: // O nut Nu
+            case 4: 
                 genderSelector.btnNu.click();
                 break;
-            case 5: // O nut Xac Nhan
+            case 5: 
                 confirmButton.click();
                 break;
-            case 6: // O nut Huy
+            case 6: 
                 cancelButton.click();
                 break;
         }
@@ -284,9 +320,9 @@ void HoiVienFormPopup::handleKeyNavigation(sf::Keyboard::Key key) {
 
 void HoiVienFormPopup::update(sf::Vector2i mousePos) {
     if (!isVisible) return;
-    BasePopup::update(mousePos); // Xu ly nut [X]
+    BasePopup::update(mousePos);
 
-    hoTenInput.update(sf::Time::Zero); // Update dau nhay
+    hoTenInput.update(sf::Time::Zero);
     sdtInput.update(sf::Time::Zero);
     ngaySinhInput.update(sf::Time::Zero);
     
@@ -296,22 +332,18 @@ void HoiVienFormPopup::update(sf::Vector2i mousePos) {
 }
 
 bool HoiVienFormPopup::validateInfo(std::string& ten, std::string& sdt, std::string& gioiTinh, std::string& ngaySinh) {
-    errorMessage.setString(""); // Xoa loi cu
+    errorMessage.setString("");
     
-    // 1. Lay du lieu tu Form
     ten = hoTenInput.getString();
     sdt = sdtInput.getString();
     gioiTinh = genderSelector.getString();
     ngaySinh = ngaySinhInput.getString();
 
-    // 2. Kiem tra de trong (theo yeu cau)
     if (ten.empty() || sdt.empty() || gioiTinh.empty() || ngaySinh.empty()) {
         errorMessage.setString("Vui long nhap du thong tin");
-        // (Them logic boi vien do o day)
         return false;
     }
 
-    // 3. Kiem tra tinh hop le (goi Validator cua ban)
     std::string errorMsg;
     
     errorMsg = Validator::validateTen(ten);
@@ -319,8 +351,6 @@ bool HoiVienFormPopup::validateInfo(std::string& ten, std::string& sdt, std::str
     
     errorMsg = Validator::validateSDT(sdt);
     if (!errorMsg.empty()) { errorMessage.setString(errorMsg); return false; }
-
-    // (validateGioiTinh da duoc dam bao boi GenderSelector)
 
     errorMsg = Validator::validateNgay(ngaySinh);
     if (!errorMsg.empty()) { errorMessage.setString(errorMsg); return false; }
@@ -332,17 +362,14 @@ void HoiVienFormPopup::handleSubmit() {
     std::string ten, sdt, gioiTinh, ngaySinh;
     
     if (!validateInfo(ten, sdt, gioiTinh, ngaySinh)) {
-        return; // Neu validate that bai, dung lai
+        return;
     }
 
     if (currentHoiVien == nullptr) {
         // --- THEM MOI ---
-        // Goi Service voi cac tham so da duoc validate
-        // (Mac dinh point = 0 khi them moi)
         HoiVienService::themHoiVien(ten, sdt, gioiTinh, ngaySinh, 0);
     } else {
         // --- CAP NHAT ---
-        // (Service sua cua ban co point, nen ta lay point cu)
         HoiVienService::suaHoiVien(
             currentHoiVien->getID(), 
             ten, 
@@ -353,11 +380,9 @@ void HoiVienFormPopup::handleSubmit() {
         );
     }
     
-    // (Kiem tra loi tu Service - Hien tai Service dang tu show loi)
-    
     if (onSuccessCallback) {
-        onSuccessCallback(); // Goi callback de load lai bang
+        onSuccessCallback();
     }
     
-    hide(); // Dong popup
+    hide();
 }
