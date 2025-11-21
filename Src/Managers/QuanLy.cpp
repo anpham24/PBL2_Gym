@@ -119,6 +119,7 @@ bool QuanLy::removeHoiVien(const string& maHV) {
 
     searchEngine.removeIndexHoiVien(hvCanXoa);
     bool removed = dsHoiVien.del(maHV);
+
     if (removed) {
         delete hvCanXoa; 
     }
@@ -194,6 +195,11 @@ bool QuanLy::removeHLV(const string& maHLV) {
     
     searchEngine.removeIndexHLV(hlvCanXoa);
     bool removed = dsHLV.erase(hlvIndex); 
+
+    if (removed) {
+        delete hlvCanXoa;
+    }
+
     return removed;
 }
 
@@ -267,6 +273,11 @@ bool QuanLy::removeNhanVien(const string& maNV) {
 
     searchEngine.removeIndexNhanVien(nvCanXoa);
     bool removed = dsNhanVien.erase(nvIndex);
+
+    if (removed) {
+        delete nvCanXoa;
+    }
+
     return removed;
 }
 
@@ -330,19 +341,19 @@ bool QuanLy::removeGoiTap(const string& maGoi) {
     MyVector<HopDong*>& dsHopDongLienQuan = gtCanXoa->getDsHopDong();
     if (!dsHopDongLienQuan.empty()) {
         gtCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
-        return false; // SỬA LẠI: Trả về false (không xóa)
+        return true;
     }
 
     MyVector<ChiTietHoaDon_GT*>& dsChiTietHoaDon_GTLienQuan = gtCanXoa->getDsChiTietHoaDon_GT();
     if (!dsChiTietHoaDon_GTLienQuan.empty()) {
         gtCanXoa->setIsActive(false); // Chỉ đánh dấu không hoạt động
-        return false; // SỬA LẠI: Trả về false (không xóa)
+        return true;
     }
 
     // Nếu không còn ràng buộc, tiến hành xóa
     bool removed = dsGoiTap.erase(gtIndex);
     if (removed) {
-        delete gtCanXoa; // <--- BUG FIX: Thêm dòng này để giải phóng bộ nhớ
+        delete gtCanXoa; 
     }
     return removed;
 }
@@ -402,6 +413,9 @@ bool QuanLy::removeLopHoc(const string& maLop) {
     lhCanXoa->setHLV(nullptr);
 
     bool removed = dsLopHoc.erase(lhIndex);
+    if (removed) {
+        delete lhCanXoa;
+    }
     return removed;
 }
 
@@ -457,24 +471,13 @@ bool QuanLy::removeMonTap(const string& maMon) {
     }
 
     MyVector<LopHoc*>& dsLopHocLienQuan = mtCanXoa->getDsLopHoc();
-    for (size_t i = 0; i < dsLopHocLienQuan.size(); ++i) {
-        LopHoc* lh = dsLopHocLienQuan[i];
-
-        if (lh != nullptr) {
-            lh->setHLV(nullptr);
-            lh->setMonTap(nullptr);
-            dsLopHoc.erase(i);
-            delete lh;
-        }
+    if (!dsLopHocLienQuan.empty()) {
+        return false; // Không được xóa MonTap nếu còn LopHoc liên quan
     }
 
     MyVector<GoiTap*>& dsGoiTapLienQuan = mtCanXoa->getDsGoiTap();
-    for (size_t i = 0; i < dsGoiTapLienQuan.size(); ++i) {
-        GoiTap* gt = dsGoiTapLienQuan[i];
-
-        if (gt != nullptr) {
-            gt->removeMonTap(mtCanXoa);
-        }
+    if (!dsGoiTapLienQuan.empty()) {
+        return false; // Không được xóa MonTap nếu còn GoiTap liên quan
     }
 
     bool removed = dsMonTap.erase(mtIndex);
@@ -575,6 +578,9 @@ bool QuanLy::removeHangHoa(const string& maHH) {
     }
 
     bool removed = dsHangHoa.erase(hhIndex);
+    if (removed) {
+        delete hhCanXoa; 
+    }
     return removed;
 }
 

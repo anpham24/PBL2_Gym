@@ -52,6 +52,8 @@ void MyVector<T>::clear() {
 
 template <typename T>
 void MyVector<T>::reserve(size_t newCapacity) {
+    if (newCapacity < m_size)
+        return;
     T* newData = new T[newCapacity];
     for (size_t i = 0; i < m_size; i++) {
         newData[i] = data[i];

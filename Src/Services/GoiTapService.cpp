@@ -29,9 +29,13 @@ void GoiTapService::themGoiTap(const string& tenGoi, int thoiGian, int soBuoiPT,
 
     GoiTap* newGoiTap = GoiTap::create(tenGoi, thoiGian, soBuoiPT, gia);
     QuanLy& ql = QuanLy::getInstance();
-    ql.addGoiTap(newGoiTap);
-    ql.setDirty(true);
-    // UI::Thêm thành công
+    if (ql.addGoiTap(newGoiTap)) {
+        ql.setDirty(true);
+        // UI::showMessage("Thêm gói tập thành công.");
+    } else {
+        delete newGoiTap; // Xóa nếu thêm thất bại để tránh leak
+        // UI::showError("Lỗi: Không thể thêm gói tập (Trùng ID hoặc lỗi hệ thống).");
+    }
 }
 
 void GoiTapService::themMonTapVaoGoiTap(const string& maGoi, const string& maMon) {

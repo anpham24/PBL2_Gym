@@ -27,33 +27,28 @@ size_t MyHashTable<T>::hash_function(const string& key) const {
 }
 
 template <typename T>
-void MyHashTable<T>::insert(const std::string& key, const T& value) {
+void MyHashTable<T>::insert(const string& key, const T& value) {
     size_t index = hash_function(key);
-    Node* newNode = new Node(key, value);
     
-    if (table[index] == nullptr) {
-        table[index] = newNode;
-        m_size++;
-        return;
-    }
-
+    // Kiểm tra tồn tại trước để update
     Node* current = table[index];
-    while (true) {
+    while (current != nullptr) {
         if (current->key == key) {
-            current->value = value; // update
-            delete newNode;
-            return;
+            current->value = value;
+            return; // Update xong thì return ngay, không cần tạo node mới
         }
-        if (current->next == nullptr) break;
         current = current->next;
     }
 
-    current->next = newNode; // thêm node mới
+    // Nếu không tìm thấy thì mới tạo Node mới
+    Node* newNode = new Node(key, value);
+    newNode->next = table[index]; // Chèn vào đầu danh sách (nhanh hơn chèn cuối)
+    table[index] = newNode;
     m_size++;
 }
 
 template <typename T>
-bool MyHashTable<T>::del(const std::string& key) {
+bool MyHashTable<T>::del(const string& key) {
     size_t index = hash_function(key);
     Node* current = table[index];
     Node* prev = nullptr;

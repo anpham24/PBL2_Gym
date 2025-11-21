@@ -34,9 +34,13 @@ void NhanVienService::themNhanVien(const string& tenNV, const string& sdt,
     }
     QuanLy& ql = QuanLy::getInstance();
     NhanVien* newNhanVien = NhanVien::create(tenNV, sdt, gioiTinh, ngaySinh, luong);
-    ql.addNhanVien(newNhanVien);
-    ql.setDirty(true);
-    // UI::showMessage("Thêm nhân viên thành công.");
+    if (ql.addNhanVien(newNhanVien)) {
+        ql.setDirty(true);
+        // UI::showMessage("Thêm nhân viên thành công.");
+    } else {
+        delete newNhanVien; // Xóa nếu thêm thất bại để tránh leak
+        // UI::showError("Lỗi: Không thể thêm nhân viên (Trùng ID hoặc lỗi hệ thống).");
+    }
 }
 
 void NhanVienService::suaNhanVien(const string& maNV, const string& tenNV, const string& sdt,

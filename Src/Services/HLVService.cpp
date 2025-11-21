@@ -39,9 +39,13 @@ void HLVService::themHLV(const string& tenHLV, const string& sdt,
     }
     QuanLy& ql = QuanLy::getInstance();
     HLV* newHLV = HLV::create(tenHLV, sdt, gioiTinh, ngaySinh, chuyenMon, luong);
-    ql.addHLV(newHLV);
-    ql.setDirty(true);
-    // UI::showMessage("Thêm HLV thành công.");
+    if (ql.addHLV(newHLV)) {
+        ql.setDirty(true);
+        // UI::showMessage("Thêm HLV thành công.");
+    } else {
+        delete newHLV; // Xóa nếu thêm thất bại để tránh leak
+        // UI::showError("Lỗi: Không thể thêm HLV (Trùng ID hoặc lỗi hệ thống).");
+    }
 }
 
 void HLVService::suaHLV(const string& maHLV, const string& tenHLV, const string& sdt,

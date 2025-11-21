@@ -18,9 +18,13 @@ void MonTapService::themMonTap(const string& tenMon) {
     
     QuanLy& ql = QuanLy::getInstance();
     MonTap* newMonTap = MonTap::create(tenMon);
-    ql.addMonTap(newMonTap);
-    ql.setDirty(true);
-    // UI::showMessage("Thêm môn tập thành công.");
+    if (ql.addMonTap(newMonTap)) {
+        ql.setDirty(true);
+        // UI::showMessage("Thêm môn tập thành công.");
+    } else {
+        delete newMonTap; // Xóa nếu thêm thất bại để tránh leak
+        // UI::showError("Lỗi: Không thể thêm môn tập (Trùng ID hoặc lỗi hệ thống).");
+    }
 }
 
 void MonTapService::suaMonTap(const string& maMon, const string& tenMon) {

@@ -24,9 +24,13 @@ void LogTapPTService::themLogTapPT(const string& maHV, const string& maHLV, cons
     }
     
     LogTapPT* newLog = LogTapPT::create(ngayGio, hv, hlv);
-    ql.addLogTapPT(newLog);
-    ql.setDirty(true);
-    // UI::showMessage("Thêm log tập PT thành công.");
+    if (ql.addLogTapPT(newLog)) {
+        ql.setDirty(true);
+        // UI::showMessage("Thêm log tập PT thành công.");
+    } else {
+        delete newLog; // Xóa nếu thêm thất bại để tránh leak
+        // UI::showError("Lỗi: Không thể thêm log tập PT (Trùng ID hoặc lỗi hệ thống).");
+    }
 }
 
 void LogTapPTService::suaLogTapPT(const string& maLog, const string& maHV, const string& maHLV,
