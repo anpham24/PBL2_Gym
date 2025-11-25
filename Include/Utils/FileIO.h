@@ -47,6 +47,9 @@ private:
     static void saveHoaDon(const string& filePath);
     static void saveLogTapPT(const string& filePath);
 
+    static void saveChiTietHoaDon_HH(const string& filePath);
+    static void saveChiTietHoaDon_GT(const string& filePath);
+
     static void saveAccounts(const AccountManager& am, const string& filePath);
     static void loadAccounts(AccountManager& am, QuanLy& ql, const string& filePath);
 };

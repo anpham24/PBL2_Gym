@@ -53,6 +53,8 @@ double ChiTietHoaDon_GT::tinhTien() const {
 }
 
 string ChiTietHoaDon_GT::read() const {
-    string result = hoaDon->getID() + ";" + goiTap->getID() + ";" + to_string(soLuong) + ";" + to_string(donGia);
+    string hoaDonID = (hoaDon != nullptr) ? hoaDon->getID() : "NULL";
+    string goiTapID = (goiTap != nullptr) ? goiTap->getID() : "NULL";
+    string result = hoaDonID + ";" + goiTapID + ";" + to_string(soLuong) + ";" + to_string(donGia);
     return result;
 }

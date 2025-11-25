@@ -15,13 +15,15 @@
 class BasePopup {
 protected:
     App& app;
+
+    sf::Font& font; // Tham chieu den font toan cuc
     sf::RectangleShape backgroundOverlay; // Lop phu mo
     sf::RectangleShape popupPanel;        // Khung cua so popup
     sf::Text title;
     Button closeButton; // Nut [X] de dong
 
     bool isVisible;
-    sf::Font& font; // Tham chieu den font toan cuc
+
 
     /**
      * @brief Ham ao (virtual) ma cac lop con se ve noi dung cua chung.

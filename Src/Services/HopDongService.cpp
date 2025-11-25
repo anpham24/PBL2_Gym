@@ -2,44 +2,73 @@
 #include "HopDong.h"
 #include "Validator.h"
 #include "QuanLy.h"
+#include <iostream>
 
 void HopDongService::themHopDong(const string& maHV, const string& maGT, const string& maNV,
-                                 const string& ngayDK, const string& ngayHetHan) {
+                                 const string& ngayDK, const string& ngayHetHan, int soBuoiPT) {
+    std::cout << "\n🔨 ===== CREATING CONTRACT =====" << std::endl;
+    std::cout << "   HV: " << maHV << std::endl;
+    std::cout << "   GT: " << maGT << std::endl;
+    std::cout << "   NV: " << maNV << std::endl;
+    std::cout << "   Start: " << ngayDK << std::endl;
+    std::cout << "   End: " << ngayHetHan << std::endl;
+    
     string errorMsg = Validator::validateNgay(ngayDK);
     if (!errorMsg.empty()) {
-        // UI::showError("Lỗi ngày đăng ký: " + errorMsg);
+        std::cerr << "   ❌ Invalid start date: " << errorMsg << std::endl;
         return;
     }
+    
     errorMsg = Validator::validateNgay(ngayHetHan);
     if (!errorMsg.empty()) {
-        // UI::showError("Lỗi ngày hết hạn: " + errorMsg);
+        std::cerr << "   ❌ Invalid end date: " << errorMsg << std::endl;
         return;
     }
 
     QuanLy& ql = QuanLy::getInstance();
+    
     HoiVien* hv = ql.getHoiVien(maHV);
     if (hv == nullptr) {
-        // UI::showError("Mã hội viên không tồn tại.");
+        std::cerr << "   ❌ HoiVien not found: " << maHV << std::endl;
         return;
     }
+    
     GoiTap* gt = ql.getGoiTap(maGT);
     if (gt == nullptr) {
-        // UI::showError("Mã gói tập không tồn tại.");
+        std::cerr << "   ❌ GoiTap not found: " << maGT << std::endl;
         return;
     }
-    NhanVien* nv = ql.getNhanVien(maNV);
-    if (nv == nullptr) {
-        // UI::showError("Mã nhân viên không tồn tại.");
-        return;
+    
+    // ✅ FIX: Cho phép ADMIN tạo hợp đồng
+    NhanVien* nv = nullptr;
+    if (maNV != "ADMIN") {
+        nv = ql.getNhanVien(maNV);
+        if (nv == nullptr) {
+            std::cerr << "   ❌ NhanVien not found: " << maNV << std::endl;
+            return;
+        }
+        std::cout << "   ✅ NhanVien: " << nv->getHoTen() << std::endl;
+    } else {
+        std::cout << "   ⚠️ ADMIN creating contract (no NhanVien link)" << std::endl;
     }
 
-    HopDong* newHopDong = HopDong::create(ngayDK, ngayHetHan, true, hv, gt, nv);
+    std::cout << "   🔨 Creating HopDong object..." << std::endl;
+    HopDong* newHopDong = HopDong::create(ngayDK, ngayHetHan, true, soBuoiPT, hv, gt, nv);
+    
+    if (newHopDong == nullptr) {
+        std::cerr << "   ❌ HopDong::create() returned nullptr!" << std::endl;
+        return;
+    }
+    
+    std::cout << "   ✅ HopDong created: " << newHopDong->getID() << std::endl;
+    
     if (ql.addHopDong(newHopDong)) {
         ql.setDirty(true);
-        // UI::showMessage("Thêm hợp đồng thành công.");
+        std::cout << "   ✅ HopDong added to QuanLy" << std::endl;
+        std::cout << "================================\n" << std::endl;
     } else {
-        delete newHopDong; // Xóa nếu thêm thất bại để tránh leak
-        // UI::showError("Lỗi: Không thể thêm hợp đồng (Trùng ID hoặc lỗi hệ thống).");
+        std::cerr << "   ❌ Failed to add HopDong to QuanLy!" << std::endl;
+        delete newHopDong;
     }
 }
 

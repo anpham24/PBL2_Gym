@@ -1,6 +1,7 @@
 #pragma once
 #include "Person.h"
 #include "MyVector.h"
+#include "Config.h"
 
 class HoaDon; // Forward declaration
 class HopDong; // Forward declaration
@@ -25,6 +26,9 @@ public:
     int getPoint() const;
     int getSoBuoiPT() const;
     bool getIsActive() const;
+    string getRank() const;
+    Config::Rank getRankEnum() const; // ✅ THÊM - Trả về enum
+    double getDiscountRate() const;   // ✅ THÊM - Lấy % giảm giá
 
     // Setters
     void setPoint(int);

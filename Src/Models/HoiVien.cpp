@@ -2,6 +2,7 @@
 #include "HopDong.h"
 #include "HoaDon.h"
 #include "IDGenerator.h"
+#include "Config.h"
 
 HoiVien::HoiVien() {}
 
@@ -17,6 +18,35 @@ HoiVien::~HoiVien() {}
 int HoiVien::getPoint() const { return this->point; }
 int HoiVien::getSoBuoiPT() const { return this->soBuoiPT; }
 bool HoiVien::getIsActive() const { return this->isActive; }
+Config::Rank HoiVien::getRankEnum() const {
+    if (point >= Config::RANK_MIN_POINTS.at(Config::Rank::PLATINUM)) {
+        return Config::Rank::PLATINUM;
+    } else if (point >= Config::RANK_MIN_POINTS.at(Config::Rank::GOLD)) {
+        return Config::Rank::GOLD;
+    } else if (point >= Config::RANK_MIN_POINTS.at(Config::Rank::SILVER)) {
+        return Config::Rank::SILVER;
+    } else {
+        return Config::Rank::BRONZE;
+    }
+}
+
+// ✅ Trả về string
+string HoiVien::getRank() const {
+    Config::Rank rank = getRankEnum();
+    
+    switch (rank) {
+        case Config::Rank::PLATINUM: return "Platinum";
+        case Config::Rank::GOLD:     return "Gold";
+        case Config::Rank::SILVER:   return "Silver";
+        case Config::Rank::BRONZE:
+        default:                     return "Bronze";
+    }
+}
+
+// ✅ Lấy % giảm giá
+double HoiVien::getDiscountRate() const {
+    return Config::RANK_DISCOUNT.at(getRankEnum());
+}
 
 // Setters
 void HoiVien::setPoint(int point) { this->point = point; }

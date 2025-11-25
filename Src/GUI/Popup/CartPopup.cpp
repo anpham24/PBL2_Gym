@@ -1,47 +1,50 @@
 // GUI/Popups/CartPopup.cpp
 #include "CartPopup.h"
+#include "HopDongService.h"
 #include "HoaDonService.h"
 #include "DateTimeUils.h"
 #include "QuanLy.h"
+#include "HoiVien.h"
 #include <iostream>
+#include <algorithm>
 
 // ========================================================================
-// IMPLEMENTATION cho PhuongThucSelector (Component con)
+// PhuongThucSelector
 // ========================================================================
 PhuongThucSelector::PhuongThucSelector(sf::Font& font) 
     : font(font), selected(""), label(font, "P.Thuc TT:", 16), btnTienMat(), btnChuyenKhoan()
 {
-    // label.setFont(font);
-    // label.setString("P.Thuc TT:");
-    // label.setCharacterSize(16);
     label.setFillColor(Config::TextMuted);
-    
     btnTienMat.setup("Tien Mat", font);
     btnChuyenKhoan.setup("Chuyen Khoan", font);
     btnTienMat.setSize(120, 35);
     btnChuyenKhoan.setSize(120, 35);
-    
     btnTienMat.setOnClick([this](){ setSelected("Tien Mat"); });
     btnChuyenKhoan.setOnClick([this](){ setSelected("Chuyen Khoan"); });
 }
+
 void PhuongThucSelector::setup(float x, float y) {
     label.setPosition(sf::Vector2f(x, y + 5));
     btnTienMat.setPosition(x + 100, y);
     btnChuyenKhoan.setPosition(x + 230, y);
 }
+
 void PhuongThucSelector::draw(sf::RenderTarget& target) {
     target.draw(label);
     btnTienMat.draw(target);
     btnChuyenKhoan.draw(target);
 }
+
 void PhuongThucSelector::handleEvent(sf::Event event, sf::Vector2i mousePos) {
     btnTienMat.handleEvent(event, mousePos);
     btnChuyenKhoan.handleEvent(event, mousePos);
 }
+
 void PhuongThucSelector::update(sf::Vector2i mousePos) {
     btnTienMat.update(mousePos);
     btnChuyenKhoan.update(mousePos);
 }
+
 void PhuongThucSelector::setSelected(const std::string& pt) {
     selected = pt;
     if (pt == "Tien Mat") {
@@ -54,7 +57,7 @@ void PhuongThucSelector::setSelected(const std::string& pt) {
 }
 
 // ========================================================================
-// IMPLEMENTATION cho CartPopup
+// CartPopup - GIỮ NGUYÊN CONSTRUCTOR CŨ
 // ========================================================================
 CartPopup::CartPopup(App& app)
     : BasePopup(app, "Tao Hoa Don Moi"), 
@@ -62,53 +65,54 @@ CartPopup::CartPopup(App& app)
       tongHoaDon(0), giamGia(0), tongThanhToan(0),
       khachHangSelector(app.getGlobalFont(), "Tim khach hang (SDT/Ten)..."),
       sanPhamTabs(app.getGlobalFont()),
-      hoveredSanPhamIndex(-1),
       hoveredCartItemIndex(-1),
       phuongThucSelector(app.getGlobalFont()),
       nhanVienText(font, "", 16),
       tongText(font, "", 16),
       giamGiaText(font, "", 16),
-      finalTotalText(font, "", 22), // (Lấy size 22 từ Dòng 161)
-      errorMessage(font, "", 16)
+      finalTotalText(font, "", 22),
+      errorMessage(font, "", 16),
+      confirmPayButton(),
+      cancelButton()
 {
-    // Mo rong popup ra toi da
-    float popupW = app.getWindow().getSize().x * 0.9f; // 90% chieu rong
-    float popupH = app.getWindow().getSize().y * 0.9f; // 90% chieu cao
+    float popupW = app.getWindow().getSize().x * 0.95f; 
+    float popupH = app.getWindow().getSize().y * 0.9f; 
+    
     popupPanel.setSize(sf::Vector2f(popupW, popupH));
     popupPanel.setPosition(sf::Vector2f(
         (app.getWindow().getSize().x - popupW) / 2.0f,
         (app.getWindow().getSize().y - popupH) / 2.0f
     ));
-    // Dat lai vi tri Title va Nut [X]
+
     title.setPosition(sf::Vector2f(popupPanel.getPosition().x + 20, popupPanel.getPosition().y + 15));
     closeButton.setPosition(popupPanel.getPosition().x + popupW - 40, popupPanel.getPosition().y + 15);
     
-    // Dinh nghia layout 3 cot
     float pX = popupPanel.getPosition().x;
     float pY = popupPanel.getPosition().y;
-    float pTop = pY + 80; // Vi tri bat dau duoi Title
-    float pBottom = pY + popupH - 80; // Vi tri cho cac nut duoi cung
+    float pTop = pY + 80;
+    float pBottom = pY + popupH - 80;
 
-    // --- Column 1 (30% width) ---
+    // ✅ Column 1 (25%) - NHÂN VIÊN Ở TRÊN, KHÁCH HÀNG Ở DƯỚI
     float col1X = pX + 20;
-    float col1Width = popupW * 0.3f - 30;
+    float col1Width = popupW * 0.25f - 20;
     
-    khachHangSelector.setSize(col1Width, 35);
-    khachHangSelector.setPosition(col1X, pTop);
-    khachHangSelector.setOnSelect([this](HoiVien* hv){
-        this->tinhTong(); // Tinh lai giam gia khi chon HV
-    });
-    
-    // nhanVienText.setFont(font);
-    // nhanVienText.setCharacterSize(16);
+    // Nhân viên ở đầu
     nhanVienText.setFillColor(Config::TextMuted);
-    nhanVienText.setPosition(sf::Vector2f(col1X, pTop + 50));
+    nhanVienText.setPosition(sf::Vector2f(col1X, pTop));
     
-    phuongThucSelector.setup(col1X, pTop + 90);
+    // Phương thức thanh toán
+    phuongThucSelector.setup(col1X, pTop + 40);
+    
+    // ✅ Khách hàng ở DƯỚI (không bị che)
+    khachHangSelector.setSize(col1Width, 35);
+    khachHangSelector.setPosition(col1X, pTop + 90);
+    khachHangSelector.setOnSelect([this](HoiVien* hv){
+        this->tinhTong(); 
+    });
 
-    // --- Column 2 (40% width) ---
-    float col2X = pX + popupW * 0.3f;
-    float col2Width = popupW * 0.4f - 20;
+    // ✅ Column 2 (45% - San Pham)
+    float col2X = pX + popupW * 0.25f + 10;
+    float col2Width = popupW * 0.45f - 20;
     
     sanPhamTabs.setPosition(col2X, pTop);
     sanPhamTabs.addTab("Hang Hoa");
@@ -122,35 +126,25 @@ CartPopup::CartPopup(App& app)
     sanPhamListBg.setSize(sf::Vector2f(col2Width, pBottom - (pTop + 85)));
     sanPhamListBg.setFillColor(Config::CardLight);
     
-    // --- Column 3 (30% width) ---
+    // Column 3 (30% - Gio Hang)
     float col3X = pX + popupW * 0.7f + 10;
     float col3Width = popupW * 0.3f - 30;
 
     cartListBg.setPosition(sf::Vector2f(col3X, pTop));
-    cartListBg.setSize(sf::Vector2f(col3Width, pBottom - (pTop + 100)));
+    cartListBg.setSize(sf::Vector2f(col3Width, pBottom - (pTop + 150)));
     cartListBg.setFillColor(Config::CardLight);
     
-    // Setup cac text Tong tien
-    float totalY = pBottom - 80;
-    // tongText.setFont(font);
-    // tongText.setCharacterSize(16);
+    float totalY = pBottom - 130;
     tongText.setFillColor(Config::TextNormal);
     tongText.setPosition(sf::Vector2f(col3X, totalY));
     
-    // giamGiaText.setFont(font);
-    // giamGiaText.setCharacterSize(16);
     giamGiaText.setFillColor(Config::AccentCyan);
     giamGiaText.setPosition(sf::Vector2f(col3X, totalY + 30));
     
-    // finalTotalText.setFont(font);
-    // finalTotalText.setCharacterSize(22);
     finalTotalText.setFillColor(Config::Success);
     finalTotalText.setStyle(sf::Text::Bold);
     finalTotalText.setPosition(sf::Vector2f(col3X, totalY + 60));
 
-    // --- Nut dieu khien (duoi cung) ---
-    // errorMessage.setFont(font);
-    // errorMessage.setCharacterSize(16);
     errorMessage.setFillColor(Config::Danger);
     errorMessage.setPosition(sf::Vector2f(pX + 20, pBottom + 20));
 
@@ -166,76 +160,183 @@ CartPopup::CartPopup(App& app)
 }
 
 void CartPopup::show(std::function<void()> onSuccess) {
+    std::cout << "\n🎬 ===== CART POPUP OPENED =====" << std::endl;
+    
     onSuccessCallback = onSuccess;
     itemsInCart.clear();
     
-    // Load danh sach khach hang (HoiVien) vao selector
+    // Load khách hàng
+    MyVector<HoiVien*> allHV = app.getQuanLy().getDsHoiVien().getAllValues();
+    std::cout << "👥 Số khách hàng: " << allHV.size() << std::endl;
+    
     khachHangSelector.setItems(
-        app.getQuanLy().getDsHoiVien().getAllValues(), // Lay tu HashTable
+        allHV, 
+        [](HoiVien* hv){ return hv->getHoTen() + " (" + hv->getSDT() + ")"; }
+    );
+    khachHangSelector.clear();
+    searchSanPham.setString("");
+    searchSanPham.setFocus(false);
+    
+    if (app.getCurrentAccount() != nullptr && app.getCurrentAccount()->getLinkedStaff() != nullptr) {
+        std::string tenNV = app.getCurrentAccount()->getLinkedStaff()->getHoTen();
+        nhanVienText.setString("NV: " + sf::String::fromUtf8(tenNV.begin(), tenNV.end()));
+    } else {
+        nhanVienText.setString("NV: ADMIN");
+    }
+    
+    phuongThucSelector.setSelected("Tien Mat");
+    
+    loadSanPhamList();
+    tinhTong();
+    
+    std::cout << "================================\n" << std::endl;
+    BasePopup::show();
+}
+
+void CartPopup::show(HoiVien* hv, std::function<void()> onSuccess) {
+    std::cout << "\n🛒 ===== CART POPUP OPENED (PRE-FILL) =====" << std::endl;
+    
+    if (hv != nullptr) {
+        std::cout << "   Pre-selecting customer: " << hv->getHoTen() << std::endl;
+    }
+    
+    onSuccessCallback = onSuccess;
+    itemsInCart.clear();
+    
+    khachHangSelector.setItems(
+        app.getQuanLy().getDsHoiVien().getAllValues(), 
         [](HoiVien* hv){ return hv->getHoTen() + " (" + hv->getSDT() + ")"; }
     );
     
-    // Reset cac truong
-    khachHangSelector.clear();
-    searchSanPham.setString("");
-    
-    // Set Nhan Vien hien tai
-    if (app.getCurrentAccount() != nullptr && app.getCurrentAccount()->getLinkedStaff() != nullptr) {
-        std::string tenNV = app.getCurrentAccount()->getLinkedStaff()->getHoTen();
-        nhanVienText.setString("Nhan vien: " + sf::String::fromUtf8(tenNV.begin(), tenNV.end()));
+    // ✅ Chọn sẵn khách hàng nếu có
+    if (hv != nullptr) {
+        khachHangSelector.setSelected(hv);
+        std::cout << "   ✅ Customer pre-selected: " << hv->getHoTen() << std::endl;
     } else {
-        nhanVienText.setString("Nhan vien: ADMIN (Khong lien ket)");
+        khachHangSelector.clear();
     }
     
-    phuongThucSelector.setSelected("Tien Mat"); // Mac dinh
+    searchSanPham.setString("");
+    searchSanPham.setFocus(false);
     
-    loadSanPhamList(); // Load danh sach san pham cho Tab Hang Hoa
+    if (app.getCurrentAccount() != nullptr && app.getCurrentAccount()->getLinkedStaff() != nullptr) {
+        std::string tenNV = app.getCurrentAccount()->getLinkedStaff()->getHoTen();
+        nhanVienText.setString("NV: " + sf::String::fromUtf8(tenNV.begin(), tenNV.end()));
+    } else {
+        nhanVienText.setString("NV: ADMIN");
+    }
+    
+    phuongThucSelector.setSelected("Tien Mat");
+    
+    loadSanPhamList();
+    tinhTong(); // ✅ Tính giảm giá ngay nếu có khách hàng
+    
+    std::cout << "========================================\n" << std::endl;
+    BasePopup::show();
+}
+
+// ✅ THÊM HÀM MỚI
+void CartPopup::show(HoiVien* hv, const std::string& goiID, std::function<void()> onSuccess) {
+    std::cout << "\n🛒 ===== CART POPUP (RENEW) =====" << std::endl;
+    std::cout << "   Customer: " << (hv ? hv->getHoTen() : "NULL") << std::endl;
+    std::cout << "   Package: " << goiID << std::endl;
+    
+    onSuccessCallback = onSuccess;
+    itemsInCart.clear();
+    
+    khachHangSelector.setItems(
+        app.getQuanLy().getDsHoiVien().getAllValues(), 
+        [](HoiVien* hv){ return hv->getHoTen() + " (" + hv->getSDT() + ")"; }
+    );
+    
+    if (hv != nullptr) {
+        khachHangSelector.setSelected(hv);
+    }
+    
+    searchSanPham.setString("");
+    
+    // ✅ THÊM GÓI VÀO GIỎ NGAY
+    GoiTap* gt = app.getQuanLy().getGoiTap(goiID);
+    if (gt != nullptr) {
+        CartItem item;
+        item.id = gt->getID();
+        item.ten = gt->getTenGoi();
+        item.donGia = gt->getGia();
+        item.soLuong = 1;
+        item.isGoiTap = true;
+        itemsInCart.push_back(item);
+        
+        std::cout << "   ✅ Package added to cart: " << item.ten << std::endl;
+    }
+    
+    loadSanPhamList();
     tinhTong();
+    
     BasePopup::show();
 }
 
 void CartPopup::hide() {
     BasePopup::hide();
-    // Tra lai so luong hang hoa neu Huy gio hang
-    for (const auto& item : itemsInCart) {
-        if (item.hhData != nullptr) {
-            item.hhData->setSoLuongCon(item.hhData->getSoLuongCon() + item.soLuong);
-        }
-    }
     itemsInCart.clear();
 }
 
 void CartPopup::loadSanPhamList() {
     dsHangHoa.clear();
     dsGoiTap.clear();
-    std::string term = searchSanPham.getString();//.toAnsiString();
-    // (nen convert term sang chu thuong)
+    std::string term = searchSanPham.getString();
+    std::transform(term.begin(), term.end(), term.begin(), ::tolower);
     
-    if (sanPhamTabs.getActiveTab() == 0) { // Tab Hang Hoa
+    std::cout << "\n🔍 ===== LOAD SAN PHAM =====" << std::endl;
+    std::cout << "Tab: " << (sanPhamTabs.getActiveTab() == 0 ? "Hang Hoa" : "Goi Tap") << std::endl;
+    std::cout << "Search term: \"" << term << "\"" << std::endl;
+    
+    if (sanPhamTabs.getActiveTab() == 0) { // Hang Hoa
         const MyVector<HangHoa*>& ds = app.getQuanLy().getDsHangHoa();
+        std::cout << "📦 Tong Hang Hoa: " << ds.size() << std::endl;
+        
         for (size_t i = 0; i < ds.size(); ++i) {
             HangHoa* hh = ds[i];
+            std::cout << "  [" << i << "] " << hh->getTenHH() 
+                      << " | Active: " << hh->getIsActive() 
+                      << " | Stock: " << hh->getSoLuongCon() << std::endl;
+            
             if (hh->getIsActive() && hh->getSoLuongCon() > 0) {
                 std::string tenHH = hh->getTenHH();
-                // (convert tenHH sang chu thuong)
+                std::transform(tenHH.begin(), tenHH.end(), tenHH.begin(), ::tolower);
                 if (term.empty() || tenHH.find(term) != std::string::npos) {
                     dsHangHoa.push_back(hh);
                 }
             }
         }
-    } else { // Tab Goi Tap
+        std::cout << "✅ Loaded " << dsHangHoa.size() << " Hang Hoa" << std::endl;
+        
+    } else { // ✅ Goi Tap
         const MyVector<GoiTap*>& ds = app.getQuanLy().getDsGoiTap();
+        std::cout << "🎫 Tong Goi Tap: " << ds.size() << std::endl;
+        
+        if (ds.size() == 0) {
+            std::cout << "❌ WARNING: Khong co goi tap trong he thong!" << std::endl;
+            std::cout << "   Kiem tra file Data/GoiTap.txt" << std::endl;
+        }
+        
         for (size_t i = 0; i < ds.size(); ++i) {
             GoiTap* gt = ds[i];
+            std::cout << "  [" << i << "] " << gt->getTenGoi() 
+                      << " | Active: " << gt->getIsActive() 
+                      << " | Price: " << gt->getGia() << std::endl;
+            
             if (gt->getIsActive()) {
                 std::string tenGT = gt->getTenGoi();
-                // (convert tenGT sang chu thuong)
+                std::transform(tenGT.begin(), tenGT.end(), tenGT.begin(), ::tolower);
                 if (term.empty() || tenGT.find(term) != std::string::npos) {
                     dsGoiTap.push_back(gt);
+                    std::cout << "    ✅ Added to display list" << std::endl;
                 }
             }
         }
+        std::cout << "✅ Loaded " << dsGoiTap.size() << " Goi Tap" << std::endl;
     }
+    std::cout << "===========================\n" << std::endl;
 }
 
 void CartPopup::tinhTong() {
@@ -248,199 +349,196 @@ void CartPopup::tinhTong() {
     
     HoiVien* hv = khachHangSelector.getSelected();
     if (hv != nullptr) {
-        // (Ban can them logic getRank() vao HoiVien.h/.cpp)
-        // Config::Rank rank = hv->getRank(); 
-        // giamGia = tongHoaDon * Config::RANK_DISCOUNT.at(rank);
+        // ✅ SỬ DỤNG getDiscountRate() từ HoiVien
+        double discountRate = hv->getDiscountRate();
+        giamGia = tongHoaDon * discountRate;
         
-        // Gia lap giam gia 5%
-        giamGia = tongHoaDon * 0.05;
+        // std::cout << "💰 Customer: " << hv->getHoTen() << std::endl;
+        // std::cout << "   Rank: " << hv->getRank() << std::endl;
+        // std::cout << "   Point: " << hv->getPoint() << std::endl;
+        // std::cout << "   Discount: " << (discountRate * 100) << "%" << std::endl;
+        // std::cout << "   Amount: -" << giamGia << " VND" << std::endl;
     }
     
     tongThanhToan = tongHoaDon - giamGia;
     
-    // Cap nhat UI (Column 3)
-    tongText.setString("Tong: " + std::to_string((int)tongHoaDon) + " VND");
-    giamGiaText.setString("Giam gia: - " + std::to_string((int)giamGia) + " VND");
-    finalTotalText.setString("Thanh toan: " + std::to_string((int)tongThanhToan) + " VND");
+    tongText.setString("Tong: " + std::to_string((long long)tongHoaDon) + " VND");
+    giamGiaText.setString("Giam gia: - " + std::to_string((long long)giamGia) + " VND");
+    finalTotalText.setString("Thanh toan: " + std::to_string((long long)tongThanhToan) + " VND");
+}
+
+CartItem* CartPopup::getCartItem(const std::string& id, bool isGoiTap) {
+    for (auto& item : itemsInCart) {
+        if (item.id == id && item.isGoiTap == isGoiTap) {
+            return &item;
+        }
+    }
+    return nullptr;
+}
+
+void CartPopup::modifyQuantity(HangHoa* hh, int delta) {
+    CartItem* item = getCartItem(hh->getID(), false);
+    
+    if (item == nullptr) {
+        if (delta > 0) {
+            CartItem newItem;
+            newItem.id = hh->getID();
+            newItem.ten = hh->getTenHH();
+            newItem.donGia = hh->getGia();
+            newItem.soLuong = 1;
+            newItem.isGoiTap = false;
+            newItem.hhData = hh;
+            itemsInCart.push_back(newItem);
+        }
+    } else {
+        int newQty = item->soLuong + delta;
+        if (newQty > hh->getSoLuongCon()) {
+            errorMessage.setString("Khong du hang!");
+        } else if (newQty <= 0) {
+            for (size_t i = 0; i < itemsInCart.size(); ++i) {
+                if (itemsInCart[i].id == hh->getID() && !itemsInCart[i].isGoiTap) {
+                    itemsInCart.erase(itemsInCart.begin() + i);
+                    break;
+                }
+            }
+        } else {
+            item->soLuong = newQty;
+        }
+    }
+    tinhTong();
+}
+
+void CartPopup::toggleGoiTap(GoiTap* gt) {
+    CartItem* item = getCartItem(gt->getID(), true);
+    if (item) {
+        for (size_t i = 0; i < itemsInCart.size(); ++i) {
+            if (itemsInCart[i].id == gt->getID() && itemsInCart[i].isGoiTap) {
+                itemsInCart.erase(itemsInCart.begin() + i);
+                break;
+            }
+        }
+    } else {
+        CartItem newItem;
+        newItem.id = gt->getID();
+        newItem.ten = gt->getTenGoi();
+        newItem.donGia = gt->getGia();
+        newItem.soLuong = 1;
+        newItem.isGoiTap = true;
+        itemsInCart.push_back(newItem);
+    }
+    tinhTong();
+}
+
+void CartPopup::handleRemoveCartItem(int index) {
+    if (index >= 0 && index < itemsInCart.size()) {
+        itemsInCart.erase(itemsInCart.begin() + index);
+        tinhTong();
+    }
 }
 
 void CartPopup::handleSubmit() {
+    std::cout << "\n🔔 ===== HANDLE SUBMIT =====" << std::endl;
+    
     HoiVien* hv = khachHangSelector.getSelected();
     NhanVien* nv = app.getCurrentAccount()->getLinkedStaff();
     
-    if (hv == nullptr) {
-        errorMessage.setString("Loi: Vui long chon mot khach hang.");
-        return;
+    if (hv == nullptr) { 
+        errorMessage.setString("❌ Chua chon khach hang!"); 
+        return; 
     }
-    if (nv == nullptr && app.getCurrentAccount()->getAccountType() != AccountType::ADMIN) {
-        errorMessage.setString("Loi: Tai khoan Staff khong lien ket voi Nhan Vien.");
-        return;
-    }
-    if (itemsInCart.empty()) {
-        errorMessage.setString("Loi: Gio hang trong.");
-        return;
+    
+    if (itemsInCart.empty()) { 
+        errorMessage.setString("❌ Gio hang trong!"); 
+        return; 
     }
 
-    // --- Tat ca deu hop le: TAO HOA DON ---
-    std::string now = DateTimeUtils::getCurrentDateTime().substr(0, 10); // "DD/MM/YYYY"
+    std::string now = DateTimeUtils::getCurrentDateTime().substr(0, 10);
+    std::string nvID = (nv != nullptr) ? nv->getID() : "ADMIN";
     
-    // Neu la Admin, khong co NhanVien lien ket -> truyen nullptr
-    std::string nvID = (nv != nullptr) ? nv->getID() : "ADMIN_ID"; // (Ban can 1 ID mac dinh cho Admin)
-    
+    // ✅ Tạo Hóa Đơn
     HoaDon* hd = HoaDonService::taoHoaDon(nvID, hv->getID(), now, phuongThucSelector.selected);
     
-    if (hd == nullptr) {
-        errorMessage.setString("Loi he thong: Khong the tao hoa don.");
-        return;
+    if (hd == nullptr) { 
+        errorMessage.setString("❌ Loi tao hoa don!"); 
+        return; 
     }
     
-    // Them item vao HoaDon
-    for (const auto& item : itemsInCart) {
+    std::cout << "✅ Invoice created: " << hd->getID() << std::endl;
+    
+    // ✅ Thêm items vào hóa đơn + TẠO HỢP ĐỒNG NẾU LÀ GÓI TẬP
+    for (size_t i = 0; i < itemsInCart.size(); ++i) {
+        const auto& item = itemsInCart[i];
+        
         if (item.isGoiTap) {
+            std::cout << "   [" << i << "] Package: " << item.ten << " x" << item.soLuong << std::endl;
+            
+            // Thêm vào hóa đơn
             HoaDonService::themGoiTapVaoHoaDon(hd->getID(), item.id, item.soLuong, item.donGia);
+            
+            // ✅ TẠO HỢP ĐỒNG CHO MỖI GÓI TẬP
+            GoiTap* gt = app.getQuanLy().getGoiTap(item.id);
+            if (gt != nullptr) {
+                // Tính ngày hết hạn = ngày hiện tại + thời gian gói
+                std::string ngayHetHan = DateTimeUtils::addDays(now, gt->getThoiGian());
+                
+                std::cout << "      🔨 Creating contract:" << std::endl;
+                std::cout << "         Start: " << now << std::endl;
+                std::cout << "         End: " << ngayHetHan << std::endl;
+                std::cout << "         Package: " << gt->getTenGoi() << std::endl;
+                
+                // Tạo hợp đồng
+                HopDongService::themHopDong(
+                    hv->getID(),      // Hội viên
+                    item.id,          // Gói tập
+                    nvID,             // Nhân viên
+                    now,              // Ngày đăng ký
+                    ngayHetHan,       // Ngày hết hạn
+                    gt->getSoBuoiPT() // Số buổi PT
+                );
+                
+                // ✅ Cộng số buổi PT vào Hội viên
+                int soBuoiPT = gt->getSoBuoiPT();
+                hv->setSoBuoiPT(hv->getSoBuoiPT() + soBuoiPT);
+                std::cout << "      ✅ Added " << soBuoiPT << " PT sessions" << std::endl;
+            } else {
+                std::cerr << "      ❌ GoiTap not found: " << item.id << std::endl;
+            }
+            
         } else {
+            std::cout << "   [" << i << "] Product: " << item.ten << " x" << item.soLuong << std::endl;
             HoaDonService::themHangHoaVaoHoaDon(hd->getID(), item.id, item.soLuong, item.donGia);
-            // (Luu y: Service themHangHoa... da tu dong tru ton kho)
         }
     }
     
-    // --- THANH TOAN NGAY ---
+    // Lưu giảm giá
+    hd->setGiamGia(giamGia);
     hd->setDaThanhToan(true);
     
-    // (Cong diem cho HoiVien)
-    int points = tongThanhToan / Config::MONEY_TO_POINT_RATIO;
+    // Cộng điểm
+    int points = static_cast<int>(tongThanhToan / Config::MONEY_TO_POINT_RATIO);
     hv->setPoint(hv->getPoint() + points);
     
+    std::cout << "\n📊 ===== INVOICE SUMMARY =====" << std::endl;
+    std::cout << "   ID: " << hd->getID() << std::endl;
+    std::cout << "   Subtotal: " << hd->getTotal() << " VND" << std::endl;
+    std::cout << "   Discount: -" << hd->getGiamGia() << " VND" << std::endl;
+    std::cout << "   FINAL TOTAL: " << hd->getFinalTotal() << " VND" << std::endl;
+    std::cout << "   Points earned: " << points << std::endl;
+    std::cout << "==============================\n" << std::endl;
+    
     app.getQuanLy().setDirty(true);
-    if (onSuccessCallback) onSuccessCallback();
+    
+    if (onSuccessCallback) {
+        onSuccessCallback();
+    }
+    
     hide();
 }
 
-void CartPopup::handleEvent(sf::Event event, sf::Vector2i mousePos) {
-    if (!isVisible) return;
-    BasePopup::handleEvent(event, mousePos); // Nut [X]
-
-    // --- Column 1 ---
-    khachHangSelector.handleEvent(event, mousePos);
-    phuongThucSelector.handleEvent(event, mousePos);
-
-    // Neu dropdown mo, khong xu ly gi them
-    if (khachHangSelector.getIsOpen()) return;
-
-    // --- Column 2 ---
-    sanPhamTabs.handleEvent(event, mousePos);
-    
-    if (event.getIf<sf::Event::TextEntered>()) {
-        searchSanPham.handleEvent(event);
-        loadSanPhamList();
-    } else if (event.getIf<sf::Event::KeyPressed>()) {
-         searchSanPham.handleEvent(event);
-    }
-    
-    if (auto* mouseEvent = event.getIf<sf::Event::MouseButtonPressed>()) {
-        if (mouseEvent->button == sf::Mouse::Button::Left) {
-            // Click them san pham
-            if (sanPhamListBg.getGlobalBounds().contains(sf::Vector2f(mousePos))) {
-                if (hoveredSanPhamIndex != -1) {
-                    if (sanPhamTabs.getActiveTab() == 0 && hoveredSanPhamIndex < dsHangHoa.size()) {
-                        handleAddHangHoa(dsHangHoa[hoveredSanPhamIndex]);
-                    } else if (hoveredSanPhamIndex < dsGoiTap.size()) {
-                        handleAddGoiTap(dsGoiTap[hoveredSanPhamIndex]);
-                    }
-                }
-            }
-            // Click xoa item khoi gio
-            if (cartListBg.getGlobalBounds().contains(sf::Vector2f(mousePos))) {
-                if (hoveredCartItemIndex != -1 && hoveredCartItemIndex < itemsInCart.size()) {
-                    handleRemoveCartItem(hoveredCartItemIndex);
-                }
-            }
-        }
-    }
-    
-    // --- Buttons ---
-    confirmPayButton.handleEvent(event, mousePos);
-    cancelButton.handleEvent(event, mousePos);
-}
-
-// ... (Cac ham update() va drawContent() ban can tu hoan thien
-//      de ve 3 cot va cap nhat hover cho 2 danh sach) ...
-// GUI/Popups/CartPopup.cpp
-// ... (them vao file da co)
-
-// ========================================================================
-// HAM UPDATE VA DRAW (HOAN CHINH)
-// ========================================================================
-
-void CartPopup::update(sf::Vector2i mousePos) {
-    if (!isVisible) return;
-    BasePopup::update(mousePos); // Cap nhat nut [X]
-
-    // --- Column 1 ---
-    khachHangSelector.update(mousePos);
-    phuongThucSelector.update(mousePos);
-
-    // Neu dropdown mo, khong update gi them
-    if (khachHangSelector.getIsOpen()) {
-        hoveredSanPhamIndex = -1;
-        hoveredCartItemIndex = -1;
-        return;
-    }
-
-    // --- Column 2 ---
-    searchSanPham.update(sf::Time::Zero); // Update dau nhay
-    
-    hoveredSanPhamIndex = -1;
-    sf::FloatRect sanPhamBounds = sanPhamListBg.getGlobalBounds();
-    if (sanPhamBounds.contains(sf::Vector2f(mousePos))) {
-        float listY = sanPhamBounds.position.y + 10;
-        float rowHeight = 35;
-        int index = static_cast<int>((mousePos.y - listY) / rowHeight);
-
-        // Kiem tra index hop le
-        if (sanPhamTabs.getActiveTab() == 0) {
-            if (index >= 0 && index < dsHangHoa.size()) hoveredSanPhamIndex = index;
-        } else {
-            if (index >= 0 && index < dsGoiTap.size()) hoveredSanPhamIndex = index;
-        }
-    }
-
-    // --- Column 3 ---
-    hoveredCartItemIndex = -1;
-    sf::FloatRect cartBounds = cartListBg.getGlobalBounds();
-    if (cartBounds.contains(sf::Vector2f(mousePos))) {
-        float listY = cartBounds.position.y + 10;
-        float rowHeight = 40; // Hang trong gio hang cao hon
-        int index = static_cast<int>((mousePos.y - listY) / rowHeight);
-        
-        if (index >= 0 && index < itemsInCart.size()) {
-            hoveredCartItemIndex = index;
-        }
-    }
-
-    // --- Buttons ---
-    confirmPayButton.update(mousePos);
-    cancelButton.update(mousePos);
-}
-
-void CartPopup::drawContent(sf::RenderTarget& target) {
-    // Ve 3 cot
-    drawCol1(target);
-    drawCol2(target);
-    drawCol3(target);
-
-    // Ve cac nut dieu khien
-    target.draw(errorMessage);
-    confirmPayButton.draw(target);
-    cancelButton.draw(target);
-}
-
-// --- HAM VE 3 COT (HELPER) ---
-
 void CartPopup::drawCol1(sf::RenderTarget& target) {
-    khachHangSelector.draw(target);
     target.draw(nhanVienText);
     phuongThucSelector.draw(target);
+    khachHangSelector.draw(target);
 }
 
 void CartPopup::drawCol2(sf::RenderTarget& target) {
@@ -448,59 +546,83 @@ void CartPopup::drawCol2(sf::RenderTarget& target) {
     searchSanPham.draw(target);
     target.draw(sanPhamListBg);
 
-    // Ve danh sach san pham
-    sf::Text itemText(font, "", 16);
-    itemText.setFillColor(Config::TextNormal);
-    
     sf::FloatRect bounds = sanPhamListBg.getGlobalBounds();
     float pX = bounds.position.x + 10;
     float pY = bounds.position.y + 10;
-    float rowHeight = 35;
+    float rowHeight = 50;
+    float width = bounds.size.x - 20;
+
+    sf::Text txt(font, "", 14);
+    txt.setFillColor(Config::TextNormal);
+    
+    sf::RectangleShape btnRect(sf::Vector2f(30, 30));
+    btnRect.setOutlineThickness(1);
+    btnRect.setOutlineColor(Config::CardLight);
 
     if (sanPhamTabs.getActiveTab() == 0) { // Hang Hoa
         for (size_t i = 0; i < dsHangHoa.size(); ++i) {
-            HangHoa* hh = dsHangHoa[i];
-            float currentY = pY + i * rowHeight;
-            if (currentY > bounds.position.y + bounds.size.y - rowHeight) break; // Khong ve tran
+            float curY = pY + i * rowHeight;
+            if (curY + rowHeight > bounds.position.y + bounds.size.y) break;
 
-            if (i == hoveredSanPhamIndex) {
-                sf::RectangleShape hoverBg(sf::Vector2f(bounds.size.x, rowHeight));
-                hoverBg.setPosition(sf::Vector2f(bounds.position.x, currentY - 5));
-                hoverBg.setFillColor(Config::CardDark);
-                target.draw(hoverBg);
-            }
+            HangHoa* hh = dsHangHoa[i];
+            CartItem* inCart = getCartItem(hh->getID(), false);
+            int qty = inCart ? inCart->soLuong : 0;
+            int stock = hh->getSoLuongCon();
+
+            txt.setString(hh->getTenHH());
+            txt.setPosition(sf::Vector2f(pX, curY + 5));
+            target.draw(txt);
+
+            std::string priceStr = std::to_string((long long)hh->getGia()) + " VND";
+            txt.setString(priceStr);
+            txt.setPosition(sf::Vector2f(pX, curY + 25));
+            txt.setFillColor(Config::TextMuted);
+            txt.setCharacterSize(12);
+            target.draw(txt);
+            txt.setCharacterSize(14);
+            txt.setFillColor(Config::TextNormal);
+
+            float ctrlX = pX + width - 110;
             
-            std::string s = hh->getTenHH() + " (" + std::to_string(hh->getSoLuongCon()) + " con lai)";
-            itemText.setString(sf::String::fromUtf8(s.begin(), s.end()));
-            itemText.setPosition(sf::Vector2f(pX, currentY));
-            target.draw(itemText);
-            
-            s = std::to_string((int)hh->getGia()) + " VND";
-            itemText.setString(sf::String::fromUtf8(s.begin(), s.end()));
-            itemText.setPosition(sf::Vector2f(pX + bounds.size.x - 120, currentY));
-            target.draw(itemText);
+            btnRect.setPosition(sf::Vector2f(ctrlX - 10, curY));
+            btnRect.setFillColor(Config::CardDark);
+            target.draw(btnRect);
+            txt.setString("-");
+            txt.setPosition(sf::Vector2f(ctrlX, curY + 5));
+            target.draw(txt);
+
+            std::string qtyStr = std::to_string(qty) + "/" + std::to_string(stock);
+            txt.setString(qtyStr);
+            txt.setPosition(sf::Vector2f(ctrlX + 30, curY + 5));
+            target.draw(txt);
+
+            btnRect.setPosition(sf::Vector2f(ctrlX + 80, curY));
+            target.draw(btnRect);
+            txt.setString("+");
+            txt.setPosition(sf::Vector2f(ctrlX + 88, curY + 5));
+            target.draw(txt);
         }
     } else { // Goi Tap
         for (size_t i = 0; i < dsGoiTap.size(); ++i) {
+            float curY = pY + i * rowHeight;
+            if (curY + rowHeight > bounds.position.y + bounds.size.y) break;
+            
             GoiTap* gt = dsGoiTap[i];
-            float currentY = pY + i * rowHeight;
-            if (currentY > bounds.position.y + bounds.size.y - rowHeight) break;
+            bool selected = (getCartItem(gt->getID(), true) != nullptr);
 
-            if (i == hoveredSanPhamIndex) {
-                sf::RectangleShape hoverBg(sf::Vector2f(bounds.size.x, rowHeight));
-                hoverBg.setPosition(sf::Vector2f(bounds.position.x, currentY - 5));
-                hoverBg.setFillColor(Config::CardDark);
-                target.draw(hoverBg);
-            }
-            
-            itemText.setString(sf::String::fromUtf8(gt->getTenGoi().begin(), gt->getTenGoi().end()));
-            itemText.setPosition(sf::Vector2f(pX, currentY));
-            target.draw(itemText);
-            
-            std::string s = std::to_string((int)gt->getGia()) + " VND";
-            itemText.setString(sf::String::fromUtf8(s.begin(), s.end()));
-            itemText.setPosition(sf::Vector2f(pX + bounds.size.x - 120, currentY));
-            target.draw(itemText);
+            txt.setString(gt->getTenGoi());
+            txt.setPosition(sf::Vector2f(pX, curY + 10));
+            target.draw(txt);
+
+            float btnW = 80;
+            btnRect.setSize(sf::Vector2f(btnW, 30));
+            btnRect.setPosition(sf::Vector2f(pX + width - btnW, curY + 5));
+            btnRect.setFillColor(selected ? Config::Danger : Config::Success);
+            target.draw(btnRect);
+
+            txt.setString(selected ? "Xoa" : "Them");
+            txt.setPosition(sf::Vector2f(pX + width - btnW + 20, curY + 10));
+            target.draw(txt);
         }
     }
 }
@@ -509,124 +631,190 @@ void CartPopup::drawCol3(sf::RenderTarget& target) {
     target.draw(cartListBg);
     
     sf::Text itemText(font, "", 14);
-    sf::Text priceText(font, "", 14);
-    sf::Text deleteText(font, "Xoa", 14);
+    sf::Text deleteText(font, "X", 14);
     deleteText.setFillColor(Config::Danger);
 
     sf::FloatRect bounds = cartListBg.getGlobalBounds();
     float pX = bounds.position.x + 10;
     float pY = bounds.position.y + 10;
-    float rowHeight = 40; // Hang trong gio hang cao hon
+    float rowHeight = 50;
 
-    // Ve cac item trong gio hang
     for (size_t i = 0; i < itemsInCart.size(); ++i) {
         const auto& item = itemsInCart[i];
         float currentY = pY + i * rowHeight;
         if (currentY > bounds.position.y + bounds.size.y - rowHeight) break;
 
         if (i == hoveredCartItemIndex) {
-            sf::RectangleShape hoverBg(sf::Vector2f(bounds.size.x, rowHeight));
-            hoverBg.setPosition(sf::Vector2f(bounds.position.x, currentY - 5));
+            sf::RectangleShape hoverBg(sf::Vector2f(bounds.size.x - 20, rowHeight - 5));
+            hoverBg.setPosition(sf::Vector2f(pX, currentY));
             hoverBg.setFillColor(Config::CardDark);
             target.draw(hoverBg);
         }
         
-        // Dong 1: STT. Ten
+        // Dòng 1: Tên
         std::string s = std::to_string(i + 1) + ". " + item.ten;
         itemText.setString(sf::String::fromUtf8(s.begin(), s.end()));
         itemText.setPosition(sf::Vector2f(pX, currentY));
         itemText.setFillColor(Config::TextNormal);
         target.draw(itemText);
         
-        // Dong 2: SL x Gia = Tong
-        s = std::to_string(item.soLuong) + " x " + std::to_string((int)item.donGia) 
-            + " = " + std::to_string((int)(item.soLuong * item.donGia));
-        priceText.setString(sf::String::fromUtf8(s.begin(), s.end()));
-        priceText.setPosition(sf::Vector2f(pX + 15, currentY + 18));
-        priceText.setFillColor(Config::TextMuted);
-        target.draw(priceText);
+        // ✅ Dòng 2: SL x Giá = TỔNG
+        long long total = (long long)(item.soLuong * item.donGia);
+        s = "   " + std::to_string(item.soLuong) + " x " + 
+            std::to_string((long long)item.donGia) + " = " + 
+            std::to_string(total) + " VND";
+        itemText.setString(sf::String::fromUtf8(s.begin(), s.end()));
+        itemText.setPosition(sf::Vector2f(pX, currentY + 20));
+        itemText.setFillColor(Config::TextMuted);
+        itemText.setCharacterSize(12);
+        target.draw(itemText);
+        itemText.setCharacterSize(14);
         
-        // Nut Xoa
-        deleteText.setPosition(sf::Vector2f(pX + bounds.size.x - 40, currentY + 5));
+        deleteText.setPosition(sf::Vector2f(pX + bounds.size.x - 40, currentY + 15));
         target.draw(deleteText);
     }
     
-    // Ve tong tien
     target.draw(tongText);
     target.draw(giamGiaText);
     target.draw(finalTotalText);
 }
 
-// THÊM 3 HÀM NÀY VÀO TỆP CartPopup.cpp
+void CartPopup::handleEvent(sf::Event event, sf::Vector2i mousePos) {
+    if (!isVisible) return;
+    BasePopup::handleEvent(event, mousePos);
+    
+    khachHangSelector.handleEvent(event, mousePos);
+    phuongThucSelector.handleEvent(event, mousePos);
+    if (khachHangSelector.getIsOpen()) return;
 
-void CartPopup::handleAddHangHoa(HangHoa* hh) {
-    if (hh == nullptr || hh->getSoLuongCon() <= 0) return;
-
-    // Kiem tra xem hang hoa da co trong gio chua
-    for (auto& item : itemsInCart) {
-        if (!item.isGoiTap && item.id == hh->getID()) {
-            if (hh->getSoLuongCon() > 0) {
-                item.soLuong++;
-                hh->setSoLuongCon(hh->getSoLuongCon() - 1); // Tru ton kho
-                tinhTong();
+    // ✅ FIX: Lưu tab cũ để detect thay đổi    
+    static int previousTab = 0;
+    int currentTab = sanPhamTabs.getActiveTab();
+    
+    sanPhamTabs.handleEvent(event, mousePos);
+    
+    // ✅ FIX: Nếu chuyển tab → Load lại sản phẩm
+    if (currentTab != sanPhamTabs.getActiveTab()) {
+        std::cout << "🔄 Tab changed: " << currentTab << " → " << sanPhamTabs.getActiveTab() << std::endl;
+        loadSanPhamList();
+        previousTab = sanPhamTabs.getActiveTab();
+    }
+    
+    // ✅ Click vào search box
+    if (auto* mouseEvent = event.getIf<sf::Event::MouseButtonPressed>()) {
+        if (mouseEvent->button == sf::Mouse::Button::Left) {
+            if (searchSanPham.isMouseOver(mousePos)) {
+                searchSanPham.setFocus(true);
+            } else {
+                searchSanPham.setFocus(false);
             }
-            return; // Da tang so luong
         }
     }
-
-    // Neu chua co, them moi vao gio
-    CartItem newItem;
-    newItem.id = hh->getID();
-    newItem.ten = hh->getTenHH();
-    newItem.donGia = hh->getGia();
-    newItem.soLuong = 1;
-    newItem.isGoiTap = false;
-    newItem.hhData = hh; // Luu con tro HangHoa de tra hang
     
-    itemsInCart.push_back(newItem);
-    hh->setSoLuongCon(hh->getSoLuongCon() - 1); // Tru ton kho
-    tinhTong();
-}
-
-void CartPopup::handleAddGoiTap(GoiTap* gt) {
-    if (gt == nullptr) return;
-
-    // Kiem tra xem goi tap da co trong gio chua
-    for (auto& item : itemsInCart) {
-        if (item.isGoiTap && item.id == gt->getID()) {
-            // (Thong thuong khong cho them 2 goi tap giong nhau)
-            errorMessage.setString("Goi tap nay da co trong gio hang.");
-            return; 
+    // ✅ Nhập text vào search
+    if (event.getIf<sf::Event::TextEntered>()) {
+        if (searchSanPham.getFocus()) {
+            searchSanPham.handleEvent(event);
+            loadSanPhamList(); // ✅ Load lại khi search
         }
     }
-
-    // Them moi vao gio
-    CartItem newItem;
-    newItem.id = gt->getID();
-    newItem.ten = gt->getTenGoi();
-    newItem.donGia = gt->getGia();
-    newItem.soLuong = 1;
-    newItem.isGoiTap = true;
-    newItem.hhData = nullptr; // Khong phai HangHoa
     
-    itemsInCart.push_back(newItem);
-    tinhTong();
+    // ✅ Phím trong search
+    if (auto* keyEvent = event.getIf<sf::Event::KeyPressed>()) {
+        if (searchSanPham.getFocus()) {
+            searchSanPham.handleEvent(event);
+            loadSanPhamList(); // ✅ Load lại khi search
+        }
+    }
+    
+    if (auto* mouseEvent = event.getIf<sf::Event::MouseButtonPressed>()) {
+        if (mouseEvent->button == sf::Mouse::Button::Left) {
+            sf::Vector2f mPos(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+            
+            if (sanPhamListBg.getGlobalBounds().contains(mPos)) {
+                float listY = sanPhamListBg.getGlobalBounds().position.y + 10;
+                float rowHeight = 50;
+                int idx = static_cast<int>((mPos.y - listY) / rowHeight);
+                
+                float width = sanPhamListBg.getSize().x - 20;
+                float pX = sanPhamListBg.getPosition().x + 10;
+
+                if (sanPhamTabs.getActiveTab() == 0) { // Hang Hoa
+                    if (idx >= 0 && idx < static_cast<int>(dsHangHoa.size())) {
+                        float ctrlX = pX + width - 110;
+                        float curY = listY + idx * rowHeight;
+                        
+                        sf::FloatRect minusBtn(
+                            sf::Vector2f(ctrlX - 10, curY), 
+                            sf::Vector2f(30, 30)
+                        );
+                        if (minusBtn.contains(mPos)) {
+                            modifyQuantity(dsHangHoa[idx], -1);
+                        }
+                        
+                        sf::FloatRect plusBtn(
+                            sf::Vector2f(ctrlX + 80, curY), 
+                            sf::Vector2f(30, 30)
+                        );
+                        if (plusBtn.contains(mPos)) {
+                            modifyQuantity(dsHangHoa[idx], 1);
+                        }
+                    }
+                } else { // Goi Tap
+                    if (idx >= 0 && idx < static_cast<int>(dsGoiTap.size())) {
+                        float btnW = 80;
+                        float curY = listY + idx * rowHeight + 5;
+                        
+                        sf::FloatRect toggleBtn(
+                            sf::Vector2f(pX + width - btnW, curY), 
+                            sf::Vector2f(btnW, 30)
+                        );
+                        if (toggleBtn.contains(mPos)) {
+                            toggleGoiTap(dsGoiTap[idx]);
+                        }
+                    }
+                }
+            }
+            
+            if (cartListBg.getGlobalBounds().contains(mPos)) {
+                if (hoveredCartItemIndex != -1) {
+                    handleRemoveCartItem(hoveredCartItemIndex);
+                }
+            }
+        }
+    }
+    
+    confirmPayButton.handleEvent(event, mousePos);
+    cancelButton.handleEvent(event, mousePos);
 }
 
-void CartPopup::handleRemoveCartItem(int index) {
-    if (index < 0 || index >= itemsInCart.size()) return;
-
-    // Lay item chuan bi xoa
-    CartItem& item = itemsInCart[index];
-
-    // QUAN TRONG: Tra lai so luong ton kho neu la HangHoa
-    if (!item.isGoiTap && item.hhData != nullptr) {
-        item.hhData->setSoLuongCon(item.hhData->getSoLuongCon() + item.soLuong);
-    }
-
-    // Xoa khoi gio hang
-    itemsInCart.erase(itemsInCart.begin() + index);
+void CartPopup::update(sf::Vector2i mousePos) {
+    if (!isVisible) return;
+    BasePopup::update(mousePos);
     
-    // Tinh lai tong
-    tinhTong();
+    khachHangSelector.update(mousePos);
+    phuongThucSelector.update(mousePos);
+    searchSanPham.update(sf::Time::Zero); // ✅ Update cursor
+    confirmPayButton.update(mousePos);
+    cancelButton.update(mousePos);
+    
+    hoveredCartItemIndex = -1;
+    if (cartListBg.getGlobalBounds().contains(sf::Vector2f(mousePos))) {
+        float listY = cartListBg.getGlobalBounds().position.y + 10;
+        float rowHeight = 50;
+        int idx = (mousePos.y - listY) / rowHeight;
+        if (idx >= 0 && idx < itemsInCart.size()) {
+            hoveredCartItemIndex = idx;
+        }
+    }
+}
+
+void CartPopup::drawContent(sf::RenderTarget& target) {
+    drawCol1(target);
+    drawCol2(target);
+    drawCol3(target);
+    
+    target.draw(errorMessage);
+    confirmPayButton.draw(target);
+    cancelButton.draw(target);
 }

@@ -9,21 +9,34 @@
 
 DatHLVPopup::DatHLVPopup(App& app)
     : BasePopup(app, "Dat Lich Tap Voi HLV"),
+      font(app.getGlobalFont()),      // ✅ Khởi tạo reference
       currentHoiVien(nullptr),
+      currentHopDong(nullptr),
       selectedHLV(nullptr),
       hoveredListIndex(-1),
-      tooltip(font, "", 14),
-      errorMessage(font, "", 14)
+    //   tooltip(font, "", 14),          // ✅ Dùng font sau khi đã khởi tạo
+      errorMessage(font, "", 14),
+      searchInput(),
+      confirmButton(),
+      cancelButton()
 {
-    // Thiet ke layout (khong thay doi)
+    // Layout setup
     sf::Vector2f panelSize(450, 500);
     popupPanel.setSize(panelSize);
     popupPanel.setPosition(sf::Vector2f(
         (app.getWindow().getSize().x - panelSize.x) / 2.0f,
         (app.getWindow().getSize().y - panelSize.y) / 2.0f
     ));
-    title.setPosition(sf::Vector2f(popupPanel.getPosition().x + 20, popupPanel.getPosition().y + 15));
-    closeButton.setPosition(popupPanel.getPosition().x + panelSize.x - 40, popupPanel.getPosition().y + 15);
+    
+    title.setPosition(sf::Vector2f(
+        popupPanel.getPosition().x + 20, 
+        popupPanel.getPosition().y + 15
+    ));
+    
+    closeButton.setPosition(
+        popupPanel.getPosition().x + panelSize.x - 40, 
+        popupPanel.getPosition().y + 15
+    );
 
     float pX = popupPanel.getPosition().x;
     float pY = popupPanel.getPosition().y;
@@ -38,59 +51,88 @@ DatHLVPopup::DatHLVPopup(App& app)
     listContainer.setOutlineColor(Config::CardLight);
     listContainer.setOutlineThickness(1);
 
-    // tooltip.setFont(font);
-    // tooltip.setCharacterSize(14);
-    tooltip.setFillColor(Config::Warning);
-
-    // errorMessage.setFont(font);
-    // errorMessage.setCharacterSize(14);
+    // tooltip.setFillColor(Config::Warning);
+    
     errorMessage.setFillColor(Config::Danger);
     errorMessage.setPosition(sf::Vector2f(pX + 30, pY + 410));
 
     float btnY = pY + panelSize.y - 70;
+    
     confirmButton.setup("Xac Nhan", font);
     confirmButton.setSize(120, 40);
     confirmButton.setPosition(pX + 70, btnY);
-    confirmButton.setOnClick([this]() { handleSubmit(); });
+    confirmButton.setOnClick([this]() { 
+        std::cout << "🔘 Confirm button clicked!" << std::endl;
+        this->handleSubmit(); 
+    });
 
     cancelButton.setup("Huy", font);
     cancelButton.setSize(120, 40);
     cancelButton.setPosition(pX + 260, btnY);
-    cancelButton.setOnClick([this]() { hide(); });
+    cancelButton.setOnClick([this]() { 
+        std::cout << "🔘 Cancel button clicked!" << std::endl;
+        this->hide(); 
+    });
 }
 
-/**
- * @brief (DA SUA DOI) Ham show don gian hon
- */
-void DatHLVPopup::show(HoiVien* hv) {
-    if (hv == nullptr) return;
+void DatHLVPopup::show(HoiVien* hv, HopDong* hd, std::function<void()> onClose) {
+    if (hv == nullptr || hd == nullptr) return;
     
     currentHoiVien = hv;
+    currentHopDong = hd;
+    onCloseCallback = onClose; // ✅ LƯU CALLBACK
     
-    if (currentHoiVien->getSoBuoiPT() <= 0) {
-        errorMessage.setString("Hoi vien da het buoi tap PT.");
+    if (hd->getSoBuoiPTConLai() <= 0) {
+        errorMessage.setString("Goi nay da het buoi PT.");
     } else {
         errorMessage.setString("");
     }
     
-    loadAllHLV(); // Tai *TAT CA* HLV
-    applySearchFilter(); // Hien thi toan bo ban dau
+    loadAllHLV();
+    applySearchFilter();
     BasePopup::show();
 }
 
+void DatHLVPopup::handleSubmit() {
+    if (selectedHLV == nullptr || currentHopDong == nullptr) return;
+    
+    if (currentHopDong->getSoBuoiPTConLai() <= 0) {
+        errorMessage.setString("Goi nay da het buoi PT");
+        return;
+    }
+
+    std::string now = DateTimeUtils::getCurrentDateTime();
+    LogTapPTService::themLogTapPT(currentHoiVien->getID(), selectedHLV->getID(), now);
+    
+    // ✅ TRỪ PT
+    currentHopDong->truBuoiPT(1);
+    
+    // std::cout << "✅ PT session used. Remaining: " << currentHopDong->getSoBuoiPTConLai() << std::endl;
+    
+    // ✅ Đánh dấu dirty để lưu
+    app.getQuanLy().setDirty(true);
+    
+    hide(); // ✅ Sẽ gọi callback
+}
+
 void DatHLVPopup::hide() {
+    std::cout << "🚪 DatHLVPopup::hide() called" << std::endl;
+    
     BasePopup::hide();
     currentHoiVien = nullptr;
+    currentHopDong = nullptr;
     selectedHLV = nullptr;
     searchInput.setString("");
     allActiveHLV.clear();
     displayedHLV.clear();
     errorMessage.setString("");
+    
+    // ✅ GỌI CALLBACK
+    if (onCloseCallback) {
+        std::cout << "   📞 Calling onCloseCallback..." << std::endl;
+        onCloseCallback();
+    }
 }
-
-/**
- * @brief (MOI) Tai tat ca HLV dang hoat dong
- */
 void DatHLVPopup::loadAllHLV() {
     allActiveHLV.clear();
     
@@ -133,30 +175,44 @@ void DatHLVPopup::applySearchFilter() {
 
 void DatHLVPopup::handleEvent(sf::Event event, sf::Vector2i mousePos) {
     if (!isVisible) return;
-    BasePopup::handleEvent(event, mousePos); // Nut [X]
-
+    
+    BasePopup::handleEvent(event, mousePos);
     confirmButton.handleEvent(event, mousePos);
     cancelButton.handleEvent(event, mousePos);
     
-    // Xu ly search input
-    if (event.getIf<sf::Event::TextEntered>()) {
-        searchInput.handleEvent(event);
-        applySearchFilter(); // Loc lai danh sach khi go
-    }
-    if (auto* keyEvent = event.getIf<sf::Event::KeyPressed>()) {
-        searchInput.handleEvent(event); // Xu ly (Left, Right, Backspace)
-        if (keyEvent->code == sf::Keyboard::Key::Enter) {
-             applySearchFilter();
-        }
-    }
-
-    // Xu ly click vao danh sach
+    // ✅ XỬ LÝ CLICK ĐỂ FOCUS/UNFOCUS InputBox
     if (auto* mouseEvent = event.getIf<sf::Event::MouseButtonPressed>()) {
         if (mouseEvent->button == sf::Mouse::Button::Left) {
+            
+            // ✅ KIỂM TRA: Click vào search box?
+            if (searchInput.isMouseOver(mousePos)) {
+                searchInput.setFocus(true); // ← SET FOCUS
+                std::cout << "🔍 Search box focused" << std::endl;
+            } else {
+                searchInput.setFocus(false); // ← BỎ FOCUS khi click ra ngoài
+            }
+            
+            // ✅ KIỂM TRA: Click vào list?
             if (listContainer.getGlobalBounds().contains(sf::Vector2f(mousePos))) {
-                if (hoveredListIndex != -1 && hoveredListIndex < displayedHLV.size()) {
+                if (hoveredListIndex >= 0 && hoveredListIndex < displayedHLV.size()) {
                     selectedHLV = displayedHLV[hoveredListIndex];
+                    std::cout << "✅ Selected HLV: " << selectedHLV->getHoTen() << std::endl;
                 }
+            }
+        }
+    }
+    
+    // ✅ CHỈ XỬ LÝ VĂN BẢN KHI ĐÃ FOCUS
+    if (searchInput.getFocus()) {
+        if (event.getIf<sf::Event::TextEntered>()) {
+            searchInput.handleEvent(event);
+            applySearchFilter();
+        }
+        
+        if (auto* keyEvent = event.getIf<sf::Event::KeyPressed>()) {
+            searchInput.handleEvent(event);
+            if (keyEvent->code == sf::Keyboard::Key::Enter) {
+                applySearchFilter();
             }
         }
     }
@@ -164,34 +220,29 @@ void DatHLVPopup::handleEvent(sf::Event event, sf::Vector2i mousePos) {
 
 void DatHLVPopup::update(sf::Vector2i mousePos) {
     if (!isVisible) return;
-    BasePopup::update(mousePos); // Nut [X]
     
+    BasePopup::update(mousePos);
     confirmButton.update(mousePos);
     cancelButton.update(mousePos);
-    searchInput.update(sf::Time::Zero); // Update dau nhay
+    searchInput.update(sf::Time::Zero);
     
-    // Xu ly hover tren danh sach
+    // ✅ CHỈ CẬP NHẬT hoveredListIndex, KHÔNG TẠO TOOLTIP
     hoveredListIndex = -1;
-    tooltip.setString(""); // Reset tooltip
 
     sf::FloatRect listBounds = listContainer.getGlobalBounds();
     if (listBounds.contains(sf::Vector2f(mousePos))) {
         float listY = listBounds.position.y + 10;
-        float rowHeight = 30; 
+        float rowHeight = 30;
 
         for (size_t i = 0; i < displayedHLV.size(); ++i) {
             sf::FloatRect rowBounds(
-                {listBounds.position.x,
-                listY + i * rowHeight},
-                {listBounds.size.x,
-                rowHeight}
+                {listBounds.position.x, listY + i * rowHeight},
+                {listBounds.size.x, rowHeight}
             );
             
             if (rowBounds.contains(sf::Vector2f(mousePos))) {
                 hoveredListIndex = i;
-                tooltip.setString(sf::String::fromUtf8(displayedHLV[i]->getSDT().begin(), displayedHLV[i]->getSDT().end()));
-                tooltip.setPosition(sf::Vector2f(mousePos.x + 15.f, mousePos.y));
-                break;
+                break; // ✅ Tìm thấy rồi thì thoát
             }
         }
     }
@@ -201,7 +252,7 @@ void DatHLVPopup::drawContent(sf::RenderTarget& target) {
     searchInput.draw(target);
     target.draw(listContainer);
     
-    // Ve danh sach HLV
+    // Vẽ danh sách HLV
     sf::FloatRect bounds = listContainer.getGlobalBounds();
     float listX = bounds.position.x + 10;
     float listY = bounds.position.y + 10;
@@ -209,17 +260,16 @@ void DatHLVPopup::drawContent(sf::RenderTarget& target) {
 
     for (size_t i = 0; i < displayedHLV.size(); ++i) {
         if (listY + i * rowHeight > bounds.position.y + bounds.size.y - rowHeight) {
-            break; // Khong ve tran ra khoi khung
+            break;
         }
         
         HLV* hlv = displayedHLV[i];
         
-        // (MOI) Hien thi theo format "ID: Ten"
         std::string hlvInfo = hlv->getID() + ": " + hlv->getHoTen();
-        sf::Text hlvName(font,sf::String::fromUtf8(hlvInfo.begin(), hlvInfo.end()), 16);
+        sf::Text hlvName(font, sf::String::fromUtf8(hlvInfo.begin(), hlvInfo.end()), 16);
         hlvName.setPosition(sf::Vector2f(listX, listY + i * rowHeight));
 
-        // Highlight mau
+        // Highlight
         if (hlv == selectedHLV) {
             hlvName.setFillColor(Config::Warning);
             hlvName.setStyle(sf::Text::Bold);
@@ -236,24 +286,24 @@ void DatHLVPopup::drawContent(sf::RenderTarget& target) {
     confirmButton.draw(target);
     cancelButton.draw(target);
     
-    target.draw(tooltip); // Ve tooltip (de len tren cung)
+    // ✅ BỎ: target.draw(tooltip);
 }
 
-void DatHLVPopup::handleSubmit() {
-    if (selectedHLV == nullptr) {
-        errorMessage.setString("Vui long chon mot HLV");
-        return;
-    }
-    if (currentHoiVien->getSoBuoiPT() <= 0) {
-        errorMessage.setString("Hoi vien da het buoi tap PT");
-        return;
-    }
+// void DatHLVPopup::handleSubmit() {
+//     if (selectedHLV == nullptr) {
+//         errorMessage.setString("Vui long chon mot HLV");
+//         return;
+//     }
+//     if (currentHoiVien->getSoBuoiPT() <= 0) {
+//         errorMessage.setString("Hoi vien da het buoi tap PT");
+//         return;
+//     }
 
-    std::string now = DateTimeUtils::getCurrentDateTime();
-    LogTapPTService::themLogTapPT(currentHoiVien->getID(), selectedHLV->getID(), now);
+//     std::string now = DateTimeUtils::getCurrentDateTime();
+//     LogTapPTService::themLogTapPT(currentHoiVien->getID(), selectedHLV->getID(), now);
     
-    // (Quan trong: Ban can dam bao LogTapPTService::themLogTapPT
-    // hoac LogTapPT::create() co goi ham tru so buoi PT)
+//     // (Quan trong: Ban can dam bao LogTapPTService::themLogTapPT
+//     // hoac LogTapPT::create() co goi ham tru so buoi PT)
     
-    hide();
-}
+//     hide();
+// }

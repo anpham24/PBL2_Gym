@@ -14,10 +14,12 @@ private:
     string ngayLap;
     string phuongThucTT;
     bool daThanhToan;
+    double giamGia; // ✅ THÊM FIELD MỚI
     MyVector<ChiTietHoaDon_HH*> dsChiTietHoaDon_HH;
     MyVector<ChiTietHoaDon_GT*> dsChiTietHoaDon_GT;
     NhanVien* nhanVien;
     HoiVien* hoiVien;
+
 public:
     HoaDon();
     HoaDon(const string&, const string&, const string&, NhanVien* = nullptr, HoiVien* = nullptr);
@@ -38,6 +40,10 @@ public:
     void setHoiVien(HoiVien*);
     void setNgayLap(const string&);
     void setPhuongThucTT(const string&);
+    
+    // ✅ THÊM GETTER/SETTER CHO GIẢM GIÁ
+    double getGiamGia() const;
+    void setGiamGia(double);
 
     void addChiTietHoaDon_HH(ChiTietHoaDon_HH*);
     void removeChiTietHoaDon_HH(ChiTietHoaDon_HH*);
@@ -45,7 +51,8 @@ public:
     void addChiTietHoaDon_GT(ChiTietHoaDon_GT*);
     void removeChiTietHoaDon_GT(ChiTietHoaDon_GT*);
 
-    double getTotal() const;
+    double getTotal() const;        // ✅ Tổng GỐC (chưa giảm)
+    double getFinalTotal() const;   // ✅ THÊM: Tổng SAU GIẢM GIÁ
     size_t itemCount() const;
 
     static HoaDon* create(const string&, const string&, const string&, NhanVien* = nullptr, HoiVien* = nullptr);

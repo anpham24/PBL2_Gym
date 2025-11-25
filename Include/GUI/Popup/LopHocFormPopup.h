@@ -30,21 +30,14 @@ private:
     sf::Text errorMessage;
     Button confirmButton;
     Button cancelButton;
-    
-    /**
-     * @brief Tai toan bo data MonTap va HLV vao Selectors.
-     */
-    void loadSelectors();
-    
-    /**
-     * @brief Kiem tra input, su dung Validator.
-     * @return true neu hop le.
-     */
-    bool validate(std::string& ten, std::string& lich, int& thoiLuong, MonTap*& mt, HLV*& hlv);
-    
-    void handleSubmit();
-    // (Chung ta se don gian hoa, khong can dieu huong phim cho form phuc tap nay)
 
+    int focusIndex; // De dieu huong bang phim
+    
+    void loadSelectors();
+    bool validate(std::string& ten, std::string& lich, int& thoiLuong, MonTap*& mt, HLV*& hlv);
+    void handleSubmit();
+    void handleKeyNavigation(sf::Keyboard::Key key);
+    void updateFocus();
 protected:
     void drawContent(sf::RenderTarget& target) override;
 

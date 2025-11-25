@@ -23,6 +23,8 @@ HLVDetailPopup::HLVDetailPopup(App& app)
     // --- Setup TabManager ---
     tabManager.setPosition(popupPanel.getPosition().x + 30, popupPanel.getPosition().y + 70);
     tabManager.addTab("Thong Tin Ca Nhan");
+    isStaffReadOnly = (app.getCurrentAccount()->getAccountType() == AccountType::STAFF);
+    if (!isStaffReadOnly)
     tabManager.addTab("Chi Tiet Luong");
 }
 
@@ -46,13 +48,13 @@ void HLVDetailPopup::hide() {
 void HLVDetailPopup::loadData() {
     if (currentHLV == nullptr) return;
     
-    // Xoa du lieu cu
+    // Xóa dữ liệu cũ
     infoLines.clear();
     luongLines.clear();
     
-    float pY = popupPanel.getPosition().y + 120; // Vi tri bat dau noi dung (duoi tabs)
+    float pY = popupPanel.getPosition().y + 120;
 
-    // --- Load Tab 1: Thong Tin Ca Nhan ---
+    // --- Load Tab 1: Thông Tin Cá Nhân ---
     createInfoLine(infoLines, "ID", currentHLV->getID(), pY);
     createInfoLine(infoLines, "Ho Ten", currentHLV->getHoTen(), pY + 30);
     createInfoLine(infoLines, "So Dien Thoai", currentHLV->getSDT(), pY + 60);
@@ -60,42 +62,60 @@ void HLVDetailPopup::loadData() {
     createInfoLine(infoLines, "Gioi Tinh", currentHLV->getGioiTinh(), pY + 120);
     createInfoLine(infoLines, "Trang Thai", currentHLV->getIsActive() ? "Dang lam" : "Nghi viec", pY + 150);
     createInfoLine(infoLines, "Chuyen Mon", currentHLV->getChuyenMon(), pY + 180);
-    createInfoLine(infoLines, "Luong Cung", std::to_string((int)currentHLV->getLuong()), pY + 210);
 
-    // --- Load Tab 2: Tinh Luong (Theo yeu cau cua ban) ---
-    double luongCung = currentHLV->getLuong();
-    int soLopDay = currentHLV->getDsLopHoc().size();
-    int soPTDay = currentHLV->getDsLogTapPT().size();
-    
-    double luongLop = soLopDay * Config::PAY_RATE_HLV_PER_CLASS;
-    double luongPT = soPTDay * Config::PAY_RATE_HLV_PER_PT;
-    double tongLuong = luongCung + luongLop + luongPT;
-
-    createInfoLine(luongLines, "Luong Cung", std::to_string((int)luongCung), pY);
-    createInfoLine(luongLines, "So Lop Da Day", std::to_string(soLopDay), pY + 30);
-    createInfoLine(luongLines, "Luong Lop", 
-        "( " + std::to_string(soLopDay) + " * " + std::to_string((int)Config::PAY_RATE_HLV_PER_CLASS) + " ) = " + std::to_string((int)luongLop), 
-        pY + 60);
-    createInfoLine(luongLines, "So Buoi PT Da Day", std::to_string(soPTDay), pY + 90);
-    createInfoLine(luongLines, "Luong PT", 
-        "( " + std::to_string(soPTDay) + " * " + std::to_string((int)Config::PAY_RATE_HLV_PER_PT) + " ) = " + std::to_string((int)luongPT), 
-        pY + 120);
-    
-    // Tao dong TONG LUONG (dac biet)
-    float labelX = popupPanel.getPosition().x + 50;
-    float valueX = popupPanel.getPosition().x + 220;
-    
-    sf::Text label(font, "TONG LUONG:", 18);
-    label.setFillColor(Config::Success);
-    label.setStyle(sf::Text::Bold);
-    label.setPosition(sf::Vector2f(labelX, pY + 170));
-    luongLines.push_back(label);
-    
-    sf::Text value(font, std::to_string((int)tongLuong) + " VND", 18);
-    value.setFillColor(Config::Success);
-    value.setStyle(sf::Text::Bold);
-    value.setPosition(sf::Vector2f(valueX, pY + 170));
-    luongLines.push_back(value);
+    // --- Load Tab 2: Tính Lương REAL-TIME ---
+    if (!isStaffReadOnly) {
+        // ✅ SỬ DỤNG METHODS MỚI
+        double luongCoBan = currentHLV->getLuongCoBan();      // Lương cố định
+        int soLopDay = currentHLV->getDsLopHoc().size();
+        int soPTDay = currentHLV->getSoBuoiPT();              // ✅ Method mới
+        
+        double luongLop = soLopDay * Config::HLV_LUONG_LOP_MOI_BUOI;
+        double luongPT = soPTDay * Config::HLV_LUONG_PT_MOI_BUOI;
+        double tongLuong = currentHLV->getLuong();            // ✅ Tính tổng real-time
+        
+        // Hiển thị chi tiết
+        createInfoLine(luongLines, "Luong Co Ban", std::to_string((int)luongCoBan), pY);
+        
+        createInfoLine(luongLines, "So Lop Da Day", std::to_string(soLopDay), pY + 30);
+        createInfoLine(luongLines, "Luong Lop", 
+            "( " + std::to_string(soLopDay) + " * " + 
+            std::to_string((int)Config::HLV_LUONG_LOP_MOI_BUOI) + " ) = " + 
+            std::to_string((int)luongLop), 
+            pY + 60);
+        
+        createInfoLine(luongLines, "So Buoi PT Da Day", std::to_string(soPTDay), pY + 90);
+        createInfoLine(luongLines, "Luong PT", 
+            "( " + std::to_string(soPTDay) + " * " + 
+            std::to_string((int)Config::HLV_LUONG_PT_MOI_BUOI) + " ) = " + 
+            std::to_string((int)luongPT), 
+            pY + 120);
+        
+        // Tạo dòng TỔNG LƯƠNG (đặc biệt)
+        float labelX = popupPanel.getPosition().x + 50;
+        float valueX = popupPanel.getPosition().x + 220;
+        
+        sf::Text label(font, "TONG LUONG:", 18);
+        label.setFillColor(Config::Success);
+        label.setStyle(sf::Text::Bold);
+        label.setPosition(sf::Vector2f(labelX, pY + 170));
+        luongLines.push_back(label);
+        
+        sf::Text value(font, std::to_string((int)tongLuong) + " VND", 18);
+        value.setFillColor(Config::Success);
+        value.setStyle(sf::Text::Bold);
+        value.setPosition(sf::Vector2f(valueX, pY + 170));
+        luongLines.push_back(value);
+        
+        // ✅ THÊM: Debug log
+        // std::cout << "\n💰 HLV Salary Details:" << std::endl;
+        // std::cout << "   Base: " << luongCoBan << " VND" << std::endl;
+        // std::cout << "   Classes: " << soLopDay << " x " << Config::HLV_LUONG_LOP_MOI_BUOI 
+        //           << " = " << luongLop << " VND" << std::endl;
+        // std::cout << "   PT Sessions: " << soPTDay << " x " << Config::HLV_LUONG_PT_MOI_BUOI 
+        //           << " = " << luongPT << " VND" << std::endl;
+        // std::cout << "   TOTAL: " << tongLuong << " VND" << std::endl;
+    }
 }
 
 // --- Ve noi dung theo Tab ---

@@ -52,6 +52,8 @@ protected:
 
 public:
     HLVDetailPopup(App& app);
+
+    bool isStaffReadOnly;
     
     /**
      * @brief Hien thi popup voi thong tin cua mot HLV cu the.

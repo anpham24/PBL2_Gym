@@ -47,6 +47,8 @@ public:
      * @param nv Con tro den NhanVien can xem.
      */
     void show(NhanVien* nv);
+
+    bool isStaffReadOnly;
     
     /**
      * @brief An popup va xoa du lieu tam.

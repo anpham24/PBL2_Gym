@@ -92,7 +92,7 @@ void HLVService::suaHLV(const string& maHLV, const string& tenHLV, const string&
     hlvCanSua->setGioiTinh(gioiTinh);
     hlvCanSua->setNgaySinh(ngaySinh);
     hlvCanSua->setChuyenMon(chuyenMon);
-    hlvCanSua->setLuong(luong);
+    hlvCanSua->setLuongCoBan(luong);
     ql.setDirty(true);
     // UI::showMessage("Cập nhật HLV thành công.");
 }

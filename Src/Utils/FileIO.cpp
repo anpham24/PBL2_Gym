@@ -243,8 +243,9 @@ void FileIO::loadHopDong(const string& filePath) {
         string ngayDK = parts[1];
         string ngayHetHan = parts[2];
         bool isActive = toBool(parts[3]);
+        int soBuoiPT = stoi(parts[4]); // ✅ THÊM
 
-        HopDong* hd = HopDong::create(maHD, ngayDK, ngayHetHan, isActive); // Chua lien ket den HoiVien va GoiTap va NhanVien
+        HopDong* hd = HopDong::create(maHD, ngayDK, ngayHetHan, isActive, soBuoiPT);
         ql.addHopDong(hd);
     }
     file.close();
@@ -261,14 +262,20 @@ void FileIO::loadHoaDon(const string& filePath) {
 
         MyVector<string> parts = splitString(line, ';');
 
-        // Cấu trúc: <MaHD>;<NgayLap>;<PhuongThucTT>;<MaNV_FK>;<MaHV_FK>
-        if (parts.size() < 3) continue;
+        // ✅ FORMAT MỚI: <MaHD>;<NgayLap>;<PhuongThucTT>;<GiamGia>;<NV_FK>;<HV_FK>
+        if (parts.size() < 4) continue; // Tối thiểu 4 trường
 
         string maHD = parts[0];
         string ngayLap = parts[1];
         string phuongThucTT = parts[2];
+        double giamGia = stod(parts[3]);
 
-        HoaDon* hd = HoaDon::create(maHD, ngayLap, phuongThucTT); // Chua lien ket den NhanVien va HoiVien
+        HoaDon* hd = HoaDon::create(maHD, ngayLap, phuongThucTT);
+        hd->setGiamGia(giamGia);
+        
+        // ✅ THÊM: Đánh dấu đã thanh toán (vì đã lưu vào file)
+        hd->setDaThanhToan(true);
+        
         ql.addHoaDon(hd);
     }
     file.close();
@@ -401,9 +408,9 @@ void FileIO::linkHopDong(const string& filePath) {
         if (parts.size() < 7) continue;
 
         string maHD = parts[0];
-        string maHV = parts[4];
-        string maGoiTap = parts[5];
-        string maNV = parts[6];
+        string maHV = parts[5];
+        string maGoiTap = parts[6];
+        string maNV = parts[7];
 
         HopDong* hd = ql.getHopDong(maHD);
         HoiVien* hv = ql.getHoiVien(maHV);
@@ -429,18 +436,22 @@ void FileIO::linkHoaDon(const string& filePath) {
 
         MyVector<string> parts = splitString(line, ';');
 
-        // Cấu trúc: <MaHD>;<NgayLap>;<PhuongThucTT>;<MaNV_FK>;<MaHV_FK>
-        if (parts.size() < 5) continue;
+        // ✅ FORMAT MỚI: <MaHD>;<NgayLap>;<PhuongThucTT>;<GiamGia>;<NV_FK>;<HV_FK>
+        if (parts.size() < 6) continue; // Cần 6 trường
 
         string maHD = parts[0];
-        string maNV = parts[3];
-        string maHV = parts[4];
+        string maNV = parts[4];  // ✅ INDEX 4
+        string maHV = parts[5];  // ✅ INDEX 5
 
         HoaDon* hd = ql.getHoaDon(maHD);
-        NhanVien* nv = ql.getNhanVien(maNV);
-        HoiVien* hv = ql.getHoiVien(maHV);
         if (hd) {
-            if (nv) hd->setNhanVien(nv);
+            // Cho phép maNV = "NULL" hoặc "ADMIN"
+            if (maNV != "NULL" && maNV != "ADMIN") {
+                NhanVien* nv = ql.getNhanVien(maNV);
+                if (nv) hd->setNhanVien(nv);
+            }
+            
+            HoiVien* hv = ql.getHoiVien(maHV);
             if (hv) hd->setHoiVien(hv);
         }
     }
@@ -507,7 +518,6 @@ void FileIO::loadAllData(QuanLy& ql, AccountManager& am, const string& folderPat
    
 
     IDGenerator::loadState();
-
     loadNhanVien(folderPath + "/NhanVien.txt");
     loadHLV(folderPath + "/HLV.txt");
     loadHoiVien(folderPath + "/HoiVien.txt");
@@ -656,6 +666,48 @@ void FileIO::saveLogTapPT(const string& filePath) {
     file.close();
 }
 
+void FileIO::saveChiTietHoaDon_HH(const string& filePath) {
+    QuanLy& ql = QuanLy::getInstance();
+    ofstream file(filePath);
+    if (!file.is_open()) return;
+
+    // Duyệt tất cả HoaDon và lưu ChiTietHoaDon_HH
+    MyVector<HoaDon*> dsHD = ql.getDsHoaDon().getAllValues();
+    for (size_t i = 0; i < dsHD.size(); ++i) {
+        HoaDon* hd = dsHD[i];
+        const MyVector<ChiTietHoaDon_HH*>& dsChiTiet = hd->getDsChiTietHoaDon_HH();
+        
+        for (size_t j = 0; j < dsChiTiet.size(); ++j) {
+            ChiTietHoaDon_HH* ct = dsChiTiet[j];
+            if (ct != nullptr) {
+                file << ct->read() << endl;
+            }
+        }
+    }
+    file.close();
+}
+
+void FileIO::saveChiTietHoaDon_GT(const string& filePath) {
+    QuanLy& ql = QuanLy::getInstance();
+    ofstream file(filePath);
+    if (!file.is_open()) return;
+
+    // Duyệt tất cả HoaDon và lưu ChiTietHoaDon_GT
+    MyVector<HoaDon*> dsHD = ql.getDsHoaDon().getAllValues();
+    for (size_t i = 0; i < dsHD.size(); ++i) {
+        HoaDon* hd = dsHD[i];
+        const MyVector<ChiTietHoaDon_GT*>& dsChiTiet = hd->getDsChiTietHoaDon_GT();
+        
+        for (size_t j = 0; j < dsChiTiet.size(); ++j) {
+            ChiTietHoaDon_GT* ct = dsChiTiet[j];
+            if (ct != nullptr) {
+                file << ct->read() << endl;
+            }
+        }
+    }
+    file.close();
+}
+
 void FileIO::saveAllData(const QuanLy& ql, const AccountManager& am, const string& folderPath) {
     saveAccounts(am, folderPath + "/accounts.txt");
 
@@ -670,6 +722,9 @@ void FileIO::saveAllData(const QuanLy& ql, const AccountManager& am, const strin
     saveHopDong(folderPath + "/HopDong.txt");
     saveHoaDon(folderPath + "/HoaDon.txt");
     saveLogTapPT(folderPath + "/LogTapPT.txt");
+
+    saveChiTietHoaDon_HH(folderPath + "/ChiTietHoaDon_HH.txt");
+    saveChiTietHoaDon_GT(folderPath + "/ChiTietHoaDon_GT.txt");
 
     IDGenerator::saveState();
 }

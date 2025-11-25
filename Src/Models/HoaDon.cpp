@@ -5,14 +5,17 @@
 #include "ChiTietHoaDon_GT.h"
 #include "IDGenerator.h"
 
-HoaDon::HoaDon() {}
+HoaDon::HoaDon() 
+    : daThanhToan(false), giamGia(0.0), nhanVien(nullptr), hoiVien(nullptr) {}
 
 HoaDon::HoaDon(const string& id, const string& ngayLap, const string& phuongThucTT, NhanVien* nv, HoiVien* hv) 
-    : id(id), nhanVien(nv), hoiVien(hv), ngayLap(ngayLap), phuongThucTT(phuongThucTT) {}
+    : id(id), nhanVien(nv), hoiVien(hv), ngayLap(ngayLap), phuongThucTT(phuongThucTT), 
+      daThanhToan(false), giamGia(0.0) {}
 
 HoaDon::HoaDon(const HoaDon& other)
     : id(other.id), nhanVien(other.nhanVien), hoiVien(other.hoiVien), 
-      ngayLap(other.ngayLap), phuongThucTT(other.phuongThucTT) {}
+      ngayLap(other.ngayLap), phuongThucTT(other.phuongThucTT), 
+      daThanhToan(other.daThanhToan), giamGia(other.giamGia) {}
 
 HoaDon::~HoaDon() {}
 
@@ -26,6 +29,10 @@ const MyVector<ChiTietHoaDon_GT*>& HoaDon::getDsChiTietHoaDon_GT() const { retur
 MyVector<ChiTietHoaDon_HH*>& HoaDon::getDsChiTietHoaDon_HH() { return dsChiTietHoaDon_HH; }
 MyVector<ChiTietHoaDon_GT*>& HoaDon::getDsChiTietHoaDon_GT() { return dsChiTietHoaDon_GT; }
 
+// ✅ THÊM GETTER/SETTER GIẢM GIÁ
+double HoaDon::getGiamGia() const { return giamGia; }
+void HoaDon::setGiamGia(double g) { giamGia = g; }
+
 void HoaDon::setNhanVien(NhanVien* nv) { 
     if (nv == this->nhanVien) return;
     if (this->nhanVien != nullptr) {
@@ -36,6 +43,7 @@ void HoaDon::setNhanVien(NhanVien* nv) {
         this->nhanVien->addHoaDon(this);
     }
 }
+
 void HoaDon::setHoiVien(HoiVien* hv) { 
     if (hv == this->hoiVien) return;
     if (this->hoiVien != nullptr) {
@@ -46,6 +54,7 @@ void HoaDon::setHoiVien(HoiVien* hv) {
         this->hoiVien->addHoaDon(this);
     }
 }
+
 void HoaDon::setNgayLap(const string &d) { ngayLap = d; }
 void HoaDon::setPhuongThucTT(const string &p) { phuongThucTT = p; }
 
@@ -75,6 +84,7 @@ void HoaDon::removeChiTietHoaDon_GT(ChiTietHoaDon_GT* item) {
     }
 }
 
+// ✅ Tổng GỐC (chưa giảm giá)
 double HoaDon::getTotal() const {
     double sum = 0.0;
     for (size_t i = 0; i < dsChiTietHoaDon_HH.size(); ++i) {
@@ -86,6 +96,11 @@ double HoaDon::getTotal() const {
     return sum;
 }
 
+// ✅ THÊM: Tổng SAU GIẢM GIÁ
+double HoaDon::getFinalTotal() const {
+    return getTotal() - giamGia;
+}
+
 size_t HoaDon::itemCount() const {
     return dsChiTietHoaDon_HH.size() + dsChiTietHoaDon_GT.size();
 }
@@ -94,15 +109,31 @@ HoaDon* HoaDon::create(const string& id, const string& ngayLap, const string& ph
     return new HoaDon(id, ngayLap, phuongThucTT, nv, hv);
 }
 
-HoaDon* HoaDon::create(const string& ngayLap, const string& phuongThucTT, NhanVien* nv, HoiVien* hv) {
+HoaDon* HoaDon::create(const string& ngayLap, const string& phuongThucTT, 
+                       NhanVien* nv, HoiVien* hv) {
     string id = IDGenerator::generateID(IDGenerator::Prefix_HoaDon);
-    return new HoaDon(id, ngayLap, phuongThucTT, nv, hv);
+    
+    HoaDon* hd = new HoaDon(id, ngayLap, phuongThucTT);
+    
+    // ✅ GỌI setters ĐỂ TẠO QUAN HỆ 2 CHIỀU
+    if (nv != nullptr) {
+        hd->setNhanVien(nv);
+    }
+    
+    if (hv != nullptr) {
+        hd->setHoiVien(hv);
+    }
+    
+    return hd;
 }
 
 string HoaDon::read() const {
-    string result = id + ";" + ngayLap + ";" + phuongThucTT + ";" + 
-                    (nhanVien ? nhanVien->getID() : "NULL") + ";" + 
-                    (hoiVien ? hoiVien->getID() : "NULL");
+    string result = id + ";" + 
+                    ngayLap + ";" + 
+                    phuongThucTT + ";" + 
+                    to_string(giamGia) + ";" +
+                    (nhanVien ? nhanVien->getID() : "ADMIN") + ";" + // ✅ Lưu cả NV
+                    (hoiVien ? hoiVien->getID() : "NULL");           // ✅ Lưu cả HV
     return result;
 }
 

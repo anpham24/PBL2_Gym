@@ -55,6 +55,8 @@ double ChiTietHoaDon_HH::tinhTien() const {
 }
 
 string ChiTietHoaDon_HH::read() const {
-    string result = hoaDon->getID() + ";" + hangHoa->getID() + ";" + to_string(soLuong) + ";" + to_string(donGia);
+    string hoaDonID = (hoaDon != nullptr) ? hoaDon->getID() : "NULL";
+    string hangHoaID = (hangHoa != nullptr) ? hangHoa->getID() : "NULL";
+    string result = hoaDonID + ";" + hangHoaID + ";" + to_string(soLuong) + ";" + to_string(donGia);
     return result;
 }

@@ -73,6 +73,6 @@ namespace Config {
     const double COMMISSION_RATE_STAFF = 0.05;
 
     // Luong cho HLV (theo buoi)
-    const double PAY_RATE_HLV_PER_CLASS = 150000.0; // Luong moi lop HLV day
-    const double PAY_RATE_HLV_PER_PT = 200000.0;   // Luong moi buoi PT HLV day
+    const double HLV_LUONG_PT_MOI_BUOI = 50000.0;      // 50k/buổi PT
+    const double HLV_LUONG_LOP_MOI_BUOI = 100000.0;
 }

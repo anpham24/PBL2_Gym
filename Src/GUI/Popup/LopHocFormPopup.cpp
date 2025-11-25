@@ -39,18 +39,20 @@ LopHocFormPopup::LopHocFormPopup(App& app)
     thoiLuongInput.setSize(inputWidth, 35);
     thoiLuongInput.setPosition(pX + 120, pY + 100);
 
-    monTapSelector.setSize(inputWidth, 35);
-    monTapSelector.setPosition(pX + 120, pY + 150);
+        float selectorWidth = (inputWidth - 20) / 2.0f; // Chia đôi width, trừ khoảng cách giữa
     
-    hlvSelector.setSize(inputWidth, 35);
-    hlvSelector.setPosition(pX + 120, pY + 200);
+    // MonTap selector (BÊN TRÁI)
+    monTapSelector.setSize(selectorWidth, 35);
+    monTapSelector.setPosition(pX + 85, pY + 160); // ✅ Tăng khoảng cách từ 150 -> 160
+    
+    // HLV selector (BÊN PHẢI, cùng hàng với MonTap)
+    hlvSelector.setSize(selectorWidth, 35);
+    hlvSelector.setPosition(pX + 120 + selectorWidth + 20, pY + 160); // ✅ Cùng Y với MonTap
 
-    // errorMessage.setFont(font);
-    // errorMessage.setCharacterSize(14);
-    errorMessage.setFillColor(Config::Danger);
-    errorMessage.setPosition(sf::Vector2f(pX, pY + 250));
+    // Error message (✅ Đẩy xuống dưới hơn vì dropdown cần không gian)
+    errorMessage.setPosition(sf::Vector2f(pX, pY + 300)); // ✅ Từ 250 -> 300
 
-    // Nut bam
+    // Nut bam (✅ Đẩy xuống để tránh dropdown)
     float btnY = popupPanel.getPosition().y + panelSize.y - 70;
     confirmButton.setup("Xac Nhan", font);
     confirmButton.setSize(120, 40);
@@ -118,6 +120,44 @@ void LopHocFormPopup::show(LopHoc* lh, std::function<void()> onSuccess) {
     }
     
     BasePopup::show();
+}
+
+void LopHocFormPopup::updateFocus() {
+    tenLopInput.setFocus(focusIndex == 0);
+    lichTapInput.setFocus(focusIndex == 1);
+    thoiLuongInput.setFocus(focusIndex == 2);
+    
+    // Selector khong co ham setFocus, nhung ta co the dong/mo no
+    // (O day ta chi can dam bao InputBox khong nhan focus sai)
+    
+    confirmButton.setFocused(focusIndex == 5);
+    cancelButton.setFocused(focusIndex == 6);
+}
+
+// --- (MOI) HAM XU LY DIEU HUONG PHIM ---
+void LopHocFormPopup::handleKeyNavigation(sf::Keyboard::Key key) {
+    int maxFocus = 6; // 0:Ten, 1:Lich, 2:ThoiLuong, 3:Mon, 4:HLV, 5:Confirm, 6:Cancel
+    
+    if (key == sf::Keyboard::Key::Tab || key == sf::Keyboard::Key::Down) {
+        focusIndex = (focusIndex + 1) % (maxFocus + 1);
+        updateFocus();
+    } 
+    else if (key == sf::Keyboard::Key::Up) {
+        focusIndex = (focusIndex - 1 + (maxFocus + 1)) % (maxFocus + 1);
+        updateFocus();
+    }
+    else if (key == sf::Keyboard::Key::Enter) {
+        // Logic Enter dac biet cho tung truong
+        if (focusIndex < 3) { 
+            // Neu dang o cac o nhap lieu, Enter -> xuong o tiep theo
+            focusIndex++; 
+            updateFocus();
+        } else if (focusIndex == 5) { 
+            confirmButton.click(); 
+        } else if (focusIndex == 6) { 
+            cancelButton.click(); 
+        }
+    }
 }
 
 bool LopHocFormPopup::validate(std::string& ten, std::string& lich, int& thoiLuong, MonTap*& mt, HLV*& hlv) {
@@ -189,10 +229,12 @@ void LopHocFormPopup::drawContent(sf::RenderTarget& target) {
     label.setString("Thoi Luong:");
     label.setPosition(sf::Vector2f(pX, pY + 105)); target.draw(label);
     label.setString("Mon Tap:");
-    label.setPosition(sf::Vector2f(pX, pY + 155)); target.draw(label);
+    label.setPosition(sf::Vector2f(pX, pY + 165)); target.draw(label);
+     float selectorWidth = (popupPanel.getSize().x - 180 - 20) / 2.0f;
     label.setString("HLV:");
-    label.setPosition(sf::Vector2f(pX, pY + 205)); target.draw(label);
-
+    label.setPosition(sf::Vector2f(pX + 100 + selectorWidth, pY + 165)); // Label ở trên selector
+    target.draw(label);
+    
     // Ve inputs
     tenLopInput.draw(target);
     lichTapInput.draw(target);
@@ -211,29 +253,50 @@ void LopHocFormPopup::handleEvent(sf::Event event, sf::Vector2i mousePos) {
     if (!isVisible) return;
     BasePopup::handleEvent(event, mousePos);
     
-    // Truyen event cho Selector TRUOC
-    // Vi chung co the "an" click de mo/dong dropdown
     monTapSelector.handleEvent(event, mousePos);
     hlvSelector.handleEvent(event, mousePos);
 
-    // Neu dropdown dang mo, khong xu ly cac nut ben duoi
     if (monTapSelector.getIsOpen() || hlvSelector.getIsOpen()) {
         return;
     }
 
-    // Xu ly cac nut
     confirmButton.handleEvent(event, mousePos);
     cancelButton.handleEvent(event, mousePos);
     
-    // Xu ly input (chi khi khong co dropdown nao mo)
-    if (event.getIf<sf::Event::TextEntered>()) {
-         tenLopInput.handleEvent(event);
-         lichTapInput.handleEvent(event);
-         thoiLuongInput.handleEvent(event);
+    // 1. Xử lý Click chuột để Focus (va CAP NHAT focusIndex)
+    if (auto* mouseEvent = event.getIf<sf::Event::MouseButtonPressed>()) {
+        if (mouseEvent->button == sf::Mouse::Button::Left) {
+            bool clickTen = tenLopInput.isMouseOver(mousePos);
+            bool clickLich = lichTapInput.isMouseOver(mousePos);
+            bool clickThoi = thoiLuongInput.isMouseOver(mousePos);
+
+            if (clickTen) focusIndex = 0;
+            else if (clickLich) focusIndex = 1;
+            else if (clickThoi) focusIndex = 2;
+            // (Cac truong hop khac nhu click Selector, Button...)
+            
+            updateFocus(); // Goi ham nay de setFocus cho cac InputBox
+        }
     }
-    
-    // (Bo qua dieu huong phim cho form phuc tap nay)
-}
+
+    // 2. Xử lý phím (TextEntered) -> Gui cho input dang focus
+    if (event.getIf<sf::Event::TextEntered>()) {
+        if (focusIndex == 0) tenLopInput.handleEvent(event);
+        else if (focusIndex == 1) lichTapInput.handleEvent(event);
+        else if (focusIndex == 2) thoiLuongInput.handleEvent(event);
+    }
+
+    // 3. Xử lý phím điều hướng (KeyPressed)
+    if (auto* keyEvent = event.getIf<sf::Event::KeyPressed>()) {
+        // Truyen event cho input dang focus (de xu ly backspace, arrow...)
+        if (focusIndex == 0) tenLopInput.handleEvent(event);
+        else if (focusIndex == 1) lichTapInput.handleEvent(event);
+        else if (focusIndex == 2) thoiLuongInput.handleEvent(event);
+        
+        // Xu ly dieu huong chung (Tab, Enter...)
+        handleKeyNavigation(keyEvent->code);
+    }
+}      
 
 void LopHocFormPopup::update(sf::Vector2i mousePos) {
     if (!isVisible) return;

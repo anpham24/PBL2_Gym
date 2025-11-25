@@ -38,8 +38,7 @@ BanHangScreen::BanHangScreen(App& app)
         return (hd->getNhanVien() != nullptr) ? hd->getNhanVien()->getHoTen() : "N/A"; 
     });
     hoaDonTable.addColumn("Ngay Lap", 150, [](const HoaDon* hd) { return hd->getNgayLap(); });
-    hoaDonTable.addColumn("Tong Tien", 120, [](const HoaDon* hd) { return std::to_string((int)hd->getTotal()); });
-    
+    hoaDonTable.addColumn("Tong Tien", 120, [](const HoaDon* hd) { return std::to_string((int)hd->getFinalTotal());});    
     // Cot hanh dong chi co "Xem"
     hoaDonTable.addAction("Xem Chi Tiet", [this](HoaDon* hd) {
         this->detailPopup.show(hd);

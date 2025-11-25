@@ -6,13 +6,21 @@
 // --- Constructor ---
 CaiDatScreen::CaiDatScreen(App& app) 
     : BaseScreen(app), 
+      font(app.getGlobalFont()),
       isAdmin(false),
-        font(app.getGlobalFont()),
       staffSelector(app.getGlobalFont(), "Chon tai khoan Staff..."),
       titleCaNhan(font, "", 22),
       messageCaNhan(font, "", 16),
       titleStaff(font, "", 22),
-      messageStaff(font, "", 16)
+      messageStaff(font, "", 16),
+      // Khoi tao InputBox va Button
+      matKhauCuInput(),
+      matKhauMoiInput(),
+      xacNhanMKInput(),
+      xacNhanDoiMKButton(),
+      matKhauMoiStaffInput(),
+      datLaiMKStaffButton(),
+      focusIndex(0) // Mac dinh focus vao ô dau tien
 {
     float contentX = 250.0f;
     Account* currentUser = app.getCurrentAccount();
@@ -23,9 +31,8 @@ CaiDatScreen::CaiDatScreen(App& app)
 
     // --- Thiet lap Khu vuc 1: Doi Mat Khau Ca Nhan ---
     float pY_CaNhan = 100.0f;
-    // titleCaNhan.setFont(font);
+
     titleCaNhan.setString("Doi Mat Khau Ca Nhan");
-    // titleCaNhan.setCharacterSize(22);
     titleCaNhan.setFillColor(Config::AccentCyan);
     titleCaNhan.setStyle(sf::Text::Bold);
     titleCaNhan.setPosition(sf::Vector2f(contentX, pY_CaNhan));
@@ -49,17 +56,13 @@ CaiDatScreen::CaiDatScreen(App& app)
         handleChangePassword();
     });
     
-    // messageCaNhan.setFont(font);
-    // messageCaNhan.setCharacterSize(16);
     messageCaNhan.setPosition(sf::Vector2f(contentX + 170, pY_CaNhan + 210));
 
     // --- Thiet lap Khu vuc 2: Dat Lai Mat Khau Staff (NEU LA ADMIN) ---
     if (isAdmin) {
         float pY_Staff = pY_CaNhan + 300;
         
-        // titleStaff.setFont(font);
         titleStaff.setString("Dat Lai Mat Khau Staff");
-        // titleStaff.setCharacterSize(22);
         titleStaff.setFillColor(Config::Warning); // Mau vang
         titleStaff.setStyle(sf::Text::Bold);
         titleStaff.setPosition(sf::Vector2f(contentX, pY_Staff));
@@ -90,9 +93,50 @@ CaiDatScreen::CaiDatScreen(App& app)
             handleResetPassword();
         });
         
-        // messageStaff.setFont(font);
-        // messageStaff.setCharacterSize(16);
         messageStaff.setPosition(sf::Vector2f(contentX + 170, pY_Staff + 160));
+    }
+    
+    // Thiet lap focus ban dau
+    updateFocus();
+}
+
+// --- (MOI) HAM QUAN LY FOCUS ---
+void CaiDatScreen::updateFocus() {
+    // Khu vuc 1
+    matKhauCuInput.setFocus(focusIndex == 0);
+    matKhauMoiInput.setFocus(focusIndex == 1);
+    xacNhanMKInput.setFocus(focusIndex == 2);
+    xacNhanDoiMKButton.setFocused(focusIndex == 3);
+
+    // Khu vuc 2 (Admin)
+    if (isAdmin) {
+        // Selector khong co setFocus truc quan, bo qua
+        matKhauMoiStaffInput.setFocus(focusIndex == 5);
+        datLaiMKStaffButton.setFocused(focusIndex == 6);
+    }
+}
+
+void CaiDatScreen::handleKeyNavigation(sf::Keyboard::Key key) {
+    int maxFocus = isAdmin ? 6 : 3;
+    
+    if (key == sf::Keyboard::Key::Tab || key == sf::Keyboard::Key::Down) {
+        focusIndex = (focusIndex + 1) % (maxFocus + 1);
+        updateFocus();
+    } 
+    else if (key == sf::Keyboard::Key::Up) {
+        focusIndex = (focusIndex - 1 + (maxFocus + 1)) % (maxFocus + 1);
+        updateFocus();
+    }
+    else if (key == sf::Keyboard::Key::Enter) {
+        if (focusIndex == 3) { // Nut Xac Nhan Doi MK
+            xacNhanDoiMKButton.click();
+        } else if (focusIndex == 6 && isAdmin) { // Nut Reset MK Staff
+            datLaiMKStaffButton.click();
+        } else {
+            // Neu dang o input, Enter se chuyen xuong o duoi
+            focusIndex = (focusIndex + 1) % (maxFocus + 1);
+            updateFocus();
+        }
     }
 }
 
@@ -102,9 +146,9 @@ void CaiDatScreen::handleChangePassword() {
     messageCaNhan.setString("");
     Account* currentUser = app.getCurrentAccount();
     
-    std::string mkCu = matKhauCuInput.getString();//.toAnsiString();
-    std::string mkMoi = matKhauMoiInput.getString();//.toAnsiString();
-    std::string xacNhan = xacNhanMKInput.getString();//.toAnsiString();
+    std::string mkCu = matKhauCuInput.getString();
+    std::string mkMoi = matKhauMoiInput.getString();
+    std::string xacNhan = xacNhanMKInput.getString();
 
     // 1. Kiem tra mat khau cu
     if (!currentUser->checkPassword(mkCu)) {
@@ -130,8 +174,9 @@ void CaiDatScreen::handleChangePassword() {
     if (success) {
         messageCaNhan.setFillColor(Config::Success);
         messageCaNhan.setString("Doi mat khau thanh cong!");
+        app.getQuanLy().setDirty(true);
         // Xoa cac truong input
-        matKhauCuInput.setString("");
+        matKhauCuInput.setString("");   
         matKhauMoiInput.setString("");
         xacNhanMKInput.setString("");
     } else {
@@ -145,7 +190,7 @@ void CaiDatScreen::handleResetPassword() {
     messageStaff.setString("");
 
     Account* staffAcc = staffSelector.getSelected();
-    std::string mkMoi = matKhauMoiStaffInput.getString();//.toAnsiString();
+    std::string mkMoi = matKhauMoiStaffInput.getString();
 
     if (staffAcc == nullptr) {
         messageStaff.setFillColor(Config::Danger);
@@ -163,6 +208,7 @@ void CaiDatScreen::handleResetPassword() {
     if (success) {
         messageStaff.setFillColor(Config::Success);
         messageStaff.setString("Dat lai mat khau cho " + sf::String::fromUtf8(staffAcc->getUsername().begin(), staffAcc->getUsername().end()) + " thanh cong!");
+        app.getQuanLy().setDirty(true);
         matKhauMoiStaffInput.setString("");
     } else {
         messageStaff.setFillColor(Config::Danger);
@@ -174,7 +220,28 @@ void CaiDatScreen::handleResetPassword() {
 void CaiDatScreen::handleEvent(sf::Event event) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(app.getWindow());
 
-    // Khu vuc 1
+    // 1. Xu ly Click chuot de Focus (QUAN TRONG)
+    if (auto* mouseEvent = event.getIf<sf::Event::MouseButtonPressed>()) {
+        if (mouseEvent->button == sf::Mouse::Button::Left) {
+            if (matKhauCuInput.isMouseOver(mousePos)) focusIndex = 0;
+            else if (matKhauMoiInput.isMouseOver(mousePos)) focusIndex = 1;
+            else if (xacNhanMKInput.isMouseOver(mousePos)) focusIndex = 2;
+            // ... (Button 3 tu xu ly click)
+            
+            if (isAdmin) {
+                // Index 4 la Selector (tu xu ly)
+                if (matKhauMoiStaffInput.isMouseOver(mousePos)) focusIndex = 5;
+            }
+            updateFocus();
+        }
+    }
+
+    // 2. Xu ly ban phim dieu huong
+    if (auto* keyEvent = event.getIf<sf::Event::KeyPressed>()) {
+        handleKeyNavigation(keyEvent->code);
+    }
+
+    // 3. Truyen su kien cho cac Component
     matKhauCuInput.handleEvent(event);
     matKhauMoiInput.handleEvent(event);
     xacNhanMKInput.handleEvent(event);
@@ -183,13 +250,12 @@ void CaiDatScreen::handleEvent(sf::Event event) {
     // Khu vuc 2 (neu la Admin)
     if (isAdmin) {
         staffSelector.handleEvent(event, mousePos);
-        if (!staffSelector.getIsOpen()) { // Chi xu ly input neu dropdown dong
+        // Neu dropdown dong thi moi cho nhap o duoi
+        if (!staffSelector.getIsOpen()) { 
             matKhauMoiStaffInput.handleEvent(event);
             datLaiMKStaffButton.handleEvent(event, mousePos);
         }
     }
-    
-    // (Bo qua dieu huong phim cho man hinh nay)
 }
 
 void CaiDatScreen::update(sf::Time dt) {

@@ -54,6 +54,9 @@ void NhanVienDetailPopup::loadData() {
     createInfoLine(infoLines, "Gioi Tinh", currentNhanVien->getGioiTinh(), pY + 120);
     createInfoLine(infoLines, "Trang Thai", currentNhanVien->getIsActive() ? "Dang lam" : "Nghi viec", pY + 150);
 
+    isStaffReadOnly = (app.getCurrentAccount()->getAccountType() == AccountType::STAFF);
+
+    if (!isStaffReadOnly) {
     // --- Load Chi Tiet Luong (Theo yeu cau cua ban) ---
     float luongY = pY + 200; // Vi tri bat dau cho luong (duoi thong tin)
     
@@ -95,7 +98,8 @@ void NhanVienDetailPopup::loadData() {
     value.setFillColor(Config::Success);
     value.setStyle(sf::Text::Bold);
     value.setPosition(sf::Vector2f(valueX, luongY + 100));
-    luongLines.push_back(value);
+    luongLines.push_back(value);  
+    }
 }
 
 void NhanVienDetailPopup::drawContent(sf::RenderTarget& target) {

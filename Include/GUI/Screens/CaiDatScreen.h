@@ -14,10 +14,10 @@
  */
 class CaiDatScreen : public BaseScreen {
 private:
+    sf::Font& font;
     bool isAdmin; // Luu quyen cua nguoi dung
 
     // --- Khu vuc 1: Doi Mat Khau Ca Nhan ---
-    sf::Font& font;
     sf::Text titleCaNhan;
     InputBox matKhauCuInput;
     InputBox matKhauMoiInput;
@@ -31,10 +31,19 @@ private:
     InputBox matKhauMoiStaffInput;
     Button datLaiMKStaffButton;
     sf::Text messageStaff; // De hien thi loi hoac thanh cong
+    
+    // --- (MOI) Bien quan ly Focus ---
+    // 0: MK Cu, 1: MK Moi, 2: Xac Nhan MK, 3: Btn Doi MK
+    // (Admin only) 4: Selector, 5: MK Staff, 6: Btn Reset
+    int focusIndex; 
 
     // Ham helper
     void handleChangePassword();
     void handleResetPassword();
+    
+    // --- (MOI) Ham xu ly Focus ---
+    void updateFocus();
+    void handleKeyNavigation(sf::Keyboard::Key key);
 
 public:
     CaiDatScreen(App& app);

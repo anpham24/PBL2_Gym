@@ -7,9 +7,11 @@ HoiVienScreen::HoiVienScreen(App& app)
     : BaseScreen(app), 
       hoiVienTable(app.getGlobalFont()), 
       pagination(app.getGlobalFont()),
-      formPopup(app),       // Khoi tao popup
-      detailPopup(app),     // Khoi tao popup
-      deletePopup(app)      // Khoi tao popup
+      formPopup(app),
+      cartPopup(app),           // ✅ Khởi tạo TRƯỚC
+      datHLVPopup(app),         // ✅ Khởi tạo TRƯỚC
+      detailPopup(app, cartPopup, datHLVPopup), // ✅ Truyền đủ tham số
+      deletePopup(app)
 {
     // --- (MOI) KIEM TRA QUYEN ---
     // Neu la Staff, dat co ReadOnly
@@ -38,10 +40,7 @@ HoiVienScreen::HoiVienScreen(App& app)
     hoiVienTable.addColumn("Trang Thai", 120, [](const HoiVien* hv){ 
         return hv->getIsActive() ? "Hoat dong" : "Het han"; 
     });
-    hoiVienTable.addColumn("Rank", 100, [](const HoiVien* hv){ 
-        // (Ban se tu them logic getRank() sau)
-        return "Bronze"; 
-    });
+    hoiVienTable.addColumn("Rank", 100, [](const HoiVien* hv){ return hv->getRank(); });
 
     // Cot "Xem Chi Tiet" (luon hien thi)
     hoiVienTable.addViewAction([this](HoiVien* hv){
@@ -123,23 +122,34 @@ void HoiVienScreen::onPageChange(int newPage) {
 void HoiVienScreen::handleEvent(sf::Event event) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(app.getWindow());
 
-    // --- Xu ly Popups truoc (de chan click) ---
-    // Neu co popup dang mo, chi popup do duoc nhan su kien
+    // ✅ XỬ LÝ POPUPS - RETURN NGAY SAU KHI XỬ LÝ
+    if (datHLVPopup.getIsVisible()) {
+        datHLVPopup.handleEvent(event, mousePos);
+        return; // ✅ QUAN TRỌNG: Ngăn xử lý tiếp
+    }
+    
+    if (cartPopup.getIsVisible()) {
+        cartPopup.handleEvent(event, mousePos);
+        return;
+    }
+    
     if (formPopup.getIsVisible()) {
         formPopup.handleEvent(event, mousePos);
         return;
     }
+    
     if (detailPopup.getIsVisible()) {
         detailPopup.handleEvent(event, mousePos);
         return;
     }
+    
     if (deletePopup.getIsVisible()) {
         deletePopup.handleEvent(event, mousePos);
         return;
     }
     
-    // --- Neu khong co popup, xu ly man hinh chinh ---
-    if (!isStaffReadOnly) { // Staff khong the an nut "Them"
+    // Xử lý màn hình chính
+    if (!isStaffReadOnly) {
         themHoiVienButton.handleEvent(event, mousePos);
     }
     hoiVienTable.handleEvent(event, mousePos);
@@ -149,17 +159,18 @@ void HoiVienScreen::handleEvent(sf::Event event) {
 void HoiVienScreen::update(sf::Time dt) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(app.getWindow());
 
-    // Luon update cac popup (vi chung co the dang an/hien)
     formPopup.update(mousePos);
     detailPopup.update(mousePos);
     deletePopup.update(mousePos);
+    cartPopup.update(mousePos);      // ✅ THÊM
+    datHLVPopup.update(mousePos);    // ✅ THÊM
     
-    // Neu co popup dang mo, khong update man hinh chinh
-    if (formPopup.getIsVisible() || detailPopup.getIsVisible() || deletePopup.getIsVisible()) {
-        return; 
+    if (formPopup.getIsVisible() || detailPopup.getIsVisible() || 
+        deletePopup.getIsVisible() || cartPopup.getIsVisible() || 
+        datHLVPopup.getIsVisible()) {
+        return;
     }
 
-    // Update man hinh chinh
     if (!isStaffReadOnly) {
         themHoiVienButton.update(mousePos);
     }
@@ -168,15 +179,16 @@ void HoiVienScreen::update(sf::Time dt) {
 }
 
 void HoiVienScreen::draw(sf::RenderTarget& target) {
-    // 1. Ve man hinh chinh
-    if (!isStaffReadOnly) { // Staff khong thay nut "Them"
+    if (!isStaffReadOnly) {
         themHoiVienButton.draw(target);
     }
     hoiVienTable.draw(target);
     pagination.draw(target);
     
-    // 2. Ve Popups (phai ve CUOI CUNG de no noi len tren)
+    // ✅ Vẽ popups
     formPopup.draw(target);
     detailPopup.draw(target);
     deletePopup.draw(target);
+    cartPopup.draw(target);      // ✅ THÊM
+    datHLVPopup.draw(target);    // ✅ THÊM
 }

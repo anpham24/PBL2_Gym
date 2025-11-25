@@ -42,13 +42,13 @@ private:
     InputBox ngaySinhInput;
     
     GenderSelector genderSelector;
-    
+    int focusIndex; // De dieu huong bang tab/enter
     sf::Text errorMessage; // Thong bao loi
     
     Button confirmButton;
     Button cancelButton;
     
-    int focusIndex; // De dieu huong bang tab/enter
+    
     std::function<void()> onSuccessCallback;
 
     bool validateInfo(std::string& ten, std::string& sdt, std::string& gioiTinh, std::string& ngaySinh);

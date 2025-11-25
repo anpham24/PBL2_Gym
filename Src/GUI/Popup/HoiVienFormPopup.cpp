@@ -114,12 +114,12 @@ void GenderSelector::setFocused(bool focusNam, bool focusNu) {
 HoiVienFormPopup::HoiVienFormPopup(App& app)
     : BasePopup(app, "Them Hoi Vien Moi"),
       currentHoiVien(nullptr),
-      genderSelector(app.getGlobalFont()),
-      focusIndex(0),
-      errorMessage(app.getGlobalFont(), "", 14),
       hoTenInput(),
       sdtInput(),
       ngaySinhInput(),
+      genderSelector(app.getGlobalFont()),
+      focusIndex(0),
+      errorMessage(app.getGlobalFont(), "", 14),
       confirmButton(),
       cancelButton()
 {

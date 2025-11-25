@@ -2,10 +2,10 @@
 
 string Validator::validateTen(const string& ten) {
     if (ten.empty()) {
-        return "Tên không được để trống.";
+        return "Ten khong duoc de trong.";
     }
     if (ten.length() > 50) {
-        return "Tên không được vượt quá 50 ký tự.";
+        return "Ten khong duoc vuot qua 50 ky tu.";
     }
     // Kiem tra ký tự hợp lệ (chỉ cho phép chữ cái và dấu cách)
     // for (char c : ten) {
@@ -18,19 +18,19 @@ string Validator::validateTen(const string& ten) {
 
 string Validator::validateSDT(const string& sdt) {
     if (sdt.length() != 10) {
-        return "Số điện thoại phải có đúng 10 chữ số.";
+        return "So dien thoai phai co dung 10 chu so.";
     }
     for (char c : sdt) {
         if (!isdigit(c)) {
-            return "Số điện thoại chỉ được chứa chữ số.";
+            return "So dien thoai chi duoc chua chu so.";
         }
     }
     return "";
 }
 
 string Validator::validateGioiTinh(const string& gioiTinh) {
-    if (gioiTinh != "Nam" && gioiTinh != "Nữ" && gioiTinh != "Khác") {
-        return "Giới tính phải là 'Nam', 'Nữ' hoặc 'Khác'.";
+    if (gioiTinh != "Nam" && gioiTinh != "Nu" && gioiTinh != "Khac") {
+        return "Gioi tinh phai la 'Nam', 'Nu' hoac 'Khac'.";
     }
     return "";
 }
@@ -38,7 +38,7 @@ string Validator::validateGioiTinh(const string& gioiTinh) {
 string Validator::validateNgay(const string& ngay) {
     // Định dạng ngày dự kiến: "DD/MM/YYYY"
     if (ngay.length() != 10 || ngay[2] != '/' || ngay[5] != '/') {
-        return "Ngày sinh phải có định dạng DD/MM/YYYY.";
+        return "Ngay sinh phai co dinh dang DD/MM/YYYY.";
     }
     // Kiểm tra các phần ngày, tháng, năm
     int day = stoi(ngay.substr(0, 2));
@@ -46,19 +46,19 @@ string Validator::validateNgay(const string& ngay) {
     int year = stoi(ngay.substr(6, 4));
 
     if (month < 1 || month > 12) {
-        return "Tháng phải từ 1 đến 12.";
+        return "Thang phai tu 1 den 12.";
     }
     if (day < 1 || day > 31) {
-        return "Ngày phải từ 1 đến 31.";
+        return "Ngay phai tu 1 den 31.";
     }
-    // Kiểm tra số ngày hợp lệ theo tháng
+    // Kiem tra so ngay hop le theo thang
     if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) {
-        return "Tháng này chỉ có tối đa 30 ngày.";
+        return "Thang nay chi co toi da 30 ngay.";
     }
     if (month == 2) {
         bool isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
         if (day > (isLeapYear ? 29 : 28)) {
-            return "Tháng Hai có tối đa " + to_string(isLeapYear ? 29 : 28) + " ngày.";
+            return "Thang Hai co toi da " + to_string(isLeapYear ? 29 : 28) + " ngay.";
         }
     }
     return "";
@@ -67,13 +67,13 @@ string Validator::validateNgay(const string& ngay) {
 string Validator::validateNgayGio(const string& ngayGio) {
     // Định dạng ngày giờ dự kiến: "DD/MM/YYYY HH:MM"
     if (ngayGio.length() != 16 || ngayGio[2] != '/' || ngayGio[5] != '/' || ngayGio[10] != ' ' || ngayGio[13] != ':') {
-        return "Ngày giờ phải có định dạng DD/MM/YYYY HH:MM.";
+        return "Ngay gio phai co dinh dang DD/MM/YYYY HH:MM.";
     }
-    // Tách phần ngày và giờ
+    // TTach phan ngay va gio
     string ngay = ngayGio.substr(0, 10);
     string gio = ngayGio.substr(11, 5);
 
-    // Kiểm tra phần ngày
+    // Kiem tra phan ngay
     string ngayError = validateNgay(ngay);
     if (!ngayError.empty()) {
         return ngayError;
@@ -84,21 +84,24 @@ string Validator::validateNgayGio(const string& ngayGio) {
     int minute = stoi(gio.substr(3, 2));
 
     if (hour < 0 || hour > 23) {
-        return "Giờ phải từ 00 đến 23.";
+        return "Gio phai tu 00 den 23.";
     }
     if (minute < 0 || minute > 59) {
-        return "Phút phải từ 00 đến 59.";
+        return "Phut phai tu 00 den 59.";
     }
 
     return "";
 }
 
+// --- SỬA LỖI Ở ĐÂY ---
 string Validator::validateSoDuong(const int& so) {
     if (so < 0)
-        return "Giá trị phải là số dương";
+        return "Gia tri phai la so duong";
+    return ""; // <--- THÊM DÒNG NÀY: Trả về rỗng nếu không lỗi
 }
 
 string Validator::validateSoDuong(const double& so) {
     if (so < 0)
-        return "Giá trị phải là số dương";
+        return "Gia tri phai la so duong";
+    return ""; // <--- THÊM DÒNG NÀY
 }
