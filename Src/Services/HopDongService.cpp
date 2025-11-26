@@ -145,3 +145,7 @@ void HopDongService::kichHoatHopDong(const string& maHD) {
     ql.setDirty(true);
     // UI::showMessage("Kích hoạt hợp đồng thành công.");
 }
+
+const MyHashTable<HopDong*>& HopDongService::getAllHopDong() {
+    return QuanLy::getInstance().getDsHopDong();
+}

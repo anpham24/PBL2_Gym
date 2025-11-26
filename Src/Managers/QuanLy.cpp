@@ -660,37 +660,47 @@ const LogTapPT* QuanLy::getLogTapPT(const string& maLog) const {
 }
 
 // ============================================================================
-// QUẢN LÝ TRUY CẬP DANH SÁCH
+// QUẢN LÝ TRUY CẬP DANH SÁCH HIỂN THỊ
 // ============================================================================
 
 const MyHashTable<HoiVien*>& QuanLy::getDsHoiVien() const {
     return dsHoiVien;
 }
 
-const MyVector<HLV*>& QuanLy::getDsHLV() const {
-    return dsHLV;
-}
-const MyVector<NhanVien*>& QuanLy::getDsNhanVien() const {
-    return dsNhanVien;
-}
-const MyVector<GoiTap*>& QuanLy::getDsGoiTap() const {
-    return dsGoiTap;
-}
-const MyVector<LopHoc*>& QuanLy::getDsLopHoc() const {
-    return dsLopHoc;
-}
-const MyVector<MonTap*>& QuanLy::getDsMonTap() const {
-    return dsMonTap;
-}
-const MyVector<HangHoa*>& QuanLy::getDsHangHoa() const {
-    return dsHangHoa;
-}
-const MyHashTable<HoaDon*>& QuanLy::getDsHoaDon() const {
-    return dsHoaDon;
-}
 const MyHashTable<HopDong*>& QuanLy::getDsHopDong() const {
     return dsHopDong;
 }
+
+const MyHashTable<HoaDon*>& QuanLy::getDsHoaDon() const {
+    return dsHoaDon;
+}
+
 const MyHashTable<LogTapPT*>& QuanLy::getDsLogTapPT() const {
     return dsLogTapPT;
 }
+
+const MyVector<HLV*>& QuanLy::getDsHLV() const {
+    return dsHLV;
+}
+
+const MyVector<NhanVien*>& QuanLy::getDsNhanVien() const {
+    return dsNhanVien;
+}
+
+const MyVector<GoiTap*>& QuanLy::getDsGoiTap() const {
+    return dsGoiTap;
+}
+
+const MyVector<LopHoc*>& QuanLy::getDsLopHoc() const {
+    return dsLopHoc;
+}
+
+const MyVector<MonTap*>& QuanLy::getDsMonTap() const {
+    return dsMonTap;
+}
+
+const MyVector<HangHoa*>& QuanLy::getDsHangHoa() const {
+    return dsHangHoa;
+}
+
+// ============================================================================

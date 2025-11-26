@@ -125,17 +125,17 @@ public:
     LogTapPT* getLogTapPT(const string&);
     const LogTapPT* getLogTapPT(const string&) const;
 
-    string getDisplayList(const string& entityName) const;
-
-
+    // Ham quan ly truy cap danh sach hien thi
     const MyHashTable<HoiVien*>& getDsHoiVien() const;
+    const MyHashTable<HopDong*>& getDsHopDong() const;
+    const MyHashTable<HoaDon*>& getDsHoaDon() const;
+    const MyHashTable<LogTapPT*>& getDsLogTapPT() const;
+    
     const MyVector<HLV*>& getDsHLV() const;
     const MyVector<NhanVien*>& getDsNhanVien() const;
     const MyVector<GoiTap*>& getDsGoiTap() const;
     const MyVector<LopHoc*>& getDsLopHoc() const;
     const MyVector<MonTap*>& getDsMonTap() const;
     const MyVector<HangHoa*>& getDsHangHoa() const;
-    const MyHashTable<HoaDon*>& getDsHoaDon() const;
-    const MyHashTable<HopDong*>& getDsHopDong() const;
-    const MyHashTable<LogTapPT*>& getDsLogTapPT() const;
+    
 };

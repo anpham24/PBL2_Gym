@@ -56,10 +56,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\Admin\OneDrive - The University of Technology\Desktop\PBL2\PBL2_Gym"
+CMAKE_SOURCE_DIR = D:\PBL2_Gym
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\Admin\OneDrive - The University of Technology\Desktop\PBL2\PBL2_Gym\build"
+CMAKE_BINARY_DIR = D:\PBL2_Gym\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\Admin\OneDrive - The University of Technology\Desktop\PBL2\PBL2_Gym\build\CMakeFiles" "C:\Users\Admin\OneDrive - The University of Technology\Desktop\PBL2\PBL2_Gym\build\\CMakeFiles\progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\PBL2_Gym\build\CMakeFiles D:\PBL2_Gym\build\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\Admin\OneDrive - The University of Technology\Desktop\PBL2\PBL2_Gym\build\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\PBL2_Gym\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -116,24 +116,1632 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named PBL2_GYM
+# Target rules for targets named PBL2_Gym
 
 # Build rule for target.
-PBL2_GYM: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 PBL2_GYM
-.PHONY : PBL2_GYM
+PBL2_Gym: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 PBL2_Gym
+.PHONY : PBL2_Gym
 
 # fast build rule for target.
-PBL2_GYM/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_GYM.dir\build.make CMakeFiles/PBL2_GYM.dir/build
-.PHONY : PBL2_GYM/fast
+PBL2_Gym/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/build
+.PHONY : PBL2_Gym/fast
+
+Src/GUI/App.obj: Src/GUI/App.cpp.obj
+.PHONY : Src/GUI/App.obj
+
+# target to build an object file
+Src/GUI/App.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/App.cpp.obj
+.PHONY : Src/GUI/App.cpp.obj
+
+Src/GUI/App.i: Src/GUI/App.cpp.i
+.PHONY : Src/GUI/App.i
+
+# target to preprocess a source file
+Src/GUI/App.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/App.cpp.i
+.PHONY : Src/GUI/App.cpp.i
+
+Src/GUI/App.s: Src/GUI/App.cpp.s
+.PHONY : Src/GUI/App.s
+
+# target to generate assembly for a file
+Src/GUI/App.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/App.cpp.s
+.PHONY : Src/GUI/App.cpp.s
+
+Src/GUI/Components/Button.obj: Src/GUI/Components/Button.cpp.obj
+.PHONY : Src/GUI/Components/Button.obj
+
+# target to build an object file
+Src/GUI/Components/Button.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/Button.cpp.obj
+.PHONY : Src/GUI/Components/Button.cpp.obj
+
+Src/GUI/Components/Button.i: Src/GUI/Components/Button.cpp.i
+.PHONY : Src/GUI/Components/Button.i
+
+# target to preprocess a source file
+Src/GUI/Components/Button.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/Button.cpp.i
+.PHONY : Src/GUI/Components/Button.cpp.i
+
+Src/GUI/Components/Button.s: Src/GUI/Components/Button.cpp.s
+.PHONY : Src/GUI/Components/Button.s
+
+# target to generate assembly for a file
+Src/GUI/Components/Button.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/Button.cpp.s
+.PHONY : Src/GUI/Components/Button.cpp.s
+
+Src/GUI/Components/Checkbox.obj: Src/GUI/Components/Checkbox.cpp.obj
+.PHONY : Src/GUI/Components/Checkbox.obj
+
+# target to build an object file
+Src/GUI/Components/Checkbox.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/Checkbox.cpp.obj
+.PHONY : Src/GUI/Components/Checkbox.cpp.obj
+
+Src/GUI/Components/Checkbox.i: Src/GUI/Components/Checkbox.cpp.i
+.PHONY : Src/GUI/Components/Checkbox.i
+
+# target to preprocess a source file
+Src/GUI/Components/Checkbox.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/Checkbox.cpp.i
+.PHONY : Src/GUI/Components/Checkbox.cpp.i
+
+Src/GUI/Components/Checkbox.s: Src/GUI/Components/Checkbox.cpp.s
+.PHONY : Src/GUI/Components/Checkbox.s
+
+# target to generate assembly for a file
+Src/GUI/Components/Checkbox.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/Checkbox.cpp.s
+.PHONY : Src/GUI/Components/Checkbox.cpp.s
+
+Src/GUI/Components/InputBox.obj: Src/GUI/Components/InputBox.cpp.obj
+.PHONY : Src/GUI/Components/InputBox.obj
+
+# target to build an object file
+Src/GUI/Components/InputBox.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/InputBox.cpp.obj
+.PHONY : Src/GUI/Components/InputBox.cpp.obj
+
+Src/GUI/Components/InputBox.i: Src/GUI/Components/InputBox.cpp.i
+.PHONY : Src/GUI/Components/InputBox.i
+
+# target to preprocess a source file
+Src/GUI/Components/InputBox.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/InputBox.cpp.i
+.PHONY : Src/GUI/Components/InputBox.cpp.i
+
+Src/GUI/Components/InputBox.s: Src/GUI/Components/InputBox.cpp.s
+.PHONY : Src/GUI/Components/InputBox.s
+
+# target to generate assembly for a file
+Src/GUI/Components/InputBox.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/InputBox.cpp.s
+.PHONY : Src/GUI/Components/InputBox.cpp.s
+
+Src/GUI/Components/Pagination.obj: Src/GUI/Components/Pagination.cpp.obj
+.PHONY : Src/GUI/Components/Pagination.obj
+
+# target to build an object file
+Src/GUI/Components/Pagination.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/Pagination.cpp.obj
+.PHONY : Src/GUI/Components/Pagination.cpp.obj
+
+Src/GUI/Components/Pagination.i: Src/GUI/Components/Pagination.cpp.i
+.PHONY : Src/GUI/Components/Pagination.i
+
+# target to preprocess a source file
+Src/GUI/Components/Pagination.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/Pagination.cpp.i
+.PHONY : Src/GUI/Components/Pagination.cpp.i
+
+Src/GUI/Components/Pagination.s: Src/GUI/Components/Pagination.cpp.s
+.PHONY : Src/GUI/Components/Pagination.s
+
+# target to generate assembly for a file
+Src/GUI/Components/Pagination.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/Pagination.cpp.s
+.PHONY : Src/GUI/Components/Pagination.cpp.s
+
+Src/GUI/Components/TabManger.obj: Src/GUI/Components/TabManger.cpp.obj
+.PHONY : Src/GUI/Components/TabManger.obj
+
+# target to build an object file
+Src/GUI/Components/TabManger.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/TabManger.cpp.obj
+.PHONY : Src/GUI/Components/TabManger.cpp.obj
+
+Src/GUI/Components/TabManger.i: Src/GUI/Components/TabManger.cpp.i
+.PHONY : Src/GUI/Components/TabManger.i
+
+# target to preprocess a source file
+Src/GUI/Components/TabManger.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/TabManger.cpp.i
+.PHONY : Src/GUI/Components/TabManger.cpp.i
+
+Src/GUI/Components/TabManger.s: Src/GUI/Components/TabManger.cpp.s
+.PHONY : Src/GUI/Components/TabManger.s
+
+# target to generate assembly for a file
+Src/GUI/Components/TabManger.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Components/TabManger.cpp.s
+.PHONY : Src/GUI/Components/TabManger.cpp.s
+
+Src/GUI/Popup/BasePopup.obj: Src/GUI/Popup/BasePopup.cpp.obj
+.PHONY : Src/GUI/Popup/BasePopup.obj
+
+# target to build an object file
+Src/GUI/Popup/BasePopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/BasePopup.cpp.obj
+.PHONY : Src/GUI/Popup/BasePopup.cpp.obj
+
+Src/GUI/Popup/BasePopup.i: Src/GUI/Popup/BasePopup.cpp.i
+.PHONY : Src/GUI/Popup/BasePopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/BasePopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/BasePopup.cpp.i
+.PHONY : Src/GUI/Popup/BasePopup.cpp.i
+
+Src/GUI/Popup/BasePopup.s: Src/GUI/Popup/BasePopup.cpp.s
+.PHONY : Src/GUI/Popup/BasePopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/BasePopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/BasePopup.cpp.s
+.PHONY : Src/GUI/Popup/BasePopup.cpp.s
+
+Src/GUI/Popup/CartPopup.obj: Src/GUI/Popup/CartPopup.cpp.obj
+.PHONY : Src/GUI/Popup/CartPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/CartPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/CartPopup.cpp.obj
+.PHONY : Src/GUI/Popup/CartPopup.cpp.obj
+
+Src/GUI/Popup/CartPopup.i: Src/GUI/Popup/CartPopup.cpp.i
+.PHONY : Src/GUI/Popup/CartPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/CartPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/CartPopup.cpp.i
+.PHONY : Src/GUI/Popup/CartPopup.cpp.i
+
+Src/GUI/Popup/CartPopup.s: Src/GUI/Popup/CartPopup.cpp.s
+.PHONY : Src/GUI/Popup/CartPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/CartPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/CartPopup.cpp.s
+.PHONY : Src/GUI/Popup/CartPopup.cpp.s
+
+Src/GUI/Popup/ConfirmDeletePopup.obj: Src/GUI/Popup/ConfirmDeletePopup.cpp.obj
+.PHONY : Src/GUI/Popup/ConfirmDeletePopup.obj
+
+# target to build an object file
+Src/GUI/Popup/ConfirmDeletePopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/ConfirmDeletePopup.cpp.obj
+.PHONY : Src/GUI/Popup/ConfirmDeletePopup.cpp.obj
+
+Src/GUI/Popup/ConfirmDeletePopup.i: Src/GUI/Popup/ConfirmDeletePopup.cpp.i
+.PHONY : Src/GUI/Popup/ConfirmDeletePopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/ConfirmDeletePopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/ConfirmDeletePopup.cpp.i
+.PHONY : Src/GUI/Popup/ConfirmDeletePopup.cpp.i
+
+Src/GUI/Popup/ConfirmDeletePopup.s: Src/GUI/Popup/ConfirmDeletePopup.cpp.s
+.PHONY : Src/GUI/Popup/ConfirmDeletePopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/ConfirmDeletePopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/ConfirmDeletePopup.cpp.s
+.PHONY : Src/GUI/Popup/ConfirmDeletePopup.cpp.s
+
+Src/GUI/Popup/DatHLVPopup.obj: Src/GUI/Popup/DatHLVPopup.cpp.obj
+.PHONY : Src/GUI/Popup/DatHLVPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/DatHLVPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/DatHLVPopup.cpp.obj
+.PHONY : Src/GUI/Popup/DatHLVPopup.cpp.obj
+
+Src/GUI/Popup/DatHLVPopup.i: Src/GUI/Popup/DatHLVPopup.cpp.i
+.PHONY : Src/GUI/Popup/DatHLVPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/DatHLVPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/DatHLVPopup.cpp.i
+.PHONY : Src/GUI/Popup/DatHLVPopup.cpp.i
+
+Src/GUI/Popup/DatHLVPopup.s: Src/GUI/Popup/DatHLVPopup.cpp.s
+.PHONY : Src/GUI/Popup/DatHLVPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/DatHLVPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/DatHLVPopup.cpp.s
+.PHONY : Src/GUI/Popup/DatHLVPopup.cpp.s
+
+Src/GUI/Popup/GoiTapFormPopup.obj: Src/GUI/Popup/GoiTapFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/GoiTapFormPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/GoiTapFormPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/GoiTapFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/GoiTapFormPopup.cpp.obj
+
+Src/GUI/Popup/GoiTapFormPopup.i: Src/GUI/Popup/GoiTapFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/GoiTapFormPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/GoiTapFormPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/GoiTapFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/GoiTapFormPopup.cpp.i
+
+Src/GUI/Popup/GoiTapFormPopup.s: Src/GUI/Popup/GoiTapFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/GoiTapFormPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/GoiTapFormPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/GoiTapFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/GoiTapFormPopup.cpp.s
+
+Src/GUI/Popup/GoiTapMonTapPopup.obj: Src/GUI/Popup/GoiTapMonTapPopup.cpp.obj
+.PHONY : Src/GUI/Popup/GoiTapMonTapPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/GoiTapMonTapPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/GoiTapMonTapPopup.cpp.obj
+.PHONY : Src/GUI/Popup/GoiTapMonTapPopup.cpp.obj
+
+Src/GUI/Popup/GoiTapMonTapPopup.i: Src/GUI/Popup/GoiTapMonTapPopup.cpp.i
+.PHONY : Src/GUI/Popup/GoiTapMonTapPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/GoiTapMonTapPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/GoiTapMonTapPopup.cpp.i
+.PHONY : Src/GUI/Popup/GoiTapMonTapPopup.cpp.i
+
+Src/GUI/Popup/GoiTapMonTapPopup.s: Src/GUI/Popup/GoiTapMonTapPopup.cpp.s
+.PHONY : Src/GUI/Popup/GoiTapMonTapPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/GoiTapMonTapPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/GoiTapMonTapPopup.cpp.s
+.PHONY : Src/GUI/Popup/GoiTapMonTapPopup.cpp.s
+
+Src/GUI/Popup/HLVDetailPopup.obj: Src/GUI/Popup/HLVDetailPopup.cpp.obj
+.PHONY : Src/GUI/Popup/HLVDetailPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/HLVDetailPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HLVDetailPopup.cpp.obj
+.PHONY : Src/GUI/Popup/HLVDetailPopup.cpp.obj
+
+Src/GUI/Popup/HLVDetailPopup.i: Src/GUI/Popup/HLVDetailPopup.cpp.i
+.PHONY : Src/GUI/Popup/HLVDetailPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/HLVDetailPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HLVDetailPopup.cpp.i
+.PHONY : Src/GUI/Popup/HLVDetailPopup.cpp.i
+
+Src/GUI/Popup/HLVDetailPopup.s: Src/GUI/Popup/HLVDetailPopup.cpp.s
+.PHONY : Src/GUI/Popup/HLVDetailPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/HLVDetailPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HLVDetailPopup.cpp.s
+.PHONY : Src/GUI/Popup/HLVDetailPopup.cpp.s
+
+Src/GUI/Popup/HLVFormPopup.obj: Src/GUI/Popup/HLVFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/HLVFormPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/HLVFormPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HLVFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/HLVFormPopup.cpp.obj
+
+Src/GUI/Popup/HLVFormPopup.i: Src/GUI/Popup/HLVFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/HLVFormPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/HLVFormPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HLVFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/HLVFormPopup.cpp.i
+
+Src/GUI/Popup/HLVFormPopup.s: Src/GUI/Popup/HLVFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/HLVFormPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/HLVFormPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HLVFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/HLVFormPopup.cpp.s
+
+Src/GUI/Popup/HangHoaFormPopup.obj: Src/GUI/Popup/HangHoaFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/HangHoaFormPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/HangHoaFormPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HangHoaFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/HangHoaFormPopup.cpp.obj
+
+Src/GUI/Popup/HangHoaFormPopup.i: Src/GUI/Popup/HangHoaFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/HangHoaFormPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/HangHoaFormPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HangHoaFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/HangHoaFormPopup.cpp.i
+
+Src/GUI/Popup/HangHoaFormPopup.s: Src/GUI/Popup/HangHoaFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/HangHoaFormPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/HangHoaFormPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HangHoaFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/HangHoaFormPopup.cpp.s
+
+Src/GUI/Popup/HoiVienDetailPopup.obj: Src/GUI/Popup/HoiVienDetailPopup.cpp.obj
+.PHONY : Src/GUI/Popup/HoiVienDetailPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/HoiVienDetailPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HoiVienDetailPopup.cpp.obj
+.PHONY : Src/GUI/Popup/HoiVienDetailPopup.cpp.obj
+
+Src/GUI/Popup/HoiVienDetailPopup.i: Src/GUI/Popup/HoiVienDetailPopup.cpp.i
+.PHONY : Src/GUI/Popup/HoiVienDetailPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/HoiVienDetailPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HoiVienDetailPopup.cpp.i
+.PHONY : Src/GUI/Popup/HoiVienDetailPopup.cpp.i
+
+Src/GUI/Popup/HoiVienDetailPopup.s: Src/GUI/Popup/HoiVienDetailPopup.cpp.s
+.PHONY : Src/GUI/Popup/HoiVienDetailPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/HoiVienDetailPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HoiVienDetailPopup.cpp.s
+.PHONY : Src/GUI/Popup/HoiVienDetailPopup.cpp.s
+
+Src/GUI/Popup/HoiVienFormPopup.obj: Src/GUI/Popup/HoiVienFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/HoiVienFormPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/HoiVienFormPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HoiVienFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/HoiVienFormPopup.cpp.obj
+
+Src/GUI/Popup/HoiVienFormPopup.i: Src/GUI/Popup/HoiVienFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/HoiVienFormPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/HoiVienFormPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HoiVienFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/HoiVienFormPopup.cpp.i
+
+Src/GUI/Popup/HoiVienFormPopup.s: Src/GUI/Popup/HoiVienFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/HoiVienFormPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/HoiVienFormPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/HoiVienFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/HoiVienFormPopup.cpp.s
+
+Src/GUI/Popup/InvoiceDetailPopup.obj: Src/GUI/Popup/InvoiceDetailPopup.cpp.obj
+.PHONY : Src/GUI/Popup/InvoiceDetailPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/InvoiceDetailPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/InvoiceDetailPopup.cpp.obj
+.PHONY : Src/GUI/Popup/InvoiceDetailPopup.cpp.obj
+
+Src/GUI/Popup/InvoiceDetailPopup.i: Src/GUI/Popup/InvoiceDetailPopup.cpp.i
+.PHONY : Src/GUI/Popup/InvoiceDetailPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/InvoiceDetailPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/InvoiceDetailPopup.cpp.i
+.PHONY : Src/GUI/Popup/InvoiceDetailPopup.cpp.i
+
+Src/GUI/Popup/InvoiceDetailPopup.s: Src/GUI/Popup/InvoiceDetailPopup.cpp.s
+.PHONY : Src/GUI/Popup/InvoiceDetailPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/InvoiceDetailPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/InvoiceDetailPopup.cpp.s
+.PHONY : Src/GUI/Popup/InvoiceDetailPopup.cpp.s
+
+Src/GUI/Popup/LopHocFormPopup.obj: Src/GUI/Popup/LopHocFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/LopHocFormPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/LopHocFormPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/LopHocFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/LopHocFormPopup.cpp.obj
+
+Src/GUI/Popup/LopHocFormPopup.i: Src/GUI/Popup/LopHocFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/LopHocFormPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/LopHocFormPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/LopHocFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/LopHocFormPopup.cpp.i
+
+Src/GUI/Popup/LopHocFormPopup.s: Src/GUI/Popup/LopHocFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/LopHocFormPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/LopHocFormPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/LopHocFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/LopHocFormPopup.cpp.s
+
+Src/GUI/Popup/MonTapFormPopup.obj: Src/GUI/Popup/MonTapFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/MonTapFormPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/MonTapFormPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/MonTapFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/MonTapFormPopup.cpp.obj
+
+Src/GUI/Popup/MonTapFormPopup.i: Src/GUI/Popup/MonTapFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/MonTapFormPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/MonTapFormPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/MonTapFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/MonTapFormPopup.cpp.i
+
+Src/GUI/Popup/MonTapFormPopup.s: Src/GUI/Popup/MonTapFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/MonTapFormPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/MonTapFormPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/MonTapFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/MonTapFormPopup.cpp.s
+
+Src/GUI/Popup/NhanVienDetailPopup.obj: Src/GUI/Popup/NhanVienDetailPopup.cpp.obj
+.PHONY : Src/GUI/Popup/NhanVienDetailPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/NhanVienDetailPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/NhanVienDetailPopup.cpp.obj
+.PHONY : Src/GUI/Popup/NhanVienDetailPopup.cpp.obj
+
+Src/GUI/Popup/NhanVienDetailPopup.i: Src/GUI/Popup/NhanVienDetailPopup.cpp.i
+.PHONY : Src/GUI/Popup/NhanVienDetailPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/NhanVienDetailPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/NhanVienDetailPopup.cpp.i
+.PHONY : Src/GUI/Popup/NhanVienDetailPopup.cpp.i
+
+Src/GUI/Popup/NhanVienDetailPopup.s: Src/GUI/Popup/NhanVienDetailPopup.cpp.s
+.PHONY : Src/GUI/Popup/NhanVienDetailPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/NhanVienDetailPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/NhanVienDetailPopup.cpp.s
+.PHONY : Src/GUI/Popup/NhanVienDetailPopup.cpp.s
+
+Src/GUI/Popup/NhanVienFormPopup.obj: Src/GUI/Popup/NhanVienFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/NhanVienFormPopup.obj
+
+# target to build an object file
+Src/GUI/Popup/NhanVienFormPopup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/NhanVienFormPopup.cpp.obj
+.PHONY : Src/GUI/Popup/NhanVienFormPopup.cpp.obj
+
+Src/GUI/Popup/NhanVienFormPopup.i: Src/GUI/Popup/NhanVienFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/NhanVienFormPopup.i
+
+# target to preprocess a source file
+Src/GUI/Popup/NhanVienFormPopup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/NhanVienFormPopup.cpp.i
+.PHONY : Src/GUI/Popup/NhanVienFormPopup.cpp.i
+
+Src/GUI/Popup/NhanVienFormPopup.s: Src/GUI/Popup/NhanVienFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/NhanVienFormPopup.s
+
+# target to generate assembly for a file
+Src/GUI/Popup/NhanVienFormPopup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Popup/NhanVienFormPopup.cpp.s
+.PHONY : Src/GUI/Popup/NhanVienFormPopup.cpp.s
+
+Src/GUI/Screens/BanHangScreen.obj: Src/GUI/Screens/BanHangScreen.cpp.obj
+.PHONY : Src/GUI/Screens/BanHangScreen.obj
+
+# target to build an object file
+Src/GUI/Screens/BanHangScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/BanHangScreen.cpp.obj
+.PHONY : Src/GUI/Screens/BanHangScreen.cpp.obj
+
+Src/GUI/Screens/BanHangScreen.i: Src/GUI/Screens/BanHangScreen.cpp.i
+.PHONY : Src/GUI/Screens/BanHangScreen.i
+
+# target to preprocess a source file
+Src/GUI/Screens/BanHangScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/BanHangScreen.cpp.i
+.PHONY : Src/GUI/Screens/BanHangScreen.cpp.i
+
+Src/GUI/Screens/BanHangScreen.s: Src/GUI/Screens/BanHangScreen.cpp.s
+.PHONY : Src/GUI/Screens/BanHangScreen.s
+
+# target to generate assembly for a file
+Src/GUI/Screens/BanHangScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/BanHangScreen.cpp.s
+.PHONY : Src/GUI/Screens/BanHangScreen.cpp.s
+
+Src/GUI/Screens/BaoCaoScreen.obj: Src/GUI/Screens/BaoCaoScreen.cpp.obj
+.PHONY : Src/GUI/Screens/BaoCaoScreen.obj
+
+# target to build an object file
+Src/GUI/Screens/BaoCaoScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/BaoCaoScreen.cpp.obj
+.PHONY : Src/GUI/Screens/BaoCaoScreen.cpp.obj
+
+Src/GUI/Screens/BaoCaoScreen.i: Src/GUI/Screens/BaoCaoScreen.cpp.i
+.PHONY : Src/GUI/Screens/BaoCaoScreen.i
+
+# target to preprocess a source file
+Src/GUI/Screens/BaoCaoScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/BaoCaoScreen.cpp.i
+.PHONY : Src/GUI/Screens/BaoCaoScreen.cpp.i
+
+Src/GUI/Screens/BaoCaoScreen.s: Src/GUI/Screens/BaoCaoScreen.cpp.s
+.PHONY : Src/GUI/Screens/BaoCaoScreen.s
+
+# target to generate assembly for a file
+Src/GUI/Screens/BaoCaoScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/BaoCaoScreen.cpp.s
+.PHONY : Src/GUI/Screens/BaoCaoScreen.cpp.s
+
+Src/GUI/Screens/CaiDatScreen.obj: Src/GUI/Screens/CaiDatScreen.cpp.obj
+.PHONY : Src/GUI/Screens/CaiDatScreen.obj
+
+# target to build an object file
+Src/GUI/Screens/CaiDatScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/CaiDatScreen.cpp.obj
+.PHONY : Src/GUI/Screens/CaiDatScreen.cpp.obj
+
+Src/GUI/Screens/CaiDatScreen.i: Src/GUI/Screens/CaiDatScreen.cpp.i
+.PHONY : Src/GUI/Screens/CaiDatScreen.i
+
+# target to preprocess a source file
+Src/GUI/Screens/CaiDatScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/CaiDatScreen.cpp.i
+.PHONY : Src/GUI/Screens/CaiDatScreen.cpp.i
+
+Src/GUI/Screens/CaiDatScreen.s: Src/GUI/Screens/CaiDatScreen.cpp.s
+.PHONY : Src/GUI/Screens/CaiDatScreen.s
+
+# target to generate assembly for a file
+Src/GUI/Screens/CaiDatScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/CaiDatScreen.cpp.s
+.PHONY : Src/GUI/Screens/CaiDatScreen.cpp.s
+
+Src/GUI/Screens/GoiTapSceen.obj: Src/GUI/Screens/GoiTapSceen.cpp.obj
+.PHONY : Src/GUI/Screens/GoiTapSceen.obj
+
+# target to build an object file
+Src/GUI/Screens/GoiTapSceen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/GoiTapSceen.cpp.obj
+.PHONY : Src/GUI/Screens/GoiTapSceen.cpp.obj
+
+Src/GUI/Screens/GoiTapSceen.i: Src/GUI/Screens/GoiTapSceen.cpp.i
+.PHONY : Src/GUI/Screens/GoiTapSceen.i
+
+# target to preprocess a source file
+Src/GUI/Screens/GoiTapSceen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/GoiTapSceen.cpp.i
+.PHONY : Src/GUI/Screens/GoiTapSceen.cpp.i
+
+Src/GUI/Screens/GoiTapSceen.s: Src/GUI/Screens/GoiTapSceen.cpp.s
+.PHONY : Src/GUI/Screens/GoiTapSceen.s
+
+# target to generate assembly for a file
+Src/GUI/Screens/GoiTapSceen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/GoiTapSceen.cpp.s
+.PHONY : Src/GUI/Screens/GoiTapSceen.cpp.s
+
+Src/GUI/Screens/HLVScreen.obj: Src/GUI/Screens/HLVScreen.cpp.obj
+.PHONY : Src/GUI/Screens/HLVScreen.obj
+
+# target to build an object file
+Src/GUI/Screens/HLVScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/HLVScreen.cpp.obj
+.PHONY : Src/GUI/Screens/HLVScreen.cpp.obj
+
+Src/GUI/Screens/HLVScreen.i: Src/GUI/Screens/HLVScreen.cpp.i
+.PHONY : Src/GUI/Screens/HLVScreen.i
+
+# target to preprocess a source file
+Src/GUI/Screens/HLVScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/HLVScreen.cpp.i
+.PHONY : Src/GUI/Screens/HLVScreen.cpp.i
+
+Src/GUI/Screens/HLVScreen.s: Src/GUI/Screens/HLVScreen.cpp.s
+.PHONY : Src/GUI/Screens/HLVScreen.s
+
+# target to generate assembly for a file
+Src/GUI/Screens/HLVScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/HLVScreen.cpp.s
+.PHONY : Src/GUI/Screens/HLVScreen.cpp.s
+
+Src/GUI/Screens/HangHoaScreen.obj: Src/GUI/Screens/HangHoaScreen.cpp.obj
+.PHONY : Src/GUI/Screens/HangHoaScreen.obj
+
+# target to build an object file
+Src/GUI/Screens/HangHoaScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/HangHoaScreen.cpp.obj
+.PHONY : Src/GUI/Screens/HangHoaScreen.cpp.obj
+
+Src/GUI/Screens/HangHoaScreen.i: Src/GUI/Screens/HangHoaScreen.cpp.i
+.PHONY : Src/GUI/Screens/HangHoaScreen.i
+
+# target to preprocess a source file
+Src/GUI/Screens/HangHoaScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/HangHoaScreen.cpp.i
+.PHONY : Src/GUI/Screens/HangHoaScreen.cpp.i
+
+Src/GUI/Screens/HangHoaScreen.s: Src/GUI/Screens/HangHoaScreen.cpp.s
+.PHONY : Src/GUI/Screens/HangHoaScreen.s
+
+# target to generate assembly for a file
+Src/GUI/Screens/HangHoaScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/HangHoaScreen.cpp.s
+.PHONY : Src/GUI/Screens/HangHoaScreen.cpp.s
+
+Src/GUI/Screens/HoiVienScreen.obj: Src/GUI/Screens/HoiVienScreen.cpp.obj
+.PHONY : Src/GUI/Screens/HoiVienScreen.obj
+
+# target to build an object file
+Src/GUI/Screens/HoiVienScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/HoiVienScreen.cpp.obj
+.PHONY : Src/GUI/Screens/HoiVienScreen.cpp.obj
+
+Src/GUI/Screens/HoiVienScreen.i: Src/GUI/Screens/HoiVienScreen.cpp.i
+.PHONY : Src/GUI/Screens/HoiVienScreen.i
+
+# target to preprocess a source file
+Src/GUI/Screens/HoiVienScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/HoiVienScreen.cpp.i
+.PHONY : Src/GUI/Screens/HoiVienScreen.cpp.i
+
+Src/GUI/Screens/HoiVienScreen.s: Src/GUI/Screens/HoiVienScreen.cpp.s
+.PHONY : Src/GUI/Screens/HoiVienScreen.s
+
+# target to generate assembly for a file
+Src/GUI/Screens/HoiVienScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/HoiVienScreen.cpp.s
+.PHONY : Src/GUI/Screens/HoiVienScreen.cpp.s
+
+Src/GUI/Screens/LoginScreen.obj: Src/GUI/Screens/LoginScreen.cpp.obj
+.PHONY : Src/GUI/Screens/LoginScreen.obj
+
+# target to build an object file
+Src/GUI/Screens/LoginScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/LoginScreen.cpp.obj
+.PHONY : Src/GUI/Screens/LoginScreen.cpp.obj
+
+Src/GUI/Screens/LoginScreen.i: Src/GUI/Screens/LoginScreen.cpp.i
+.PHONY : Src/GUI/Screens/LoginScreen.i
+
+# target to preprocess a source file
+Src/GUI/Screens/LoginScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/LoginScreen.cpp.i
+.PHONY : Src/GUI/Screens/LoginScreen.cpp.i
+
+Src/GUI/Screens/LoginScreen.s: Src/GUI/Screens/LoginScreen.cpp.s
+.PHONY : Src/GUI/Screens/LoginScreen.s
+
+# target to generate assembly for a file
+Src/GUI/Screens/LoginScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/LoginScreen.cpp.s
+.PHONY : Src/GUI/Screens/LoginScreen.cpp.s
+
+Src/GUI/Screens/LopHocScreen.obj: Src/GUI/Screens/LopHocScreen.cpp.obj
+.PHONY : Src/GUI/Screens/LopHocScreen.obj
+
+# target to build an object file
+Src/GUI/Screens/LopHocScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/LopHocScreen.cpp.obj
+.PHONY : Src/GUI/Screens/LopHocScreen.cpp.obj
+
+Src/GUI/Screens/LopHocScreen.i: Src/GUI/Screens/LopHocScreen.cpp.i
+.PHONY : Src/GUI/Screens/LopHocScreen.i
+
+# target to preprocess a source file
+Src/GUI/Screens/LopHocScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/LopHocScreen.cpp.i
+.PHONY : Src/GUI/Screens/LopHocScreen.cpp.i
+
+Src/GUI/Screens/LopHocScreen.s: Src/GUI/Screens/LopHocScreen.cpp.s
+.PHONY : Src/GUI/Screens/LopHocScreen.s
+
+# target to generate assembly for a file
+Src/GUI/Screens/LopHocScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/LopHocScreen.cpp.s
+.PHONY : Src/GUI/Screens/LopHocScreen.cpp.s
+
+Src/GUI/Screens/MainScreen.obj: Src/GUI/Screens/MainScreen.cpp.obj
+.PHONY : Src/GUI/Screens/MainScreen.obj
+
+# target to build an object file
+Src/GUI/Screens/MainScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/MainScreen.cpp.obj
+.PHONY : Src/GUI/Screens/MainScreen.cpp.obj
+
+Src/GUI/Screens/MainScreen.i: Src/GUI/Screens/MainScreen.cpp.i
+.PHONY : Src/GUI/Screens/MainScreen.i
+
+# target to preprocess a source file
+Src/GUI/Screens/MainScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/MainScreen.cpp.i
+.PHONY : Src/GUI/Screens/MainScreen.cpp.i
+
+Src/GUI/Screens/MainScreen.s: Src/GUI/Screens/MainScreen.cpp.s
+.PHONY : Src/GUI/Screens/MainScreen.s
+
+# target to generate assembly for a file
+Src/GUI/Screens/MainScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/MainScreen.cpp.s
+.PHONY : Src/GUI/Screens/MainScreen.cpp.s
+
+Src/GUI/Screens/MonTapScreen.obj: Src/GUI/Screens/MonTapScreen.cpp.obj
+.PHONY : Src/GUI/Screens/MonTapScreen.obj
+
+# target to build an object file
+Src/GUI/Screens/MonTapScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/MonTapScreen.cpp.obj
+.PHONY : Src/GUI/Screens/MonTapScreen.cpp.obj
+
+Src/GUI/Screens/MonTapScreen.i: Src/GUI/Screens/MonTapScreen.cpp.i
+.PHONY : Src/GUI/Screens/MonTapScreen.i
+
+# target to preprocess a source file
+Src/GUI/Screens/MonTapScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/MonTapScreen.cpp.i
+.PHONY : Src/GUI/Screens/MonTapScreen.cpp.i
+
+Src/GUI/Screens/MonTapScreen.s: Src/GUI/Screens/MonTapScreen.cpp.s
+.PHONY : Src/GUI/Screens/MonTapScreen.s
+
+# target to generate assembly for a file
+Src/GUI/Screens/MonTapScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/MonTapScreen.cpp.s
+.PHONY : Src/GUI/Screens/MonTapScreen.cpp.s
+
+Src/GUI/Screens/NhanVienScreen.obj: Src/GUI/Screens/NhanVienScreen.cpp.obj
+.PHONY : Src/GUI/Screens/NhanVienScreen.obj
+
+# target to build an object file
+Src/GUI/Screens/NhanVienScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/NhanVienScreen.cpp.obj
+.PHONY : Src/GUI/Screens/NhanVienScreen.cpp.obj
+
+Src/GUI/Screens/NhanVienScreen.i: Src/GUI/Screens/NhanVienScreen.cpp.i
+.PHONY : Src/GUI/Screens/NhanVienScreen.i
+
+# target to preprocess a source file
+Src/GUI/Screens/NhanVienScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/NhanVienScreen.cpp.i
+.PHONY : Src/GUI/Screens/NhanVienScreen.cpp.i
+
+Src/GUI/Screens/NhanVienScreen.s: Src/GUI/Screens/NhanVienScreen.cpp.s
+.PHONY : Src/GUI/Screens/NhanVienScreen.s
+
+# target to generate assembly for a file
+Src/GUI/Screens/NhanVienScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Screens/NhanVienScreen.cpp.s
+.PHONY : Src/GUI/Screens/NhanVienScreen.cpp.s
+
+Src/GUI/Sidebar.obj: Src/GUI/Sidebar.cpp.obj
+.PHONY : Src/GUI/Sidebar.obj
+
+# target to build an object file
+Src/GUI/Sidebar.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Sidebar.cpp.obj
+.PHONY : Src/GUI/Sidebar.cpp.obj
+
+Src/GUI/Sidebar.i: Src/GUI/Sidebar.cpp.i
+.PHONY : Src/GUI/Sidebar.i
+
+# target to preprocess a source file
+Src/GUI/Sidebar.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Sidebar.cpp.i
+.PHONY : Src/GUI/Sidebar.cpp.i
+
+Src/GUI/Sidebar.s: Src/GUI/Sidebar.cpp.s
+.PHONY : Src/GUI/Sidebar.s
+
+# target to generate assembly for a file
+Src/GUI/Sidebar.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/GUI/Sidebar.cpp.s
+.PHONY : Src/GUI/Sidebar.cpp.s
+
+Src/Managers/AccountManager.obj: Src/Managers/AccountManager.cpp.obj
+.PHONY : Src/Managers/AccountManager.obj
+
+# target to build an object file
+Src/Managers/AccountManager.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Managers/AccountManager.cpp.obj
+.PHONY : Src/Managers/AccountManager.cpp.obj
+
+Src/Managers/AccountManager.i: Src/Managers/AccountManager.cpp.i
+.PHONY : Src/Managers/AccountManager.i
+
+# target to preprocess a source file
+Src/Managers/AccountManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Managers/AccountManager.cpp.i
+.PHONY : Src/Managers/AccountManager.cpp.i
+
+Src/Managers/AccountManager.s: Src/Managers/AccountManager.cpp.s
+.PHONY : Src/Managers/AccountManager.s
+
+# target to generate assembly for a file
+Src/Managers/AccountManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Managers/AccountManager.cpp.s
+.PHONY : Src/Managers/AccountManager.cpp.s
+
+Src/Managers/QuanLy.obj: Src/Managers/QuanLy.cpp.obj
+.PHONY : Src/Managers/QuanLy.obj
+
+# target to build an object file
+Src/Managers/QuanLy.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Managers/QuanLy.cpp.obj
+.PHONY : Src/Managers/QuanLy.cpp.obj
+
+Src/Managers/QuanLy.i: Src/Managers/QuanLy.cpp.i
+.PHONY : Src/Managers/QuanLy.i
+
+# target to preprocess a source file
+Src/Managers/QuanLy.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Managers/QuanLy.cpp.i
+.PHONY : Src/Managers/QuanLy.cpp.i
+
+Src/Managers/QuanLy.s: Src/Managers/QuanLy.cpp.s
+.PHONY : Src/Managers/QuanLy.s
+
+# target to generate assembly for a file
+Src/Managers/QuanLy.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Managers/QuanLy.cpp.s
+.PHONY : Src/Managers/QuanLy.cpp.s
+
+Src/Managers/SearchEngine.obj: Src/Managers/SearchEngine.cpp.obj
+.PHONY : Src/Managers/SearchEngine.obj
+
+# target to build an object file
+Src/Managers/SearchEngine.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Managers/SearchEngine.cpp.obj
+.PHONY : Src/Managers/SearchEngine.cpp.obj
+
+Src/Managers/SearchEngine.i: Src/Managers/SearchEngine.cpp.i
+.PHONY : Src/Managers/SearchEngine.i
+
+# target to preprocess a source file
+Src/Managers/SearchEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Managers/SearchEngine.cpp.i
+.PHONY : Src/Managers/SearchEngine.cpp.i
+
+Src/Managers/SearchEngine.s: Src/Managers/SearchEngine.cpp.s
+.PHONY : Src/Managers/SearchEngine.s
+
+# target to generate assembly for a file
+Src/Managers/SearchEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Managers/SearchEngine.cpp.s
+.PHONY : Src/Managers/SearchEngine.cpp.s
+
+Src/Managers/SearchService.obj: Src/Managers/SearchService.cpp.obj
+.PHONY : Src/Managers/SearchService.obj
+
+# target to build an object file
+Src/Managers/SearchService.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Managers/SearchService.cpp.obj
+.PHONY : Src/Managers/SearchService.cpp.obj
+
+Src/Managers/SearchService.i: Src/Managers/SearchService.cpp.i
+.PHONY : Src/Managers/SearchService.i
+
+# target to preprocess a source file
+Src/Managers/SearchService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Managers/SearchService.cpp.i
+.PHONY : Src/Managers/SearchService.cpp.i
+
+Src/Managers/SearchService.s: Src/Managers/SearchService.cpp.s
+.PHONY : Src/Managers/SearchService.s
+
+# target to generate assembly for a file
+Src/Managers/SearchService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Managers/SearchService.cpp.s
+.PHONY : Src/Managers/SearchService.cpp.s
+
+Src/Models/Account.obj: Src/Models/Account.cpp.obj
+.PHONY : Src/Models/Account.obj
+
+# target to build an object file
+Src/Models/Account.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/Account.cpp.obj
+.PHONY : Src/Models/Account.cpp.obj
+
+Src/Models/Account.i: Src/Models/Account.cpp.i
+.PHONY : Src/Models/Account.i
+
+# target to preprocess a source file
+Src/Models/Account.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/Account.cpp.i
+.PHONY : Src/Models/Account.cpp.i
+
+Src/Models/Account.s: Src/Models/Account.cpp.s
+.PHONY : Src/Models/Account.s
+
+# target to generate assembly for a file
+Src/Models/Account.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/Account.cpp.s
+.PHONY : Src/Models/Account.cpp.s
+
+Src/Models/ChiTietHoaDon_GT.obj: Src/Models/ChiTietHoaDon_GT.cpp.obj
+.PHONY : Src/Models/ChiTietHoaDon_GT.obj
+
+# target to build an object file
+Src/Models/ChiTietHoaDon_GT.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/ChiTietHoaDon_GT.cpp.obj
+.PHONY : Src/Models/ChiTietHoaDon_GT.cpp.obj
+
+Src/Models/ChiTietHoaDon_GT.i: Src/Models/ChiTietHoaDon_GT.cpp.i
+.PHONY : Src/Models/ChiTietHoaDon_GT.i
+
+# target to preprocess a source file
+Src/Models/ChiTietHoaDon_GT.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/ChiTietHoaDon_GT.cpp.i
+.PHONY : Src/Models/ChiTietHoaDon_GT.cpp.i
+
+Src/Models/ChiTietHoaDon_GT.s: Src/Models/ChiTietHoaDon_GT.cpp.s
+.PHONY : Src/Models/ChiTietHoaDon_GT.s
+
+# target to generate assembly for a file
+Src/Models/ChiTietHoaDon_GT.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/ChiTietHoaDon_GT.cpp.s
+.PHONY : Src/Models/ChiTietHoaDon_GT.cpp.s
+
+Src/Models/ChiTietHoaDon_HH.obj: Src/Models/ChiTietHoaDon_HH.cpp.obj
+.PHONY : Src/Models/ChiTietHoaDon_HH.obj
+
+# target to build an object file
+Src/Models/ChiTietHoaDon_HH.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/ChiTietHoaDon_HH.cpp.obj
+.PHONY : Src/Models/ChiTietHoaDon_HH.cpp.obj
+
+Src/Models/ChiTietHoaDon_HH.i: Src/Models/ChiTietHoaDon_HH.cpp.i
+.PHONY : Src/Models/ChiTietHoaDon_HH.i
+
+# target to preprocess a source file
+Src/Models/ChiTietHoaDon_HH.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/ChiTietHoaDon_HH.cpp.i
+.PHONY : Src/Models/ChiTietHoaDon_HH.cpp.i
+
+Src/Models/ChiTietHoaDon_HH.s: Src/Models/ChiTietHoaDon_HH.cpp.s
+.PHONY : Src/Models/ChiTietHoaDon_HH.s
+
+# target to generate assembly for a file
+Src/Models/ChiTietHoaDon_HH.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/ChiTietHoaDon_HH.cpp.s
+.PHONY : Src/Models/ChiTietHoaDon_HH.cpp.s
+
+Src/Models/GoiTap.obj: Src/Models/GoiTap.cpp.obj
+.PHONY : Src/Models/GoiTap.obj
+
+# target to build an object file
+Src/Models/GoiTap.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/GoiTap.cpp.obj
+.PHONY : Src/Models/GoiTap.cpp.obj
+
+Src/Models/GoiTap.i: Src/Models/GoiTap.cpp.i
+.PHONY : Src/Models/GoiTap.i
+
+# target to preprocess a source file
+Src/Models/GoiTap.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/GoiTap.cpp.i
+.PHONY : Src/Models/GoiTap.cpp.i
+
+Src/Models/GoiTap.s: Src/Models/GoiTap.cpp.s
+.PHONY : Src/Models/GoiTap.s
+
+# target to generate assembly for a file
+Src/Models/GoiTap.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/GoiTap.cpp.s
+.PHONY : Src/Models/GoiTap.cpp.s
+
+Src/Models/HLV.obj: Src/Models/HLV.cpp.obj
+.PHONY : Src/Models/HLV.obj
+
+# target to build an object file
+Src/Models/HLV.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HLV.cpp.obj
+.PHONY : Src/Models/HLV.cpp.obj
+
+Src/Models/HLV.i: Src/Models/HLV.cpp.i
+.PHONY : Src/Models/HLV.i
+
+# target to preprocess a source file
+Src/Models/HLV.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HLV.cpp.i
+.PHONY : Src/Models/HLV.cpp.i
+
+Src/Models/HLV.s: Src/Models/HLV.cpp.s
+.PHONY : Src/Models/HLV.s
+
+# target to generate assembly for a file
+Src/Models/HLV.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HLV.cpp.s
+.PHONY : Src/Models/HLV.cpp.s
+
+Src/Models/HangHoa.obj: Src/Models/HangHoa.cpp.obj
+.PHONY : Src/Models/HangHoa.obj
+
+# target to build an object file
+Src/Models/HangHoa.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HangHoa.cpp.obj
+.PHONY : Src/Models/HangHoa.cpp.obj
+
+Src/Models/HangHoa.i: Src/Models/HangHoa.cpp.i
+.PHONY : Src/Models/HangHoa.i
+
+# target to preprocess a source file
+Src/Models/HangHoa.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HangHoa.cpp.i
+.PHONY : Src/Models/HangHoa.cpp.i
+
+Src/Models/HangHoa.s: Src/Models/HangHoa.cpp.s
+.PHONY : Src/Models/HangHoa.s
+
+# target to generate assembly for a file
+Src/Models/HangHoa.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HangHoa.cpp.s
+.PHONY : Src/Models/HangHoa.cpp.s
+
+Src/Models/HoaDon.obj: Src/Models/HoaDon.cpp.obj
+.PHONY : Src/Models/HoaDon.obj
+
+# target to build an object file
+Src/Models/HoaDon.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HoaDon.cpp.obj
+.PHONY : Src/Models/HoaDon.cpp.obj
+
+Src/Models/HoaDon.i: Src/Models/HoaDon.cpp.i
+.PHONY : Src/Models/HoaDon.i
+
+# target to preprocess a source file
+Src/Models/HoaDon.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HoaDon.cpp.i
+.PHONY : Src/Models/HoaDon.cpp.i
+
+Src/Models/HoaDon.s: Src/Models/HoaDon.cpp.s
+.PHONY : Src/Models/HoaDon.s
+
+# target to generate assembly for a file
+Src/Models/HoaDon.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HoaDon.cpp.s
+.PHONY : Src/Models/HoaDon.cpp.s
+
+Src/Models/HoiVien.obj: Src/Models/HoiVien.cpp.obj
+.PHONY : Src/Models/HoiVien.obj
+
+# target to build an object file
+Src/Models/HoiVien.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HoiVien.cpp.obj
+.PHONY : Src/Models/HoiVien.cpp.obj
+
+Src/Models/HoiVien.i: Src/Models/HoiVien.cpp.i
+.PHONY : Src/Models/HoiVien.i
+
+# target to preprocess a source file
+Src/Models/HoiVien.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HoiVien.cpp.i
+.PHONY : Src/Models/HoiVien.cpp.i
+
+Src/Models/HoiVien.s: Src/Models/HoiVien.cpp.s
+.PHONY : Src/Models/HoiVien.s
+
+# target to generate assembly for a file
+Src/Models/HoiVien.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HoiVien.cpp.s
+.PHONY : Src/Models/HoiVien.cpp.s
+
+Src/Models/HopDong.obj: Src/Models/HopDong.cpp.obj
+.PHONY : Src/Models/HopDong.obj
+
+# target to build an object file
+Src/Models/HopDong.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HopDong.cpp.obj
+.PHONY : Src/Models/HopDong.cpp.obj
+
+Src/Models/HopDong.i: Src/Models/HopDong.cpp.i
+.PHONY : Src/Models/HopDong.i
+
+# target to preprocess a source file
+Src/Models/HopDong.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HopDong.cpp.i
+.PHONY : Src/Models/HopDong.cpp.i
+
+Src/Models/HopDong.s: Src/Models/HopDong.cpp.s
+.PHONY : Src/Models/HopDong.s
+
+# target to generate assembly for a file
+Src/Models/HopDong.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/HopDong.cpp.s
+.PHONY : Src/Models/HopDong.cpp.s
+
+Src/Models/LogTapPT.obj: Src/Models/LogTapPT.cpp.obj
+.PHONY : Src/Models/LogTapPT.obj
+
+# target to build an object file
+Src/Models/LogTapPT.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/LogTapPT.cpp.obj
+.PHONY : Src/Models/LogTapPT.cpp.obj
+
+Src/Models/LogTapPT.i: Src/Models/LogTapPT.cpp.i
+.PHONY : Src/Models/LogTapPT.i
+
+# target to preprocess a source file
+Src/Models/LogTapPT.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/LogTapPT.cpp.i
+.PHONY : Src/Models/LogTapPT.cpp.i
+
+Src/Models/LogTapPT.s: Src/Models/LogTapPT.cpp.s
+.PHONY : Src/Models/LogTapPT.s
+
+# target to generate assembly for a file
+Src/Models/LogTapPT.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/LogTapPT.cpp.s
+.PHONY : Src/Models/LogTapPT.cpp.s
+
+Src/Models/LopHoc.obj: Src/Models/LopHoc.cpp.obj
+.PHONY : Src/Models/LopHoc.obj
+
+# target to build an object file
+Src/Models/LopHoc.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/LopHoc.cpp.obj
+.PHONY : Src/Models/LopHoc.cpp.obj
+
+Src/Models/LopHoc.i: Src/Models/LopHoc.cpp.i
+.PHONY : Src/Models/LopHoc.i
+
+# target to preprocess a source file
+Src/Models/LopHoc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/LopHoc.cpp.i
+.PHONY : Src/Models/LopHoc.cpp.i
+
+Src/Models/LopHoc.s: Src/Models/LopHoc.cpp.s
+.PHONY : Src/Models/LopHoc.s
+
+# target to generate assembly for a file
+Src/Models/LopHoc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/LopHoc.cpp.s
+.PHONY : Src/Models/LopHoc.cpp.s
+
+Src/Models/MonTap.obj: Src/Models/MonTap.cpp.obj
+.PHONY : Src/Models/MonTap.obj
+
+# target to build an object file
+Src/Models/MonTap.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/MonTap.cpp.obj
+.PHONY : Src/Models/MonTap.cpp.obj
+
+Src/Models/MonTap.i: Src/Models/MonTap.cpp.i
+.PHONY : Src/Models/MonTap.i
+
+# target to preprocess a source file
+Src/Models/MonTap.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/MonTap.cpp.i
+.PHONY : Src/Models/MonTap.cpp.i
+
+Src/Models/MonTap.s: Src/Models/MonTap.cpp.s
+.PHONY : Src/Models/MonTap.s
+
+# target to generate assembly for a file
+Src/Models/MonTap.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/MonTap.cpp.s
+.PHONY : Src/Models/MonTap.cpp.s
+
+Src/Models/NhanVien.obj: Src/Models/NhanVien.cpp.obj
+.PHONY : Src/Models/NhanVien.obj
+
+# target to build an object file
+Src/Models/NhanVien.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/NhanVien.cpp.obj
+.PHONY : Src/Models/NhanVien.cpp.obj
+
+Src/Models/NhanVien.i: Src/Models/NhanVien.cpp.i
+.PHONY : Src/Models/NhanVien.i
+
+# target to preprocess a source file
+Src/Models/NhanVien.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/NhanVien.cpp.i
+.PHONY : Src/Models/NhanVien.cpp.i
+
+Src/Models/NhanVien.s: Src/Models/NhanVien.cpp.s
+.PHONY : Src/Models/NhanVien.s
+
+# target to generate assembly for a file
+Src/Models/NhanVien.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/NhanVien.cpp.s
+.PHONY : Src/Models/NhanVien.cpp.s
+
+Src/Models/Person.obj: Src/Models/Person.cpp.obj
+.PHONY : Src/Models/Person.obj
+
+# target to build an object file
+Src/Models/Person.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/Person.cpp.obj
+.PHONY : Src/Models/Person.cpp.obj
+
+Src/Models/Person.i: Src/Models/Person.cpp.i
+.PHONY : Src/Models/Person.i
+
+# target to preprocess a source file
+Src/Models/Person.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/Person.cpp.i
+.PHONY : Src/Models/Person.cpp.i
+
+Src/Models/Person.s: Src/Models/Person.cpp.s
+.PHONY : Src/Models/Person.s
+
+# target to generate assembly for a file
+Src/Models/Person.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Models/Person.cpp.s
+.PHONY : Src/Models/Person.cpp.s
+
+Src/Services/GoiTapService.obj: Src/Services/GoiTapService.cpp.obj
+.PHONY : Src/Services/GoiTapService.obj
+
+# target to build an object file
+Src/Services/GoiTapService.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/GoiTapService.cpp.obj
+.PHONY : Src/Services/GoiTapService.cpp.obj
+
+Src/Services/GoiTapService.i: Src/Services/GoiTapService.cpp.i
+.PHONY : Src/Services/GoiTapService.i
+
+# target to preprocess a source file
+Src/Services/GoiTapService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/GoiTapService.cpp.i
+.PHONY : Src/Services/GoiTapService.cpp.i
+
+Src/Services/GoiTapService.s: Src/Services/GoiTapService.cpp.s
+.PHONY : Src/Services/GoiTapService.s
+
+# target to generate assembly for a file
+Src/Services/GoiTapService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/GoiTapService.cpp.s
+.PHONY : Src/Services/GoiTapService.cpp.s
+
+Src/Services/HLVService.obj: Src/Services/HLVService.cpp.obj
+.PHONY : Src/Services/HLVService.obj
+
+# target to build an object file
+Src/Services/HLVService.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HLVService.cpp.obj
+.PHONY : Src/Services/HLVService.cpp.obj
+
+Src/Services/HLVService.i: Src/Services/HLVService.cpp.i
+.PHONY : Src/Services/HLVService.i
+
+# target to preprocess a source file
+Src/Services/HLVService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HLVService.cpp.i
+.PHONY : Src/Services/HLVService.cpp.i
+
+Src/Services/HLVService.s: Src/Services/HLVService.cpp.s
+.PHONY : Src/Services/HLVService.s
+
+# target to generate assembly for a file
+Src/Services/HLVService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HLVService.cpp.s
+.PHONY : Src/Services/HLVService.cpp.s
+
+Src/Services/HangHoaService.obj: Src/Services/HangHoaService.cpp.obj
+.PHONY : Src/Services/HangHoaService.obj
+
+# target to build an object file
+Src/Services/HangHoaService.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HangHoaService.cpp.obj
+.PHONY : Src/Services/HangHoaService.cpp.obj
+
+Src/Services/HangHoaService.i: Src/Services/HangHoaService.cpp.i
+.PHONY : Src/Services/HangHoaService.i
+
+# target to preprocess a source file
+Src/Services/HangHoaService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HangHoaService.cpp.i
+.PHONY : Src/Services/HangHoaService.cpp.i
+
+Src/Services/HangHoaService.s: Src/Services/HangHoaService.cpp.s
+.PHONY : Src/Services/HangHoaService.s
+
+# target to generate assembly for a file
+Src/Services/HangHoaService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HangHoaService.cpp.s
+.PHONY : Src/Services/HangHoaService.cpp.s
+
+Src/Services/HoaDonService.obj: Src/Services/HoaDonService.cpp.obj
+.PHONY : Src/Services/HoaDonService.obj
+
+# target to build an object file
+Src/Services/HoaDonService.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HoaDonService.cpp.obj
+.PHONY : Src/Services/HoaDonService.cpp.obj
+
+Src/Services/HoaDonService.i: Src/Services/HoaDonService.cpp.i
+.PHONY : Src/Services/HoaDonService.i
+
+# target to preprocess a source file
+Src/Services/HoaDonService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HoaDonService.cpp.i
+.PHONY : Src/Services/HoaDonService.cpp.i
+
+Src/Services/HoaDonService.s: Src/Services/HoaDonService.cpp.s
+.PHONY : Src/Services/HoaDonService.s
+
+# target to generate assembly for a file
+Src/Services/HoaDonService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HoaDonService.cpp.s
+.PHONY : Src/Services/HoaDonService.cpp.s
+
+Src/Services/HoiVienService.obj: Src/Services/HoiVienService.cpp.obj
+.PHONY : Src/Services/HoiVienService.obj
+
+# target to build an object file
+Src/Services/HoiVienService.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HoiVienService.cpp.obj
+.PHONY : Src/Services/HoiVienService.cpp.obj
+
+Src/Services/HoiVienService.i: Src/Services/HoiVienService.cpp.i
+.PHONY : Src/Services/HoiVienService.i
+
+# target to preprocess a source file
+Src/Services/HoiVienService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HoiVienService.cpp.i
+.PHONY : Src/Services/HoiVienService.cpp.i
+
+Src/Services/HoiVienService.s: Src/Services/HoiVienService.cpp.s
+.PHONY : Src/Services/HoiVienService.s
+
+# target to generate assembly for a file
+Src/Services/HoiVienService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HoiVienService.cpp.s
+.PHONY : Src/Services/HoiVienService.cpp.s
+
+Src/Services/HopDongService.obj: Src/Services/HopDongService.cpp.obj
+.PHONY : Src/Services/HopDongService.obj
+
+# target to build an object file
+Src/Services/HopDongService.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HopDongService.cpp.obj
+.PHONY : Src/Services/HopDongService.cpp.obj
+
+Src/Services/HopDongService.i: Src/Services/HopDongService.cpp.i
+.PHONY : Src/Services/HopDongService.i
+
+# target to preprocess a source file
+Src/Services/HopDongService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HopDongService.cpp.i
+.PHONY : Src/Services/HopDongService.cpp.i
+
+Src/Services/HopDongService.s: Src/Services/HopDongService.cpp.s
+.PHONY : Src/Services/HopDongService.s
+
+# target to generate assembly for a file
+Src/Services/HopDongService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/HopDongService.cpp.s
+.PHONY : Src/Services/HopDongService.cpp.s
+
+Src/Services/LogTapPTService.obj: Src/Services/LogTapPTService.cpp.obj
+.PHONY : Src/Services/LogTapPTService.obj
+
+# target to build an object file
+Src/Services/LogTapPTService.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/LogTapPTService.cpp.obj
+.PHONY : Src/Services/LogTapPTService.cpp.obj
+
+Src/Services/LogTapPTService.i: Src/Services/LogTapPTService.cpp.i
+.PHONY : Src/Services/LogTapPTService.i
+
+# target to preprocess a source file
+Src/Services/LogTapPTService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/LogTapPTService.cpp.i
+.PHONY : Src/Services/LogTapPTService.cpp.i
+
+Src/Services/LogTapPTService.s: Src/Services/LogTapPTService.cpp.s
+.PHONY : Src/Services/LogTapPTService.s
+
+# target to generate assembly for a file
+Src/Services/LogTapPTService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/LogTapPTService.cpp.s
+.PHONY : Src/Services/LogTapPTService.cpp.s
+
+Src/Services/LopHocService.obj: Src/Services/LopHocService.cpp.obj
+.PHONY : Src/Services/LopHocService.obj
+
+# target to build an object file
+Src/Services/LopHocService.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/LopHocService.cpp.obj
+.PHONY : Src/Services/LopHocService.cpp.obj
+
+Src/Services/LopHocService.i: Src/Services/LopHocService.cpp.i
+.PHONY : Src/Services/LopHocService.i
+
+# target to preprocess a source file
+Src/Services/LopHocService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/LopHocService.cpp.i
+.PHONY : Src/Services/LopHocService.cpp.i
+
+Src/Services/LopHocService.s: Src/Services/LopHocService.cpp.s
+.PHONY : Src/Services/LopHocService.s
+
+# target to generate assembly for a file
+Src/Services/LopHocService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/LopHocService.cpp.s
+.PHONY : Src/Services/LopHocService.cpp.s
+
+Src/Services/MonTapService.obj: Src/Services/MonTapService.cpp.obj
+.PHONY : Src/Services/MonTapService.obj
+
+# target to build an object file
+Src/Services/MonTapService.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/MonTapService.cpp.obj
+.PHONY : Src/Services/MonTapService.cpp.obj
+
+Src/Services/MonTapService.i: Src/Services/MonTapService.cpp.i
+.PHONY : Src/Services/MonTapService.i
+
+# target to preprocess a source file
+Src/Services/MonTapService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/MonTapService.cpp.i
+.PHONY : Src/Services/MonTapService.cpp.i
+
+Src/Services/MonTapService.s: Src/Services/MonTapService.cpp.s
+.PHONY : Src/Services/MonTapService.s
+
+# target to generate assembly for a file
+Src/Services/MonTapService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/MonTapService.cpp.s
+.PHONY : Src/Services/MonTapService.cpp.s
+
+Src/Services/NhanVienService.obj: Src/Services/NhanVienService.cpp.obj
+.PHONY : Src/Services/NhanVienService.obj
+
+# target to build an object file
+Src/Services/NhanVienService.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/NhanVienService.cpp.obj
+.PHONY : Src/Services/NhanVienService.cpp.obj
+
+Src/Services/NhanVienService.i: Src/Services/NhanVienService.cpp.i
+.PHONY : Src/Services/NhanVienService.i
+
+# target to preprocess a source file
+Src/Services/NhanVienService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/NhanVienService.cpp.i
+.PHONY : Src/Services/NhanVienService.cpp.i
+
+Src/Services/NhanVienService.s: Src/Services/NhanVienService.cpp.s
+.PHONY : Src/Services/NhanVienService.s
+
+# target to generate assembly for a file
+Src/Services/NhanVienService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Services/NhanVienService.cpp.s
+.PHONY : Src/Services/NhanVienService.cpp.s
+
+Src/Utils/FileIO.obj: Src/Utils/FileIO.cpp.obj
+.PHONY : Src/Utils/FileIO.obj
+
+# target to build an object file
+Src/Utils/FileIO.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Utils/FileIO.cpp.obj
+.PHONY : Src/Utils/FileIO.cpp.obj
+
+Src/Utils/FileIO.i: Src/Utils/FileIO.cpp.i
+.PHONY : Src/Utils/FileIO.i
+
+# target to preprocess a source file
+Src/Utils/FileIO.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Utils/FileIO.cpp.i
+.PHONY : Src/Utils/FileIO.cpp.i
+
+Src/Utils/FileIO.s: Src/Utils/FileIO.cpp.s
+.PHONY : Src/Utils/FileIO.s
+
+# target to generate assembly for a file
+Src/Utils/FileIO.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Utils/FileIO.cpp.s
+.PHONY : Src/Utils/FileIO.cpp.s
+
+Src/Utils/IDGenerator.obj: Src/Utils/IDGenerator.cpp.obj
+.PHONY : Src/Utils/IDGenerator.obj
+
+# target to build an object file
+Src/Utils/IDGenerator.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Utils/IDGenerator.cpp.obj
+.PHONY : Src/Utils/IDGenerator.cpp.obj
+
+Src/Utils/IDGenerator.i: Src/Utils/IDGenerator.cpp.i
+.PHONY : Src/Utils/IDGenerator.i
+
+# target to preprocess a source file
+Src/Utils/IDGenerator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Utils/IDGenerator.cpp.i
+.PHONY : Src/Utils/IDGenerator.cpp.i
+
+Src/Utils/IDGenerator.s: Src/Utils/IDGenerator.cpp.s
+.PHONY : Src/Utils/IDGenerator.s
+
+# target to generate assembly for a file
+Src/Utils/IDGenerator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Utils/IDGenerator.cpp.s
+.PHONY : Src/Utils/IDGenerator.cpp.s
+
+Src/Utils/StringUtils.obj: Src/Utils/StringUtils.cpp.obj
+.PHONY : Src/Utils/StringUtils.obj
+
+# target to build an object file
+Src/Utils/StringUtils.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Utils/StringUtils.cpp.obj
+.PHONY : Src/Utils/StringUtils.cpp.obj
+
+Src/Utils/StringUtils.i: Src/Utils/StringUtils.cpp.i
+.PHONY : Src/Utils/StringUtils.i
+
+# target to preprocess a source file
+Src/Utils/StringUtils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Utils/StringUtils.cpp.i
+.PHONY : Src/Utils/StringUtils.cpp.i
+
+Src/Utils/StringUtils.s: Src/Utils/StringUtils.cpp.s
+.PHONY : Src/Utils/StringUtils.s
+
+# target to generate assembly for a file
+Src/Utils/StringUtils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Utils/StringUtils.cpp.s
+.PHONY : Src/Utils/StringUtils.cpp.s
+
+Src/Utils/Validator.obj: Src/Utils/Validator.cpp.obj
+.PHONY : Src/Utils/Validator.obj
+
+# target to build an object file
+Src/Utils/Validator.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Utils/Validator.cpp.obj
+.PHONY : Src/Utils/Validator.cpp.obj
+
+Src/Utils/Validator.i: Src/Utils/Validator.cpp.i
+.PHONY : Src/Utils/Validator.i
+
+# target to preprocess a source file
+Src/Utils/Validator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Utils/Validator.cpp.i
+.PHONY : Src/Utils/Validator.cpp.i
+
+Src/Utils/Validator.s: Src/Utils/Validator.cpp.s
+.PHONY : Src/Utils/Validator.s
+
+# target to generate assembly for a file
+Src/Utils/Validator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/Src/Utils/Validator.cpp.s
+.PHONY : Src/Utils/Validator.cpp.s
 
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
 # target to build an object file
 main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_GYM.dir\build.make CMakeFiles/PBL2_GYM.dir/main.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/main.cpp.obj
 .PHONY : main.cpp.obj
 
 main.i: main.cpp.i
@@ -141,7 +1749,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_GYM.dir\build.make CMakeFiles/PBL2_GYM.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -149,7 +1757,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_GYM.dir\build.make CMakeFiles/PBL2_GYM.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PBL2_Gym.dir\build.make CMakeFiles/PBL2_Gym.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -160,7 +1768,208 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... PBL2_GYM
+	@echo ... PBL2_Gym
+	@echo ... Src/GUI/App.obj
+	@echo ... Src/GUI/App.i
+	@echo ... Src/GUI/App.s
+	@echo ... Src/GUI/Components/Button.obj
+	@echo ... Src/GUI/Components/Button.i
+	@echo ... Src/GUI/Components/Button.s
+	@echo ... Src/GUI/Components/Checkbox.obj
+	@echo ... Src/GUI/Components/Checkbox.i
+	@echo ... Src/GUI/Components/Checkbox.s
+	@echo ... Src/GUI/Components/InputBox.obj
+	@echo ... Src/GUI/Components/InputBox.i
+	@echo ... Src/GUI/Components/InputBox.s
+	@echo ... Src/GUI/Components/Pagination.obj
+	@echo ... Src/GUI/Components/Pagination.i
+	@echo ... Src/GUI/Components/Pagination.s
+	@echo ... Src/GUI/Components/TabManger.obj
+	@echo ... Src/GUI/Components/TabManger.i
+	@echo ... Src/GUI/Components/TabManger.s
+	@echo ... Src/GUI/Popup/BasePopup.obj
+	@echo ... Src/GUI/Popup/BasePopup.i
+	@echo ... Src/GUI/Popup/BasePopup.s
+	@echo ... Src/GUI/Popup/CartPopup.obj
+	@echo ... Src/GUI/Popup/CartPopup.i
+	@echo ... Src/GUI/Popup/CartPopup.s
+	@echo ... Src/GUI/Popup/ConfirmDeletePopup.obj
+	@echo ... Src/GUI/Popup/ConfirmDeletePopup.i
+	@echo ... Src/GUI/Popup/ConfirmDeletePopup.s
+	@echo ... Src/GUI/Popup/DatHLVPopup.obj
+	@echo ... Src/GUI/Popup/DatHLVPopup.i
+	@echo ... Src/GUI/Popup/DatHLVPopup.s
+	@echo ... Src/GUI/Popup/GoiTapFormPopup.obj
+	@echo ... Src/GUI/Popup/GoiTapFormPopup.i
+	@echo ... Src/GUI/Popup/GoiTapFormPopup.s
+	@echo ... Src/GUI/Popup/GoiTapMonTapPopup.obj
+	@echo ... Src/GUI/Popup/GoiTapMonTapPopup.i
+	@echo ... Src/GUI/Popup/GoiTapMonTapPopup.s
+	@echo ... Src/GUI/Popup/HLVDetailPopup.obj
+	@echo ... Src/GUI/Popup/HLVDetailPopup.i
+	@echo ... Src/GUI/Popup/HLVDetailPopup.s
+	@echo ... Src/GUI/Popup/HLVFormPopup.obj
+	@echo ... Src/GUI/Popup/HLVFormPopup.i
+	@echo ... Src/GUI/Popup/HLVFormPopup.s
+	@echo ... Src/GUI/Popup/HangHoaFormPopup.obj
+	@echo ... Src/GUI/Popup/HangHoaFormPopup.i
+	@echo ... Src/GUI/Popup/HangHoaFormPopup.s
+	@echo ... Src/GUI/Popup/HoiVienDetailPopup.obj
+	@echo ... Src/GUI/Popup/HoiVienDetailPopup.i
+	@echo ... Src/GUI/Popup/HoiVienDetailPopup.s
+	@echo ... Src/GUI/Popup/HoiVienFormPopup.obj
+	@echo ... Src/GUI/Popup/HoiVienFormPopup.i
+	@echo ... Src/GUI/Popup/HoiVienFormPopup.s
+	@echo ... Src/GUI/Popup/InvoiceDetailPopup.obj
+	@echo ... Src/GUI/Popup/InvoiceDetailPopup.i
+	@echo ... Src/GUI/Popup/InvoiceDetailPopup.s
+	@echo ... Src/GUI/Popup/LopHocFormPopup.obj
+	@echo ... Src/GUI/Popup/LopHocFormPopup.i
+	@echo ... Src/GUI/Popup/LopHocFormPopup.s
+	@echo ... Src/GUI/Popup/MonTapFormPopup.obj
+	@echo ... Src/GUI/Popup/MonTapFormPopup.i
+	@echo ... Src/GUI/Popup/MonTapFormPopup.s
+	@echo ... Src/GUI/Popup/NhanVienDetailPopup.obj
+	@echo ... Src/GUI/Popup/NhanVienDetailPopup.i
+	@echo ... Src/GUI/Popup/NhanVienDetailPopup.s
+	@echo ... Src/GUI/Popup/NhanVienFormPopup.obj
+	@echo ... Src/GUI/Popup/NhanVienFormPopup.i
+	@echo ... Src/GUI/Popup/NhanVienFormPopup.s
+	@echo ... Src/GUI/Screens/BanHangScreen.obj
+	@echo ... Src/GUI/Screens/BanHangScreen.i
+	@echo ... Src/GUI/Screens/BanHangScreen.s
+	@echo ... Src/GUI/Screens/BaoCaoScreen.obj
+	@echo ... Src/GUI/Screens/BaoCaoScreen.i
+	@echo ... Src/GUI/Screens/BaoCaoScreen.s
+	@echo ... Src/GUI/Screens/CaiDatScreen.obj
+	@echo ... Src/GUI/Screens/CaiDatScreen.i
+	@echo ... Src/GUI/Screens/CaiDatScreen.s
+	@echo ... Src/GUI/Screens/GoiTapSceen.obj
+	@echo ... Src/GUI/Screens/GoiTapSceen.i
+	@echo ... Src/GUI/Screens/GoiTapSceen.s
+	@echo ... Src/GUI/Screens/HLVScreen.obj
+	@echo ... Src/GUI/Screens/HLVScreen.i
+	@echo ... Src/GUI/Screens/HLVScreen.s
+	@echo ... Src/GUI/Screens/HangHoaScreen.obj
+	@echo ... Src/GUI/Screens/HangHoaScreen.i
+	@echo ... Src/GUI/Screens/HangHoaScreen.s
+	@echo ... Src/GUI/Screens/HoiVienScreen.obj
+	@echo ... Src/GUI/Screens/HoiVienScreen.i
+	@echo ... Src/GUI/Screens/HoiVienScreen.s
+	@echo ... Src/GUI/Screens/LoginScreen.obj
+	@echo ... Src/GUI/Screens/LoginScreen.i
+	@echo ... Src/GUI/Screens/LoginScreen.s
+	@echo ... Src/GUI/Screens/LopHocScreen.obj
+	@echo ... Src/GUI/Screens/LopHocScreen.i
+	@echo ... Src/GUI/Screens/LopHocScreen.s
+	@echo ... Src/GUI/Screens/MainScreen.obj
+	@echo ... Src/GUI/Screens/MainScreen.i
+	@echo ... Src/GUI/Screens/MainScreen.s
+	@echo ... Src/GUI/Screens/MonTapScreen.obj
+	@echo ... Src/GUI/Screens/MonTapScreen.i
+	@echo ... Src/GUI/Screens/MonTapScreen.s
+	@echo ... Src/GUI/Screens/NhanVienScreen.obj
+	@echo ... Src/GUI/Screens/NhanVienScreen.i
+	@echo ... Src/GUI/Screens/NhanVienScreen.s
+	@echo ... Src/GUI/Sidebar.obj
+	@echo ... Src/GUI/Sidebar.i
+	@echo ... Src/GUI/Sidebar.s
+	@echo ... Src/Managers/AccountManager.obj
+	@echo ... Src/Managers/AccountManager.i
+	@echo ... Src/Managers/AccountManager.s
+	@echo ... Src/Managers/QuanLy.obj
+	@echo ... Src/Managers/QuanLy.i
+	@echo ... Src/Managers/QuanLy.s
+	@echo ... Src/Managers/SearchEngine.obj
+	@echo ... Src/Managers/SearchEngine.i
+	@echo ... Src/Managers/SearchEngine.s
+	@echo ... Src/Managers/SearchService.obj
+	@echo ... Src/Managers/SearchService.i
+	@echo ... Src/Managers/SearchService.s
+	@echo ... Src/Models/Account.obj
+	@echo ... Src/Models/Account.i
+	@echo ... Src/Models/Account.s
+	@echo ... Src/Models/ChiTietHoaDon_GT.obj
+	@echo ... Src/Models/ChiTietHoaDon_GT.i
+	@echo ... Src/Models/ChiTietHoaDon_GT.s
+	@echo ... Src/Models/ChiTietHoaDon_HH.obj
+	@echo ... Src/Models/ChiTietHoaDon_HH.i
+	@echo ... Src/Models/ChiTietHoaDon_HH.s
+	@echo ... Src/Models/GoiTap.obj
+	@echo ... Src/Models/GoiTap.i
+	@echo ... Src/Models/GoiTap.s
+	@echo ... Src/Models/HLV.obj
+	@echo ... Src/Models/HLV.i
+	@echo ... Src/Models/HLV.s
+	@echo ... Src/Models/HangHoa.obj
+	@echo ... Src/Models/HangHoa.i
+	@echo ... Src/Models/HangHoa.s
+	@echo ... Src/Models/HoaDon.obj
+	@echo ... Src/Models/HoaDon.i
+	@echo ... Src/Models/HoaDon.s
+	@echo ... Src/Models/HoiVien.obj
+	@echo ... Src/Models/HoiVien.i
+	@echo ... Src/Models/HoiVien.s
+	@echo ... Src/Models/HopDong.obj
+	@echo ... Src/Models/HopDong.i
+	@echo ... Src/Models/HopDong.s
+	@echo ... Src/Models/LogTapPT.obj
+	@echo ... Src/Models/LogTapPT.i
+	@echo ... Src/Models/LogTapPT.s
+	@echo ... Src/Models/LopHoc.obj
+	@echo ... Src/Models/LopHoc.i
+	@echo ... Src/Models/LopHoc.s
+	@echo ... Src/Models/MonTap.obj
+	@echo ... Src/Models/MonTap.i
+	@echo ... Src/Models/MonTap.s
+	@echo ... Src/Models/NhanVien.obj
+	@echo ... Src/Models/NhanVien.i
+	@echo ... Src/Models/NhanVien.s
+	@echo ... Src/Models/Person.obj
+	@echo ... Src/Models/Person.i
+	@echo ... Src/Models/Person.s
+	@echo ... Src/Services/GoiTapService.obj
+	@echo ... Src/Services/GoiTapService.i
+	@echo ... Src/Services/GoiTapService.s
+	@echo ... Src/Services/HLVService.obj
+	@echo ... Src/Services/HLVService.i
+	@echo ... Src/Services/HLVService.s
+	@echo ... Src/Services/HangHoaService.obj
+	@echo ... Src/Services/HangHoaService.i
+	@echo ... Src/Services/HangHoaService.s
+	@echo ... Src/Services/HoaDonService.obj
+	@echo ... Src/Services/HoaDonService.i
+	@echo ... Src/Services/HoaDonService.s
+	@echo ... Src/Services/HoiVienService.obj
+	@echo ... Src/Services/HoiVienService.i
+	@echo ... Src/Services/HoiVienService.s
+	@echo ... Src/Services/HopDongService.obj
+	@echo ... Src/Services/HopDongService.i
+	@echo ... Src/Services/HopDongService.s
+	@echo ... Src/Services/LogTapPTService.obj
+	@echo ... Src/Services/LogTapPTService.i
+	@echo ... Src/Services/LogTapPTService.s
+	@echo ... Src/Services/LopHocService.obj
+	@echo ... Src/Services/LopHocService.i
+	@echo ... Src/Services/LopHocService.s
+	@echo ... Src/Services/MonTapService.obj
+	@echo ... Src/Services/MonTapService.i
+	@echo ... Src/Services/MonTapService.s
+	@echo ... Src/Services/NhanVienService.obj
+	@echo ... Src/Services/NhanVienService.i
+	@echo ... Src/Services/NhanVienService.s
+	@echo ... Src/Utils/FileIO.obj
+	@echo ... Src/Utils/FileIO.i
+	@echo ... Src/Utils/FileIO.s
+	@echo ... Src/Utils/IDGenerator.obj
+	@echo ... Src/Utils/IDGenerator.i
+	@echo ... Src/Utils/IDGenerator.s
+	@echo ... Src/Utils/StringUtils.obj
+	@echo ... Src/Utils/StringUtils.i
+	@echo ... Src/Utils/StringUtils.s
+	@echo ... Src/Utils/Validator.obj
+	@echo ... Src/Utils/Validator.i
+	@echo ... Src/Utils/Validator.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

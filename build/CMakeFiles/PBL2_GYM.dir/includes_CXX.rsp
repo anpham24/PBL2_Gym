@@ -1,1 +1,1 @@
--isystem C:/SFML_Build/include
+-ID:/PBL2_Gym/Include -ID:/PBL2_Gym/Include/Models -ID:/PBL2_Gym/Include/Managers -ID:/PBL2_Gym/Include/Services -ID:/PBL2_Gym/Include/Utils -ID:/PBL2_Gym/Include/GUI -ID:/PBL2_Gym/Include/GUI/Components -ID:/PBL2_Gym/Include/GUI/Screens -ID:/PBL2_Gym/Include/GUI/Popup -isystem C:/SFML_Build/include

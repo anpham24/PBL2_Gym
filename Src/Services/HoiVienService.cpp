@@ -2,7 +2,6 @@
 #include "HoiVien.h"
 #include "Validator.h"
 #include "QuanLy.h"
-#include "MyVector.h"
 
 void HoiVienService::themHoiVien(const string& tenHV, const string& sdt,
                                  const string& gioiTinh, const string& ngaySinh, int point) {
@@ -102,4 +101,8 @@ void HoiVienService::xoaHoiVien(const string& maHV) {
         // UI::showError("Lỗi: Xóa hội viên thất bại (Lỗi hệ thống).");
         return;
     }
+}
+
+const MyHashTable<HoiVien*>& HoiVienService::getAllHoiVien() {
+    return QuanLy::getInstance().getDsHoiVien();
 }

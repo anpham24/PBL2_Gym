@@ -65,3 +65,7 @@ void MonTapService::xoaMonTap(const string& maMon) {
         return;
     }
 }
+
+const MyVector<MonTap*>& MonTapService::getAllMonTap() {
+    return QuanLy::getInstance().getDsMonTap();
+}

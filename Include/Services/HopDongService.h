@@ -1,6 +1,11 @@
 #pragma once
 #include <string>
+
+#include "MyHashTable.h"
+
 using namespace std;
+
+class HopDong;
 
 class HopDongService {
 public:
@@ -10,4 +15,5 @@ public:
                           const string& maNV, const string& ngayDK, const string& ngayHetHan);
     static void huyHopDong(const string& maHD);
     static void kichHoatHopDong(const string& maHD);
+    static const MyHashTable<HopDong*>& getAllHopDong();
 };

@@ -6,7 +6,6 @@
 #include "GoiTap.h"
 #include "Validator.h"
 #include "QuanLy.h"
-#include <iostream>
 
 HoaDon* HoaDonService::taoHoaDon(const string& maNV, const string& maHV,
     const string& ngayLap, const string& phuongThucTT) {
@@ -184,4 +183,8 @@ void HoaDonService::xoaGoiTapKhoiHoaDon(const string& maHD, const string& maGT) 
             return;
         }
     }
+}
+
+const MyHashTable<HoaDon*>& HoaDonService::getAllHoaDon() {
+    return QuanLy::getInstance().getDsHoaDon();
 }
