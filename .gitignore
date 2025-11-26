@@ -4,4 +4,4 @@
 # Bỏ qua file exe khi build
 *.exe
 
-/build/
+build/
