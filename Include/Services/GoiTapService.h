@@ -1,6 +1,11 @@
 #pragma once
 #include <string>
+
+#include "MyVector.h"
+
 using namespace std;
+
+class GoiTap;
 
 class GoiTapService {
 public:
@@ -8,4 +13,5 @@ public:
     static void themMonTapVaoGoiTap(const string& maGoi, const string& maMon);
     static void suaGoiTap(const string& maGoi, const string& tenGoi, int thoiGian, int soBuoiPT, double gia);
     static void xoaGoiTap(const string& maGoi);
+    static const MyVector<GoiTap*>& getAllGoiTap();
 };

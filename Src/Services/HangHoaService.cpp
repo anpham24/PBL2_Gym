@@ -2,7 +2,6 @@
 #include "HangHoa.h"
 #include "Validator.h"
 #include "QuanLy.h"
-#include "MyVector.h"
 
 void HangHoaService::themHangHoa(const string& tenHH, const string& loaiHH, double gia, int soLuong) {  
     string errorMsg = Validator::validateTen(tenHH);
@@ -104,3 +103,7 @@ void HangHoaService::xoaHangHoa(const string& maHH) {
     }
 }
 
+const MyVector<HangHoa*>& HangHoaService::getAllHangHoa() {
+    QuanLy& ql = QuanLy::getInstance();
+    return ql.getDsHangHoa();
+}

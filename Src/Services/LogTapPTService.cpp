@@ -66,3 +66,7 @@ void LogTapPTService::suaLogTapPT(const string& maLog, const string& maHV, const
     ql.setDirty(true);
     // UI::showMessage("Cập nhật log tập PT thành công.");
 }
+
+const MyHashTable<LogTapPT*>& LogTapPTService::getAllLogTapPT() {
+    return QuanLy::getInstance().getDsLogTapPT();
+}

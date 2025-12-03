@@ -3,27 +3,27 @@
 using namespace std;
 
 class Person {
-    protected:
-        string id;
-        string hoTen;
-        string sdt;
-        string gioiTinh;
-        string ngaySinh;
-    public:
-        Person();
-        Person(const string&, const string&, const string&, const string&, const string&);
-        virtual ~Person() = 0;
+protected:
+    string id;
+    string hoTen;
+    string sdt;
+    string gioiTinh;
+    string ngaySinh;
+public:
+    Person();
+    Person(const string&, const string&, const string&, const string&, const string&);
+    virtual ~Person() = 0;
 
-        const string& getID() const;
-        const string& getHoTen() const;
-        const string& getSDT() const;
-        const string& getGioiTinh() const;
-        const string& getNgaySinh() const;
+    const string& getID() const;
+    const string& getHoTen() const;
+    const string& getSDT() const;
+    const string& getGioiTinh() const;
+    const string& getNgaySinh() const;
 
-        void setHoTen(const string&);
-        void setSDT(const string&);
-        void setGioiTinh(const string&);
-        void setNgaySinh(const string&);
+    void setHoTen(const string&);
+    void setSDT(const string&);
+    void setGioiTinh(const string&);
+    void setNgaySinh(const string&);
 
-        virtual string read() const = 0;
+    virtual string read() const = 0;
 };

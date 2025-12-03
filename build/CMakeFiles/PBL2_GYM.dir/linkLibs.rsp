@@ -1,1 +1,0 @@
- "C:/SFML_Build/lib/libsfml-graphics-s.a" "C:/SFML_Build/lib/libsfml-window-s.a" "C:/SFML_Build/lib/libsfml-system-s.a" -lopengl32 -lwinmm -lgdi32 C:/SFML_Build/lib/libfreetype.a C:/SFML_Build/lib/libharfbuzz.a C:/SFML_Build/lib/libfreetype.a C:/SFML_Build/lib/libharfbuzz.a -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

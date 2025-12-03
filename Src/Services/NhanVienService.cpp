@@ -102,3 +102,7 @@ void NhanVienService::xoaNhanVien(const string& maNV) {
         return;
     }
 }
+
+const MyVector<NhanVien*>& NhanVienService::getAllNhanVien() {
+    return QuanLy::getInstance().getDsNhanVien();
+}

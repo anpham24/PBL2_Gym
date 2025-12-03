@@ -137,3 +137,8 @@ void HoiVienService::xoaHoiVien(const string &maHV)
         return;
     }
 }
+
+const MyHashTable<HoiVien *> &HoiVienService::getAllHoiVien()
+{
+    return QuanLy::getInstance().getDsHoiVien();
+}

@@ -103,3 +103,7 @@ void LopHocService::xoaLopHoc(const string &maLop)
         return;
     }
 }
+
+const MyVector<LopHoc*>& LopHocService::getAllLopHoc() {
+    return QuanLy::getInstance().getDsLopHoc();
+}

@@ -2,7 +2,6 @@
 #include "HLV.h"
 #include "Validator.h"
 #include "QuanLy.h"
-#include "MyVector.h"
 
 void HLVService::themHLV(const string& tenHLV, const string& sdt,
                          const string& gioiTinh, const string& ngaySinh,
@@ -112,4 +111,9 @@ void HLVService::xoaHLV(const string& maHLV) {
         // UI::showError("Lỗi: Xóa HLV thất bại (Lỗi hệ thống).");
         return;
     }
+}
+
+const MyVector<HLV*>& HLVService::getAllHLV() {
+    QuanLy& ql = QuanLy::getInstance();
+    return ql.getDsHLV();
 }

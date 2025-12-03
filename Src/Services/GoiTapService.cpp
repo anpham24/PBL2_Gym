@@ -3,7 +3,6 @@
 #include "MonTap.h"
 #include "QuanLy.h"
 #include "Validator.h"
-#include <iostream>
 
 void GoiTapService::themGoiTap(const string& tenGoi, int thoiGian, int soBuoiPT, double gia) {
     string errorMsg = Validator::validateTen(tenGoi);
@@ -72,7 +71,7 @@ void GoiTapService::suaGoiTap(const string& maGoi, const string& tenGoi, int tho
     }
     string errorMsg = Validator::validateTen(tenGoi);
     if (!errorMsg.empty()) {
-        // UI::showError(errorMsg)
+        // UI::showError("Lỗi tên gói tập: " + errorMsg);
         return;
     }
     errorMsg = Validator::validateSoDuong(thoiGian);
@@ -104,10 +103,13 @@ void GoiTapService::xoaGoiTap(const std::string& id) {
     bool success = ql.removeGoiTap(id);
     
     if (success) {
-        std::cout << "Service: Xoa Goi Tap " << id << " thanh cong." << std::endl;
         ql.setDirty(true);
     } else {
-        std::cerr << "Loi Service: Xoa Goi Tap " << id << " that bai." << std::endl;
-        // (Sau này bạn sẽ dùng UI::showError thay cho cerr)
+        // UI::showError("Lỗi: Không thể xóa gói tập");
     }
+}
+
+const MyVector<GoiTap*>& GoiTapService::getAllGoiTap() {
+    QuanLy& ql = QuanLy::getInstance();
+    return ql.getDsGoiTap();
 }

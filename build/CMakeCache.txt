@@ -23,8 +23,8 @@ CMAKE_AR:FILEPATH=C:/msys64/ucrt64/bin/ar.exe
 //No help, variable specified on the command line.
 CMAKE_BUILD_TYPE:STRING=Debug
 
-//No help, variable specified on the command line.
-CMAKE_CXX_COMPILER:FILEPATH=C:/msys64/ucrt64/bin/g++.exe
+//CXX compiler
+CMAKE_CXX_COMPILER:STRING=C:/msys64/ucrt64/bin/g++.exe
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -52,8 +52,8 @@ CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 //Libraries linked by default with all C++ applications.
 CMAKE_CXX_STANDARD_LIBRARIES:STRING=-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
 
-//No help, variable specified on the command line.
-CMAKE_C_COMPILER:FILEPATH=C:/msys64/ucrt64/bin/gcc.exe
+//C compiler
+CMAKE_C_COMPILER:STRING=C:/msys64/ucrt64/bin/gcc.exe
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -164,21 +164,6 @@ CMAKE_PROJECT_NAME:STATIC=PBL2_Gym
 //Value Computed by CMake
 CMAKE_PROJECT_SPDX_LICENSE:STATIC=
 
-//Value Computed by CMake
-CMAKE_PROJECT_VERSION:STATIC=1.0.0
-
-//Value Computed by CMake
-CMAKE_PROJECT_VERSION_MAJOR:STATIC=1
-
-//Value Computed by CMake
-CMAKE_PROJECT_VERSION_MINOR:STATIC=0
-
-//Value Computed by CMake
-CMAKE_PROJECT_VERSION_PATCH:STATIC=0
-
-//Value Computed by CMake
-CMAKE_PROJECT_VERSION_TWEAK:STATIC=
-
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=C:/msys64/ucrt64/bin/ranlib.exe
 
@@ -265,15 +250,6 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 //The directory containing a CMake configuration file for Freetype.
 Freetype_DIR:PATH=C:/SFML_Build/lib/cmake/freetype
 
-//Value Computed by CMake
-GymManagementSystem_BINARY_DIR:STATIC=C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym/build
-
-//Value Computed by CMake
-GymManagementSystem_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-GymManagementSystem_SOURCE_DIR:STATIC=C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym
-
 //OpenGL library for win32
 OPENGL_gl_LIBRARY:STRING=opengl32
 
@@ -288,9 +264,6 @@ PBL2_Gym_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 PBL2_Gym_SOURCE_DIR:STATIC=C:/Users/Admin/OneDrive - The University of Technology/Desktop/PBL2/PBL2_Gym
-
-//The directory containing a CMake configuration file for SFML.
-SFML_DIR:PATH=SFML_DIR-NOTFOUND
 
 //Path to a file.
 SFML_DOC_DIR:PATH=SFML_DOC_DIR-NOTFOUND

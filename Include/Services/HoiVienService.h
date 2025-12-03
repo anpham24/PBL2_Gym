@@ -1,6 +1,11 @@
 #pragma once
 #include <string>
+
+#include "MyHashTable.h"
+
 using namespace std;
+
+class HoiVien;
 
 class HoiVienService {
 public:
@@ -9,4 +14,5 @@ public:
     static void suaHoiVien(const string& maHV, const string& tenHV, const string& sdt,
                                const string& gioiTinh, const string& ngaySinh, int point);
     static void xoaHoiVien(const string& maHV);
+    static const MyHashTable<HoiVien*>& getAllHoiVien();
 };

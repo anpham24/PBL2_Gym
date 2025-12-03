@@ -1,17 +1,3 @@
-/**
- * FileIO.cpp - Cac thao tac nhap/xuat file cho he thong quan ly phong gym
- * 
- * File nay xu ly viec load va save tat ca du lieu entity tu/vao cac file CSV.
- * Moi loai entity co file rieng voi dinh dang cu the (phan cach bang dau cham phay).
- * 
- * Thu tu load quan trong doi voi cac entity co su phu thuoc:
- * 1. Cac entity doc lap (NhanVien, HLV, MonTap, GoiTap, HangHoa, HoiVien)
- * 2. Cac entity co tham chieu don gian (LopHoc can MonTap+HLV, HopDong can HoiVien+GoiTap)
- * 3. Cac entity giao dich (HoaDon can NhanVien+HoiVien)
- * 4. Cac entity chi tiet (ChiTietHoaDon_* can HoaDon va HangHoa/GoiTap)
- * 5. Cac entity log (LogTapPT can HoiVien+HLV)
- */
-
 #include "FileIO.h"
 #include "QuanLy.h"
 #include "StringUtils.h"
