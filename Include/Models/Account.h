@@ -1,7 +1,8 @@
 // Account.h
 #pragma once
 #include <string>
-#include "NhanVien.h" // Gia su NhanVien.h o day
+
+#include "NhanVien.h" 
 
 enum class AccountType {
     ADMIN,

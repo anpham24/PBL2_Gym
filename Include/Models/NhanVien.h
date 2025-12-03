@@ -1,7 +1,8 @@
 #pragma once
+#include <string>
+
 #include "Person.h"
 #include "MyVector.h"
-#include <string>
 
 class HopDong;
 class HoaDon;

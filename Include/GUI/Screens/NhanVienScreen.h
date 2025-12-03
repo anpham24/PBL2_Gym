@@ -10,6 +10,7 @@
 #include "NhanVienDetailPopup.h" // (Chung ta se tao)
 #include "ConfirmDeletePopup.h"   // (Tai su dung)
 #include "NhanVien.h"
+#include "InputBox.h"
 
 /*
  * Lop NhanVienScreen quan ly giao dien cho Nhan Vien.
@@ -31,6 +32,9 @@ private:
     NhanVienFormPopup formPopup;
     NhanVienDetailPopup detailPopup;
     ConfirmDeletePopup deletePopup;
+
+    InputBox searchBox;
+    void applySearch();
 
     bool isStaffReadOnly; // Co de luu trang thai Read-only
 

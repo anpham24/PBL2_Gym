@@ -3,6 +3,7 @@
 #include "Table.h"
 #include "Pagination.h"
 #include "Button.h"
+#include "Inputbox.h"
 #include "HoiVienFormPopup.h"
 #include "HoiVienDetailPopup.h"
 #include "ConfirmDeletePopup.h"
@@ -18,6 +19,9 @@ private:
     
     MyVector<HoiVien*> allHoiVien;
     MyVector<HoiVien*> pagedHoiVien;
+
+    InputBox searchBox;
+    void applySearch();
     
     bool isStaffReadOnly = false;
     

@@ -2,6 +2,7 @@
 #include "MonTapScreen.h"
 #include "QuanLy.h"
 #include "MonTapService.h" // Goi Service
+#include "StringUtils.h"
 
 // --- Constructor ---
 MonTapScreen::MonTapScreen(App& app) 
@@ -15,6 +16,10 @@ MonTapScreen::MonTapScreen(App& app)
     isStaffReadOnly = (app.getCurrentAccount()->getAccountType() == AccountType::STAFF);
 
     float contentX = 250.0f; // Vi tri bat dau (sau Sidebar)
+
+    searchBox.setup("Tim theo Ten mon.. .", app.getGlobalFont(), false);
+    searchBox.setSize(350, 40);
+    searchBox.setPosition(contentX, 40);
     
     // --- Nut Them ---
     themMonTapButton.setup("Them Mon Tap Moi", app.getGlobalFont());
@@ -72,23 +77,70 @@ MonTapScreen::MonTapScreen(App& app)
 
 MonTapScreen::~MonTapScreen() {}
 
+void MonTapScreen::applySearch() {
+    std::string searchTerm = searchBox.getString();
+    
+    // Reload từ QuanLy
+    allMonTap.clear();
+    const MyVector<MonTap*>& dsMonTapGoc = app.getQuanLy(). getDsMonTap();
+    for (size_t i = 0; i < dsMonTapGoc.size(); ++i) {
+        allMonTap. push_back(dsMonTapGoc[i]);
+    }
+    
+    if (searchTerm.empty()) {
+        pagination.setup(allMonTap. size(), 10);
+        onPageChange(pagination.getCurrentPage());
+        return;
+    }
+    
+    std::cout << "\n🔍 MonTap - Searching: \"" << searchTerm << "\"" << std::endl;
+    
+    MyVector<MonTap*> filteredData;
+    
+    // Kiểm tra input hợp lệ (chỉ chữ cái + dấu cách)
+    bool hasInvalidChar = false;
+    for (size_t i = 0; i < searchTerm.length(); ++i) {
+        char c = searchTerm[i];
+        if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
+            hasInvalidChar = true;
+            break;
+        }
+    }
+    
+    if (hasInvalidChar) {
+        std::cout << "   ⚠️  Contains invalid chars → No search" << std::endl;
+    } else {
+        // ✅ Tìm theo TÊN (Linear Search)
+        for (size_t i = 0; i < dsMonTapGoc.size(); ++i) {
+            MonTap* mt = dsMonTapGoc[i];
+            
+            if (StringUtils::contains(mt->getTenMon(), searchTerm)) {
+                filteredData.push_back(mt);
+            }
+        }
+        
+        std::cout << "   ✅ Found " << filteredData.size() << " results" << std::endl;
+    }
+    
+    allMonTap.clear();
+    for (size_t i = 0; i < filteredData. size(); ++i) {
+        allMonTap.push_back(filteredData[i]);
+    }
+    
+    pagination. setup(allMonTap.size(), 10);
+    onPageChange(1);
+}
+
 // --- Ham Logic ---
 void MonTapScreen::loadAndDisplayData() {
     allMonTap.clear();
     
-    // Lay data tu QuanLy
     const MyVector<MonTap*>& dsMonTapGoc = app.getQuanLy().getDsMonTap();
     for (size_t i = 0; i < dsMonTapGoc.size(); ++i) {
         allMonTap.push_back(dsMonTapGoc[i]);
     }
     
-    // (Sau nay se them logic Tim kiem/Loc o day)
-    
-    // Thiet lap pagination
-    pagination.setup(allMonTap.size(), 10); // 10 muc moi trang
-    
-    // Hien thi trang hien tai
-    onPageChange(pagination.getCurrentPage());
+    applySearch(); // ✅ ÁP DỤNG TÌM KIẾM
 }
 
 void MonTapScreen::onPageChange(int newPage) {
@@ -107,18 +159,30 @@ void MonTapScreen::onPageChange(int newPage) {
 void MonTapScreen::handleEvent(sf::Event event) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(app.getWindow());
 
-    // --- Xu ly Popups truoc (de chan click) ---
-    if (formPopup.getIsVisible()) {
-        formPopup.handleEvent(event, mousePos);
-        return;
-    }
-    if (deletePopup.getIsVisible()) {
-        deletePopup.handleEvent(event, mousePos);
-        return;
+    if (formPopup.getIsVisible()) { formPopup.handleEvent(event, mousePos); return; }
+    if (deletePopup.getIsVisible()) { deletePopup. handleEvent(event, mousePos); return; }
+    
+    // ✅ XỬ LÝ SEARCH BOX
+    if (auto* mouseEvent = event.getIf<sf::Event::MouseButtonPressed>()) {
+        if (mouseEvent->button == sf::Mouse::Button::Left) {
+            searchBox.setFocus(searchBox.isMouseOver(mousePos));
+        }
     }
     
-    // --- Neu khong co popup, xu ly man hinh chinh ---
-    if (!isStaffReadOnly) { // Staff khong the an nut "Them"
+    if (searchBox.getFocus()) {
+        if (event.getIf<sf::Event::TextEntered>()) {
+            searchBox.handleEvent(event);
+            applySearch();
+        }
+        if (auto* keyEvent = event.getIf<sf::Event::KeyPressed>()) {
+            searchBox.handleEvent(event);
+            if (keyEvent->code == sf::Keyboard::Key::Enter) {
+                applySearch();
+            }
+        }
+    }
+    
+    if (! isStaffReadOnly) {
         themMonTapButton.handleEvent(event, mousePos);
     }
     monTapTable.handleEvent(event, mousePos);
@@ -128,17 +192,16 @@ void MonTapScreen::handleEvent(sf::Event event) {
 void MonTapScreen::update(sf::Time dt) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(app.getWindow());
 
-    // Luon update cac popup
     formPopup.update(mousePos);
-    deletePopup.update(mousePos);
+    deletePopup. update(mousePos);
     
-    // Neu co popup dang mo, khong update man hinh chinh
     if (formPopup.getIsVisible() || deletePopup.getIsVisible()) {
         return; 
     }
 
-    // Update man hinh chinh
-    if (!isStaffReadOnly) {
+    searchBox.update(sf::Time::Zero); // ✅ THÊM
+    
+    if (! isStaffReadOnly) {
         themMonTapButton.update(mousePos);
     }
     monTapTable.update(mousePos);
@@ -146,14 +209,15 @@ void MonTapScreen::update(sf::Time dt) {
 }
 
 void MonTapScreen::draw(sf::RenderTarget& target) {
-    // 1. Ve man hinh chinh
-    if (!isStaffReadOnly) { // Staff khong thay nut "Them"
+    searchBox.draw(target); // ✅ THÊM
+    
+    if (!isStaffReadOnly) {
         themMonTapButton.draw(target);
     }
     monTapTable.draw(target);
     pagination.draw(target);
     
-    // 2. Ve Popups (phai ve CUOI CUNG de no noi len tren)
     formPopup.draw(target);
     deletePopup.draw(target);
 }
+

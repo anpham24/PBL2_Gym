@@ -9,6 +9,7 @@
 #include "MonTapFormPopup.h"     // (Chung ta se tao)
 #include "ConfirmDeletePopup.h" // (Tai su dung tu HoiVien)
 #include "MonTap.h"
+#include "InputBox.h"
 
 /*
  * Lop MonTapScreen quan ly giao dien cho Mon Tap.
@@ -28,6 +29,9 @@ private:
     // Popups
     MonTapFormPopup formPopup;
     ConfirmDeletePopup deletePopup;
+
+    InputBox searchBox;
+    void applySearch();
 
     bool isStaffReadOnly; // Co de luu trang thai Read-only
 

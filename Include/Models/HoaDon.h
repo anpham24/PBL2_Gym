@@ -1,6 +1,8 @@
 #pragma once
-#include "MyVector.h"
 #include <string>
+
+#include "MyVector.h"
+
 using namespace std;
 
 class NhanVien;

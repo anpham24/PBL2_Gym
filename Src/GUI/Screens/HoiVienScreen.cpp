@@ -2,6 +2,8 @@
 #include "HoiVienScreen.h"
 #include "QuanLy.h"
 #include "HoiVienService.h" // De goi xoaHoiVien
+#include "StringUtils.h"
+#include "SearchService.h"
 
 HoiVienScreen::HoiVienScreen(App& app) 
     : BaseScreen(app), 
@@ -13,10 +15,6 @@ HoiVienScreen::HoiVienScreen(App& app)
       detailPopup(app, cartPopup, datHLVPopup), // ✅ Truyền đủ tham số
       deletePopup(app)
 {
-    // --- (MOI) KIEM TRA QUYEN ---
-    // Neu la Staff, dat co ReadOnly
-    // isStaffReadOnly = (app.getCurrentAccount()->getAccountType() == AccountType::STAFF);
-
     float contentX = 250; // Vi tri bat dau (sau Sidebar)
     
     // --- Nut Them ---
@@ -29,6 +27,10 @@ HoiVienScreen::HoiVienScreen(App& app)
             this->loadAndDisplayData();
         });
     });
+
+    searchBox.setup("Tim theo ID hoac Ten...", app.getGlobalFont(), false);
+    searchBox.setSize(400, 40);
+    searchBox.setPosition(contentX, 40); // Phía trên table
 
     // --- Bang Du Lieu ---
     hoiVienTable.setPosition(contentX, 100);
@@ -86,22 +88,100 @@ HoiVienScreen::HoiVienScreen(App& app)
     loadAndDisplayData();
 }
 
-void HoiVienScreen::loadAndDisplayData() {
-    allHoiVien.clear();
+void HoiVienScreen::applySearch() {
+    std::string searchTerm = searchBox. getString();
     
-    // Lay data tu QuanLy (HoiVien dung HashTable nen can getAllValues)
-    MyVector<HoiVien*> allValues = app.getQuanLy().getDsHoiVien().getAllValues();
+    // ✅ LUÔN reload từ QuanLy trước
+    allHoiVien.clear();
+    MyVector<HoiVien*> allValues = app. getQuanLy(). getDsHoiVien(). getAllValues();
     for (size_t i = 0; i < allValues.size(); ++i) {
         allHoiVien.push_back(allValues[i]);
     }
     
-    // (Sau nay se them logic Tim kiem/Loc o day)
+    if (searchTerm.empty()) {
+        std::cout << "🔍 Search cleared, showing all " << allHoiVien. size() << " HoiVien" << std::endl;
+        pagination.setup(allHoiVien. size(), 10);
+        onPageChange(pagination.getCurrentPage());
+        return;
+    }
     
-    // Thiet lap pagination
-    pagination.setup(allHoiVien.size(), 10); // 10 muc moi trang
+    std::cout << "\n🔍 HoiVien - Searching: \"" << searchTerm << "\"" << std::endl;
     
-    // Hien thi trang hien tai
-    onPageChange(pagination.getCurrentPage());
+    MyVector<HoiVien*> filteredData;
+    
+    // ============================================================
+    // ✅ KIỂM TRA: Input có phải toàn số không?  → Tìm theo ID
+    // ============================================================
+    if (StringUtils::isNumber(searchTerm)) {
+        std::cout << "   → Searching by ID (Prefix Match)..." << std::endl;
+        
+        // Duyệt tất cả HV, tìm ID bắt đầu bằng searchTerm
+        for (size_t i = 0; i < allHoiVien. size(); ++i) {
+            HoiVien* hv = allHoiVien[i];
+            
+            // Kiểm tra ID có bắt đầu bằng searchTerm không
+            if (hv->getID().substr(0, searchTerm.length()) == searchTerm) {
+                filteredData. push_back(hv);
+            }
+        }
+        
+        std::cout << "   ✅ Found " << filteredData.size() << " results" << std::endl;
+    } 
+    // ============================================================
+    // ✅ Ngược lại: Tìm theo TÊN (dùng Trie)
+    // ============================================================
+    else {
+        std::cout << "   → Searching by Name (Trie)..." << std::endl;
+        
+        // Kiểm tra input có chứa số hoặc ký tự đặc biệt không
+        bool hasInvalidChar = false;
+        
+        for (size_t i = 0; i < searchTerm.length(); ++i) {
+            char c = searchTerm[i];
+            
+            // Chỉ chấp nhận a-z, A-Z, dấu cách
+            if (! ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
+                hasInvalidChar = true;
+                break;
+            }
+        }
+        
+        // Nếu có ký tự không hợp lệ → Không tìm
+        if (hasInvalidChar) {
+            std::cout << "   ⚠️  Contains invalid chars → No search" << std::endl;
+        } 
+        // Nếu hợp lệ → Tìm bằng Trie
+        else {
+            MyVector<HoiVien*> results = SearchService::searchHoiVien(searchTerm);
+            
+            for (size_t i = 0; i < results.size(); ++i) {
+                filteredData.push_back(results[i]);
+            }
+            
+            std::cout << "   ✅ Found " << filteredData.size() << " results" << std::endl;
+        }
+    }
+    
+    // Cập nhật danh sách hiển thị
+    allHoiVien. clear();
+    for (size_t i = 0; i < filteredData.size(); ++i) {
+        allHoiVien.push_back(filteredData[i]);
+    }
+    
+    pagination.setup(allHoiVien.size(), 10);
+    onPageChange(1);
+}
+
+void HoiVienScreen::loadAndDisplayData() {
+    allHoiVien.clear();
+    
+    MyVector<HoiVien*> allValues = app.getQuanLy().getDsHoiVien(). getAllValues();
+    for (size_t i = 0; i < allValues.size(); ++i) {
+        allHoiVien.push_back(allValues[i]);
+    }
+    
+    // ✅ ÁP DỤNG TÌM KIẾM
+    applySearch();
 }
 
 void HoiVienScreen::onPageChange(int newPage) {
@@ -147,6 +227,30 @@ void HoiVienScreen::handleEvent(sf::Event event) {
         deletePopup.handleEvent(event, mousePos);
         return;
     }
+
+    if (auto* mouseEvent = event.getIf<sf::Event::MouseButtonPressed>()) {
+        if (mouseEvent->button == sf::Mouse::Button::Left) {
+            if (searchBox.isMouseOver(mousePos)) {
+                searchBox.setFocus(true);
+            } else {
+                searchBox.setFocus(false);
+            }
+        }
+    }
+    
+    if (searchBox.getFocus()) {
+        if (event.getIf<sf::Event::TextEntered>()) {
+            searchBox.handleEvent(event);
+            applySearch(); // ✅ Tìm kiếm mỗi khi gõ
+        }
+        
+        if (auto* keyEvent = event.getIf<sf::Event::KeyPressed>()) {
+            searchBox.handleEvent(event);
+            if (keyEvent->code == sf::Keyboard::Key::Enter) {
+                applySearch();
+            }
+        }
+    }
     
     // Xử lý màn hình chính
     if (!isStaffReadOnly) {
@@ -171,6 +275,8 @@ void HoiVienScreen::update(sf::Time dt) {
         return;
     }
 
+    searchBox.update(sf::Time::Zero);
+
     if (!isStaffReadOnly) {
         themHoiVienButton.update(mousePos);
     }
@@ -179,6 +285,8 @@ void HoiVienScreen::update(sf::Time dt) {
 }
 
 void HoiVienScreen::draw(sf::RenderTarget& target) {
+    searchBox.draw(target); 
+
     if (!isStaffReadOnly) {
         themHoiVienButton.draw(target);
     }

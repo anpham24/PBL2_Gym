@@ -1,4 +1,3 @@
-// GUI/Screens/BaoCaoScreen.h
 #pragma once
 
 #include "BaseScreen.h"
@@ -8,57 +7,38 @@
 #include "Button.h"
 #include "Selector.h"
 #include "Models/NhanVien.h"
+#include "BaoCaoService.h" // Include Service
 #include <vector>
 #include <string>
 
-/*
- * Lop BaoCaoScreen hien thi cac thong ke doanh thu.
- * Day la man hinh "Chi Doc" (Read-Only) va chi danh cho Admin.
- */
-class BaoCaoScreen : public BaseScreen {
+class BaoCaoScreen : public BaseScreen
+{
 private:
-    sf::Font& font;
+    sf::Font &font;
     TabManager tabManager;
 
-    // --- Components Bo Loc (Filters) ---
+    // --- Components Bo Loc ---
     InputBox tuNgayInput;
     InputBox denNgayInput;
     Selector<NhanVien> nhanVienSelector;
+    Button clearNVButton;
     Button locButton;
 
-    // --- Data Da Xu Ly (de ve) ---
-    // Tab 1 (Thang)
-    std::vector<sf::Text> thangReportLines; // Cac dong text (VD: "Tong doanh thu: 50000")
-    std::vector<sf::Text> thangPreviousLines; // Text so sanh voi thang truoc
-    
-    // Tab 2 (Nam)
-    std::vector<sf::Text> namReportLines;
-    // Data cho bieu do cot (12 thang)
-    std::vector<double> monthlyRevenue; 
-    std::vector<sf::RectangleShape> barChart; // Cac cot
-    std::vector<sf::Text> barChartLabels; // Nhan (T1, T2...)
+    // --- Data Hien Thi ---
+    std::vector<sf::Text> thangReportLines;
 
-    /**
-     * @brief Ham chinh: Goi QuanLy, tinh toan tat ca so lieu, va cap nhat UI.
-     */
-    void loadReportData();
-    
-    /**
-     * @brief Ham ve bieu do cot (Tab 2).
-     */
-    void drawBarChart(sf::RenderTarget& target);
-    
-    /**
-     * @brief Ham helper de tao text va them vao vector.
-     */
-    void createReportLine(std::vector<sf::Text>& lines, const std::string& label, const std::string& value, float yPos);
-    
-    // (Ban se can them mot DateUtils::isBetween de so sanh ngay)
+    // Data bieu do (cache lai ket qua tu Service de ve)
+    std::vector<double> chartData;
+
+    // --- Ham Helper UI ---
+    void loadReportData(); // Bay gio chi goi Service va cap nhat UI
+    void drawBarChart(sf::RenderTarget &target);
+    void createReportLine(std::vector<sf::Text> &lines, const std::string &label, const std::string &value, float yPos);
 
 public:
-    BaoCaoScreen(App& app);
-    
+    BaoCaoScreen(App &app);
+
     void handleEvent(sf::Event event) override;
     void update(sf::Time dt) override;
-    void draw(sf::RenderTarget& target) override;
+    void draw(sf::RenderTarget &target) override;
 };

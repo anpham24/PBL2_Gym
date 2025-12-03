@@ -10,6 +10,7 @@
 #include "InvoiceDetailPopup.h" // (Chung ta se tao)
 #include "ConfirmDeletePopup.h"   // (Tai su dung)
 #include "HoaDon.h"
+#include "InputBox.h"
 
 /*
  * Lop BanHangScreen hien thi LICH SU cac hoa don da thanh toan.
@@ -31,6 +32,12 @@ private:
     CartPopup cartPopup;
     InvoiceDetailPopup detailPopup;
     ConfirmDeletePopup deletePopup;
+
+    InputBox tuNgayInput;   
+    InputBox denNgayInput;  
+    Button locButton;       
+    
+    void applyFilter();   
 
     // Ham helper
     void loadAndDisplayData();

@@ -9,6 +9,7 @@
 #include "HangHoaFormPopup.h"   // (Chung ta se tao)
 #include "ConfirmDeletePopup.h" // (Tai su dung)
 #include "HangHoa.h"
+#include "InputBox.h"
 
 /*
  * Lop HangHoaScreen quan ly giao dien cho Hang Hoa.
@@ -29,6 +30,9 @@ private:
     // Popups
     HangHoaFormPopup formPopup;
     ConfirmDeletePopup deletePopup;
+
+    InputBox searchBox;
+    void applySearch();
 
     bool isStaffReadOnly; // Co de luu trang thai Read-only
 

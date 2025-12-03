@@ -2,6 +2,7 @@
 #include "LopHocScreen.h"
 #include "Managers/QuanLy.h"
 #include "Services/LopHocService.h" // Goi Service
+#include "StringUtils.h"
 
 // --- Constructor (DA CAP NHAT QUYEN) ---
 LopHocScreen::LopHocScreen(App& app) 
@@ -15,6 +16,10 @@ LopHocScreen::LopHocScreen(App& app)
     isStaffReadOnly = (app.getCurrentAccount()->getAccountType() == AccountType::STAFF);
 
     float contentX = 250.0f; 
+
+    searchBox.setup("Tim theo Ten lop hoac Lich tap (VD: T4-18:00)...", app.getGlobalFont(), false);
+    searchBox.setSize(500, 40);
+    searchBox.setPosition(contentX, 40);
     
     // --- Nut Them ---
     themLopHocButton.setup("Them Lop Hoc Moi", app.getGlobalFont());
@@ -70,6 +75,46 @@ LopHocScreen::LopHocScreen(App& app)
     loadAndDisplayData();
 }
 
+void LopHocScreen::applySearch() {
+    std::string searchTerm = searchBox.getString();
+    
+    if (searchTerm.empty()) {
+        pagination.setup(allLopHoc.size(), 10);
+        onPageChange(pagination.getCurrentPage());
+        return;
+    }
+    
+    std::cout << "\n🔍 LopHoc - Searching: \"" << searchTerm << "\"" << std::endl;
+    
+    MyVector<LopHoc*> filteredData;
+    
+    const MyVector<LopHoc*>& dsLopHocGoc = app.getQuanLy(). getDsLopHoc();
+    
+    for (size_t i = 0; i < dsLopHocGoc.size(); ++i) {
+        LopHoc* lh = dsLopHocGoc[i];
+        
+        // ✅ Tìm theo TÊN LỚP (case-insensitive)
+        bool matchName = StringUtils::contains(lh->getTenLop(), searchTerm);
+        
+        // ✅ Tìm theo LỊCH TẬP (VD: "T4-18:00" hoặc chỉ "T4")
+        bool matchSchedule = StringUtils::contains(lh->getLichTap(), searchTerm);
+        
+        if (matchName || matchSchedule) {
+            filteredData.push_back(lh);
+        }
+    }
+    
+    std::cout << "   ✅ Found " << filteredData.size() << " results" << std::endl;
+    
+    allLopHoc.clear();
+    for (size_t i = 0; i < filteredData.size(); ++i) {
+        allLopHoc.push_back(filteredData[i]);
+    }
+    
+    pagination.setup(allLopHoc.size(), 10);
+    onPageChange(1);
+}
+
 // --- Ham Logic ---
 void LopHocScreen::loadAndDisplayData() {
     allLopHoc.clear();
@@ -81,8 +126,7 @@ void LopHocScreen::loadAndDisplayData() {
     
     // (Sau nay se them logic Tim kiem/Loc o day)
     
-    pagination.setup(allLopHoc.size(), 10);
-    onPageChange(pagination.getCurrentPage());
+    applySearch();
 }
 
 void LopHocScreen::onPageChange(int newPage) {
@@ -101,12 +145,35 @@ void LopHocScreen::onPageChange(int newPage) {
 void LopHocScreen::handleEvent(sf::Event event) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(app.getWindow());
 
-    // Xu ly Popups truoc
     if (formPopup.getIsVisible()) { formPopup.handleEvent(event, mousePos); return; }
     if (deletePopup.getIsVisible()) { deletePopup.handleEvent(event, mousePos); return; }
     
-    // Xu ly man hinh chinh
-    if (!isStaffReadOnly) { // Staff khong the an nut "Them"
+    // ✅ XỬ LÝ SEARCH BOX
+    if (auto* mouseEvent = event.getIf<sf::Event::MouseButtonPressed>()) {
+        if (mouseEvent->button == sf::Mouse::Button::Left) {
+            if (searchBox.isMouseOver(mousePos)) {
+                searchBox.setFocus(true);
+            } else {
+                searchBox.setFocus(false);
+            }
+        }
+    }
+    
+    if (searchBox.getFocus()) {
+        if (event.getIf<sf::Event::TextEntered>()) {
+            searchBox.handleEvent(event);
+            applySearch();
+        }
+        
+        if (auto* keyEvent = event.getIf<sf::Event::KeyPressed>()) {
+            searchBox.handleEvent(event);
+            if (keyEvent->code == sf::Keyboard::Key::Enter) {
+                applySearch();
+            }
+        }
+    }
+    
+    if (! isStaffReadOnly) { 
         themLopHocButton.handleEvent(event, mousePos);
     }
     lopHocTable.handleEvent(event, mousePos);
@@ -124,6 +191,8 @@ void LopHocScreen::update(sf::Time dt) {
         return; 
     }
 
+    searchBox.update(sf::Time::Zero);
+
     // Update man hinh chinh
     if (!isStaffReadOnly) {
         themLopHocButton.update(mousePos);
@@ -133,6 +202,7 @@ void LopHocScreen::update(sf::Time dt) {
 }
 
 void LopHocScreen::draw(sf::RenderTarget& target) {
+    searchBox.draw(target);
     // 1. Ve man hinh chinh
     if (!isStaffReadOnly) { // Staff khong thay nut "Them"
         themLopHocButton.draw(target);

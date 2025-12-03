@@ -1,8 +1,11 @@
 #pragma once
+
+#include <string>
+
 #include "MyVector.h"
 #include "MyHashTable.h"
 #include "SearchEngine.h"
-#include <string>
+
 using namespace std;
 
 class HoiVien;

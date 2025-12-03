@@ -29,6 +29,7 @@
 #include "ChiTietHoaDon_HH.h"
 #include "LogTapPT.h"
 #include "IDGenerator.h"
+#include "SearchService.h"
 #include <fstream>
 #include <iostream>
 
@@ -540,6 +541,8 @@ void FileIO::loadAllData(QuanLy& ql, AccountManager& am, const string& folderPat
     linkHoaDon(folderPath + "/HoaDon.txt");
     linkLogTapPT(folderPath + "/LogTapPT.txt");
     linkGoiTap_MonTap(folderPath + "/GoiTap_MonTap.txt");
+
+    SearchService::indexAllHoiVien();
 }
 
 void FileIO::saveNhanVien(const string& filePath) {

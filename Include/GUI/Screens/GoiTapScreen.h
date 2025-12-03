@@ -10,6 +10,7 @@
 #include "GoiTapMonTapPopup.h"  // (Chung ta se tao)
 #include "ConfirmDeletePopup.h" // (Tai su dung)
 #include "GoiTap.h"
+#include "InputBox.h"
 
 /*
  * Lop GoiTapScreen quan ly giao dien cho Goi Tap.
@@ -31,6 +32,9 @@ private:
     GoiTapFormPopup formPopup;
     GoiTapMonTapPopup monTapPopup;
     ConfirmDeletePopup deletePopup;
+
+    InputBox searchBox;
+    void applySearch();
 
     bool isStaffReadOnly; // Co de luu trang thai Read-only
 
