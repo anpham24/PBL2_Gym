@@ -32,25 +32,16 @@ class MainScreen : public BaseScreen {
 private:
     Sidebar sidebar;
     
-    // Con tro thong minh de quan ly man hinh noi dung hien tai
     std::unique_ptr<BaseScreen> contentScreen;
     
     ContentScreenType currentContentScreen;
 
 public:
-    /**
-     * @brief Ham dung.
-     * @param app Tham chieu den App chinh.
-     */
     MainScreen(App& app);
     
     void handleEvent(sf::Event event) override;
     void update(sf::Time dt) override;
     void draw(sf::RenderTarget& target) override;
 
-    /**
-     * @brief Ham nay duoc goi boi Sidebar de thay doi noi dung ben phai.
-     * @param type Loai man hinh noi dung de hien thi.
-     */
     void changeContentScreen(ContentScreenType type);
 };

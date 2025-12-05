@@ -10,6 +10,7 @@
 #include "HLVDetailPopup.h"    // (Chung ta se tao)
 #include "ConfirmDeletePopup.h" // (Tai su dung)
 #include "HLV.h"
+#include "InputBox.h"
 
 /*
  * Lop HLVScreen quan ly giao dien cho Huan Luyen Vien.
@@ -31,6 +32,9 @@ private:
     HLVFormPopup formPopup;
     HLVDetailPopup detailPopup;
     ConfirmDeletePopup deletePopup;
+
+    InputBox searchBox;
+    void applySearch();
 
     bool isStaffReadOnly; // Co de luu trang thai Read-only
 

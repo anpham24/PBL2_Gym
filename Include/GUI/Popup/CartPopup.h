@@ -10,6 +10,7 @@
 #include "HoiVien.h"
 #include "HangHoa.h"
 #include "GoiTap.h"
+#include "HoiVienSelector.h"
 #include <functional>
 #include <vector>
 #include <string>
@@ -51,7 +52,7 @@ private:
     double tongThanhToan;
     
     // --- Column 1 ---
-    Selector<HoiVien> khachHangSelector;
+    HoiVienSelector khachHangSelector;
     sf::Text nhanVienText;
     PhuongThucSelector phuongThucSelector; 
 

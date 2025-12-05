@@ -2,6 +2,8 @@
 #include "BanHangScreen.h"
 #include "Managers/QuanLy.h"
 #include "Services/HoaDonService.h" // Goi Service (neu can xoa)
+#include "DateTimeUils.h" 
+#include "Validator.h"    
 
 // --- Constructor (DA DON GIAN HOA) ---
 BanHangScreen::BanHangScreen(App& app) 
@@ -13,6 +15,21 @@ BanHangScreen::BanHangScreen(App& app)
       deletePopup(app)                // Khoi tao popup
 {
     float contentX = 250.0f; 
+
+    tuNgayInput.setup("Tu ngay (DD/MM/YYYY)", app.getGlobalFont(), false);
+    tuNgayInput. setSize(180, 35);
+    tuNgayInput.setPosition(contentX, 40);
+    
+    denNgayInput.setup("Den ngay (DD/MM/YYYY)", app.getGlobalFont(), false);
+    denNgayInput.setSize(180, 35);
+    denNgayInput.setPosition(contentX + 190, 40);
+    
+    locButton.setup("Loc", app.getGlobalFont());
+    locButton.setSize(100, 35);
+    locButton.setPosition(contentX + 380, 40);
+    locButton.setOnClick([this]() {
+        this->applyFilter();
+    });
     
     // --- Nut Them ---
     themHoaDonButton.setup("Tao Hoa Don Moi", app.getGlobalFont());
@@ -62,27 +79,54 @@ BanHangScreen::BanHangScreen(App& app)
         this->onPageChange(newPage);
     });
     
+    std::string today = DateTimeUtils::getCurrentDateTime();
+    tuNgayInput. setString("01/" + today. substr(3, 7)); // "01/MM/YYYY"
+    denNgayInput.setString(today.substr(0, 10));       // "DD/MM/YYYY"
+    
     loadAndDisplayData();
+}
+
+void BanHangScreen::applyFilter() {
+    allPaidHoaDon. clear();
+    
+    std::string tuNgay = tuNgayInput.getString();
+    std::string denNgay = denNgayInput.getString();
+    
+    // Validate ngày
+    bool hasFilter = false;
+    if (!tuNgay.empty() && ! denNgay.empty()) {
+        if (Validator::validateNgay(tuNgay) == "" && Validator::validateNgay(denNgay) == "") {
+            hasFilter = true;
+        }
+    }
+    
+    // Lấy tất cả hóa đơn
+    MyVector<HoaDon*> tatCaHoaDon = app.getQuanLy().getDsHoaDon(). getAllValues();
+    
+    for (size_t i = 0; i < tatCaHoaDon.size(); ++i) {
+        HoaDon* hd = tatCaHoaDon[i];
+        if (hd == nullptr || ! hd->getDaThanhToan()) continue;
+        
+        // ✅ Lọc theo ngày
+        if (hasFilter) {
+            std::string ngayLap = hd->getNgayLap();
+            if (! DateTimeUtils::isBetween(ngayLap, tuNgay, denNgay)) {
+                continue;
+            }
+        }
+        
+        allPaidHoaDon.push_back(hd);
+    }
+    
+    std::cout << "🔍 Filtered " << allPaidHoaDon.size() << " invoices" << std::endl;
+    
+    pagination.setup(allPaidHoaDon.size(), 10);
+    onPageChange(pagination.getCurrentPage());
 }
 
 // --- Ham Logic (DA DON GIAN HOA) ---
 void BanHangScreen::loadAndDisplayData() {
-    allPaidHoaDon.clear(); 
-    
-    // Lay data tu QuanLy (HoaDon dung HashTable)
-    MyVector<HoaDon*> tatCaHoaDon = app.getQuanLy().getDsHoaDon().getAllValues();
-    
-    // Chi loc cac hoa don DA THANH TOAN
-    for(size_t i = 0; i < tatCaHoaDon.size(); ++i) {
-        HoaDon* hd = tatCaHoaDon[i];
-        if (hd->getDaThanhToan()) { // <-- LOGIC MOI
-            // (Them loc theo ngay/tim kiem o day)
-            allPaidHoaDon.push_back(hd);
-        }
-    }
-    
-    pagination.setup(allPaidHoaDon.size(), 10);
-    onPageChange(pagination.getCurrentPage());
+    applyFilter();
 }
 
 void BanHangScreen::onPageChange(int newPage) {
@@ -99,14 +143,49 @@ void BanHangScreen::onPageChange(int newPage) {
 
 // --- Vong lap chinh (DA DON GIAN HOA) ---
 void BanHangScreen::handleEvent(sf::Event event) {
-    sf::Vector2i mousePos = sf::Mouse::getPosition(app.getWindow());
+    sf::Vector2i mousePos = sf::Mouse::getPosition(app. getWindow());
 
-    // Xu ly Popups truoc
+    // Xử lý Popups trước
     if (cartPopup.getIsVisible()) { cartPopup.handleEvent(event, mousePos); return; }
     if (detailPopup.getIsVisible()) { detailPopup.handleEvent(event, mousePos); return; }
     if (deletePopup.getIsVisible()) { deletePopup.handleEvent(event, mousePos); return; }
+
+    // ✅ XỬ LÝ CLICK VÀO INPUT BOX
+    if (auto* mouseEvent = event.getIf<sf::Event::MouseButtonPressed>()) {
+        if (mouseEvent->button == sf::Mouse::Button::Left) {
+            tuNgayInput. setFocus(tuNgayInput.isMouseOver(mousePos));
+            denNgayInput.setFocus(denNgayInput.isMouseOver(mousePos));
+        }
+    }
     
-    // Xu ly man hinh chinh
+    // ✅ XỬ LÝ NHẬP TEXT VÀO INPUT BOX
+    if (event.getIf<sf::Event::TextEntered>()) {
+        if (tuNgayInput.getFocus()) {
+            tuNgayInput.handleEvent(event);
+        } else if (denNgayInput. getFocus()) {
+            denNgayInput.handleEvent(event);
+        }
+    }
+    
+    // ✅ XỬ LÝ PHÍM (Mũi tên, Backspace, Enter...)
+    if (auto* keyEvent = event.getIf<sf::Event::KeyPressed>()) {
+        if (tuNgayInput.getFocus()) {
+            tuNgayInput.handleEvent(event);
+            if (keyEvent->code == sf::Keyboard::Key::Enter) {
+                applyFilter(); // ✅ Enter → Lọc
+            }
+        } else if (denNgayInput.getFocus()) {
+            denNgayInput.handleEvent(event);
+            if (keyEvent->code == sf::Keyboard::Key::Enter) {
+                applyFilter();
+            }
+        }
+    }
+    
+    // Xử lý nút lọc
+    locButton.handleEvent(event, mousePos);
+    
+    // Xử lý màn hình chính
     themHoaDonButton.handleEvent(event, mousePos);
     hoaDonTable.handleEvent(event, mousePos);
     pagination.handleEvent(event, mousePos);
@@ -124,6 +203,10 @@ void BanHangScreen::update(sf::Time dt) {
         return; 
     }
 
+    tuNgayInput.update(dt);
+    denNgayInput.update(dt);
+    locButton.update(mousePos);
+
     // Update man hinh chinh
     themHoaDonButton.update(mousePos);
     hoaDonTable.update(mousePos);
@@ -131,6 +214,10 @@ void BanHangScreen::update(sf::Time dt) {
 }
 
 void BanHangScreen::draw(sf::RenderTarget& target) {
+    tuNgayInput.draw(target);
+    denNgayInput.draw(target);
+    locButton.draw(target);
+    
     // 1. Ve man hinh chinh
     themHoaDonButton.draw(target);
     hoaDonTable.draw(target);

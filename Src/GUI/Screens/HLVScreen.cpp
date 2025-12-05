@@ -2,6 +2,7 @@
 #include "HLVScreen.h"
 #include "QuanLy.h"
 #include "HLVService.h" // Goi Service
+#include "StringUtils.h"
 
 // --- Constructor (DA CAP NHAT QUYEN) ---
 HLVScreen::HLVScreen(App& app) 
@@ -15,7 +16,11 @@ HLVScreen::HLVScreen(App& app)
     // --- (MOI) KIEM TRA QUYEN ---
     isStaffReadOnly = (app.getCurrentAccount()->getAccountType() == AccountType::STAFF);
 
-    float contentX = 250.0f; 
+    float contentX = 250.0f;
+    
+    searchBox.setup("Tim theo ID, Ten hoac Chuyen mon...", app.getGlobalFont(), false);
+    searchBox.setSize(450, 40);
+    searchBox.setPosition(contentX, 40);
     
     // --- Nut Them ---
     themHLVButton.setup("Them HLV Moi", app.getGlobalFont());
@@ -91,19 +96,93 @@ HLVScreen::HLVScreen(App& app)
     loadAndDisplayData();
 }
 
-// --- Ham Logic ---
-void HLVScreen::loadAndDisplayData() {
-    allHLV.clear();
+void HLVScreen::applySearch() {
+    std::string searchTerm = searchBox.getString();
     
+    // Reload từ QuanLy
+    allHLV.clear();
     const MyVector<HLV*>& dsHLVGoc = app.getQuanLy().getDsHLV();
     for (size_t i = 0; i < dsHLVGoc.size(); ++i) {
         allHLV.push_back(dsHLVGoc[i]);
     }
     
-    // (Sau nay se them logic Tim kiem/Loc o day)
+    if (searchTerm.empty()) {
+        std::cout << "🔍 Search cleared, showing all " << allHLV.size() << " HLV" << std::endl;
+        pagination.setup(allHLV.size(), 10);
+        onPageChange(pagination.getCurrentPage());
+        return;
+    }
     
-    pagination.setup(allHLV.size(), 10);
-    onPageChange(pagination.getCurrentPage());
+    std::cout << "\n🔍 HLV - Searching: \"" << searchTerm << "\"" << std::endl;
+    
+    MyVector<HLV*> filteredData;
+    
+    // ✅ 1.  Nếu toàn số → Tìm theo ID (prefix match)
+    if (StringUtils::isNumber(searchTerm)) {
+        std::cout << "   → Searching by ID (Prefix Match)..." << std::endl;
+        
+        for (size_t i = 0; i < dsHLVGoc.size(); ++i) {
+            HLV* hlv = dsHLVGoc[i];
+            
+            if (hlv->getID().substr(0, searchTerm.length()) == searchTerm) {
+                filteredData.push_back(hlv);
+            }
+        }
+        
+        std::cout << "   ✅ Found " << filteredData.size() << " results" << std::endl;
+    } 
+    // ✅ 2. Nếu chữ → Tìm theo TÊN hoặc CHUYÊN MÔN
+    else {
+        std::cout << "   → Searching by Name/Chuyen Mon..." << std::endl;
+        
+        // Kiểm tra input hợp lệ
+        bool hasInvalidChar = false;
+        for (size_t i = 0; i < searchTerm.length(); ++i) {
+            char c = searchTerm[i];
+            if (! ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
+                hasInvalidChar = true;
+                break;
+            }
+        }
+        
+        if (hasInvalidChar) {
+            std::cout << "   ⚠️  Contains invalid chars → No search" << std::endl;
+        } else {
+            // Tìm theo TÊN hoặc CHUYÊN MÔN (Linear Search)
+            for (size_t i = 0; i < dsHLVGoc.size(); ++i) {
+                HLV* hlv = dsHLVGoc[i];
+                
+                bool matchName = StringUtils::contains(hlv->getHoTen(), searchTerm);
+                bool matchChuyenMon = StringUtils::contains(hlv->getChuyenMon(), searchTerm);
+                
+                if (matchName || matchChuyenMon) {
+                    filteredData.push_back(hlv);
+                }
+            }
+            
+            std::cout << "   ✅ Found " << filteredData.size() << " results" << std::endl;
+        }
+    }
+    
+    allHLV.clear();
+    for (size_t i = 0; i < filteredData. size(); ++i) {
+        allHLV.push_back(filteredData[i]);
+    }
+    
+    pagination. setup(allHLV.size(), 10);
+    onPageChange(1);
+}
+
+// --- Ham Logic ---
+void HLVScreen::loadAndDisplayData() {
+    allHLV.clear();
+    
+    const MyVector<HLV*>& dsHLVGoc = app.getQuanLy(). getDsHLV();
+    for (size_t i = 0; i < dsHLVGoc.size(); ++i) {
+        allHLV.push_back(dsHLVGoc[i]);
+    }
+    
+    applySearch(); // ✅ ÁP DỤNG TÌM KIẾM
 }
 
 void HLVScreen::onPageChange(int newPage) {
@@ -122,23 +201,40 @@ void HLVScreen::onPageChange(int newPage) {
 void HLVScreen::handleEvent(sf::Event event) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(app.getWindow());
 
-    // Xu ly Popups truoc
     if (formPopup.getIsVisible()) { formPopup.handleEvent(event, mousePos); return; }
     if (detailPopup.getIsVisible()) { detailPopup.handleEvent(event, mousePos); return; }
     if (deletePopup.getIsVisible()) { deletePopup.handleEvent(event, mousePos); return; }
     
-    // Xu ly man hinh chinh
-    if (!isStaffReadOnly) { // Staff khong the an nut "Them"
+    // ✅ XỬ LÝ SEARCH BOX
+    if (auto* mouseEvent = event.getIf<sf::Event::MouseButtonPressed>()) {
+        if (mouseEvent->button == sf::Mouse::Button::Left) {
+            searchBox.setFocus(searchBox.isMouseOver(mousePos));
+        }
+    }
+    
+    if (searchBox.getFocus()) {
+        if (event.getIf<sf::Event::TextEntered>()) {
+            searchBox.handleEvent(event);
+            applySearch();
+        }
+        if (auto* keyEvent = event.getIf<sf::Event::KeyPressed>()) {
+            searchBox.handleEvent(event);
+            if (keyEvent->code == sf::Keyboard::Key::Enter) {
+                applySearch();
+            }
+        }
+    }
+    
+    if (! isStaffReadOnly) {
         themHLVButton.handleEvent(event, mousePos);
     }
-    hlvTable.handleEvent(event, mousePos);
+    hlvTable. handleEvent(event, mousePos);
     pagination.handleEvent(event, mousePos);
 }
 
 void HLVScreen::update(sf::Time dt) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(app.getWindow());
 
-    // Luon update cac popup
     formPopup.update(mousePos);
     detailPopup.update(mousePos);
     deletePopup.update(mousePos);
@@ -147,7 +243,8 @@ void HLVScreen::update(sf::Time dt) {
         return; 
     }
 
-    // Update man hinh chinh
+    searchBox. update(sf::Time::Zero); // ✅ THÊM
+    
     if (!isStaffReadOnly) {
         themHLVButton.update(mousePos);
     }
@@ -156,15 +253,15 @@ void HLVScreen::update(sf::Time dt) {
 }
 
 void HLVScreen::draw(sf::RenderTarget& target) {
-    // 1. Ve man hinh chinh
-    if (!isStaffReadOnly) { // Staff khong thay nut "Them"
+    searchBox.draw(target); // ✅ THÊM
+    
+    if (!isStaffReadOnly) {
         themHLVButton.draw(target);
     }
     hlvTable.draw(target);
     pagination.draw(target);
     
-    // 2. Ve Popups (phai ve CUOI CUNG)
     formPopup.draw(target);
     detailPopup.draw(target);
-    deletePopup.draw(target);
+    deletePopup. draw(target);
 }

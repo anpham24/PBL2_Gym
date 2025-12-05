@@ -98,4 +98,25 @@ public:
     
     return result.str();
 }
+
+static long dateToInt(const string& date) {
+    if (date.length() < 10) return 0;
+    
+    // Parse DD/MM/YYYY
+    int day = std::stoi(date.substr(0, 2));
+    int month = std::stoi(date.substr(3, 2));
+    int year = std::stoi(date.substr(6, 4));
+    
+    // Công thức: year * 10000 + month * 100 + day
+    // VD: 15/11/2025 → 20251115
+    return year * 10000 + month * 100 + day;
+}
+
+static bool isBetween(const string& date, const string& startDate, const string& endDate) {
+    long dateInt = dateToInt(date);
+    long startInt = dateToInt(startDate);
+    long endInt = dateToInt(endDate);
+    
+    return (dateInt >= startInt && dateInt <= endInt);
+}
 };

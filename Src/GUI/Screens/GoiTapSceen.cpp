@@ -2,6 +2,7 @@
 #include "GoiTapScreen.h"
 #include "Managers/QuanLy.h"
 #include "Services/GoiTapService.h"
+#include "StringUtils.h"
 
 // --- Constructor (DA CAP NHAT QUYEN) ---
 GoiTapScreen::GoiTapScreen(App& app) 
@@ -16,6 +17,10 @@ GoiTapScreen::GoiTapScreen(App& app)
     isStaffReadOnly = (app.getCurrentAccount()->getAccountType() == AccountType::STAFF);
 
     float contentX = 250.0f; 
+
+    searchBox.setup("Tim theo Ten hoac Thoi gian (ngay)...", app.getGlobalFont(), false);
+    searchBox.setSize(400, 40);
+    searchBox.setPosition(contentX, 40);
     
     // --- Nut Them ---
     themGoiTapButton.setup("Them Goi Tap Moi", app.getGlobalFont());
@@ -76,6 +81,62 @@ GoiTapScreen::GoiTapScreen(App& app)
     loadAndDisplayData();
 }
 
+void GoiTapScreen::applySearch() {
+    std::string searchTerm = searchBox.getString();
+    
+    // Nếu không có từ khóa → Hiển thị tất cả
+    if (searchTerm.empty()) {
+        pagination.setup(allGoiTap.size(), 10);
+        onPageChange(pagination.getCurrentPage());
+        return;
+    }
+    
+    std::cout << "\n🔍 GoiTap - Searching: \"" << searchTerm << "\"" << std::endl;
+    
+    MyVector<GoiTap*> filteredData;
+    
+    const MyVector<GoiTap*>& dsGoiTapGoc = app.getQuanLy().getDsGoiTap();
+    
+    // ✅ 1. Nếu là số → Tìm theo thời gian (chính xác)
+    if (StringUtils::isNumber(searchTerm)) {
+        int thoiGian = std::stoi(searchTerm);
+        std::cout << "   → Searching by Time: " << thoiGian << " days" << std::endl;
+        
+        for (size_t i = 0; i < dsGoiTapGoc.size(); ++i) {
+            GoiTap* gt = dsGoiTapGoc[i];
+            if (gt->getThoiGian() == thoiGian) {
+                filteredData.push_back(gt);
+            }
+        }
+        
+        std::cout << "   ✅ Found " << filteredData.size() << " results" << std::endl;
+    } 
+    // ✅ 2. Nếu là chữ → Tìm theo tên (linear search)
+    else {
+        std::cout << "   → Searching by Name..." << std::endl;
+        
+        for (size_t i = 0; i < dsGoiTapGoc.size(); ++i) {
+            GoiTap* gt = dsGoiTapGoc[i];
+            
+            // ✅ Dùng StringUtils::contains (case-insensitive)
+            if (StringUtils::contains(gt->getTenGoi(), searchTerm)) {
+                filteredData.push_back(gt);
+            }
+        }
+        
+        std::cout << "   ✅ Found " << filteredData.size() << " results" << std::endl;
+    }
+    
+    // ✅ Cập nhật allGoiTap với dữ liệu đã lọc
+    allGoiTap.clear();
+    for (size_t i = 0; i < filteredData.size(); ++i) {
+        allGoiTap.push_back(filteredData[i]);
+    }
+    
+    pagination.setup(allGoiTap.size(), 10);
+    onPageChange(1);
+}
+
 // --- Ham Logic (DA CAP NHAT) ---
 void GoiTapScreen::loadAndDisplayData() {
     allGoiTap.clear();
@@ -85,8 +146,7 @@ void GoiTapScreen::loadAndDisplayData() {
         allGoiTap.push_back(dsGoiTapGoc[i]);
     }
     
-    pagination.setup(allGoiTap.size(), 10);
-    onPageChange(pagination.getCurrentPage());
+    applySearch();
 }
 
 void GoiTapScreen::onPageChange(int newPage) {
@@ -105,13 +165,38 @@ void GoiTapScreen::onPageChange(int newPage) {
 void GoiTapScreen::handleEvent(sf::Event event) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(app.getWindow());
 
-    // Xu ly Popups truoc
+    // Xử lý Popups
     if (formPopup.getIsVisible()) { formPopup.handleEvent(event, mousePos); return; }
     if (monTapPopup.getIsVisible()) { monTapPopup.handleEvent(event, mousePos); return; }
     if (deletePopup.getIsVisible()) { deletePopup.handleEvent(event, mousePos); return; }
     
-    // Xu ly man hinh chinh
-    if (!isStaffReadOnly) { // Staff khong the an nut "Them"
+    // ✅ XỬ LÝ SEARCH BOX
+    if (auto* mouseEvent = event.getIf<sf::Event::MouseButtonPressed>()) {
+        if (mouseEvent->button == sf::Mouse::Button::Left) {
+            if (searchBox.isMouseOver(mousePos)) {
+                searchBox.setFocus(true);
+            } else {
+                searchBox.setFocus(false);
+            }
+        }
+    }
+    
+    if (searchBox.getFocus()) {
+        if (event.getIf<sf::Event::TextEntered>()) {
+            searchBox.handleEvent(event);
+            applySearch();
+        }
+        
+        if (auto* keyEvent = event.getIf<sf::Event::KeyPressed>()) {
+            searchBox.handleEvent(event);
+            if (keyEvent->code == sf::Keyboard::Key::Enter) {
+                applySearch();
+            }
+        }
+    }
+    
+    // Xử lý màn hình chính
+    if (! isStaffReadOnly) { 
         themGoiTapButton.handleEvent(event, mousePos);
     }
     goiTapTable.handleEvent(event, mousePos);
@@ -119,19 +204,19 @@ void GoiTapScreen::handleEvent(sf::Event event) {
 }
 
 void GoiTapScreen::update(sf::Time dt) {
-    sf::Vector2i mousePos = sf::Mouse::getPosition(app.getWindow());
+    sf::Vector2i mousePos = sf::Mouse::getPosition(app. getWindow());
 
-    // Luon update cac popup
     formPopup.update(mousePos);
     monTapPopup.update(mousePos);
     deletePopup.update(mousePos);
     
-    if (formPopup.getIsVisible() || monTapPopup.getIsVisible() || deletePopup.getIsVisible()) {
+    if (formPopup.getIsVisible() || monTapPopup.getIsVisible() || deletePopup. getIsVisible()) {
         return; 
     }
-
-    // Update man hinh chinh
-    if (!isStaffReadOnly) { // Staff khong update nut "Them"
+    
+    searchBox.update(sf::Time::Zero);
+    
+    if (! isStaffReadOnly) { 
         themGoiTapButton.update(mousePos);
     }
     goiTapTable.update(mousePos);
@@ -139,6 +224,7 @@ void GoiTapScreen::update(sf::Time dt) {
 }
 
 void GoiTapScreen::draw(sf::RenderTarget& target) {
+    searchBox.draw(target);
     // 1. Ve man hinh chinh
     if (!isStaffReadOnly) { // Staff khong thay nut "Them"
         themGoiTapButton.draw(target);

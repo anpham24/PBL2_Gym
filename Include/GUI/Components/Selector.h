@@ -7,6 +7,7 @@
 #include "Config.h"
 #include "Utils/MyVector.h"
 #include "InputBox.h" // Cần để dùng InputBox
+#include "StringUtils.h"
 
 // ========================================================================
 // DINH NGHIA ITEM (STRUCT)
@@ -32,15 +33,9 @@ private:
     sf::RectangleShape dropdownBackground;
     std::vector<sf::Text> dropdownTexts; 
     int hoveredDropdownIndex; 
-
-    // --- Data ---
-    std::vector<SelectorItem<T>> allItems; 
-    std::vector<SelectorItem<T>*> filteredItems; 
-    SelectorItem<T>* currentSelection; 
     
     // --- Trang thai ---
     bool isOpen; 
-    InputBox searchBox; 
 
     // Thêm biến lưu vị trí/kích thước (vì InputBox không có getter)
     sf::Vector2f searchBoxPos;
@@ -48,7 +43,11 @@ private:
 
     std::function<void(T*)> onSelect;
 
-    void filterList();
+protected:
+    std::vector<SelectorItem<T>> allItems; 
+    std::vector<SelectorItem<T>*> filteredItems; 
+    SelectorItem<T>* currentSelection; 
+    InputBox searchBox; 
 
 public:
     Selector(sf::Font& font, const std::string& placeholder);
@@ -65,7 +64,9 @@ public:
     bool getIsOpen() const; // Hàm này bạn đã thêm ở lượt trước
     
     void setOnSelect(std::function<void(T*)> func);
-    void clear(); 
+    void clear();
+
+    virtual void filterList();
 
     void handleEvent(sf::Event event, sf::Vector2i mousePos);
     void update(sf::Vector2i mousePos);
@@ -147,17 +148,26 @@ void Selector<T>::setItems(const MyVector<T*>& data, std::function<std::string(T
 template <typename T>
 void Selector<T>::filterItems(std::function<bool(T*)> predicate) {
     filteredItems.clear();
-    // Sửa 5: Lỗi std::string (xóa .toAnsiString)
     std::string searchTerm = searchBox.getString();
 
     for (auto& item : allItems) {
-        // 1. Loc theo dieu kien ben ngoai
+        // 1. Lọc theo điều kiện bên ngoài
         if (predicate(item.data)) {
             
-            // 2. Loc theo search box noi bo
+            // 2. Lọc theo search box nội bộ
             std::string itemText = item.displayText;
             
-            if (searchTerm.empty() || itemText.find(searchTerm) != std::string::npos) {
+            // ✅ THAY STD::FIND BẰNG LINEAR SEARCH
+            bool match = false;
+            
+            if (searchTerm.empty()) {
+                match = true;
+            } else {
+                // ✅ Linear Search (không dùng std::string::find)
+                match = StringUtils::contains(itemText, searchTerm);
+            }
+            
+            if (match) {
                 filteredItems.push_back(&item);
             }
         }
@@ -173,7 +183,7 @@ void Selector<T>::filterItems(std::function<bool(T*)> predicate) {
         }
     }
     
-    if (!stillValid) {
+    if (! stillValid) {
         setSelected(nullptr); 
     }
 }

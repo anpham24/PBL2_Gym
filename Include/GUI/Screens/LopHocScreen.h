@@ -9,6 +9,7 @@
 #include "LopHocFormPopup.h"     // (Chung ta se tao)
 #include "ConfirmDeletePopup.h" // (Tai su dung)
 #include "LopHoc.h"
+#include "InputBox.h"
 
 /*
  * Lop LopHocScreen quan ly giao dien cho Lop Hoc.
@@ -29,6 +30,9 @@ private:
     // Popups
     LopHocFormPopup formPopup;
     ConfirmDeletePopup deletePopup;
+
+    InputBox searchBox;
+    void applySearch();
 
     bool isStaffReadOnly; // Co de luu trang thai Read-only
 

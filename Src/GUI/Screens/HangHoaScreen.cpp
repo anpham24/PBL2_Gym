@@ -2,6 +2,7 @@
 #include "HangHoaScreen.h"
 #include "Managers/QuanLy.h"
 #include "Services/HangHoaService.h" // Goi Service
+#include "StringUtils.h"
 
 // --- Constructor (DA CAP NHAT QUYEN) ---
 HangHoaScreen::HangHoaScreen(App& app) 
@@ -15,6 +16,10 @@ HangHoaScreen::HangHoaScreen(App& app)
     isStaffReadOnly = (app.getCurrentAccount()->getAccountType() == AccountType::STAFF);
 
     float contentX = 250.0f; 
+
+     searchBox.setup("Tim theo Ten hang hoa...", app.getGlobalFont(), false);
+    searchBox.setSize(350, 40);
+    searchBox.setPosition(contentX, 40);
     
     // --- Nut Them ---
     themHangHoaButton.setup("Them Hang Hoa Moi", app.getGlobalFont());
@@ -70,6 +75,59 @@ HangHoaScreen::HangHoaScreen(App& app)
     loadAndDisplayData();
 }
 
+void HangHoaScreen::applySearch() {
+    std::string searchTerm = searchBox.getString();
+    
+    // Reload
+    allHangHoa.clear();
+    const MyVector<HangHoa*>& dsHangHoaGoc = app.getQuanLy().getDsHangHoa();
+    for (size_t i = 0; i < dsHangHoaGoc.size(); ++i) {
+        allHangHoa.push_back(dsHangHoaGoc[i]);
+    }
+    
+    if (searchTerm.empty()) {
+        pagination.setup(allHangHoa.size(), 10);
+        onPageChange(pagination.getCurrentPage());
+        return;
+    }
+    
+    std::cout << "\n🔍 HangHoa - Searching: \"" << searchTerm << "\"" << std::endl;
+    
+    MyVector<HangHoa*> filteredData;
+    
+    // Kiểm tra input hợp lệ
+    bool hasInvalidChar = false;
+    for (size_t i = 0; i < searchTerm.length(); ++i) {
+        char c = searchTerm[i];
+        if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
+            hasInvalidChar = true;
+            break;
+        }
+    }
+    
+    if (hasInvalidChar) {
+        std::cout << "   ⚠️  Contains invalid chars → No search" << std::endl;
+    } else {
+        for (size_t i = 0; i < dsHangHoaGoc.size(); ++i) {
+            HangHoa* hh = dsHangHoaGoc[i];
+            
+            if (StringUtils::contains(hh->getTenHH(), searchTerm)) {
+                filteredData.push_back(hh);
+            }
+        }
+        
+        std::cout << "   ✅ Found " << filteredData.size() << " results" << std::endl;
+    }
+    
+    allHangHoa.clear();
+    for (size_t i = 0; i < filteredData.size(); ++i) {
+        allHangHoa. push_back(filteredData[i]);
+    }
+    
+    pagination.setup(allHangHoa.size(), 10);
+    onPageChange(1);
+}
+
 // --- Ham Logic ---
 void HangHoaScreen::loadAndDisplayData() {
     allHangHoa.clear();
@@ -81,8 +139,7 @@ void HangHoaScreen::loadAndDisplayData() {
     
     // (Sau nay se them logic Tim kiem/Loc o day)
     
-    pagination.setup(allHangHoa.size(), 10);
-    onPageChange(pagination.getCurrentPage());
+    applySearch();
 }
 
 void HangHoaScreen::onPageChange(int newPage) {
@@ -104,6 +161,25 @@ void HangHoaScreen::handleEvent(sf::Event event) {
     // Xu ly Popups truoc
     if (formPopup.getIsVisible()) { formPopup.handleEvent(event, mousePos); return; }
     if (deletePopup.getIsVisible()) { deletePopup.handleEvent(event, mousePos); return; }
+
+    if (auto* mouseEvent = event.getIf<sf::Event::MouseButtonPressed>()) {
+        if (mouseEvent->button == sf::Mouse::Button::Left) {
+            searchBox.setFocus(searchBox.isMouseOver(mousePos));
+        }
+    }
+    
+    if (searchBox.getFocus()) {
+        if (event.getIf<sf::Event::TextEntered>()) {
+            searchBox.handleEvent(event);
+            applySearch();
+        }
+        if (auto* keyEvent = event.getIf<sf::Event::KeyPressed>()) {
+            searchBox.handleEvent(event);
+            if (keyEvent->code == sf::Keyboard::Key::Enter) {
+                applySearch();
+            }
+        }
+    }
     
     // Xu ly man hinh chinh
     if (!isStaffReadOnly) { 
@@ -124,6 +200,8 @@ void HangHoaScreen::update(sf::Time dt) {
         return; 
     }
 
+    searchBox.update(sf::Time::Zero);
+
     // Update man hinh chinh
     if (!isStaffReadOnly) {
         themHangHoaButton.update(mousePos);
@@ -133,6 +211,7 @@ void HangHoaScreen::update(sf::Time dt) {
 }
 
 void HangHoaScreen::draw(sf::RenderTarget& target) {
+    searchBox.draw(target);
     // 1. Ve man hinh chinh
     if (!isStaffReadOnly) { // Staff khong thay nut "Them"
         themHangHoaButton.draw(target);

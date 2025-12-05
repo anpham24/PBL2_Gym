@@ -3,14 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
-#include <functional> // De su dung std::function
-#include "Config.h" // De lay bang mau
+#include <functional> 
 
-/*
- * Lop Button dinh nghia mot nut bam co the tuong tac.
- * No xu ly cac trang thai: idle (binh thuong), hover (di chuot qua),
- * va focused (duoc chon bang ban phim).
- */
+#include "Config.h" 
+
 class Button {
 private:
     sf::RectangleShape shape; // Hinh dang cua nut
@@ -28,45 +24,17 @@ private:
     bool isFocused;
 
 public:
-    /**
-     * @brief Ham dung mac dinh.
-     */
     Button();
     ~Button();
 
     Button(const Button& other); // 1. Hàm Khởi Tạo Sao Chép
     Button& operator=(const Button& other); // 2. Hàm Gán Sao Chép
 
-    /**
-     * @brief Thiet lap cac gia tri cho nut.
-     * @param label Chu hien thi tren nut.
-     * @param font Font chu toan cuc tu App.
-     */
     void setup(const std::string& label, sf::Font& font);
-
-    /**
-     * @brief Dat vi tri cho nut.
-     * @param x Vi tri X.
-     * @param y Vi tri Y.
-     */
     void setPosition(float x, float y);
-
-    /**
-     * @brief Dat kich thuoc cho nut.
-     * @param w Chieu rong.
-     * @param h Chieu cao.
-     */
     void setSize(float w, float h);
-
-    /**
-     * @brief Dang ky mot ham de goi khi nut duoc click.
-     * @param func Ham callback (vi du: mot lambda [this](){ ... }).
-     */
     void setOnClick(std::function<void()> func);
 
-    /**
-     * @brief Tra ve ham callback (de kiem tra).
-     */
     std::function<void()> getOnClick() const;
 
     /**
